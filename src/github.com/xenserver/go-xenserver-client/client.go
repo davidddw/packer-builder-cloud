@@ -79,9 +79,9 @@ func (client *XenAPIClient) Login() (err error) {
 	if err == nil {
 		// err might not be set properly, so check the reference
 		if result["Value"] == nil {
-			return errors.New ("Invalid credentials supplied")
+			return errors.New("Invalid credentials supplied")
 		}
-	}	
+	}
 	client.Session = result["Value"]
 	return err
 }
@@ -328,7 +328,7 @@ func (client *XenAPIClient) CreateNetwork(name_label string, name_description st
 
 	net_rec := make(xmlrpc.Struct)
 	net_rec["name_label"] = name_label
-	net_rec["name_description"] = name_description 
+	net_rec["name_description"] = name_description
 	net_rec["bridge"] = bridge
 	net_rec["other_config"] = make(xmlrpc.Struct)
 
@@ -355,7 +355,6 @@ func (self *Host) GetAddress() (address string, err error) {
 	return address, nil
 }
 
-
 // VM associated functions
 
 func (self *VM) Clone(label string) (new_instance *VM, err error) {
@@ -380,7 +379,7 @@ func (self *VM) Provision() (err error) {
 	return
 }
 
-func (self *VM) Copy (newName string, targetSr *SR) (new_instance *VM, err error) {
+func (self *VM) Copy(newName string, targetSr *SR) (new_instance *VM, err error) {
 	new_instance = new(VM)
 
 	result := APIResult{}
@@ -474,6 +473,23 @@ func (self *VM) GetHVMBootPolicy() (bootOrder string, err error) {
 	return bootOrder, nil
 }
 
+func (self *VM) RemoveFromHVMBootParams(keyString string) (err error) {
+	result := APIResult{}
+	err = self.Client.APICall(&result, "VM.remove_from_HVM_boot_params", self.Ref, keyString)
+	if err != nil {
+		return err
+	}
+	return
+}
+
+func (self *VM) RemoveFromOtherConfig(keyString string) (err error) {
+	result := APIResult{}
+	err = self.Client.APICall(&result, "VM.remove_from_other_config", self.Ref, keyString)
+	if err != nil {
+		return err
+	}
+	return
+}
 
 func (self *VM) SetHVMBoot(policy, bootOrder string) (err error) {
 	result := APIResult{}
@@ -528,7 +544,6 @@ func (self *VM) GetResidentOn() (host *Host, err error) {
 
 	return host, nil
 }
-
 
 func (self *VM) GetPowerState() (state string, err error) {
 	result := APIResult{}
@@ -648,6 +663,34 @@ func (self *VM) SetStaticMemoryRange(min, max uint) (err error) {
 	return
 }
 
+func (self *VM) ConnectDVD() (err error) {
+
+	vbd_rec := make(xmlrpc.Struct)
+	vbd_rec["VM"] = self.Ref
+	vbd_rec["VDI"] = nil
+	vbd_rec["mode"] = "RO"
+	vbd_rec["bootable"] = false
+	vbd_rec["unpluggable"] = false
+	vbd_rec["other_config"] = make(xmlrpc.Struct)
+	vbd_rec["qos_algorithm_type"] = ""
+	vbd_rec["qos_algorithm_params"] = make(xmlrpc.Struct)
+	vbd_rec["empty"] = true
+	vbd_rec["type"] = "CD"
+	vbd_rec["userdevice"] = "autodetect"
+
+	result := APIResult{}
+	err = self.Client.APICall(&result, "VBD.create", vbd_rec)
+	if err != nil {
+		return err
+	}
+	vbd_ref := result.Value.(string)
+	fmt.Println("VBD Ref:", vbd_ref)
+	result = APIResult{}
+	err = self.Client.APICall(&result, "VBD.get_uuid", vbd_ref)
+	fmt.Println("VBD UUID: ", result.Value.(string))
+	return
+}
+
 func (self *VM) ConnectVdi(vdi *VDI, vdiType VDIType) (err error) {
 
 	// 1. Create a VBD
@@ -669,7 +712,7 @@ func (self *VM) ConnectVdi(vdi *VDI, vdiType VDIType) (err error) {
 		vbd_rec["type"] = "CD"
 	case Disk:
 		vbd_rec["mode"] = "RW"
-		vbd_rec["bootable"] = false
+		vbd_rec["bootable"] = true
 		vbd_rec["unpluggable"] = false
 		vbd_rec["type"] = "Disk"
 	case Floppy:
@@ -751,7 +794,7 @@ func (self *VM) SetPlatform(params map[string]string) (err error) {
 	return
 }
 
-func (self *VM) SetVCpuMax( vcpus uint) (err error) {
+func (self *VM) SetVCpuMax(vcpus uint) (err error) {
 	result := APIResult{}
 	strVcpu := fmt.Sprintf("%d", vcpus)
 
@@ -763,7 +806,7 @@ func (self *VM) SetVCpuMax( vcpus uint) (err error) {
 	return
 }
 
-func (self *VM) SetVCpuAtStartup( vcpus uint) (err error) {
+func (self *VM) SetVCpuAtStartup(vcpus uint) (err error) {
 	result := APIResult{}
 	strVcpu := fmt.Sprintf("%d", vcpus)
 
@@ -884,7 +927,6 @@ func (self *Network) Destroy() (err error) {
 	}
 	return
 }
-
 
 // PIF associated functions
 
@@ -1031,10 +1073,9 @@ func (self *VDI) GetVirtualSize() (virtual_size string, err error) {
 	if err != nil {
 		return "", err
 	}
-	virtual_size = result.Value.(string)  
+	virtual_size = result.Value.(string)
 	return virtual_size, nil
 }
-
 
 func (self *VDI) Destroy() (err error) {
 	result := APIResult{}

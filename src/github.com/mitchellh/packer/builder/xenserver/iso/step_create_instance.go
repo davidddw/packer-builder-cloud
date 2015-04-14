@@ -56,7 +56,7 @@ func (self *stepCreateInstance) Run(state multistep.StateBag) multistep.StepActi
 		return multistep.ActionHalt
 	}
 
-	instance.SetPlatform(config.PlatformArgs)
+	err = instance.SetPlatform(config.PlatformArgs)
 	if err != nil {
 		ui.Error(fmt.Sprintf("Error setting VM platform: %s", err.Error()))
 		return multistep.ActionHalt

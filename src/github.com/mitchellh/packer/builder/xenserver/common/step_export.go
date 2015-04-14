@@ -55,7 +55,54 @@ func (StepExport) Run(state multistep.StateBag) multistep.StepAction {
 		ui.Error(fmt.Sprintf("Could not get VM with UUID '%s': %s", instance_uuid, err.Error()))
 		return multistep.ActionHalt
 	}
+	
+	ui.Say("Step: convert to template")
+		
+	err = instance.SetHVMBoot("", "")
+	if err != nil {
+		ui.Error(fmt.Sprintf("Error setting HVM Bootloader: %s", err.Error()))
+		return multistep.ActionHalt
+	}
+	
+	err = instance.RemoveFromHVMBootParams("order")
+	if err != nil {
+		ui.Error(fmt.Sprintf("Error setting HVM Bootloader: %s", err.Error()))
+		return multistep.ActionHalt
+	}
+	
+	err = instance.RemoveFromOtherConfig("disks")
+	if err != nil {
+		ui.Error(fmt.Sprintf("Error setting HVM Bootloader: %s", err.Error()))
+		return multistep.ActionHalt
+	}
+	
+	err = instance.SetPVBootloader("pygrub", "")
+	if err != nil {
+		ui.Error(fmt.Sprintf("Error setting PV Bootloader: %s", err.Error()))
+		return multistep.ActionHalt
+	}
+	
+	vifs, err := instance.GetVIFs()
+	if err != nil {
+		ui.Error(fmt.Sprintf("Error get vif: %s", err.Error()))
+		return multistep.ActionHalt
+	}
+	for _, vif := range vifs {
+	    vif.Destroy()
+	}
 
+	err = instance.ConnectDVD()
+	if err != nil {
+		ui.Error(fmt.Sprintf("Error Connect DVD Driver: %s", err.Error()))
+		return multistep.ActionHalt
+	}
+		
+	err = instance.SetIsATemplate(true)
+	if err != nil {
+		ui.Error(fmt.Sprintf("Error setting is_a_template=true: %s", err.Error()))
+		return multistep.ActionHalt
+	}
+	
 	ui.Say("Step: export artifact")
 
 	switch config.Format {

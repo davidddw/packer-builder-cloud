@@ -30,7 +30,7 @@ func (self *StepUploadVdi) Run(state multistep.StateBag) multistep.StepAction {
 	ui.Say(fmt.Sprintf("Step: Upload VDI '%s'", self.VdiName))
 
 	// Create VDI for the image
-	sr, err := config.GetSR(client)
+	sr, err := config.GetIsoSR(client)
 	if err != nil {
 		ui.Error(fmt.Sprintf("Unable to get SR: %s", err.Error()))
 		return multistep.ActionHalt
