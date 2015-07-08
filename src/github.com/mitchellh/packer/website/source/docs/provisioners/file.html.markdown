@@ -40,6 +40,10 @@ The available configuration options are listed below. All elements are required.
   machine. This value must be a writable location and any parent directories
   must already exist.
 
+* `direction` (string) - The direction of the file transfer. This defaults
+  to "upload." If it is set to "download" then the file "source" in
+  the machine wll be downloaded locally to "destination"
+
 ## Directory Uploads
 
 The file provisioner is also able to upload a complete directory to the
@@ -61,7 +65,7 @@ machine will be created by Packer.
 
 If the source, however, is `/foo/` (a trailing slash is present), and
 the destination is `/tmp`, then the contents of `/foo` will be uploaded
-directly into `/tmp` directly.
+into `/tmp` directly.
 
 This behavior was adopted from the standard behavior of rsync. Note that
 under the covers, rsync may or may not be used.

@@ -12,6 +12,7 @@ import (
 	"sync"
 
 	"github.com/mitchellh/cli"
+	"github.com/mitchellh/packer/command"
 	"github.com/mitchellh/packer/packer"
 	"github.com/mitchellh/packer/packer/plugin"
 	"github.com/mitchellh/panicwrap"
@@ -139,15 +140,14 @@ func wrappedMain() int {
 
 	defer plugin.CleanupClients()
 
-	// Create the environment configuration
-	EnvConfig = *packer.DefaultEnvironmentConfig()
-	EnvConfig.Cache = cache
-	EnvConfig.Components.Builder = config.LoadBuilder
-	EnvConfig.Components.Hook = config.LoadHook
-	EnvConfig.Components.PostProcessor = config.LoadPostProcessor
-	EnvConfig.Components.Provisioner = config.LoadProvisioner
+	// Setup the UI if we're being machine-readable
+	var ui packer.Ui = &packer.BasicUi{
+		Reader:      os.Stdin,
+		Writer:      os.Stdout,
+		ErrorWriter: os.Stdout,
+	}
 	if machineReadable {
-		EnvConfig.Ui = &packer.MachineReadableUi{
+		ui = &packer.MachineReadableUi{
 			Writer: os.Stdout,
 		}
 
@@ -157,6 +157,21 @@ func wrappedMain() int {
 			fmt.Fprintf(os.Stderr, "Packer failed to initialize UI: %s\n", err)
 			return 1
 		}
+	}
+
+	// Create the CLI meta
+	CommandMeta = &command.Meta{
+		CoreConfig: &packer.CoreConfig{
+			Components: packer.ComponentFinder{
+				Builder:       config.LoadBuilder,
+				Hook:          config.LoadHook,
+				PostProcessor: config.LoadPostProcessor,
+				Provisioner:   config.LoadProvisioner,
+			},
+			Version: Version,
+		},
+		Cache: cache,
+		Ui:    ui,
 	}
 
 	//setupSignalHandlers(env)
@@ -203,12 +218,10 @@ func loadConfig() (*config, error) {
 		return nil, err
 	}
 
-	mustExist := true
 	configFilePath := os.Getenv("PACKER_CONFIG")
 	if configFilePath == "" {
 		var err error
 		configFilePath, err = configFile()
-		mustExist = false
 
 		if err != nil {
 			log.Printf("Error detecting default config file path: %s", err)
@@ -226,11 +239,7 @@ func loadConfig() (*config, error) {
 			return nil, err
 		}
 
-		if mustExist {
-			return nil, err
-		}
-
-		log.Println("File doesn't exist, but doesn't need to. Ignoring.")
+		log.Printf("[WARN] Config file doesn't exist: %s", configFilePath)
 		return &config, nil
 	}
 	defer f.Close()

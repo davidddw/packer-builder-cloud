@@ -3,11 +3,13 @@ package pvm
 import (
 	"errors"
 	"fmt"
+	"log"
+
 	"github.com/mitchellh/multistep"
 	parallelscommon "github.com/mitchellh/packer/builder/parallels/common"
 	"github.com/mitchellh/packer/common"
+	"github.com/mitchellh/packer/helper/communicator"
 	"github.com/mitchellh/packer/packer"
-	"log"
 )
 
 // Builder implements packer.Builder and builds the actual Parallels
@@ -68,7 +70,7 @@ func (b *Builder) Run(ui packer.Ui, hook packer.Hook, cache packer.Cache) (packe
 		new(parallelscommon.StepAttachFloppy),
 		&parallelscommon.StepPrlctl{
 			Commands: b.config.Prlctl,
-			Tpl:      b.config.tpl,
+			Ctx:      b.config.ctx,
 		},
 		&parallelscommon.StepRun{
 			BootWait: b.config.BootWait,
@@ -78,12 +80,12 @@ func (b *Builder) Run(ui packer.Ui, hook packer.Hook, cache packer.Cache) (packe
 			BootCommand:    b.config.BootCommand,
 			HostInterfaces: []string{},
 			VMName:         b.config.VMName,
-			Tpl:            b.config.tpl,
+			Ctx:            b.config.ctx,
 		},
-		&common.StepConnectSSH{
-			SSHAddress:     parallelscommon.SSHAddress,
-			SSHConfig:      parallelscommon.SSHConfigFunc(b.config.SSHConfig),
-			SSHWaitTimeout: b.config.SSHWaitTimeout,
+		&communicator.StepConnect{
+			Config:    &b.config.SSHConfig.Comm,
+			Host:      parallelscommon.CommHost,
+			SSHConfig: parallelscommon.SSHConfigFunc(b.config.SSHConfig),
 		},
 		&parallelscommon.StepUploadVersion{
 			Path: b.config.PrlctlVersionFile,
@@ -92,12 +94,16 @@ func (b *Builder) Run(ui packer.Ui, hook packer.Hook, cache packer.Cache) (packe
 			ParallelsToolsFlavor:    b.config.ParallelsToolsFlavor,
 			ParallelsToolsGuestPath: b.config.ParallelsToolsGuestPath,
 			ParallelsToolsMode:      b.config.ParallelsToolsMode,
-			Tpl:                     b.config.tpl,
+			Ctx:                     b.config.ctx,
 		},
 		new(common.StepProvision),
 		&parallelscommon.StepShutdown{
 			Command: b.config.ShutdownCommand,
 			Timeout: b.config.ShutdownTimeout,
+		},
+		&parallelscommon.StepPrlctl{
+			Commands: b.config.PrlctlPost,
+			Ctx:      b.config.ctx,
 		},
 	}
 

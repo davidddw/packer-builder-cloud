@@ -116,6 +116,21 @@ func TestConfigPrepare(t *testing.T) {
 			"5s",
 			false,
 		},
+		{
+			"use_internal_ip",
+			nil,
+			false,
+		},
+		{
+			"use_internal_ip",
+			false,
+			false,
+		},
+		{
+			"use_internal_ip",
+			"SO VERY BAD",
+			true,
+		},
 	}
 
 	for _, tc := range cases {
@@ -133,6 +148,35 @@ func TestConfigPrepare(t *testing.T) {
 			testConfigErr(t, warns, errs, tc.Key)
 		} else {
 			testConfigOk(t, warns, errs)
+		}
+	}
+}
+
+func TestConfigDefaults(t *testing.T) {
+	cases := []struct {
+		Read  func(c *Config) interface{}
+		Value interface{}
+	}{
+		{
+			func(c *Config) interface{} { return c.Comm.Type },
+			"ssh",
+		},
+
+		{
+			func(c *Config) interface{} { return c.Comm.SSHPort },
+			22,
+		},
+	}
+
+	for _, tc := range cases {
+		raw := testConfig(t)
+
+		c, warns, errs := NewConfig(raw)
+		testConfigOk(t, warns, errs)
+
+		actual := tc.Read(c)
+		if actual != tc.Value {
+			t.Fatalf("bad: %#v", actual)
 		}
 	}
 }

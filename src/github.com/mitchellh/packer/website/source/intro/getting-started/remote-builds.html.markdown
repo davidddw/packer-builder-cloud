@@ -61,12 +61,12 @@ Now we have Atlas building an AMI with Redis pre-configured. This is great, but 
   "variables": ["..."],
   "builders": ["..."],
   "provisioners": ["..."],
-  "push": ["..."]
+  "push": ["..."],
   "post-processors": [
     {
       "type": "atlas",
       "artifact": "ATLAS_USERNAME/packer-tutorial",
-      "artifact_type": "aws.ami"
+      "artifact_type": "amazon.ami"
     }
   ]
 }

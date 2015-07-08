@@ -5,16 +5,19 @@ package puppetmasterless
 
 import (
 	"fmt"
-	"github.com/mitchellh/packer/common"
-	"github.com/mitchellh/packer/packer"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/mitchellh/packer/common"
+	"github.com/mitchellh/packer/helper/config"
+	"github.com/mitchellh/packer/packer"
+	"github.com/mitchellh/packer/template/interpolate"
 )
 
 type Config struct {
 	common.PackerConfig `mapstructure:",squash"`
-	tpl                 *packer.ConfigTemplate
+	ctx                 interpolate.Context
 
 	// The command used to execute Puppet.
 	ExecuteCommand string `mapstructure:"execute_command"`
@@ -41,6 +44,10 @@ type Config struct {
 	// The directory where files will be uploaded. Packer requires write
 	// permissions in this directory.
 	StagingDir string `mapstructure:"staging_directory"`
+
+	// The directory from which the command will be executed.
+	// Packer requires the directory to exist when running puppet.
+	WorkingDir string `mapstructure:"working_directory"`
 }
 
 type Provisioner struct {
@@ -48,6 +55,7 @@ type Provisioner struct {
 }
 
 type ExecuteTemplate struct {
+	WorkingDir      string
 	FacterVars      string
 	HieraConfigPath string
 	ModulePath      string
@@ -57,23 +65,23 @@ type ExecuteTemplate struct {
 }
 
 func (p *Provisioner) Prepare(raws ...interface{}) error {
-	md, err := common.DecodeConfig(&p.config, raws...)
+	err := config.Decode(&p.config, &config.DecodeOpts{
+		Interpolate:        true,
+		InterpolateContext: &p.config.ctx,
+		InterpolateFilter: &interpolate.RenderFilter{
+			Exclude: []string{
+				"execute_command",
+			},
+		},
+	}, raws...)
 	if err != nil {
 		return err
 	}
-
-	p.config.tpl, err = packer.NewConfigTemplate()
-	if err != nil {
-		return err
-	}
-	p.config.tpl.UserVars = p.config.PackerUserVars
-
-	// Accumulate any errors
-	errs := common.CheckUnusedConfig(md)
 
 	// Set some defaults
 	if p.config.ExecuteCommand == "" {
-		p.config.ExecuteCommand = "{{.FacterVars}} {{if .Sudo}} sudo -E {{end}}" +
+		p.config.ExecuteCommand = "cd {{.WorkingDir}} && " +
+			"{{.FacterVars}} {{if .Sudo}} sudo -E {{end}}" +
 			"puppet apply --verbose --modulepath='{{.ModulePath}}' " +
 			"{{if ne .HieraConfigPath \"\"}}--hiera_config='{{.HieraConfigPath}}' {{end}}" +
 			"{{if ne .ManifestDir \"\"}}--manifestdir='{{.ManifestDir}}' {{end}}" +
@@ -85,71 +93,18 @@ func (p *Provisioner) Prepare(raws ...interface{}) error {
 		p.config.StagingDir = "/tmp/packer-puppet-masterless"
 	}
 
-	// Templates
-	templates := map[string]*string{
-		"hiera_config_path": &p.config.HieraConfigPath,
-		"manifest_file":     &p.config.ManifestFile,
-		"manifest_dir":      &p.config.ManifestDir,
-		"staging_dir":       &p.config.StagingDir,
+	if p.config.WorkingDir == "" {
+		p.config.WorkingDir = p.config.StagingDir
 	}
 
-	for n, ptr := range templates {
-		var err error
-		*ptr, err = p.config.tpl.Process(*ptr, nil)
-		if err != nil {
-			errs = packer.MultiErrorAppend(
-				errs, fmt.Errorf("Error processing %s: %s", n, err))
-		}
+	if p.config.Facter == nil {
+		p.config.Facter = make(map[string]string)
 	}
-
-	sliceTemplates := map[string][]string{
-		"module_paths": p.config.ModulePaths,
-	}
-
-	for n, slice := range sliceTemplates {
-		for i, elem := range slice {
-			var err error
-			slice[i], err = p.config.tpl.Process(elem, nil)
-			if err != nil {
-				errs = packer.MultiErrorAppend(
-					errs, fmt.Errorf("Error processing %s[%d]: %s", n, i, err))
-			}
-		}
-	}
-
-	validates := map[string]*string{
-		"execute_command": &p.config.ExecuteCommand,
-	}
-
-	for n, ptr := range validates {
-		if err := p.config.tpl.Validate(*ptr); err != nil {
-			errs = packer.MultiErrorAppend(
-				errs, fmt.Errorf("Error parsing %s: %s", n, err))
-		}
-	}
-
-	newFacts := make(map[string]string)
-	for k, v := range p.config.Facter {
-		k, err := p.config.tpl.Process(k, nil)
-		if err != nil {
-			errs = packer.MultiErrorAppend(errs,
-				fmt.Errorf("Error processing facter key %s: %s", k, err))
-			continue
-		}
-
-		v, err := p.config.tpl.Process(v, nil)
-		if err != nil {
-			errs = packer.MultiErrorAppend(errs,
-				fmt.Errorf("Error processing facter value '%s': %s", v, err))
-			continue
-		}
-
-		newFacts[k] = v
-	}
-
-	p.config.Facter = newFacts
+	p.config.Facter["packer_build_name"] = p.config.PackerBuildName
+	p.config.Facter["packer_builder_type"] = p.config.PackerBuilderType
 
 	// Validation
+	var errs *packer.MultiError
 	if p.config.HieraConfigPath != "" {
 		info, err := os.Stat(p.config.HieraConfigPath)
 		if err != nil {
@@ -255,14 +210,16 @@ func (p *Provisioner) Provision(ui packer.Ui, comm packer.Communicator) error {
 	}
 
 	// Execute Puppet
-	command, err := p.config.tpl.Process(p.config.ExecuteCommand, &ExecuteTemplate{
+	p.config.ctx.Data = &ExecuteTemplate{
 		FacterVars:      strings.Join(facterVars, " "),
 		HieraConfigPath: remoteHieraConfigPath,
 		ManifestDir:     remoteManifestDir,
 		ManifestFile:    remoteManifestFile,
 		ModulePath:      strings.Join(modulePaths, ":"),
 		Sudo:            !p.config.PreventSudo,
-	})
+		WorkingDir:      p.config.WorkingDir,
+	}
+	command, err := interpolate.Render(p.config.ExecuteCommand, &p.config.ctx)
 	if err != nil {
 		return err
 	}
@@ -320,7 +277,15 @@ func (p *Provisioner) uploadManifests(ui packer.Ui, comm packer.Communicator) (s
 	}
 	defer f.Close()
 
-	manifestFilename := filepath.Base(p.config.ManifestFile)
+	manifestFilename := p.config.ManifestFile
+	if fi, err := os.Stat(p.config.ManifestFile); err != nil {
+		return "", fmt.Errorf("Error inspecting manifest file: %s", err)
+	} else if !fi.IsDir() {
+		manifestFilename = filepath.Base(manifestFilename)
+	} else {
+		ui.Say("WARNING: manifest_file should be a file. Use manifest_dir for directories")
+	}
+
 	remoteManifestFile := fmt.Sprintf("%s/%s", remoteManifestsPath, manifestFilename)
 	if err := comm.Upload(remoteManifestFile, f, nil); err != nil {
 		return "", err

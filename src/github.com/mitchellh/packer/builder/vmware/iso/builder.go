@@ -3,26 +3,30 @@ package iso
 import (
 	"errors"
 	"fmt"
-	"github.com/mitchellh/multistep"
-	vmwcommon "github.com/mitchellh/packer/builder/vmware/common"
-	"github.com/mitchellh/packer/common"
-	"github.com/mitchellh/packer/packer"
 	"io/ioutil"
 	"log"
 	"math/rand"
 	"os"
 	"strings"
 	"time"
+
+	"github.com/mitchellh/multistep"
+	vmwcommon "github.com/mitchellh/packer/builder/vmware/common"
+	"github.com/mitchellh/packer/common"
+	"github.com/mitchellh/packer/helper/communicator"
+	"github.com/mitchellh/packer/helper/config"
+	"github.com/mitchellh/packer/packer"
+	"github.com/mitchellh/packer/template/interpolate"
 )
 
 const BuilderIdESX = "mitchellh.vmware-esx"
 
 type Builder struct {
-	config config
+	config Config
 	runner multistep.Runner
 }
 
-type config struct {
+type Config struct {
 	common.PackerConfig      `mapstructure:",squash"`
 	vmwcommon.DriverConfig   `mapstructure:",squash"`
 	vmwcommon.OutputConfig   `mapstructure:",squash"`
@@ -32,19 +36,21 @@ type config struct {
 	vmwcommon.ToolsConfig    `mapstructure:",squash"`
 	vmwcommon.VMXConfig      `mapstructure:",squash"`
 
-	DiskName        string   `mapstructure:"vmdk_name"`
-	DiskSize        uint     `mapstructure:"disk_size"`
-	DiskTypeId      string   `mapstructure:"disk_type_id"`
-	FloppyFiles     []string `mapstructure:"floppy_files"`
-	GuestOSType     string   `mapstructure:"guest_os_type"`
-	ISOChecksum     string   `mapstructure:"iso_checksum"`
-	ISOChecksumType string   `mapstructure:"iso_checksum_type"`
-	ISOUrls         []string `mapstructure:"iso_urls"`
-	Version         string   `mapstructure:"version"`
-	VMName          string   `mapstructure:"vm_name"`
-	BootCommand     []string `mapstructure:"boot_command"`
-	SkipCompaction  bool     `mapstructure:"skip_compaction"`
-	VMXTemplatePath string   `mapstructure:"vmx_template_path"`
+	AdditionalDiskSize  []uint   `mapstructure:"disk_additional_size"`
+	DiskName            string   `mapstructure:"vmdk_name"`
+	DiskSize            uint     `mapstructure:"disk_size"`
+	DiskTypeId          string   `mapstructure:"disk_type_id"`
+	FloppyFiles         []string `mapstructure:"floppy_files"`
+	GuestOSType         string   `mapstructure:"guest_os_type"`
+	ISOChecksum         string   `mapstructure:"iso_checksum"`
+	ISOChecksumType     string   `mapstructure:"iso_checksum_type"`
+	ISOUrls             []string `mapstructure:"iso_urls"`
+	Version             string   `mapstructure:"version"`
+	VMName              string   `mapstructure:"vm_name"`
+	BootCommand         []string `mapstructure:"boot_command"`
+	SkipCompaction      bool     `mapstructure:"skip_compaction"`
+	VMXTemplatePath     string   `mapstructure:"vmx_template_path"`
+	VMXDiskTemplatePath string   `mapstructure:"vmx_disk_template_path"`
 
 	RemoteType           string `mapstructure:"remote_type"`
 	RemoteDatastore      string `mapstructure:"remote_datastore"`
@@ -57,31 +63,34 @@ type config struct {
 
 	RawSingleISOUrl string `mapstructure:"iso_url"`
 
-	tpl *packer.ConfigTemplate
+	ctx interpolate.Context
 }
 
 func (b *Builder) Prepare(raws ...interface{}) ([]string, error) {
-	md, err := common.DecodeConfig(&b.config, raws...)
+	err := config.Decode(&b.config, &config.DecodeOpts{
+		Interpolate:        true,
+		InterpolateContext: &b.config.ctx,
+		InterpolateFilter: &interpolate.RenderFilter{
+			Exclude: []string{
+				"boot_command",
+				"tools_upload_path",
+			},
+		},
+	}, raws...)
 	if err != nil {
 		return nil, err
 	}
 
-	b.config.tpl, err = packer.NewConfigTemplate()
-	if err != nil {
-		return nil, err
-	}
-	b.config.tpl.UserVars = b.config.PackerUserVars
-
-	// Accumulate any errors
-	errs := common.CheckUnusedConfig(md)
-	errs = packer.MultiErrorAppend(errs, b.config.DriverConfig.Prepare(b.config.tpl)...)
+	// Accumulate any errors and warnings
+	var errs *packer.MultiError
+	errs = packer.MultiErrorAppend(errs, b.config.DriverConfig.Prepare(&b.config.ctx)...)
 	errs = packer.MultiErrorAppend(errs,
-		b.config.OutputConfig.Prepare(b.config.tpl, &b.config.PackerConfig)...)
-	errs = packer.MultiErrorAppend(errs, b.config.RunConfig.Prepare(b.config.tpl)...)
-	errs = packer.MultiErrorAppend(errs, b.config.ShutdownConfig.Prepare(b.config.tpl)...)
-	errs = packer.MultiErrorAppend(errs, b.config.SSHConfig.Prepare(b.config.tpl)...)
-	errs = packer.MultiErrorAppend(errs, b.config.ToolsConfig.Prepare(b.config.tpl)...)
-	errs = packer.MultiErrorAppend(errs, b.config.VMXConfig.Prepare(b.config.tpl)...)
+		b.config.OutputConfig.Prepare(&b.config.ctx, &b.config.PackerConfig)...)
+	errs = packer.MultiErrorAppend(errs, b.config.RunConfig.Prepare(&b.config.ctx)...)
+	errs = packer.MultiErrorAppend(errs, b.config.ShutdownConfig.Prepare(&b.config.ctx)...)
+	errs = packer.MultiErrorAppend(errs, b.config.SSHConfig.Prepare(&b.config.ctx)...)
+	errs = packer.MultiErrorAppend(errs, b.config.ToolsConfig.Prepare(&b.config.ctx)...)
+	errs = packer.MultiErrorAppend(errs, b.config.VMXConfig.Prepare(&b.config.ctx)...)
 	warnings := make([]string, 0)
 
 	if b.config.DiskName == "" {
@@ -135,59 +144,6 @@ func (b *Builder) Prepare(raws ...interface{}) ([]string, error) {
 
 	if b.config.RemotePort == 0 {
 		b.config.RemotePort = 22
-	}
-
-	// Errors
-	templates := map[string]*string{
-		"disk_name":              &b.config.DiskName,
-		"guest_os_type":          &b.config.GuestOSType,
-		"iso_checksum":           &b.config.ISOChecksum,
-		"iso_checksum_type":      &b.config.ISOChecksumType,
-		"iso_url":                &b.config.RawSingleISOUrl,
-		"vm_name":                &b.config.VMName,
-		"vmx_template_path":      &b.config.VMXTemplatePath,
-		"remote_type":            &b.config.RemoteType,
-		"remote_host":            &b.config.RemoteHost,
-		"remote_datastore":       &b.config.RemoteDatastore,
-		"remote_cache_datastore": &b.config.RemoteCacheDatastore,
-		"remote_cache_directory": &b.config.RemoteCacheDirectory,
-		"remote_user":            &b.config.RemoteUser,
-		"remote_password":        &b.config.RemotePassword,
-	}
-
-	for n, ptr := range templates {
-		var err error
-		*ptr, err = b.config.tpl.Process(*ptr, nil)
-		if err != nil {
-			errs = packer.MultiErrorAppend(
-				errs, fmt.Errorf("Error processing %s: %s", n, err))
-		}
-	}
-
-	for i, url := range b.config.ISOUrls {
-		var err error
-		b.config.ISOUrls[i], err = b.config.tpl.Process(url, nil)
-		if err != nil {
-			errs = packer.MultiErrorAppend(
-				errs, fmt.Errorf("Error processing iso_urls[%d]: %s", i, err))
-		}
-	}
-
-	for i, command := range b.config.BootCommand {
-		if err := b.config.tpl.Validate(command); err != nil {
-			errs = packer.MultiErrorAppend(errs,
-				fmt.Errorf("Error processing boot_command[%d]: %s", i, err))
-		}
-	}
-
-	for i, file := range b.config.FloppyFiles {
-		var err error
-		b.config.FloppyFiles[i], err = b.config.tpl.Process(file, nil)
-		if err != nil {
-			errs = packer.MultiErrorAppend(errs,
-				fmt.Errorf("Error processing floppy_files[%d]: %s",
-					i, err))
-		}
 	}
 
 	if b.config.ISOChecksumType == "" {
@@ -343,19 +299,18 @@ func (b *Builder) Run(ui packer.Ui, hook packer.Hook, cache packer.Cache) (packe
 		&vmwcommon.StepTypeBootCommand{
 			BootCommand: b.config.BootCommand,
 			VMName:      b.config.VMName,
-			Tpl:         b.config.tpl,
+			Ctx:         b.config.ctx,
 		},
-		&common.StepConnectSSH{
-			SSHAddress:     driver.SSHAddress,
-			SSHConfig:      vmwcommon.SSHConfigFunc(&b.config.SSHConfig),
-			SSHWaitTimeout: b.config.SSHWaitTimeout,
-			NoPty:          b.config.SSHSkipRequestPty,
+		&communicator.StepConnect{
+			Config:    &b.config.SSHConfig.Comm,
+			Host:      driver.CommHost,
+			SSHConfig: vmwcommon.SSHConfigFunc(&b.config.SSHConfig),
 		},
 		&vmwcommon.StepUploadTools{
 			RemoteType:        b.config.RemoteType,
 			ToolsUploadFlavor: b.config.ToolsUploadFlavor,
 			ToolsUploadPath:   b.config.ToolsUploadPath,
-			Tpl:               b.config.tpl,
+			Ctx:               b.config.ctx,
 		},
 		&common.StepProvision{},
 		&vmwcommon.StepShutdown{
@@ -369,7 +324,7 @@ func (b *Builder) Run(ui packer.Ui, hook packer.Hook, cache packer.Cache) (packe
 		},
 		&vmwcommon.StepCleanVMX{},
 		&StepUploadVMX{
-			RemoteType:        b.config.RemoteType,
+			RemoteType: b.config.RemoteType,
 		},
 		&vmwcommon.StepCompactDisk{
 			Skip: b.config.SkipCompaction,
@@ -440,5 +395,5 @@ func (b *Builder) validateVMXTemplatePath() error {
 		return err
 	}
 
-	return b.config.tpl.Validate(string(data))
+	return interpolate.Validate(string(data), &b.config.ctx)
 }
