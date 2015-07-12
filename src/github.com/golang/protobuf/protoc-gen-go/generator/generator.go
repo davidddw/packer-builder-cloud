@@ -449,6 +449,7 @@ type Generator struct {
 	file             *FileDescriptor   // The file we are compiling now.
 	usedPackages     map[string]bool   // Names of packages used in current file.
 	typeNameToObject map[string]Object // Key is a fully-qualified name in input syntax.
+	init             []string          // Lines to emit in the init function.
 	indent           string
 }
 
@@ -966,6 +967,12 @@ func (g *Generator) P(str ...interface{}) {
 	g.WriteByte('\n')
 }
 
+// addInitf stores the given statement to be printed inside the file's init function.
+// The statement is given as a format specifier and arguments.
+func (g *Generator) addInitf(stmt string, a ...interface{}) {
+	g.init = append(g.init, fmt.Sprintf(stmt, a...))
+}
+
 // In Indents the output one tab stop.
 func (g *Generator) In() { g.indent += "\t" }
 
@@ -1161,26 +1168,25 @@ func (g *Generator) generateImports() {
 			continue
 		}
 		filename := goFileName(s)
+		// By default, import path is the dirname of the Go filename.
+		importPath := path.Dir(filename)
 		if substitution, ok := g.ImportMap[s]; ok {
-			filename = substitution
+			importPath = substitution
 		}
-		filename = g.ImportPrefix + filename
-		if strings.HasSuffix(filename, ".go") {
-			filename = filename[0 : len(filename)-3]
-		}
+		importPath = g.ImportPrefix + importPath
 		// Skip weak imports.
 		if g.weak(int32(i)) {
-			g.P("// skipping weak import ", fd.PackageName(), " ", strconv.Quote(filename))
+			g.P("// skipping weak import ", fd.PackageName(), " ", strconv.Quote(importPath))
 			continue
 		}
 		if _, ok := g.usedPackages[fd.PackageName()]; ok {
-			g.P("import ", fd.PackageName(), " ", strconv.Quote(filename))
+			g.P("import ", fd.PackageName(), " ", strconv.Quote(importPath))
 		} else {
 			// TODO: Re-enable this when we are more feature-complete.
 			// For instance, some protos use foreign field extensions, which we don't support.
 			// Until then, this is just annoying spam.
 			//log.Printf("protoc-gen-go: discarding unused import from %v: %v", *g.file.Name, s)
-			g.P("// discarding unused import ", fd.PackageName(), " ", strconv.Quote(filename))
+			g.P("// discarding unused import ", fd.PackageName(), " ", strconv.Quote(importPath))
 		}
 	}
 	g.P()
@@ -1555,8 +1561,13 @@ func (g *Generator) generateMessage(message *Descriptor) {
 				keyTag, valTag := g.goTag(d, keyField, keyWire), g.goTag(d, valField, valWire)
 
 				// We don't use stars, except for message-typed values.
+				// Message and enum types are the only two possibly foreign types used in maps,
+				// so record their use. They are not permitted as map keys.
 				keyType = strings.TrimPrefix(keyType, "*")
 				switch *valField.Type {
+				case descriptor.FieldDescriptorProto_TYPE_ENUM:
+					valType = strings.TrimPrefix(valType, "*")
+					g.RecordTypeUse(valField.GetTypeName())
 				case descriptor.FieldDescriptorProto_TYPE_MESSAGE:
 					g.RecordTypeUse(valField.GetTypeName())
 				default:
@@ -1844,8 +1855,16 @@ func (g *Generator) generateMessage(message *Descriptor) {
 func (g *Generator) generateExtension(ext *ExtensionDescriptor) {
 	ccTypeName := ext.DescName()
 
-	extDesc := g.ObjectNamed(*ext.Extendee).(*Descriptor)
-	extendedType := "*" + g.TypeName(extDesc)
+	extObj := g.ObjectNamed(*ext.Extendee)
+	var extDesc *Descriptor
+	if id, ok := extObj.(*ImportedDescriptor); ok {
+		// This is extending a publicly imported message.
+		// We need the underlying type for goTag.
+		extDesc = id.o.(*Descriptor)
+	} else {
+		extDesc = extObj.(*Descriptor)
+	}
+	extendedType := "*" + g.TypeName(extObj) // always use the original
 	field := ext.FieldDescriptorProto
 	fieldType, wireType := g.GoType(ext.parent, field)
 	tag := g.goTag(extDesc, field, wireType)
@@ -1887,19 +1906,13 @@ func (g *Generator) generateExtension(ext *ExtensionDescriptor) {
 
 	if mset {
 		// Generate a bit more code to register with message_set.go.
-		g.P("func init() { ")
-		g.In()
-		g.P(g.Pkg["proto"], ".RegisterMessageSetType((", fieldType, ")(nil), ", field.Number, ", \"", extName, "\")")
-		g.Out()
-		g.P("}")
+		g.addInitf("%s.RegisterMessageSetType((%s)(nil), %d, %q)", g.Pkg["proto"], fieldType, *field.Number, extName)
 	}
 
 	g.file.addExport(ext, constOrVarSymbol{ccTypeName, "var", ""})
 }
 
 func (g *Generator) generateInitFunction() {
-	g.P("func init() {")
-	g.In()
 	for _, enum := range g.file.enum {
 		g.generateEnumRegistration(enum)
 	}
@@ -1911,8 +1924,17 @@ func (g *Generator) generateInitFunction() {
 	for _, ext := range g.file.ext {
 		g.generateExtensionRegistration(ext)
 	}
+	if len(g.init) == 0 {
+		return
+	}
+	g.P("func init() {")
+	g.In()
+	for _, l := range g.init {
+		g.P(l)
+	}
 	g.Out()
 	g.P("}")
+	g.init = nil
 }
 
 func (g *Generator) generateEnumRegistration(enum *EnumDescriptor) {
@@ -1925,11 +1947,11 @@ func (g *Generator) generateEnumRegistration(enum *EnumDescriptor) {
 	typeName := enum.TypeName()
 	// The full type name, CamelCased.
 	ccTypeName := CamelCaseSlice(typeName)
-	g.P(g.Pkg["proto"]+".RegisterEnum(", strconv.Quote(pkg+ccTypeName), ", ", ccTypeName+"_name, ", ccTypeName+"_value)")
+	g.addInitf("%s.RegisterEnum(%q, %[3]s_name, %[3]s_value)", g.Pkg["proto"], pkg+ccTypeName, ccTypeName)
 }
 
 func (g *Generator) generateExtensionRegistration(ext *ExtensionDescriptor) {
-	g.P(g.Pkg["proto"]+".RegisterExtension(", ext.DescName(), ")")
+	g.addInitf("%s.RegisterExtension(%s)", g.Pkg["proto"], ext.DescName())
 }
 
 // And now lots of helper functions.
