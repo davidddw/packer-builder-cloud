@@ -6,15 +6,15 @@ package ses
 import (
 	"time"
 
-	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awsutil"
+	"github.com/aws/aws-sdk-go/aws/service"
 )
 
 const opDeleteIdentity = "DeleteIdentity"
 
 // DeleteIdentityRequest generates a request for the DeleteIdentity operation.
-func (c *SES) DeleteIdentityRequest(input *DeleteIdentityInput) (req *aws.Request, output *DeleteIdentityOutput) {
-	op := &aws.Operation{
+func (c *SES) DeleteIdentityRequest(input *DeleteIdentityInput) (req *service.Request, output *DeleteIdentityOutput) {
+	op := &service.Operation{
 		Name:       opDeleteIdentity,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -40,11 +40,47 @@ func (c *SES) DeleteIdentity(input *DeleteIdentityInput) (*DeleteIdentityOutput,
 	return out, err
 }
 
+const opDeleteIdentityPolicy = "DeleteIdentityPolicy"
+
+// DeleteIdentityPolicyRequest generates a request for the DeleteIdentityPolicy operation.
+func (c *SES) DeleteIdentityPolicyRequest(input *DeleteIdentityPolicyInput) (req *service.Request, output *DeleteIdentityPolicyOutput) {
+	op := &service.Operation{
+		Name:       opDeleteIdentityPolicy,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteIdentityPolicyInput{}
+	}
+
+	req = c.newRequest(op, input, output)
+	output = &DeleteIdentityPolicyOutput{}
+	req.Data = output
+	return
+}
+
+// Deletes the specified sending authorization policy for the given identity
+// (email address or domain). This API returns successfully even if a policy
+// with the specified name does not exist.
+//
+// This API is for the identity owner only. If you have not verified the identity,
+// this API will return an error. Sending authorization is a feature that enables
+// an identity owner to authorize other senders to use its identities. For information
+// about using sending authorization, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
+//
+// This action is throttled at one request per second.
+func (c *SES) DeleteIdentityPolicy(input *DeleteIdentityPolicyInput) (*DeleteIdentityPolicyOutput, error) {
+	req, out := c.DeleteIdentityPolicyRequest(input)
+	err := req.Send()
+	return out, err
+}
+
 const opDeleteVerifiedEmailAddress = "DeleteVerifiedEmailAddress"
 
 // DeleteVerifiedEmailAddressRequest generates a request for the DeleteVerifiedEmailAddress operation.
-func (c *SES) DeleteVerifiedEmailAddressRequest(input *DeleteVerifiedEmailAddressInput) (req *aws.Request, output *DeleteVerifiedEmailAddressOutput) {
-	op := &aws.Operation{
+func (c *SES) DeleteVerifiedEmailAddressRequest(input *DeleteVerifiedEmailAddressInput) (req *service.Request, output *DeleteVerifiedEmailAddressOutput) {
+	op := &service.Operation{
 		Name:       opDeleteVerifiedEmailAddress,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -71,22 +107,22 @@ func (c *SES) DeleteVerifiedEmailAddress(input *DeleteVerifiedEmailAddressInput)
 	return out, err
 }
 
-const opGetIdentityDKIMAttributes = "GetIdentityDkimAttributes"
+const opGetIdentityDkimAttributes = "GetIdentityDkimAttributes"
 
-// GetIdentityDKIMAttributesRequest generates a request for the GetIdentityDKIMAttributes operation.
-func (c *SES) GetIdentityDKIMAttributesRequest(input *GetIdentityDKIMAttributesInput) (req *aws.Request, output *GetIdentityDKIMAttributesOutput) {
-	op := &aws.Operation{
-		Name:       opGetIdentityDKIMAttributes,
+// GetIdentityDkimAttributesRequest generates a request for the GetIdentityDkimAttributes operation.
+func (c *SES) GetIdentityDkimAttributesRequest(input *GetIdentityDkimAttributesInput) (req *service.Request, output *GetIdentityDkimAttributesOutput) {
+	op := &service.Operation{
+		Name:       opGetIdentityDkimAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &GetIdentityDKIMAttributesInput{}
+		input = &GetIdentityDkimAttributesInput{}
 	}
 
 	req = c.newRequest(op, input, output)
-	output = &GetIdentityDKIMAttributesOutput{}
+	output = &GetIdentityDkimAttributesOutput{}
 	req.Data = output
 	return
 }
@@ -109,8 +145,8 @@ func (c *SES) GetIdentityDKIMAttributesRequest(input *GetIdentityDKIMAttributesI
 //
 // For more information about creating DNS records using DKIM tokens, go to
 // the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim-dns-records.html).
-func (c *SES) GetIdentityDKIMAttributes(input *GetIdentityDKIMAttributesInput) (*GetIdentityDKIMAttributesOutput, error) {
-	req, out := c.GetIdentityDKIMAttributesRequest(input)
+func (c *SES) GetIdentityDkimAttributes(input *GetIdentityDkimAttributesInput) (*GetIdentityDkimAttributesOutput, error) {
+	req, out := c.GetIdentityDkimAttributesRequest(input)
 	err := req.Send()
 	return out, err
 }
@@ -118,8 +154,8 @@ func (c *SES) GetIdentityDKIMAttributes(input *GetIdentityDKIMAttributesInput) (
 const opGetIdentityNotificationAttributes = "GetIdentityNotificationAttributes"
 
 // GetIdentityNotificationAttributesRequest generates a request for the GetIdentityNotificationAttributes operation.
-func (c *SES) GetIdentityNotificationAttributesRequest(input *GetIdentityNotificationAttributesInput) (req *aws.Request, output *GetIdentityNotificationAttributesOutput) {
-	op := &aws.Operation{
+func (c *SES) GetIdentityNotificationAttributesRequest(input *GetIdentityNotificationAttributesInput) (req *service.Request, output *GetIdentityNotificationAttributesOutput) {
+	op := &service.Operation{
 		Name:       opGetIdentityNotificationAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -149,11 +185,47 @@ func (c *SES) GetIdentityNotificationAttributes(input *GetIdentityNotificationAt
 	return out, err
 }
 
+const opGetIdentityPolicies = "GetIdentityPolicies"
+
+// GetIdentityPoliciesRequest generates a request for the GetIdentityPolicies operation.
+func (c *SES) GetIdentityPoliciesRequest(input *GetIdentityPoliciesInput) (req *service.Request, output *GetIdentityPoliciesOutput) {
+	op := &service.Operation{
+		Name:       opGetIdentityPolicies,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetIdentityPoliciesInput{}
+	}
+
+	req = c.newRequest(op, input, output)
+	output = &GetIdentityPoliciesOutput{}
+	req.Data = output
+	return
+}
+
+// Returns the requested sending authorization policies for the given identity
+// (email address or domain). The policies are returned as a map of policy names
+// to policy contents. You can retrieve a maximum of 20 policies at a time.
+//
+// This API is for the identity owner only. If you have not verified the identity,
+// this API will return an error. Sending authorization is a feature that enables
+// an identity owner to authorize other senders to use its identities. For information
+// about using sending authorization, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
+//
+// This action is throttled at one request per second.
+func (c *SES) GetIdentityPolicies(input *GetIdentityPoliciesInput) (*GetIdentityPoliciesOutput, error) {
+	req, out := c.GetIdentityPoliciesRequest(input)
+	err := req.Send()
+	return out, err
+}
+
 const opGetIdentityVerificationAttributes = "GetIdentityVerificationAttributes"
 
 // GetIdentityVerificationAttributesRequest generates a request for the GetIdentityVerificationAttributes operation.
-func (c *SES) GetIdentityVerificationAttributesRequest(input *GetIdentityVerificationAttributesInput) (req *aws.Request, output *GetIdentityVerificationAttributesOutput) {
-	op := &aws.Operation{
+func (c *SES) GetIdentityVerificationAttributesRequest(input *GetIdentityVerificationAttributesInput) (req *service.Request, output *GetIdentityVerificationAttributesOutput) {
+	op := &service.Operation{
 		Name:       opGetIdentityVerificationAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -184,8 +256,8 @@ func (c *SES) GetIdentityVerificationAttributes(input *GetIdentityVerificationAt
 const opGetSendQuota = "GetSendQuota"
 
 // GetSendQuotaRequest generates a request for the GetSendQuota operation.
-func (c *SES) GetSendQuotaRequest(input *GetSendQuotaInput) (req *aws.Request, output *GetSendQuotaOutput) {
-	op := &aws.Operation{
+func (c *SES) GetSendQuotaRequest(input *GetSendQuotaInput) (req *service.Request, output *GetSendQuotaOutput) {
+	op := &service.Operation{
 		Name:       opGetSendQuota,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -213,8 +285,8 @@ func (c *SES) GetSendQuota(input *GetSendQuotaInput) (*GetSendQuotaOutput, error
 const opGetSendStatistics = "GetSendStatistics"
 
 // GetSendStatisticsRequest generates a request for the GetSendStatistics operation.
-func (c *SES) GetSendStatisticsRequest(input *GetSendStatisticsInput) (req *aws.Request, output *GetSendStatisticsOutput) {
-	op := &aws.Operation{
+func (c *SES) GetSendStatisticsRequest(input *GetSendStatisticsInput) (req *service.Request, output *GetSendStatisticsOutput) {
+	op := &service.Operation{
 		Name:       opGetSendStatistics,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -245,12 +317,12 @@ func (c *SES) GetSendStatistics(input *GetSendStatisticsInput) (*GetSendStatisti
 const opListIdentities = "ListIdentities"
 
 // ListIdentitiesRequest generates a request for the ListIdentities operation.
-func (c *SES) ListIdentitiesRequest(input *ListIdentitiesInput) (req *aws.Request, output *ListIdentitiesOutput) {
-	op := &aws.Operation{
+func (c *SES) ListIdentitiesRequest(input *ListIdentitiesInput) (req *service.Request, output *ListIdentitiesOutput) {
+	op := &service.Operation{
 		Name:       opListIdentities,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
+		Paginator: &service.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxItems",
@@ -285,11 +357,47 @@ func (c *SES) ListIdentitiesPages(input *ListIdentitiesInput, fn func(p *ListIde
 	})
 }
 
+const opListIdentityPolicies = "ListIdentityPolicies"
+
+// ListIdentityPoliciesRequest generates a request for the ListIdentityPolicies operation.
+func (c *SES) ListIdentityPoliciesRequest(input *ListIdentityPoliciesInput) (req *service.Request, output *ListIdentityPoliciesOutput) {
+	op := &service.Operation{
+		Name:       opListIdentityPolicies,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ListIdentityPoliciesInput{}
+	}
+
+	req = c.newRequest(op, input, output)
+	output = &ListIdentityPoliciesOutput{}
+	req.Data = output
+	return
+}
+
+// Returns a list of sending authorization policies that are attached to the
+// given identity (email address or domain). This API returns only a list. If
+// you want the actual policy content, you can use GetIdentityPolicies.
+//
+// This API is for the identity owner only. If you have not verified the identity,
+// this API will return an error. Sending authorization is a feature that enables
+// an identity owner to authorize other senders to use its identities. For information
+// about using sending authorization, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
+//
+// This action is throttled at one request per second.
+func (c *SES) ListIdentityPolicies(input *ListIdentityPoliciesInput) (*ListIdentityPoliciesOutput, error) {
+	req, out := c.ListIdentityPoliciesRequest(input)
+	err := req.Send()
+	return out, err
+}
+
 const opListVerifiedEmailAddresses = "ListVerifiedEmailAddresses"
 
 // ListVerifiedEmailAddressesRequest generates a request for the ListVerifiedEmailAddresses operation.
-func (c *SES) ListVerifiedEmailAddressesRequest(input *ListVerifiedEmailAddressesInput) (req *aws.Request, output *ListVerifiedEmailAddressesOutput) {
-	op := &aws.Operation{
+func (c *SES) ListVerifiedEmailAddressesRequest(input *ListVerifiedEmailAddressesInput) (req *service.Request, output *ListVerifiedEmailAddressesOutput) {
+	op := &service.Operation{
 		Name:       opListVerifiedEmailAddresses,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -316,11 +424,46 @@ func (c *SES) ListVerifiedEmailAddresses(input *ListVerifiedEmailAddressesInput)
 	return out, err
 }
 
+const opPutIdentityPolicy = "PutIdentityPolicy"
+
+// PutIdentityPolicyRequest generates a request for the PutIdentityPolicy operation.
+func (c *SES) PutIdentityPolicyRequest(input *PutIdentityPolicyInput) (req *service.Request, output *PutIdentityPolicyOutput) {
+	op := &service.Operation{
+		Name:       opPutIdentityPolicy,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &PutIdentityPolicyInput{}
+	}
+
+	req = c.newRequest(op, input, output)
+	output = &PutIdentityPolicyOutput{}
+	req.Data = output
+	return
+}
+
+// Adds or updates a sending authorization policy for the specified identity
+// (email address or domain).
+//
+// This API is for the identity owner only. If you have not verified the identity,
+// this API will return an error. Sending authorization is a feature that enables
+// an identity owner to authorize other senders to use its identities. For information
+// about using sending authorization, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
+//
+// This action is throttled at one request per second.
+func (c *SES) PutIdentityPolicy(input *PutIdentityPolicyInput) (*PutIdentityPolicyOutput, error) {
+	req, out := c.PutIdentityPolicyRequest(input)
+	err := req.Send()
+	return out, err
+}
+
 const opSendEmail = "SendEmail"
 
 // SendEmailRequest generates a request for the SendEmail operation.
-func (c *SES) SendEmailRequest(input *SendEmailInput) (req *aws.Request, output *SendEmailOutput) {
-	op := &aws.Operation{
+func (c *SES) SendEmailRequest(input *SendEmailInput) (req *service.Request, output *SendEmailOutput) {
+	op := &service.Operation{
 		Name:       opSendEmail,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -339,20 +482,21 @@ func (c *SES) SendEmailRequest(input *SendEmailInput) (req *aws.Request, output 
 // Composes an email message based on input data, and then immediately queues
 // the message for sending.
 //
-//  You can only send email from verified email addresses and domains. If your
-// account is still in the Amazon SES sandbox, you must also verify every recipient
-// email address except for the recipients provided by the Amazon SES mailbox
-// simulator. For more information, go to the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html).
-//  The total size of the message cannot exceed 10 MB.
+// There are several important points to know about SendEmail:
 //
-// Amazon SES has a limit on the total number of recipients per message: The
-// combined number of To:, CC: and BCC: email addresses cannot exceed 50. If
-// you need to send an email message to a larger audience, you can divide your
-// recipient list into groups of 50 or fewer, and then call Amazon SES repeatedly
-// to send the message to each group.
-//
-// For every message that you send, the total number of recipients (To:, CC:
-// and BCC:) is counted against your sending quota - the maximum number of emails
+//  You can only send email from verified email addresses and domains; otherwise,
+// you will get an "Email address not verified" error. If your account is still
+// in the Amazon SES sandbox, you must also verify every recipient email address
+// except for the recipients provided by the Amazon SES mailbox simulator. For
+// more information, go to the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html).
+// The total size of the message cannot exceed 10 MB. This includes any attachments
+// that are part of the message. Amazon SES has a limit on the total number
+// of recipients per message. The combined number of To:, CC: and BCC: email
+// addresses cannot exceed 50. If you need to send an email message to a larger
+// audience, you can divide your recipient list into groups of 50 or fewer,
+// and then call Amazon SES repeatedly to send the message to each group. For
+// every message that you send, the total number of recipients (To:, CC: and
+// BCC:) is counted against your sending quota - the maximum number of emails
 // you can send in a 24-hour period. For information about your sending quota,
 // go to the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html).
 func (c *SES) SendEmail(input *SendEmailInput) (*SendEmailOutput, error) {
@@ -364,8 +508,8 @@ func (c *SES) SendEmail(input *SendEmailInput) (*SendEmailOutput, error) {
 const opSendRawEmail = "SendRawEmail"
 
 // SendRawEmailRequest generates a request for the SendRawEmail operation.
-func (c *SES) SendRawEmailRequest(input *SendRawEmailInput) (req *aws.Request, output *SendRawEmailOutput) {
-	op := &aws.Operation{
+func (c *SES) SendRawEmailRequest(input *SendRawEmailInput) (req *service.Request, output *SendRawEmailOutput) {
+	op := &service.Operation{
 		Name:       opSendRawEmail,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -386,49 +530,61 @@ func (c *SES) SendRawEmailRequest(input *SendRawEmailInput) (req *aws.Request, o
 // raw text of the message must comply with Internet email standards; otherwise,
 // the message cannot be sent.
 //
-//  You can only send email from verified email addresses and domains. If your
-// account is still in the Amazon SES sandbox, you must also verify every recipient
-// email address except for the recipients provided by the Amazon SES mailbox
-// simulator. For more information, go to the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html).
-//  The total size of the message cannot exceed 10 MB. This includes any attachments
-// that are part of the message.
+// There are several important points to know about SendRawEmail:
 //
-// Amazon SES has a limit on the total number of recipients per message: The
-// combined number of To:, CC: and BCC: email addresses cannot exceed 50. If
-// you need to send an email message to a larger audience, you can divide your
-// recipient list into groups of 50 or fewer, and then call Amazon SES repeatedly
-// to send the message to each group.
-//
-// The To:, CC:, and BCC: headers in the raw message can contain a group list.
-// Note that each recipient in a group list counts towards the 50-recipient
-// limit.
-//
+//  You can only send email from verified email addresses and domains; otherwise,
+// you will get an "Email address not verified" error. If your account is still
+// in the Amazon SES sandbox, you must also verify every recipient email address
+// except for the recipients provided by the Amazon SES mailbox simulator. For
+// more information, go to the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html).
+// The total size of the message cannot exceed 10 MB. This includes any attachments
+// that are part of the message. Amazon SES has a limit on the total number
+// of recipients per message. The combined number of To:, CC: and BCC: email
+// addresses cannot exceed 50. If you need to send an email message to a larger
+// audience, you can divide your recipient list into groups of 50 or fewer,
+// and then call Amazon SES repeatedly to send the message to each group. The
+// To:, CC:, and BCC: headers in the raw message can contain a group list. Note
+// that each recipient in a group list counts towards the 50-recipient limit.
 // For every message that you send, the total number of recipients (To:, CC:
 // and BCC:) is counted against your sending quota - the maximum number of emails
 // you can send in a 24-hour period. For information about your sending quota,
 // go to the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html).
+// If you are using sending authorization to send on behalf of another user,
+// SendRawEmail enables you to specify the cross-account identity for the email's
+// "Source," "From," and "Return-Path" parameters in one of two ways: you can
+// pass optional parameters SourceArn, FromArn, and/or ReturnPathArn to the
+// API, or you can include the following X-headers in the header of your raw
+// email:  X-SES-SOURCE-ARN X-SES-FROM-ARN X-SES-RETURN-PATH-ARN  Do not include
+// these X-headers in the DKIM signature, because they are removed by Amazon
+// SES before sending the email. For the most common sending authorization use
+// case, we recommend that you specify the SourceIdentityArn and do not specify
+// either the FromIdentityArn or ReturnPathIdentityArn. (The same note applies
+// to the corresponding X-headers.) If you only specify the SourceIdentityArn,
+// Amazon SES will simply set the "From" address and the "Return Path" address
+// to the identity specified in SourceIdentityArn. For more information about
+// sending authorization, see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
 func (c *SES) SendRawEmail(input *SendRawEmailInput) (*SendRawEmailOutput, error) {
 	req, out := c.SendRawEmailRequest(input)
 	err := req.Send()
 	return out, err
 }
 
-const opSetIdentityDKIMEnabled = "SetIdentityDkimEnabled"
+const opSetIdentityDkimEnabled = "SetIdentityDkimEnabled"
 
-// SetIdentityDKIMEnabledRequest generates a request for the SetIdentityDKIMEnabled operation.
-func (c *SES) SetIdentityDKIMEnabledRequest(input *SetIdentityDKIMEnabledInput) (req *aws.Request, output *SetIdentityDKIMEnabledOutput) {
-	op := &aws.Operation{
-		Name:       opSetIdentityDKIMEnabled,
+// SetIdentityDkimEnabledRequest generates a request for the SetIdentityDkimEnabled operation.
+func (c *SES) SetIdentityDkimEnabledRequest(input *SetIdentityDkimEnabledInput) (req *service.Request, output *SetIdentityDkimEnabledOutput) {
+	op := &service.Operation{
+		Name:       opSetIdentityDkimEnabled,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &SetIdentityDKIMEnabledInput{}
+		input = &SetIdentityDkimEnabledInput{}
 	}
 
 	req = c.newRequest(op, input, output)
-	output = &SetIdentityDKIMEnabledOutput{}
+	output = &SetIdentityDkimEnabledOutput{}
 	req.Data = output
 	return
 }
@@ -447,8 +603,8 @@ func (c *SES) SetIdentityDKIMEnabledRequest(input *SetIdentityDKIMEnabledInput) 
 //
 // For more information about Easy DKIM signing, go to the Amazon SES Developer
 // Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html).
-func (c *SES) SetIdentityDKIMEnabled(input *SetIdentityDKIMEnabledInput) (*SetIdentityDKIMEnabledOutput, error) {
-	req, out := c.SetIdentityDKIMEnabledRequest(input)
+func (c *SES) SetIdentityDkimEnabled(input *SetIdentityDkimEnabledInput) (*SetIdentityDkimEnabledOutput, error) {
+	req, out := c.SetIdentityDkimEnabledRequest(input)
 	err := req.Send()
 	return out, err
 }
@@ -456,8 +612,8 @@ func (c *SES) SetIdentityDKIMEnabled(input *SetIdentityDKIMEnabledInput) (*SetId
 const opSetIdentityFeedbackForwardingEnabled = "SetIdentityFeedbackForwardingEnabled"
 
 // SetIdentityFeedbackForwardingEnabledRequest generates a request for the SetIdentityFeedbackForwardingEnabled operation.
-func (c *SES) SetIdentityFeedbackForwardingEnabledRequest(input *SetIdentityFeedbackForwardingEnabledInput) (req *aws.Request, output *SetIdentityFeedbackForwardingEnabledOutput) {
-	op := &aws.Operation{
+func (c *SES) SetIdentityFeedbackForwardingEnabledRequest(input *SetIdentityFeedbackForwardingEnabledInput) (req *service.Request, output *SetIdentityFeedbackForwardingEnabledOutput) {
+	op := &service.Operation{
 		Name:       opSetIdentityFeedbackForwardingEnabled,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -493,8 +649,8 @@ func (c *SES) SetIdentityFeedbackForwardingEnabled(input *SetIdentityFeedbackFor
 const opSetIdentityNotificationTopic = "SetIdentityNotificationTopic"
 
 // SetIdentityNotificationTopicRequest generates a request for the SetIdentityNotificationTopic operation.
-func (c *SES) SetIdentityNotificationTopicRequest(input *SetIdentityNotificationTopicInput) (req *aws.Request, output *SetIdentityNotificationTopicOutput) {
-	op := &aws.Operation{
+func (c *SES) SetIdentityNotificationTopicRequest(input *SetIdentityNotificationTopicInput) (req *service.Request, output *SetIdentityNotificationTopicOutput) {
+	op := &service.Operation{
 		Name:       opSetIdentityNotificationTopic,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -526,22 +682,22 @@ func (c *SES) SetIdentityNotificationTopic(input *SetIdentityNotificationTopicIn
 	return out, err
 }
 
-const opVerifyDomainDKIM = "VerifyDomainDkim"
+const opVerifyDomainDkim = "VerifyDomainDkim"
 
-// VerifyDomainDKIMRequest generates a request for the VerifyDomainDKIM operation.
-func (c *SES) VerifyDomainDKIMRequest(input *VerifyDomainDKIMInput) (req *aws.Request, output *VerifyDomainDKIMOutput) {
-	op := &aws.Operation{
-		Name:       opVerifyDomainDKIM,
+// VerifyDomainDkimRequest generates a request for the VerifyDomainDkim operation.
+func (c *SES) VerifyDomainDkimRequest(input *VerifyDomainDkimInput) (req *service.Request, output *VerifyDomainDkimOutput) {
+	op := &service.Operation{
+		Name:       opVerifyDomainDkim,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &VerifyDomainDKIMInput{}
+		input = &VerifyDomainDkimInput{}
 	}
 
 	req = c.newRequest(op, input, output)
-	output = &VerifyDomainDKIMOutput{}
+	output = &VerifyDomainDkimOutput{}
 	req.Data = output
 	return
 }
@@ -561,8 +717,8 @@ func (c *SES) VerifyDomainDKIMRequest(input *VerifyDomainDKIMInput) (req *aws.Re
 //
 // For more information about creating DNS records using DKIM tokens, go to
 // the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim-dns-records.html).
-func (c *SES) VerifyDomainDKIM(input *VerifyDomainDKIMInput) (*VerifyDomainDKIMOutput, error) {
-	req, out := c.VerifyDomainDKIMRequest(input)
+func (c *SES) VerifyDomainDkim(input *VerifyDomainDkimInput) (*VerifyDomainDkimOutput, error) {
+	req, out := c.VerifyDomainDkimRequest(input)
 	err := req.Send()
 	return out, err
 }
@@ -570,8 +726,8 @@ func (c *SES) VerifyDomainDKIM(input *VerifyDomainDKIMInput) (*VerifyDomainDKIMO
 const opVerifyDomainIdentity = "VerifyDomainIdentity"
 
 // VerifyDomainIdentityRequest generates a request for the VerifyDomainIdentity operation.
-func (c *SES) VerifyDomainIdentityRequest(input *VerifyDomainIdentityInput) (req *aws.Request, output *VerifyDomainIdentityOutput) {
-	op := &aws.Operation{
+func (c *SES) VerifyDomainIdentityRequest(input *VerifyDomainIdentityInput) (req *service.Request, output *VerifyDomainIdentityOutput) {
+	op := &service.Operation{
 		Name:       opVerifyDomainIdentity,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -599,8 +755,8 @@ func (c *SES) VerifyDomainIdentity(input *VerifyDomainIdentityInput) (*VerifyDom
 const opVerifyEmailAddress = "VerifyEmailAddress"
 
 // VerifyEmailAddressRequest generates a request for the VerifyEmailAddress operation.
-func (c *SES) VerifyEmailAddressRequest(input *VerifyEmailAddressInput) (req *aws.Request, output *VerifyEmailAddressOutput) {
-	op := &aws.Operation{
+func (c *SES) VerifyEmailAddressRequest(input *VerifyEmailAddressInput) (req *service.Request, output *VerifyEmailAddressOutput) {
+	op := &service.Operation{
 		Name:       opVerifyEmailAddress,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -631,8 +787,8 @@ func (c *SES) VerifyEmailAddress(input *VerifyEmailAddressInput) (*VerifyEmailAd
 const opVerifyEmailIdentity = "VerifyEmailIdentity"
 
 // VerifyEmailIdentityRequest generates a request for the VerifyEmailIdentity operation.
-func (c *SES) VerifyEmailIdentityRequest(input *VerifyEmailIdentityInput) (req *aws.Request, output *VerifyEmailIdentityOutput) {
-	op := &aws.Operation{
+func (c *SES) VerifyEmailIdentityRequest(input *VerifyEmailIdentityInput) (req *service.Request, output *VerifyEmailIdentityOutput) {
+	op := &service.Operation{
 		Name:       opVerifyEmailIdentity,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -665,7 +821,7 @@ type Body struct {
 	// The content of the message, in HTML format. Use this for email clients that
 	// can process HTML. You can include clickable links, formatted text, and much
 	// more in an HTML message.
-	HTML *Content `locationName:"Html" type:"structure"`
+	Html *Content `type:"structure"`
 
 	// The content of the message, in text format. Use this for text-based email
 	// clients, or clients on high-latency networks (such as mobile devices).
@@ -680,7 +836,7 @@ type metadataBody struct {
 
 // String returns the string representation
 func (s Body) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -709,7 +865,7 @@ type metadataContent struct {
 
 // String returns the string representation
 func (s Content) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -732,7 +888,7 @@ type metadataDeleteIdentityInput struct {
 
 // String returns the string representation
 func (s DeleteIdentityInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -752,11 +908,63 @@ type metadataDeleteIdentityOutput struct {
 
 // String returns the string representation
 func (s DeleteIdentityOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
 func (s DeleteIdentityOutput) GoString() string {
+	return s.String()
+}
+
+// Represents a request instructing the service to delete an authorization policy
+// applying to an identity.
+//
+// This request succeeds regardless of whether the specified policy exists.
+type DeleteIdentityPolicyInput struct {
+	// The identity that is associated with the policy that you want to delete.
+	// You can specify the identity by using its name or by using its Amazon Resource
+	// Name (ARN). Examples: user@example.com, example.com, arn:aws:ses:us-east-1:123456789012:identity/example.com.
+	//
+	// To successfully call this API, you must own the identity.
+	Identity *string `type:"string" required:"true"`
+
+	// The name of the policy to be deleted.
+	PolicyName *string `type:"string" required:"true"`
+
+	metadataDeleteIdentityPolicyInput `json:"-" xml:"-"`
+}
+
+type metadataDeleteIdentityPolicyInput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DeleteIdentityPolicyInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteIdentityPolicyInput) GoString() string {
+	return s.String()
+}
+
+// An empty element. Receiving this element indicates that the request completed
+// successfully.
+type DeleteIdentityPolicyOutput struct {
+	metadataDeleteIdentityPolicyOutput `json:"-" xml:"-"`
+}
+
+type metadataDeleteIdentityPolicyOutput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DeleteIdentityPolicyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteIdentityPolicyOutput) GoString() string {
 	return s.String()
 }
 
@@ -775,7 +983,7 @@ type metadataDeleteVerifiedEmailAddressInput struct {
 
 // String returns the string representation
 func (s DeleteVerifiedEmailAddressInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -793,7 +1001,7 @@ type metadataDeleteVerifiedEmailAddressOutput struct {
 
 // String returns the string representation
 func (s DeleteVerifiedEmailAddressOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -810,10 +1018,10 @@ func (s DeleteVerifiedEmailAddressOutput) GoString() string {
 // For more information, see RFC 2047 (http://tools.ietf.org/html/rfc2047).
 type Destination struct {
 	// The BCC: field(s) of the message.
-	BCCAddresses []*string `locationName:"BccAddresses" type:"list"`
+	BccAddresses []*string `type:"list"`
 
 	// The CC: field(s) of the message.
-	CCAddresses []*string `locationName:"CcAddresses" type:"list"`
+	CcAddresses []*string `type:"list"`
 
 	// The To: field(s) of the message.
 	ToAddresses []*string `type:"list"`
@@ -827,7 +1035,7 @@ type metadataDestination struct {
 
 // String returns the string representation
 func (s Destination) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -841,52 +1049,54 @@ func (s Destination) GoString() string {
 // of a domain name identity includes whether DKIM signing is enabled, as well
 // as the DNS records (tokens) that must remain published in the domain name's
 // DNS.
-type GetIdentityDKIMAttributesInput struct {
+type GetIdentityDkimAttributesInput struct {
 	// A list of one or more verified identities - email addresses, domains, or
 	// both.
 	Identities []*string `type:"list" required:"true"`
 
-	metadataGetIdentityDKIMAttributesInput `json:"-" xml:"-"`
+	metadataGetIdentityDkimAttributesInput `json:"-" xml:"-"`
 }
 
-type metadataGetIdentityDKIMAttributesInput struct {
+type metadataGetIdentityDkimAttributesInput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s GetIdentityDKIMAttributesInput) String() string {
-	return awsutil.StringValue(s)
+func (s GetIdentityDkimAttributesInput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s GetIdentityDKIMAttributesInput) GoString() string {
+func (s GetIdentityDkimAttributesInput) GoString() string {
 	return s.String()
 }
 
 // Represents a list of all the DKIM attributes for the specified identity.
-type GetIdentityDKIMAttributesOutput struct {
+type GetIdentityDkimAttributesOutput struct {
 	// The DKIM attributes for an email address or a domain.
-	DKIMAttributes map[string]*IdentityDKIMAttributes `locationName:"DkimAttributes" type:"map" required:"true"`
+	DkimAttributes map[string]*IdentityDkimAttributes `type:"map" required:"true"`
 
-	metadataGetIdentityDKIMAttributesOutput `json:"-" xml:"-"`
+	metadataGetIdentityDkimAttributesOutput `json:"-" xml:"-"`
 }
 
-type metadataGetIdentityDKIMAttributesOutput struct {
+type metadataGetIdentityDkimAttributesOutput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s GetIdentityDKIMAttributesOutput) String() string {
-	return awsutil.StringValue(s)
+func (s GetIdentityDkimAttributesOutput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s GetIdentityDKIMAttributesOutput) GoString() string {
+func (s GetIdentityDkimAttributesOutput) GoString() string {
 	return s.String()
 }
 
 type GetIdentityNotificationAttributesInput struct {
-	// A list of one or more identities.
+	// A list of one or more identities. You can specify an identity by using its
+	// name or by using its Amazon Resource Name (ARN). Examples: user@example.com,
+	// example.com, arn:aws:ses:us-east-1:123456789012:identity/example.com.
 	Identities []*string `type:"list" required:"true"`
 
 	metadataGetIdentityNotificationAttributesInput `json:"-" xml:"-"`
@@ -898,7 +1108,7 @@ type metadataGetIdentityNotificationAttributesInput struct {
 
 // String returns the string representation
 func (s GetIdentityNotificationAttributesInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -923,11 +1133,66 @@ type metadataGetIdentityNotificationAttributesOutput struct {
 
 // String returns the string representation
 func (s GetIdentityNotificationAttributesOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
 func (s GetIdentityNotificationAttributesOutput) GoString() string {
+	return s.String()
+}
+
+// Represents a request instructing the service to retrieve the text of a list
+// of authorization policies applying to an identity.
+type GetIdentityPoliciesInput struct {
+	// The identity for which the policies will be retrieved. You can specify an
+	// identity by using its name or by using its Amazon Resource Name (ARN). Examples:
+	// user@example.com, example.com, arn:aws:ses:us-east-1:123456789012:identity/example.com.
+	//
+	// To successfully call this API, you must own the identity.
+	Identity *string `type:"string" required:"true"`
+
+	// A list of the names of policies to be retrieved. You can retrieve a maximum
+	// of 20 policies at a time. If you do not know the names of the policies that
+	// are attached to the identity, you can use ListIdentityPolicies.
+	PolicyNames []*string `type:"list" required:"true"`
+
+	metadataGetIdentityPoliciesInput `json:"-" xml:"-"`
+}
+
+type metadataGetIdentityPoliciesInput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetIdentityPoliciesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetIdentityPoliciesInput) GoString() string {
+	return s.String()
+}
+
+// Represents a map of policy names to policies returned from a successful GetIdentityPolicies
+// request.
+type GetIdentityPoliciesOutput struct {
+	// A map of policy names to policies.
+	Policies map[string]*string `type:"map" required:"true"`
+
+	metadataGetIdentityPoliciesOutput `json:"-" xml:"-"`
+}
+
+type metadataGetIdentityPoliciesOutput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetIdentityPoliciesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetIdentityPoliciesOutput) GoString() string {
 	return s.String()
 }
 
@@ -946,7 +1211,7 @@ type metadataGetIdentityVerificationAttributesInput struct {
 
 // String returns the string representation
 func (s GetIdentityVerificationAttributesInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -968,7 +1233,7 @@ type metadataGetIdentityVerificationAttributesOutput struct {
 
 // String returns the string representation
 func (s GetIdentityVerificationAttributesOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -986,7 +1251,7 @@ type metadataGetSendQuotaInput struct {
 
 // String returns the string representation
 func (s GetSendQuotaInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1020,7 +1285,7 @@ type metadataGetSendQuotaOutput struct {
 
 // String returns the string representation
 func (s GetSendQuotaOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1038,7 +1303,7 @@ type metadataGetSendStatisticsInput struct {
 
 // String returns the string representation
 func (s GetSendStatisticsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1062,7 +1327,7 @@ type metadataGetSendStatisticsOutput struct {
 
 // String returns the string representation
 func (s GetSendStatisticsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1071,9 +1336,9 @@ func (s GetSendStatisticsOutput) GoString() string {
 }
 
 // Represents the DKIM attributes of a verified email address or a domain.
-type IdentityDKIMAttributes struct {
+type IdentityDkimAttributes struct {
 	// True if DKIM signing is enabled for email sent from the identity; false otherwise.
-	DKIMEnabled *bool `locationName:"DkimEnabled" type:"boolean" required:"true"`
+	DkimEnabled *bool `type:"boolean" required:"true"`
 
 	// A set of character strings that represent the domain's identity. Using these
 	// tokens, you will need to create DNS CNAME records that point to DKIM public
@@ -1085,27 +1350,27 @@ type IdentityDKIMAttributes struct {
 	//
 	// For more information about creating DNS records using DKIM tokens, go to
 	// the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim-dns-records.html).
-	DKIMTokens []*string `locationName:"DkimTokens" type:"list"`
+	DkimTokens []*string `type:"list"`
 
 	// Describes whether Amazon SES has successfully verified the DKIM DNS records
 	// (tokens) published in the domain name's DNS. (This only applies to domain
 	// identities, not email address identities.)
-	DKIMVerificationStatus *string `locationName:"DkimVerificationStatus" type:"string" required:"true"`
+	DkimVerificationStatus *string `type:"string" required:"true" enum:"VerificationStatus"`
 
-	metadataIdentityDKIMAttributes `json:"-" xml:"-"`
+	metadataIdentityDkimAttributes `json:"-" xml:"-"`
 }
 
-type metadataIdentityDKIMAttributes struct {
+type metadataIdentityDkimAttributes struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s IdentityDKIMAttributes) String() string {
-	return awsutil.StringValue(s)
+func (s IdentityDkimAttributes) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s IdentityDKIMAttributes) GoString() string {
+func (s IdentityDkimAttributes) GoString() string {
 	return s.String()
 }
 
@@ -1141,7 +1406,7 @@ type metadataIdentityNotificationAttributes struct {
 
 // String returns the string representation
 func (s IdentityNotificationAttributes) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1153,7 +1418,7 @@ func (s IdentityNotificationAttributes) GoString() string {
 type IdentityVerificationAttributes struct {
 	// The verification status of the identity: "Pending", "Success", "Failed",
 	// or "TemporaryFailure".
-	VerificationStatus *string `type:"string" required:"true"`
+	VerificationStatus *string `type:"string" required:"true" enum:"VerificationStatus"`
 
 	// The verification token for a domain identity. Null for email address identities.
 	VerificationToken *string `type:"string"`
@@ -1167,7 +1432,7 @@ type metadataIdentityVerificationAttributes struct {
 
 // String returns the string representation
 func (s IdentityVerificationAttributes) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1180,7 +1445,7 @@ func (s IdentityVerificationAttributes) GoString() string {
 type ListIdentitiesInput struct {
 	// The type of the identities to list. Possible values are "EmailAddress" and
 	// "Domain". If this parameter is omitted, then all identities will be listed.
-	IdentityType *string `type:"string"`
+	IdentityType *string `type:"string" enum:"IdentityType"`
 
 	// The maximum number of identities per page. Possible values are 1-1000 inclusive.
 	MaxItems *int64 `type:"integer"`
@@ -1197,7 +1462,7 @@ type metadataListIdentitiesInput struct {
 
 // String returns the string representation
 func (s ListIdentitiesInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1222,11 +1487,61 @@ type metadataListIdentitiesOutput struct {
 
 // String returns the string representation
 func (s ListIdentitiesOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
 func (s ListIdentitiesOutput) GoString() string {
+	return s.String()
+}
+
+// Represents a request instructing the service to list all authorization policies,
+// by name, applying to an identity.
+type ListIdentityPoliciesInput struct {
+	// The identity that is associated with the policy for which the policies will
+	// be listed. You can specify an identity by using its name or by using its
+	// Amazon Resource Name (ARN). Examples: user@example.com, example.com, arn:aws:ses:us-east-1:123456789012:identity/example.com.
+	//
+	// To successfully call this API, you must own the identity.
+	Identity *string `type:"string" required:"true"`
+
+	metadataListIdentityPoliciesInput `json:"-" xml:"-"`
+}
+
+type metadataListIdentityPoliciesInput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s ListIdentityPoliciesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListIdentityPoliciesInput) GoString() string {
+	return s.String()
+}
+
+// Represents a list of policy names returned from a successful ListIdentityPolicies
+// request.
+type ListIdentityPoliciesOutput struct {
+	// A list of names of policies that apply to the specified identity.
+	PolicyNames []*string `type:"list" required:"true"`
+
+	metadataListIdentityPoliciesOutput `json:"-" xml:"-"`
+}
+
+type metadataListIdentityPoliciesOutput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s ListIdentityPoliciesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListIdentityPoliciesOutput) GoString() string {
 	return s.String()
 }
 
@@ -1240,7 +1555,7 @@ type metadataListVerifiedEmailAddressesInput struct {
 
 // String returns the string representation
 func (s ListVerifiedEmailAddressesInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1262,7 +1577,7 @@ type metadataListVerifiedEmailAddressesOutput struct {
 
 // String returns the string representation
 func (s ListVerifiedEmailAddressesOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1288,11 +1603,70 @@ type metadataMessage struct {
 
 // String returns the string representation
 func (s Message) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
 func (s Message) GoString() string {
+	return s.String()
+}
+
+// Represents a request instructing the service to apply an authorization policy
+// to an identity.
+type PutIdentityPolicyInput struct {
+	// The identity to which the policy will apply. You can specify an identity
+	// by using its name or by using its Amazon Resource Name (ARN). Examples: user@example.com,
+	// example.com, arn:aws:ses:us-east-1:123456789012:identity/example.com.
+	//
+	// To successfully call this API, you must own the identity.
+	Identity *string `type:"string" required:"true"`
+
+	// The text of the policy in JSON format. The policy cannot exceed 4 KB.
+	//
+	// For information about the syntax of sending authorization policies, see
+	// the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-policies.html).
+	Policy *string `type:"string" required:"true"`
+
+	// The name of the policy.
+	//
+	// The policy name cannot exceed 64 characters and can only include alphanumeric
+	// characters, dashes, and underscores.
+	PolicyName *string `type:"string" required:"true"`
+
+	metadataPutIdentityPolicyInput `json:"-" xml:"-"`
+}
+
+type metadataPutIdentityPolicyInput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s PutIdentityPolicyInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutIdentityPolicyInput) GoString() string {
+	return s.String()
+}
+
+// An empty element. Receiving this element indicates that the request completed
+// successfully.
+type PutIdentityPolicyOutput struct {
+	metadataPutIdentityPolicyOutput `json:"-" xml:"-"`
+}
+
+type metadataPutIdentityPolicyOutput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s PutIdentityPolicyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutIdentityPolicyOutput) GoString() string {
 	return s.String()
 }
 
@@ -1304,7 +1678,13 @@ type RawMessage struct {
 	//
 	// The To:, CC:, and BCC: headers in the raw message can contain a group list.
 	//
-	// For more information, go to the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html).
+	// If you are using SendRawEmail with sending authorization, you can include
+	// X-headers in the raw message to specify the "Source," "From," and "Return-Path"
+	// addresses. For more information, see the documentation for SendRawEmail.
+	//
+	// Do not include these X-headers in the DKIM signature, because they are removed
+	// by Amazon SES before sending the email. For more information, go to the Amazon
+	// SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html).
 	Data []byte `type:"blob" required:"true"`
 
 	metadataRawMessage `json:"-" xml:"-"`
@@ -1316,7 +1696,7 @@ type metadataRawMessage struct {
 
 // String returns the string representation
 func (s RawMessage) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1351,7 +1731,7 @@ type metadataSendDataPoint struct {
 
 // String returns the string representation
 func (s SendDataPoint) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1384,13 +1764,48 @@ type SendEmailInput struct {
 	// a domain that has been verified with Amazon SES.
 	ReturnPath *string `type:"string"`
 
-	// The identity's email address.
+	// This parameter is used only for sending authorization. It is the ARN of the
+	// identity that is associated with the sending authorization policy that permits
+	// you to use the email address specified in the ReturnPath parameter.
 	//
-	//  By default, the string must be 7-bit ASCII. If the text must contain any
-	// other characters, then you must use MIME encoded-word syntax (RFC 2047) instead
-	// of a literal string. MIME encoded-word syntax uses the following form: =?charset?encoding?encoded-text?=.
-	// For more information, see RFC 2047 (http://tools.ietf.org/html/rfc2047).
+	// For example, if the owner of example.com (which has ARN arn:aws:ses:us-east-1:123456789012:identity/example.com)
+	// attaches a policy to it that authorizes you to use feedback@example.com,
+	// then you would specify the ReturnPathArn to be arn:aws:ses:us-east-1:123456789012:identity/example.com,
+	// and the ReturnPath to be feedback@example.com.
+	//
+	// For more information about sending authorization, see the Amazon SES Developer
+	// Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
+	ReturnPathArn *string `type:"string"`
+
+	// The email address that is sending the email. This email address must be either
+	// individually verified with Amazon SES, or from a domain that has been verified
+	// with Amazon SES. For information about verifying identities, see the Amazon
+	// SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html).
+	//
+	// If you are sending on behalf of another user and have been permitted to
+	// do so by a sending authorization policy, then you must also specify the SourceArn
+	// parameter. For more information about sending authorization, see the Amazon
+	// SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
+	//
+	//  In all cases, the email address must be 7-bit ASCII. If the text must contain
+	// any other characters, then you must use MIME encoded-word syntax (RFC 2047)
+	// instead of a literal string. MIME encoded-word syntax uses the following
+	// form: =?charset?encoding?encoded-text?=. For more information, see RFC 2047
+	// (http://tools.ietf.org/html/rfc2047).
 	Source *string `type:"string" required:"true"`
+
+	// This parameter is used only for sending authorization. It is the ARN of the
+	// identity that is associated with the sending authorization policy that permits
+	// you to send for the email address specified in the Source parameter.
+	//
+	// For example, if the owner of example.com (which has ARN arn:aws:ses:us-east-1:123456789012:identity/example.com)
+	// attaches a policy to it that authorizes you to send from user@example.com,
+	// then you would specify the SourceArn to be arn:aws:ses:us-east-1:123456789012:identity/example.com,
+	// and the Source to be user@example.com.
+	//
+	// For more information about sending authorization, see the Amazon SES Developer
+	// Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
+	SourceArn *string `type:"string"`
 
 	metadataSendEmailInput `json:"-" xml:"-"`
 }
@@ -1401,7 +1816,7 @@ type metadataSendEmailInput struct {
 
 // String returns the string representation
 func (s SendEmailInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1412,7 +1827,7 @@ func (s SendEmailInput) GoString() string {
 // Represents a unique message ID returned from a successful SendEmail request.
 type SendEmailOutput struct {
 	// The unique message identifier returned from the SendEmail action.
-	MessageID *string `locationName:"MessageId" type:"string" required:"true"`
+	MessageId *string `type:"string" required:"true"`
 
 	metadataSendEmailOutput `json:"-" xml:"-"`
 }
@@ -1423,7 +1838,7 @@ type metadataSendEmailOutput struct {
 
 // String returns the string representation
 func (s SendEmailOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1441,6 +1856,18 @@ type SendRawEmailInput struct {
 	// addresses.
 	Destinations []*string `type:"list"`
 
+	// This parameter is used only for sending authorization. It is the ARN of the
+	// identity that is associated with the sending authorization policy that permits
+	// you to specify a particular "From" address in the header of the raw email.
+	//
+	// Instead of using this parameter, you can use the X-header X-SES-FROM-ARN
+	// in the raw message of the email. If you use both the FromArn parameter and
+	// the corresponding X-header, Amazon SES uses the value of the FromArn parameter.
+	//
+	// For information about when to use this parameter, see the description of
+	// SendRawEmail in this guide, or see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html).
+	FromArn *string `type:"string"`
+
 	// The raw text of the message. The client is responsible for ensuring the following:
 	//
 	//   Message must contain a header and a body, separated by a blank line. All
@@ -1450,6 +1877,24 @@ type SendRawEmailInput struct {
 	// (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/mime-types.html).
 	// Content must be base64-encoded, if MIME requires it.
 	RawMessage *RawMessage `type:"structure" required:"true"`
+
+	// This parameter is used only for sending authorization. It is the ARN of the
+	// identity that is associated with the sending authorization policy that permits
+	// you to use the email address specified in the ReturnPath parameter.
+	//
+	// For example, if the owner of example.com (which has ARN arn:aws:ses:us-east-1:123456789012:identity/example.com)
+	// attaches a policy to it that authorizes you to use feedback@example.com,
+	// then you would specify the ReturnPathArn to be arn:aws:ses:us-east-1:123456789012:identity/example.com,
+	// and the ReturnPath to be feedback@example.com.
+	//
+	// Instead of using this parameter, you can use the X-header X-SES-RETURN-PATH-ARN
+	// in the raw message of the email. If you use both the ReturnPathArn parameter
+	// and the corresponding X-header, Amazon SES uses the value of the ReturnPathArn
+	// parameter.
+	//
+	// For information about when to use this parameter, see the description of
+	// SendRawEmail in this guide, or see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html).
+	ReturnPathArn *string `type:"string"`
 
 	// The identity's email address. If you do not provide a value for this parameter,
 	// you must specify a "From" address in the raw text of the message. (You can
@@ -1466,6 +1911,24 @@ type SendRawEmailInput struct {
 	// text of the message.
 	Source *string `type:"string"`
 
+	// This parameter is used only for sending authorization. It is the ARN of the
+	// identity that is associated with the sending authorization policy that permits
+	// you to send for the email address specified in the Source parameter.
+	//
+	// For example, if the owner of example.com (which has ARN arn:aws:ses:us-east-1:123456789012:identity/example.com)
+	// attaches a policy to it that authorizes you to send from user@example.com,
+	// then you would specify the SourceArn to be arn:aws:ses:us-east-1:123456789012:identity/example.com,
+	// and the Source to be user@example.com.
+	//
+	// Instead of using this parameter, you can use the X-header X-SES-SOURCE-ARN
+	// in the raw message of the email. If you use both the SourceArn parameter
+	// and the corresponding X-header, Amazon SES uses the value of the SourceArn
+	// parameter.
+	//
+	// For information about when to use this parameter, see the description of
+	// SendRawEmail in this guide, or see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html).
+	SourceArn *string `type:"string"`
+
 	metadataSendRawEmailInput `json:"-" xml:"-"`
 }
 
@@ -1475,7 +1938,7 @@ type metadataSendRawEmailInput struct {
 
 // String returns the string representation
 func (s SendRawEmailInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1486,7 +1949,7 @@ func (s SendRawEmailInput) GoString() string {
 // Represents a unique message ID returned from a successful SendRawEmail request.
 type SendRawEmailOutput struct {
 	// The unique message identifier returned from the SendRawEmail action.
-	MessageID *string `locationName:"MessageId" type:"string" required:"true"`
+	MessageId *string `type:"string" required:"true"`
 
 	metadataSendRawEmailOutput `json:"-" xml:"-"`
 }
@@ -1497,7 +1960,7 @@ type metadataSendRawEmailOutput struct {
 
 // String returns the string representation
 func (s SendRawEmailOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1507,48 +1970,48 @@ func (s SendRawEmailOutput) GoString() string {
 
 // Represents a request instructing the service to enable or disable DKIM signing
 // for an identity.
-type SetIdentityDKIMEnabledInput struct {
+type SetIdentityDkimEnabledInput struct {
 	// Sets whether DKIM signing is enabled for an identity. Set to true to enable
 	// DKIM signing for this identity; false to disable it.
-	DKIMEnabled *bool `locationName:"DkimEnabled" type:"boolean" required:"true"`
+	DkimEnabled *bool `type:"boolean" required:"true"`
 
 	// The identity for which DKIM signing should be enabled or disabled.
 	Identity *string `type:"string" required:"true"`
 
-	metadataSetIdentityDKIMEnabledInput `json:"-" xml:"-"`
+	metadataSetIdentityDkimEnabledInput `json:"-" xml:"-"`
 }
 
-type metadataSetIdentityDKIMEnabledInput struct {
+type metadataSetIdentityDkimEnabledInput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s SetIdentityDKIMEnabledInput) String() string {
-	return awsutil.StringValue(s)
+func (s SetIdentityDkimEnabledInput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s SetIdentityDKIMEnabledInput) GoString() string {
+func (s SetIdentityDkimEnabledInput) GoString() string {
 	return s.String()
 }
 
 // An empty element. Receiving this element indicates that the request completed
 // successfully.
-type SetIdentityDKIMEnabledOutput struct {
-	metadataSetIdentityDKIMEnabledOutput `json:"-" xml:"-"`
+type SetIdentityDkimEnabledOutput struct {
+	metadataSetIdentityDkimEnabledOutput `json:"-" xml:"-"`
 }
 
-type metadataSetIdentityDKIMEnabledOutput struct {
+type metadataSetIdentityDkimEnabledOutput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s SetIdentityDKIMEnabledOutput) String() string {
-	return awsutil.StringValue(s)
+func (s SetIdentityDkimEnabledOutput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s SetIdentityDKIMEnabledOutput) GoString() string {
+func (s SetIdentityDkimEnabledOutput) GoString() string {
 	return s.String()
 }
 
@@ -1574,7 +2037,7 @@ type metadataSetIdentityFeedbackForwardingEnabledInput struct {
 
 // String returns the string representation
 func (s SetIdentityFeedbackForwardingEnabledInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1594,7 +2057,7 @@ type metadataSetIdentityFeedbackForwardingEnabledOutput struct {
 
 // String returns the string representation
 func (s SetIdentityFeedbackForwardingEnabledOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1604,18 +2067,19 @@ func (s SetIdentityFeedbackForwardingEnabledOutput) GoString() string {
 
 // Represents a request to set or clear an identity's notification topic.
 type SetIdentityNotificationTopicInput struct {
-	// The identity for which the Amazon SNS topic will be set. Examples: user@example.com,
-	// example.com.
+	// The identity for which the Amazon SNS topic will be set. You can specify
+	// an identity by using its name or by using its Amazon Resource Name (ARN).
+	// Examples: user@example.com, example.com, arn:aws:ses:us-east-1:123456789012:identity/example.com.
 	Identity *string `type:"string" required:"true"`
 
 	// The type of notifications that will be published to the specified Amazon
 	// SNS topic.
-	NotificationType *string `type:"string" required:"true"`
+	NotificationType *string `type:"string" required:"true" enum:"NotificationType"`
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic. If the parameter
 	// is omitted from the request or a null value is passed, SnsTopic is cleared
 	// and publishing is disabled.
-	SNSTopic *string `locationName:"SnsTopic" type:"string"`
+	SnsTopic *string `type:"string"`
 
 	metadataSetIdentityNotificationTopicInput `json:"-" xml:"-"`
 }
@@ -1626,7 +2090,7 @@ type metadataSetIdentityNotificationTopicInput struct {
 
 // String returns the string representation
 func (s SetIdentityNotificationTopicInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1646,7 +2110,7 @@ type metadataSetIdentityNotificationTopicOutput struct {
 
 // String returns the string representation
 func (s SetIdentityNotificationTopicOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1656,30 +2120,30 @@ func (s SetIdentityNotificationTopicOutput) GoString() string {
 
 // Represents a request instructing the service to begin DKIM verification for
 // a domain.
-type VerifyDomainDKIMInput struct {
+type VerifyDomainDkimInput struct {
 	// The name of the domain to be verified for Easy DKIM signing.
 	Domain *string `type:"string" required:"true"`
 
-	metadataVerifyDomainDKIMInput `json:"-" xml:"-"`
+	metadataVerifyDomainDkimInput `json:"-" xml:"-"`
 }
 
-type metadataVerifyDomainDKIMInput struct {
+type metadataVerifyDomainDkimInput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s VerifyDomainDKIMInput) String() string {
-	return awsutil.StringValue(s)
+func (s VerifyDomainDkimInput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s VerifyDomainDKIMInput) GoString() string {
+func (s VerifyDomainDkimInput) GoString() string {
 	return s.String()
 }
 
 // Represents the DNS records that must be published in the domain name's DNS
 // to complete DKIM setup.
-type VerifyDomainDKIMOutput struct {
+type VerifyDomainDkimOutput struct {
 	// A set of character strings that represent the domain's identity. If the identity
 	// is an email address, the tokens represent the domain of that address.
 	//
@@ -1691,22 +2155,22 @@ type VerifyDomainDKIMOutput struct {
 	//
 	// For more information about creating DNS records using DKIM tokens, go to
 	// the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim-dns-records.html).
-	DKIMTokens []*string `locationName:"DkimTokens" type:"list" required:"true"`
+	DkimTokens []*string `type:"list" required:"true"`
 
-	metadataVerifyDomainDKIMOutput `json:"-" xml:"-"`
+	metadataVerifyDomainDkimOutput `json:"-" xml:"-"`
 }
 
-type metadataVerifyDomainDKIMOutput struct {
+type metadataVerifyDomainDkimOutput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s VerifyDomainDKIMOutput) String() string {
-	return awsutil.StringValue(s)
+func (s VerifyDomainDkimOutput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s VerifyDomainDKIMOutput) GoString() string {
+func (s VerifyDomainDkimOutput) GoString() string {
 	return s.String()
 }
 
@@ -1724,7 +2188,7 @@ type metadataVerifyDomainIdentityInput struct {
 
 // String returns the string representation
 func (s VerifyDomainIdentityInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1747,7 +2211,7 @@ type metadataVerifyDomainIdentityOutput struct {
 
 // String returns the string representation
 func (s VerifyDomainIdentityOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1769,7 +2233,7 @@ type metadataVerifyEmailAddressInput struct {
 
 // String returns the string representation
 func (s VerifyEmailAddressInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1787,7 +2251,7 @@ type metadataVerifyEmailAddressOutput struct {
 
 // String returns the string representation
 func (s VerifyEmailAddressOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1809,7 +2273,7 @@ type metadataVerifyEmailIdentityInput struct {
 
 // String returns the string representation
 func (s VerifyEmailIdentityInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1829,10 +2293,39 @@ type metadataVerifyEmailIdentityOutput struct {
 
 // String returns the string representation
 func (s VerifyEmailIdentityOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
 func (s VerifyEmailIdentityOutput) GoString() string {
 	return s.String()
 }
+
+const (
+	// @enum IdentityType
+	IdentityTypeEmailAddress = "EmailAddress"
+	// @enum IdentityType
+	IdentityTypeDomain = "Domain"
+)
+
+const (
+	// @enum NotificationType
+	NotificationTypeBounce = "Bounce"
+	// @enum NotificationType
+	NotificationTypeComplaint = "Complaint"
+	// @enum NotificationType
+	NotificationTypeDelivery = "Delivery"
+)
+
+const (
+	// @enum VerificationStatus
+	VerificationStatusPending = "Pending"
+	// @enum VerificationStatus
+	VerificationStatusSuccess = "Success"
+	// @enum VerificationStatus
+	VerificationStatusFailed = "Failed"
+	// @enum VerificationStatus
+	VerificationStatusTemporaryFailure = "TemporaryFailure"
+	// @enum VerificationStatus
+	VerificationStatusNotStarted = "NotStarted"
+)

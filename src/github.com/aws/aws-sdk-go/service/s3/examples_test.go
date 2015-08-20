@@ -22,7 +22,7 @@ func ExampleS3_AbortMultipartUpload() {
 	params := &s3.AbortMultipartUploadInput{
 		Bucket:       aws.String("BucketName"),        // Required
 		Key:          aws.String("ObjectKey"),         // Required
-		UploadID:     aws.String("MultipartUploadId"), // Required
+		UploadId:     aws.String("MultipartUploadId"), // Required
 		RequestPayer: aws.String("RequestPayer"),
 	}
 	resp, err := svc.AbortMultipartUpload(params)
@@ -43,7 +43,7 @@ func ExampleS3_AbortMultipartUpload() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_CompleteMultipartUpload() {
@@ -52,12 +52,12 @@ func ExampleS3_CompleteMultipartUpload() {
 	params := &s3.CompleteMultipartUploadInput{
 		Bucket:   aws.String("BucketName"),        // Required
 		Key:      aws.String("ObjectKey"),         // Required
-		UploadID: aws.String("MultipartUploadId"), // Required
+		UploadId: aws.String("MultipartUploadId"), // Required
 		MultipartUpload: &s3.CompletedMultipartUpload{
 			Parts: []*s3.CompletedPart{
 				{ // Required
 					ETag:       aws.String("ETag"),
-					PartNumber: aws.Long(1),
+					PartNumber: aws.Int64(1),
 				},
 				// More values...
 			},
@@ -82,7 +82,7 @@ func ExampleS3_CompleteMultipartUpload() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_CopyObject() {
@@ -119,7 +119,7 @@ func ExampleS3_CopyObject() {
 		SSECustomerAlgorithm:    aws.String("SSECustomerAlgorithm"),
 		SSECustomerKey:          aws.String("SSECustomerKey"),
 		SSECustomerKeyMD5:       aws.String("SSECustomerKeyMD5"),
-		SSEKMSKeyID:             aws.String("SSEKMSKeyId"),
+		SSEKMSKeyId:             aws.String("SSEKMSKeyId"),
 		ServerSideEncryption:    aws.String("ServerSideEncryption"),
 		StorageClass:            aws.String("StorageClass"),
 		WebsiteRedirectLocation: aws.String("WebsiteRedirectLocation"),
@@ -142,7 +142,7 @@ func ExampleS3_CopyObject() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_CreateBucket() {
@@ -178,7 +178,7 @@ func ExampleS3_CreateBucket() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_CreateMultipartUpload() {
@@ -206,7 +206,7 @@ func ExampleS3_CreateMultipartUpload() {
 		SSECustomerAlgorithm:    aws.String("SSECustomerAlgorithm"),
 		SSECustomerKey:          aws.String("SSECustomerKey"),
 		SSECustomerKeyMD5:       aws.String("SSECustomerKeyMD5"),
-		SSEKMSKeyID:             aws.String("SSEKMSKeyId"),
+		SSEKMSKeyId:             aws.String("SSEKMSKeyId"),
 		ServerSideEncryption:    aws.String("ServerSideEncryption"),
 		StorageClass:            aws.String("StorageClass"),
 		WebsiteRedirectLocation: aws.String("WebsiteRedirectLocation"),
@@ -229,7 +229,7 @@ func ExampleS3_CreateMultipartUpload() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_DeleteBucket() {
@@ -256,16 +256,16 @@ func ExampleS3_DeleteBucket() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
-func ExampleS3_DeleteBucketCORS() {
+func ExampleS3_DeleteBucketCors() {
 	svc := s3.New(nil)
 
-	params := &s3.DeleteBucketCORSInput{
+	params := &s3.DeleteBucketCorsInput{
 		Bucket: aws.String("BucketName"), // Required
 	}
-	resp, err := svc.DeleteBucketCORS(params)
+	resp, err := svc.DeleteBucketCors(params)
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
@@ -283,7 +283,7 @@ func ExampleS3_DeleteBucketCORS() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_DeleteBucketLifecycle() {
@@ -310,7 +310,7 @@ func ExampleS3_DeleteBucketLifecycle() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_DeleteBucketPolicy() {
@@ -337,7 +337,7 @@ func ExampleS3_DeleteBucketPolicy() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_DeleteBucketReplication() {
@@ -364,7 +364,7 @@ func ExampleS3_DeleteBucketReplication() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_DeleteBucketTagging() {
@@ -391,7 +391,7 @@ func ExampleS3_DeleteBucketTagging() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_DeleteBucketWebsite() {
@@ -418,7 +418,7 @@ func ExampleS3_DeleteBucketWebsite() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_DeleteObject() {
@@ -429,7 +429,7 @@ func ExampleS3_DeleteObject() {
 		Key:          aws.String("ObjectKey"),  // Required
 		MFA:          aws.String("MFA"),
 		RequestPayer: aws.String("RequestPayer"),
-		VersionID:    aws.String("ObjectVersionId"),
+		VersionId:    aws.String("ObjectVersionId"),
 	}
 	resp, err := svc.DeleteObject(params)
 
@@ -449,7 +449,7 @@ func ExampleS3_DeleteObject() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_DeleteObjects() {
@@ -461,11 +461,11 @@ func ExampleS3_DeleteObjects() {
 			Objects: []*s3.ObjectIdentifier{ // Required
 				{ // Required
 					Key:       aws.String("ObjectKey"), // Required
-					VersionID: aws.String("ObjectVersionId"),
+					VersionId: aws.String("ObjectVersionId"),
 				},
 				// More values...
 			},
-			Quiet: aws.Boolean(true),
+			Quiet: aws.Bool(true),
 		},
 		MFA:          aws.String("MFA"),
 		RequestPayer: aws.String("RequestPayer"),
@@ -488,16 +488,16 @@ func ExampleS3_DeleteObjects() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
-func ExampleS3_GetBucketACL() {
+func ExampleS3_GetBucketAcl() {
 	svc := s3.New(nil)
 
-	params := &s3.GetBucketACLInput{
+	params := &s3.GetBucketAclInput{
 		Bucket: aws.String("BucketName"), // Required
 	}
-	resp, err := svc.GetBucketACL(params)
+	resp, err := svc.GetBucketAcl(params)
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
@@ -515,16 +515,16 @@ func ExampleS3_GetBucketACL() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
-func ExampleS3_GetBucketCORS() {
+func ExampleS3_GetBucketCors() {
 	svc := s3.New(nil)
 
-	params := &s3.GetBucketCORSInput{
+	params := &s3.GetBucketCorsInput{
 		Bucket: aws.String("BucketName"), // Required
 	}
-	resp, err := svc.GetBucketCORS(params)
+	resp, err := svc.GetBucketCors(params)
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
@@ -542,7 +542,7 @@ func ExampleS3_GetBucketCORS() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_GetBucketLifecycle() {
@@ -569,7 +569,7 @@ func ExampleS3_GetBucketLifecycle() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_GetBucketLocation() {
@@ -596,7 +596,7 @@ func ExampleS3_GetBucketLocation() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_GetBucketLogging() {
@@ -623,7 +623,7 @@ func ExampleS3_GetBucketLogging() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_GetBucketNotification() {
@@ -650,7 +650,7 @@ func ExampleS3_GetBucketNotification() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_GetBucketNotificationConfiguration() {
@@ -677,7 +677,7 @@ func ExampleS3_GetBucketNotificationConfiguration() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_GetBucketPolicy() {
@@ -704,7 +704,7 @@ func ExampleS3_GetBucketPolicy() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_GetBucketReplication() {
@@ -731,7 +731,7 @@ func ExampleS3_GetBucketReplication() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_GetBucketRequestPayment() {
@@ -758,7 +758,7 @@ func ExampleS3_GetBucketRequestPayment() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_GetBucketTagging() {
@@ -785,7 +785,7 @@ func ExampleS3_GetBucketTagging() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_GetBucketVersioning() {
@@ -812,7 +812,7 @@ func ExampleS3_GetBucketVersioning() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_GetBucketWebsite() {
@@ -839,7 +839,7 @@ func ExampleS3_GetBucketWebsite() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_GetObject() {
@@ -863,7 +863,7 @@ func ExampleS3_GetObject() {
 		SSECustomerAlgorithm:       aws.String("SSECustomerAlgorithm"),
 		SSECustomerKey:             aws.String("SSECustomerKey"),
 		SSECustomerKeyMD5:          aws.String("SSECustomerKeyMD5"),
-		VersionID:                  aws.String("ObjectVersionId"),
+		VersionId:                  aws.String("ObjectVersionId"),
 	}
 	resp, err := svc.GetObject(params)
 
@@ -883,19 +883,19 @@ func ExampleS3_GetObject() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
-func ExampleS3_GetObjectACL() {
+func ExampleS3_GetObjectAcl() {
 	svc := s3.New(nil)
 
-	params := &s3.GetObjectACLInput{
+	params := &s3.GetObjectAclInput{
 		Bucket:       aws.String("BucketName"), // Required
 		Key:          aws.String("ObjectKey"),  // Required
 		RequestPayer: aws.String("RequestPayer"),
-		VersionID:    aws.String("ObjectVersionId"),
+		VersionId:    aws.String("ObjectVersionId"),
 	}
-	resp, err := svc.GetObjectACL(params)
+	resp, err := svc.GetObjectAcl(params)
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
@@ -913,7 +913,7 @@ func ExampleS3_GetObjectACL() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_GetObjectTorrent() {
@@ -942,7 +942,7 @@ func ExampleS3_GetObjectTorrent() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_HeadBucket() {
@@ -969,7 +969,7 @@ func ExampleS3_HeadBucket() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_HeadObject() {
@@ -987,7 +987,7 @@ func ExampleS3_HeadObject() {
 		SSECustomerAlgorithm: aws.String("SSECustomerAlgorithm"),
 		SSECustomerKey:       aws.String("SSECustomerKey"),
 		SSECustomerKeyMD5:    aws.String("SSECustomerKeyMD5"),
-		VersionID:            aws.String("ObjectVersionId"),
+		VersionId:            aws.String("ObjectVersionId"),
 	}
 	resp, err := svc.HeadObject(params)
 
@@ -1007,7 +1007,7 @@ func ExampleS3_HeadObject() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_ListBuckets() {
@@ -1032,7 +1032,7 @@ func ExampleS3_ListBuckets() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_ListMultipartUploads() {
@@ -1043,9 +1043,9 @@ func ExampleS3_ListMultipartUploads() {
 		Delimiter:      aws.String("Delimiter"),
 		EncodingType:   aws.String("EncodingType"),
 		KeyMarker:      aws.String("KeyMarker"),
-		MaxUploads:     aws.Long(1),
+		MaxUploads:     aws.Int64(1),
 		Prefix:         aws.String("Prefix"),
-		UploadIDMarker: aws.String("UploadIdMarker"),
+		UploadIdMarker: aws.String("UploadIdMarker"),
 	}
 	resp, err := svc.ListMultipartUploads(params)
 
@@ -1065,7 +1065,7 @@ func ExampleS3_ListMultipartUploads() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_ListObjectVersions() {
@@ -1076,9 +1076,9 @@ func ExampleS3_ListObjectVersions() {
 		Delimiter:       aws.String("Delimiter"),
 		EncodingType:    aws.String("EncodingType"),
 		KeyMarker:       aws.String("KeyMarker"),
-		MaxKeys:         aws.Long(1),
+		MaxKeys:         aws.Int64(1),
 		Prefix:          aws.String("Prefix"),
-		VersionIDMarker: aws.String("VersionIdMarker"),
+		VersionIdMarker: aws.String("VersionIdMarker"),
 	}
 	resp, err := svc.ListObjectVersions(params)
 
@@ -1098,7 +1098,7 @@ func ExampleS3_ListObjectVersions() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_ListObjects() {
@@ -1109,7 +1109,7 @@ func ExampleS3_ListObjects() {
 		Delimiter:    aws.String("Delimiter"),
 		EncodingType: aws.String("EncodingType"),
 		Marker:       aws.String("Marker"),
-		MaxKeys:      aws.Long(1),
+		MaxKeys:      aws.Int64(1),
 		Prefix:       aws.String("Prefix"),
 	}
 	resp, err := svc.ListObjects(params)
@@ -1130,7 +1130,7 @@ func ExampleS3_ListObjects() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_ListParts() {
@@ -1139,9 +1139,9 @@ func ExampleS3_ListParts() {
 	params := &s3.ListPartsInput{
 		Bucket:           aws.String("BucketName"),        // Required
 		Key:              aws.String("ObjectKey"),         // Required
-		UploadID:         aws.String("MultipartUploadId"), // Required
-		MaxParts:         aws.Long(1),
-		PartNumberMarker: aws.Long(1),
+		UploadId:         aws.String("MultipartUploadId"), // Required
+		MaxParts:         aws.Int64(1),
+		PartNumberMarker: aws.Int64(1),
 		RequestPayer:     aws.String("RequestPayer"),
 	}
 	resp, err := svc.ListParts(params)
@@ -1162,13 +1162,13 @@ func ExampleS3_ListParts() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
-func ExampleS3_PutBucketACL() {
+func ExampleS3_PutBucketAcl() {
 	svc := s3.New(nil)
 
-	params := &s3.PutBucketACLInput{
+	params := &s3.PutBucketAclInput{
 		Bucket: aws.String("BucketName"), // Required
 		ACL:    aws.String("BucketCannedACL"),
 		AccessControlPolicy: &s3.AccessControlPolicy{
@@ -1196,7 +1196,7 @@ func ExampleS3_PutBucketACL() {
 		GrantWrite:       aws.String("GrantWrite"),
 		GrantWriteACP:    aws.String("GrantWriteACP"),
 	}
-	resp, err := svc.PutBucketACL(params)
+	resp, err := svc.PutBucketAcl(params)
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
@@ -1214,13 +1214,13 @@ func ExampleS3_PutBucketACL() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
-func ExampleS3_PutBucketCORS() {
+func ExampleS3_PutBucketCors() {
 	svc := s3.New(nil)
 
-	params := &s3.PutBucketCORSInput{
+	params := &s3.PutBucketCorsInput{
 		Bucket: aws.String("BucketName"), // Required
 		CORSConfiguration: &s3.CORSConfiguration{
 			CORSRules: []*s3.CORSRule{
@@ -1241,13 +1241,13 @@ func ExampleS3_PutBucketCORS() {
 						aws.String("ExposeHeader"), // Required
 						// More values...
 					},
-					MaxAgeSeconds: aws.Long(1),
+					MaxAgeSeconds: aws.Int64(1),
 				},
 				// More values...
 			},
 		},
 	}
-	resp, err := svc.PutBucketCORS(params)
+	resp, err := svc.PutBucketCors(params)
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
@@ -1265,7 +1265,7 @@ func ExampleS3_PutBucketCORS() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_PutBucketLifecycle() {
@@ -1280,19 +1280,19 @@ func ExampleS3_PutBucketLifecycle() {
 					Status: aws.String("ExpirationStatus"), // Required
 					Expiration: &s3.LifecycleExpiration{
 						Date: aws.Time(time.Now()),
-						Days: aws.Long(1),
+						Days: aws.Int64(1),
 					},
 					ID: aws.String("ID"),
 					NoncurrentVersionExpiration: &s3.NoncurrentVersionExpiration{
-						NoncurrentDays: aws.Long(1),
+						NoncurrentDays: aws.Int64(1),
 					},
 					NoncurrentVersionTransition: &s3.NoncurrentVersionTransition{
-						NoncurrentDays: aws.Long(1),
+						NoncurrentDays: aws.Int64(1),
 						StorageClass:   aws.String("TransitionStorageClass"),
 					},
 					Transition: &s3.Transition{
 						Date:         aws.Time(time.Now()),
-						Days:         aws.Long(1),
+						Days:         aws.Int64(1),
 						StorageClass: aws.String("TransitionStorageClass"),
 					},
 				},
@@ -1318,7 +1318,7 @@ func ExampleS3_PutBucketLifecycle() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_PutBucketLogging() {
@@ -1364,7 +1364,7 @@ func ExampleS3_PutBucketLogging() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_PutBucketNotification() {
@@ -1380,7 +1380,7 @@ func ExampleS3_PutBucketNotification() {
 					aws.String("Event"), // Required
 					// More values...
 				},
-				ID:             aws.String("NotificationId"),
+				Id:             aws.String("NotificationId"),
 				InvocationRole: aws.String("CloudFunctionInvocationRole"),
 			},
 			QueueConfiguration: &s3.QueueConfigurationDeprecated{
@@ -1389,7 +1389,7 @@ func ExampleS3_PutBucketNotification() {
 					aws.String("Event"), // Required
 					// More values...
 				},
-				ID:    aws.String("NotificationId"),
+				Id:    aws.String("NotificationId"),
 				Queue: aws.String("QueueArn"),
 			},
 			TopicConfiguration: &s3.TopicConfigurationDeprecated{
@@ -1398,7 +1398,7 @@ func ExampleS3_PutBucketNotification() {
 					aws.String("Event"), // Required
 					// More values...
 				},
-				ID:    aws.String("NotificationId"),
+				Id:    aws.String("NotificationId"),
 				Topic: aws.String("TopicArn"),
 			},
 		},
@@ -1421,7 +1421,7 @@ func ExampleS3_PutBucketNotification() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_PutBucketNotificationConfiguration() {
@@ -1436,8 +1436,8 @@ func ExampleS3_PutBucketNotificationConfiguration() {
 						aws.String("Event"), // Required
 						// More values...
 					},
-					LambdaFunctionARN: aws.String("LambdaFunctionArn"), // Required
-					ID:                aws.String("NotificationId"),
+					LambdaFunctionArn: aws.String("LambdaFunctionArn"), // Required
+					Id:                aws.String("NotificationId"),
 				},
 				// More values...
 			},
@@ -1447,8 +1447,8 @@ func ExampleS3_PutBucketNotificationConfiguration() {
 						aws.String("Event"), // Required
 						// More values...
 					},
-					QueueARN: aws.String("QueueArn"), // Required
-					ID:       aws.String("NotificationId"),
+					QueueArn: aws.String("QueueArn"), // Required
+					Id:       aws.String("NotificationId"),
 				},
 				// More values...
 			},
@@ -1458,8 +1458,8 @@ func ExampleS3_PutBucketNotificationConfiguration() {
 						aws.String("Event"), // Required
 						// More values...
 					},
-					TopicARN: aws.String("TopicArn"), // Required
-					ID:       aws.String("NotificationId"),
+					TopicArn: aws.String("TopicArn"), // Required
+					Id:       aws.String("NotificationId"),
 				},
 				// More values...
 			},
@@ -1483,7 +1483,7 @@ func ExampleS3_PutBucketNotificationConfiguration() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_PutBucketPolicy() {
@@ -1511,7 +1511,7 @@ func ExampleS3_PutBucketPolicy() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_PutBucketReplication() {
@@ -1552,7 +1552,7 @@ func ExampleS3_PutBucketReplication() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_PutBucketRequestPayment() {
@@ -1582,7 +1582,7 @@ func ExampleS3_PutBucketRequestPayment() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_PutBucketTagging() {
@@ -1618,7 +1618,7 @@ func ExampleS3_PutBucketTagging() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_PutBucketVersioning() {
@@ -1650,7 +1650,7 @@ func ExampleS3_PutBucketVersioning() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_PutBucketWebsite() {
@@ -1672,14 +1672,14 @@ func ExampleS3_PutBucketWebsite() {
 			RoutingRules: []*s3.RoutingRule{
 				{ // Required
 					Redirect: &s3.Redirect{ // Required
-						HTTPRedirectCode:     aws.String("HttpRedirectCode"),
 						HostName:             aws.String("HostName"),
+						HttpRedirectCode:     aws.String("HttpRedirectCode"),
 						Protocol:             aws.String("Protocol"),
 						ReplaceKeyPrefixWith: aws.String("ReplaceKeyPrefixWith"),
 						ReplaceKeyWith:       aws.String("ReplaceKeyWith"),
 					},
 					Condition: &s3.Condition{
-						HTTPErrorCodeReturnedEquals: aws.String("HttpErrorCodeReturnedEquals"),
+						HttpErrorCodeReturnedEquals: aws.String("HttpErrorCodeReturnedEquals"),
 						KeyPrefixEquals:             aws.String("KeyPrefixEquals"),
 					},
 				},
@@ -1705,7 +1705,7 @@ func ExampleS3_PutBucketWebsite() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_PutObject() {
@@ -1720,7 +1720,7 @@ func ExampleS3_PutObject() {
 		ContentDisposition: aws.String("ContentDisposition"),
 		ContentEncoding:    aws.String("ContentEncoding"),
 		ContentLanguage:    aws.String("ContentLanguage"),
-		ContentLength:      aws.Long(1),
+		ContentLength:      aws.Int64(1),
 		ContentType:        aws.String("ContentType"),
 		Expires:            aws.Time(time.Now()),
 		GrantFullControl:   aws.String("GrantFullControl"),
@@ -1735,7 +1735,7 @@ func ExampleS3_PutObject() {
 		SSECustomerAlgorithm:    aws.String("SSECustomerAlgorithm"),
 		SSECustomerKey:          aws.String("SSECustomerKey"),
 		SSECustomerKeyMD5:       aws.String("SSECustomerKeyMD5"),
-		SSEKMSKeyID:             aws.String("SSEKMSKeyId"),
+		SSEKMSKeyId:             aws.String("SSEKMSKeyId"),
 		ServerSideEncryption:    aws.String("ServerSideEncryption"),
 		StorageClass:            aws.String("StorageClass"),
 		WebsiteRedirectLocation: aws.String("WebsiteRedirectLocation"),
@@ -1758,13 +1758,13 @@ func ExampleS3_PutObject() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
-func ExampleS3_PutObjectACL() {
+func ExampleS3_PutObjectAcl() {
 	svc := s3.New(nil)
 
-	params := &s3.PutObjectACLInput{
+	params := &s3.PutObjectAclInput{
 		Bucket: aws.String("BucketName"), // Required
 		Key:    aws.String("ObjectKey"),  // Required
 		ACL:    aws.String("ObjectCannedACL"),
@@ -1794,7 +1794,7 @@ func ExampleS3_PutObjectACL() {
 		GrantWriteACP:    aws.String("GrantWriteACP"),
 		RequestPayer:     aws.String("RequestPayer"),
 	}
-	resp, err := svc.PutObjectACL(params)
+	resp, err := svc.PutObjectAcl(params)
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
@@ -1812,7 +1812,7 @@ func ExampleS3_PutObjectACL() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_RestoreObject() {
@@ -1823,9 +1823,9 @@ func ExampleS3_RestoreObject() {
 		Key:          aws.String("ObjectKey"),  // Required
 		RequestPayer: aws.String("RequestPayer"),
 		RestoreRequest: &s3.RestoreRequest{
-			Days: aws.Long(1), // Required
+			Days: aws.Int64(1), // Required
 		},
-		VersionID: aws.String("ObjectVersionId"),
+		VersionId: aws.String("ObjectVersionId"),
 	}
 	resp, err := svc.RestoreObject(params)
 
@@ -1845,7 +1845,7 @@ func ExampleS3_RestoreObject() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_UploadPart() {
@@ -1854,10 +1854,10 @@ func ExampleS3_UploadPart() {
 	params := &s3.UploadPartInput{
 		Bucket:               aws.String("BucketName"),        // Required
 		Key:                  aws.String("ObjectKey"),         // Required
-		PartNumber:           aws.Long(1),                     // Required
-		UploadID:             aws.String("MultipartUploadId"), // Required
+		PartNumber:           aws.Int64(1),                    // Required
+		UploadId:             aws.String("MultipartUploadId"), // Required
 		Body:                 bytes.NewReader([]byte("PAYLOAD")),
-		ContentLength:        aws.Long(1),
+		ContentLength:        aws.Int64(1),
 		RequestPayer:         aws.String("RequestPayer"),
 		SSECustomerAlgorithm: aws.String("SSECustomerAlgorithm"),
 		SSECustomerKey:       aws.String("SSECustomerKey"),
@@ -1881,7 +1881,7 @@ func ExampleS3_UploadPart() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleS3_UploadPartCopy() {
@@ -1891,8 +1891,8 @@ func ExampleS3_UploadPartCopy() {
 		Bucket:                         aws.String("BucketName"),        // Required
 		CopySource:                     aws.String("CopySource"),        // Required
 		Key:                            aws.String("ObjectKey"),         // Required
-		PartNumber:                     aws.Long(1),                     // Required
-		UploadID:                       aws.String("MultipartUploadId"), // Required
+		PartNumber:                     aws.Int64(1),                    // Required
+		UploadId:                       aws.String("MultipartUploadId"), // Required
 		CopySourceIfMatch:              aws.String("CopySourceIfMatch"),
 		CopySourceIfModifiedSince:      aws.Time(time.Now()),
 		CopySourceIfNoneMatch:          aws.String("CopySourceIfNoneMatch"),
@@ -1924,5 +1924,5 @@ func ExampleS3_UploadPartCopy() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }

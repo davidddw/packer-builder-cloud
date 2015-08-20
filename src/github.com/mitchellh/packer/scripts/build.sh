@@ -22,8 +22,8 @@ if [ "${TF_DEV}x" != "x" ]; then
 fi
 
 # Determine the arch/os combos we're building for
-XC_ARCH=${XC_ARCH:-"386 amd64"}
-XC_OS=${XC_OS:-linux windows}
+XC_ARCH=${XC_ARCH:-"386 amd64 arm"}
+XC_OS=${XC_OS:-linux darwin windows freebsd openbsd}
 
 # Install dependencies
 echo "==> Getting dependencies..."

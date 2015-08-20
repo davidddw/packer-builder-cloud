@@ -29,7 +29,7 @@ func ExampleSWF_CountClosedWorkflowExecutions() {
 			LatestDate: aws.Time(time.Now()),
 		},
 		ExecutionFilter: &swf.WorkflowExecutionFilter{
-			WorkflowID: aws.String("WorkflowId"), // Required
+			WorkflowId: aws.String("WorkflowId"), // Required
 		},
 		StartTimeFilter: &swf.ExecutionTimeFilter{
 			OldestDate: aws.Time(time.Now()), // Required
@@ -61,7 +61,7 @@ func ExampleSWF_CountClosedWorkflowExecutions() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSWF_CountOpenWorkflowExecutions() {
@@ -74,7 +74,7 @@ func ExampleSWF_CountOpenWorkflowExecutions() {
 			LatestDate: aws.Time(time.Now()),
 		},
 		ExecutionFilter: &swf.WorkflowExecutionFilter{
-			WorkflowID: aws.String("WorkflowId"), // Required
+			WorkflowId: aws.String("WorkflowId"), // Required
 		},
 		TagFilter: &swf.TagFilter{
 			Tag: aws.String("Tag"), // Required
@@ -102,7 +102,7 @@ func ExampleSWF_CountOpenWorkflowExecutions() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSWF_CountPendingActivityTasks() {
@@ -132,7 +132,7 @@ func ExampleSWF_CountPendingActivityTasks() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSWF_CountPendingDecisionTasks() {
@@ -162,7 +162,7 @@ func ExampleSWF_CountPendingDecisionTasks() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSWF_DeprecateActivityType() {
@@ -193,7 +193,7 @@ func ExampleSWF_DeprecateActivityType() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSWF_DeprecateDomain() {
@@ -220,7 +220,7 @@ func ExampleSWF_DeprecateDomain() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSWF_DeprecateWorkflowType() {
@@ -251,7 +251,7 @@ func ExampleSWF_DeprecateWorkflowType() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSWF_DescribeActivityType() {
@@ -282,7 +282,7 @@ func ExampleSWF_DescribeActivityType() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSWF_DescribeDomain() {
@@ -309,7 +309,7 @@ func ExampleSWF_DescribeDomain() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSWF_DescribeWorkflowExecution() {
@@ -318,8 +318,8 @@ func ExampleSWF_DescribeWorkflowExecution() {
 	params := &swf.DescribeWorkflowExecutionInput{
 		Domain: aws.String("DomainName"), // Required
 		Execution: &swf.WorkflowExecution{ // Required
-			RunID:      aws.String("RunId"),      // Required
-			WorkflowID: aws.String("WorkflowId"), // Required
+			RunId:      aws.String("RunId"),      // Required
+			WorkflowId: aws.String("WorkflowId"), // Required
 		},
 	}
 	resp, err := svc.DescribeWorkflowExecution(params)
@@ -340,7 +340,7 @@ func ExampleSWF_DescribeWorkflowExecution() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSWF_DescribeWorkflowType() {
@@ -371,7 +371,7 @@ func ExampleSWF_DescribeWorkflowType() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSWF_GetWorkflowExecutionHistory() {
@@ -380,12 +380,12 @@ func ExampleSWF_GetWorkflowExecutionHistory() {
 	params := &swf.GetWorkflowExecutionHistoryInput{
 		Domain: aws.String("DomainName"), // Required
 		Execution: &swf.WorkflowExecution{ // Required
-			RunID:      aws.String("RunId"),      // Required
-			WorkflowID: aws.String("WorkflowId"), // Required
+			RunId:      aws.String("RunId"),      // Required
+			WorkflowId: aws.String("WorkflowId"), // Required
 		},
-		MaximumPageSize: aws.Long(1),
+		MaximumPageSize: aws.Int64(1),
 		NextPageToken:   aws.String("PageToken"),
-		ReverseOrder:    aws.Boolean(true),
+		ReverseOrder:    aws.Bool(true),
 	}
 	resp, err := svc.GetWorkflowExecutionHistory(params)
 
@@ -405,7 +405,7 @@ func ExampleSWF_GetWorkflowExecutionHistory() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSWF_ListActivityTypes() {
@@ -414,10 +414,10 @@ func ExampleSWF_ListActivityTypes() {
 	params := &swf.ListActivityTypesInput{
 		Domain:             aws.String("DomainName"),         // Required
 		RegistrationStatus: aws.String("RegistrationStatus"), // Required
-		MaximumPageSize:    aws.Long(1),
+		MaximumPageSize:    aws.Int64(1),
 		Name:               aws.String("Name"),
 		NextPageToken:      aws.String("PageToken"),
-		ReverseOrder:       aws.Boolean(true),
+		ReverseOrder:       aws.Bool(true),
 	}
 	resp, err := svc.ListActivityTypes(params)
 
@@ -437,7 +437,7 @@ func ExampleSWF_ListActivityTypes() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSWF_ListClosedWorkflowExecutions() {
@@ -453,11 +453,11 @@ func ExampleSWF_ListClosedWorkflowExecutions() {
 			LatestDate: aws.Time(time.Now()),
 		},
 		ExecutionFilter: &swf.WorkflowExecutionFilter{
-			WorkflowID: aws.String("WorkflowId"), // Required
+			WorkflowId: aws.String("WorkflowId"), // Required
 		},
-		MaximumPageSize: aws.Long(1),
+		MaximumPageSize: aws.Int64(1),
 		NextPageToken:   aws.String("PageToken"),
-		ReverseOrder:    aws.Boolean(true),
+		ReverseOrder:    aws.Bool(true),
 		StartTimeFilter: &swf.ExecutionTimeFilter{
 			OldestDate: aws.Time(time.Now()), // Required
 			LatestDate: aws.Time(time.Now()),
@@ -488,7 +488,7 @@ func ExampleSWF_ListClosedWorkflowExecutions() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSWF_ListDomains() {
@@ -496,9 +496,9 @@ func ExampleSWF_ListDomains() {
 
 	params := &swf.ListDomainsInput{
 		RegistrationStatus: aws.String("RegistrationStatus"), // Required
-		MaximumPageSize:    aws.Long(1),
+		MaximumPageSize:    aws.Int64(1),
 		NextPageToken:      aws.String("PageToken"),
-		ReverseOrder:       aws.Boolean(true),
+		ReverseOrder:       aws.Bool(true),
 	}
 	resp, err := svc.ListDomains(params)
 
@@ -518,7 +518,7 @@ func ExampleSWF_ListDomains() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSWF_ListOpenWorkflowExecutions() {
@@ -531,11 +531,11 @@ func ExampleSWF_ListOpenWorkflowExecutions() {
 			LatestDate: aws.Time(time.Now()),
 		},
 		ExecutionFilter: &swf.WorkflowExecutionFilter{
-			WorkflowID: aws.String("WorkflowId"), // Required
+			WorkflowId: aws.String("WorkflowId"), // Required
 		},
-		MaximumPageSize: aws.Long(1),
+		MaximumPageSize: aws.Int64(1),
 		NextPageToken:   aws.String("PageToken"),
-		ReverseOrder:    aws.Boolean(true),
+		ReverseOrder:    aws.Bool(true),
 		TagFilter: &swf.TagFilter{
 			Tag: aws.String("Tag"), // Required
 		},
@@ -562,7 +562,7 @@ func ExampleSWF_ListOpenWorkflowExecutions() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSWF_ListWorkflowTypes() {
@@ -571,10 +571,10 @@ func ExampleSWF_ListWorkflowTypes() {
 	params := &swf.ListWorkflowTypesInput{
 		Domain:             aws.String("DomainName"),         // Required
 		RegistrationStatus: aws.String("RegistrationStatus"), // Required
-		MaximumPageSize:    aws.Long(1),
+		MaximumPageSize:    aws.Int64(1),
 		Name:               aws.String("Name"),
 		NextPageToken:      aws.String("PageToken"),
-		ReverseOrder:       aws.Boolean(true),
+		ReverseOrder:       aws.Bool(true),
 	}
 	resp, err := svc.ListWorkflowTypes(params)
 
@@ -594,7 +594,7 @@ func ExampleSWF_ListWorkflowTypes() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSWF_PollForActivityTask() {
@@ -625,7 +625,7 @@ func ExampleSWF_PollForActivityTask() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSWF_PollForDecisionTask() {
@@ -637,9 +637,9 @@ func ExampleSWF_PollForDecisionTask() {
 			Name: aws.String("Name"), // Required
 		},
 		Identity:        aws.String("Identity"),
-		MaximumPageSize: aws.Long(1),
+		MaximumPageSize: aws.Int64(1),
 		NextPageToken:   aws.String("PageToken"),
-		ReverseOrder:    aws.Boolean(true),
+		ReverseOrder:    aws.Bool(true),
 	}
 	resp, err := svc.PollForDecisionTask(params)
 
@@ -659,7 +659,7 @@ func ExampleSWF_PollForDecisionTask() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSWF_RecordActivityTaskHeartbeat() {
@@ -687,7 +687,7 @@ func ExampleSWF_RecordActivityTaskHeartbeat() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSWF_RegisterActivityType() {
@@ -725,7 +725,7 @@ func ExampleSWF_RegisterActivityType() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSWF_RegisterDomain() {
@@ -754,7 +754,7 @@ func ExampleSWF_RegisterDomain() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSWF_RegisterWorkflowType() {
@@ -766,6 +766,7 @@ func ExampleSWF_RegisterWorkflowType() {
 		Version:                             aws.String("Version"),    // Required
 		DefaultChildPolicy:                  aws.String("ChildPolicy"),
 		DefaultExecutionStartToCloseTimeout: aws.String("DurationInSecondsOptional"),
+		DefaultLambdaRole:                   aws.String("Arn"),
 		DefaultTaskList: &swf.TaskList{
 			Name: aws.String("Name"), // Required
 		},
@@ -791,7 +792,7 @@ func ExampleSWF_RegisterWorkflowType() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSWF_RequestCancelWorkflowExecution() {
@@ -799,8 +800,8 @@ func ExampleSWF_RequestCancelWorkflowExecution() {
 
 	params := &swf.RequestCancelWorkflowExecutionInput{
 		Domain:     aws.String("DomainName"), // Required
-		WorkflowID: aws.String("WorkflowId"), // Required
-		RunID:      aws.String("RunIdOptional"),
+		WorkflowId: aws.String("WorkflowId"), // Required
+		RunId:      aws.String("RunIdOptional"),
 	}
 	resp, err := svc.RequestCancelWorkflowExecution(params)
 
@@ -820,7 +821,7 @@ func ExampleSWF_RequestCancelWorkflowExecution() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSWF_RespondActivityTaskCanceled() {
@@ -848,7 +849,7 @@ func ExampleSWF_RespondActivityTaskCanceled() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSWF_RespondActivityTaskCompleted() {
@@ -876,7 +877,7 @@ func ExampleSWF_RespondActivityTaskCompleted() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSWF_RespondActivityTaskFailed() {
@@ -905,7 +906,7 @@ func ExampleSWF_RespondActivityTaskFailed() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSWF_RespondDecisionTaskCompleted() {
@@ -917,7 +918,7 @@ func ExampleSWF_RespondDecisionTaskCompleted() {
 			{ // Required
 				DecisionType: aws.String("DecisionType"), // Required
 				CancelTimerDecisionAttributes: &swf.CancelTimerDecisionAttributes{
-					TimerID: aws.String("TimerId"), // Required
+					TimerId: aws.String("TimerId"), // Required
 				},
 				CancelWorkflowExecutionDecisionAttributes: &swf.CancelWorkflowExecutionDecisionAttributes{
 					Details: aws.String("Data"),
@@ -928,7 +929,8 @@ func ExampleSWF_RespondDecisionTaskCompleted() {
 				ContinueAsNewWorkflowExecutionDecisionAttributes: &swf.ContinueAsNewWorkflowExecutionDecisionAttributes{
 					ChildPolicy:                  aws.String("ChildPolicy"),
 					ExecutionStartToCloseTimeout: aws.String("DurationInSecondsOptional"),
-					Input: aws.String("Data"),
+					Input:      aws.String("Data"),
+					LambdaRole: aws.String("Arn"),
 					TagList: []*string{
 						aws.String("Tag"), // Required
 						// More values...
@@ -949,15 +951,15 @@ func ExampleSWF_RespondDecisionTaskCompleted() {
 					Details:    aws.String("Data"),
 				},
 				RequestCancelActivityTaskDecisionAttributes: &swf.RequestCancelActivityTaskDecisionAttributes{
-					ActivityID: aws.String("ActivityId"), // Required
+					ActivityId: aws.String("ActivityId"), // Required
 				},
 				RequestCancelExternalWorkflowExecutionDecisionAttributes: &swf.RequestCancelExternalWorkflowExecutionDecisionAttributes{
-					WorkflowID: aws.String("WorkflowId"), // Required
+					WorkflowId: aws.String("WorkflowId"), // Required
 					Control:    aws.String("Data"),
-					RunID:      aws.String("RunIdOptional"),
+					RunId:      aws.String("RunIdOptional"),
 				},
 				ScheduleActivityTaskDecisionAttributes: &swf.ScheduleActivityTaskDecisionAttributes{
-					ActivityID: aws.String("ActivityId"), // Required
+					ActivityId: aws.String("ActivityId"), // Required
 					ActivityType: &swf.ActivityType{ // Required
 						Name:    aws.String("Name"),    // Required
 						Version: aws.String("Version"), // Required
@@ -973,15 +975,21 @@ func ExampleSWF_RespondDecisionTaskCompleted() {
 					},
 					TaskPriority: aws.String("TaskPriority"),
 				},
+				ScheduleLambdaFunctionDecisionAttributes: &swf.ScheduleLambdaFunctionDecisionAttributes{
+					Id:                  aws.String("FunctionId"),   // Required
+					Name:                aws.String("FunctionName"), // Required
+					Input:               aws.String("FunctionInput"),
+					StartToCloseTimeout: aws.String("DurationInSecondsOptional"),
+				},
 				SignalExternalWorkflowExecutionDecisionAttributes: &swf.SignalExternalWorkflowExecutionDecisionAttributes{
 					SignalName: aws.String("SignalName"), // Required
-					WorkflowID: aws.String("WorkflowId"), // Required
+					WorkflowId: aws.String("WorkflowId"), // Required
 					Control:    aws.String("Data"),
 					Input:      aws.String("Data"),
-					RunID:      aws.String("RunIdOptional"),
+					RunId:      aws.String("RunIdOptional"),
 				},
 				StartChildWorkflowExecutionDecisionAttributes: &swf.StartChildWorkflowExecutionDecisionAttributes{
-					WorkflowID: aws.String("WorkflowId"), // Required
+					WorkflowId: aws.String("WorkflowId"), // Required
 					WorkflowType: &swf.WorkflowType{ // Required
 						Name:    aws.String("Name"),    // Required
 						Version: aws.String("Version"), // Required
@@ -989,7 +997,8 @@ func ExampleSWF_RespondDecisionTaskCompleted() {
 					ChildPolicy: aws.String("ChildPolicy"),
 					Control:     aws.String("Data"),
 					ExecutionStartToCloseTimeout: aws.String("DurationInSecondsOptional"),
-					Input: aws.String("Data"),
+					Input:      aws.String("Data"),
+					LambdaRole: aws.String("Arn"),
 					TagList: []*string{
 						aws.String("Tag"), // Required
 						// More values...
@@ -1002,7 +1011,7 @@ func ExampleSWF_RespondDecisionTaskCompleted() {
 				},
 				StartTimerDecisionAttributes: &swf.StartTimerDecisionAttributes{
 					StartToFireTimeout: aws.String("DurationInSeconds"), // Required
-					TimerID:            aws.String("TimerId"),           // Required
+					TimerId:            aws.String("TimerId"),           // Required
 					Control:            aws.String("Data"),
 				},
 			},
@@ -1028,7 +1037,7 @@ func ExampleSWF_RespondDecisionTaskCompleted() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSWF_SignalWorkflowExecution() {
@@ -1037,9 +1046,9 @@ func ExampleSWF_SignalWorkflowExecution() {
 	params := &swf.SignalWorkflowExecutionInput{
 		Domain:     aws.String("DomainName"), // Required
 		SignalName: aws.String("SignalName"), // Required
-		WorkflowID: aws.String("WorkflowId"), // Required
+		WorkflowId: aws.String("WorkflowId"), // Required
 		Input:      aws.String("Data"),
-		RunID:      aws.String("RunIdOptional"),
+		RunId:      aws.String("RunIdOptional"),
 	}
 	resp, err := svc.SignalWorkflowExecution(params)
 
@@ -1059,7 +1068,7 @@ func ExampleSWF_SignalWorkflowExecution() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSWF_StartWorkflowExecution() {
@@ -1067,14 +1076,15 @@ func ExampleSWF_StartWorkflowExecution() {
 
 	params := &swf.StartWorkflowExecutionInput{
 		Domain:     aws.String("DomainName"), // Required
-		WorkflowID: aws.String("WorkflowId"), // Required
+		WorkflowId: aws.String("WorkflowId"), // Required
 		WorkflowType: &swf.WorkflowType{ // Required
 			Name:    aws.String("Name"),    // Required
 			Version: aws.String("Version"), // Required
 		},
 		ChildPolicy:                  aws.String("ChildPolicy"),
 		ExecutionStartToCloseTimeout: aws.String("DurationInSecondsOptional"),
-		Input: aws.String("Data"),
+		Input:      aws.String("Data"),
+		LambdaRole: aws.String("Arn"),
 		TagList: []*string{
 			aws.String("Tag"), // Required
 			// More values...
@@ -1103,7 +1113,7 @@ func ExampleSWF_StartWorkflowExecution() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSWF_TerminateWorkflowExecution() {
@@ -1111,11 +1121,11 @@ func ExampleSWF_TerminateWorkflowExecution() {
 
 	params := &swf.TerminateWorkflowExecutionInput{
 		Domain:      aws.String("DomainName"), // Required
-		WorkflowID:  aws.String("WorkflowId"), // Required
+		WorkflowId:  aws.String("WorkflowId"), // Required
 		ChildPolicy: aws.String("ChildPolicy"),
 		Details:     aws.String("Data"),
 		Reason:      aws.String("TerminateReason"),
-		RunID:       aws.String("RunIdOptional"),
+		RunId:       aws.String("RunIdOptional"),
 	}
 	resp, err := svc.TerminateWorkflowExecution(params)
 
@@ -1135,5 +1145,5 @@ func ExampleSWF_TerminateWorkflowExecution() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }

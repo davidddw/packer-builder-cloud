@@ -4,15 +4,15 @@
 package mobileanalytics
 
 import (
-	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awsutil"
+	"github.com/aws/aws-sdk-go/aws/service"
 )
 
 const opPutEvents = "PutEvents"
 
 // PutEventsRequest generates a request for the PutEvents operation.
-func (c *MobileAnalytics) PutEventsRequest(input *PutEventsInput) (req *aws.Request, output *PutEventsOutput) {
-	op := &aws.Operation{
+func (c *MobileAnalytics) PutEventsRequest(input *PutEventsInput) (req *service.Request, output *PutEventsOutput) {
+	op := &service.Operation{
 		Name:       opPutEvents,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2014-06-05/events",
@@ -74,7 +74,7 @@ type metadataEvent struct {
 
 // String returns the string representation
 func (s Event) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -103,7 +103,7 @@ type metadataPutEventsInput struct {
 
 // String returns the string representation
 func (s PutEventsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -121,7 +121,7 @@ type metadataPutEventsOutput struct {
 
 // String returns the string representation
 func (s PutEventsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -135,7 +135,7 @@ type Session struct {
 	Duration *int64 `locationName:"duration" type:"long"`
 
 	// A unique identifier for the session
-	ID *string `locationName:"id" type:"string"`
+	Id *string `locationName:"id" type:"string"`
 
 	// The time the event started in ISO 8601 standard date time format. For example,
 	// 2014-06-30T19:07:47.885Z
@@ -154,7 +154,7 @@ type metadataSession struct {
 
 // String returns the string representation
 func (s Session) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation

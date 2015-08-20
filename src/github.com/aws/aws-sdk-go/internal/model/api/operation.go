@@ -7,8 +7,6 @@ import (
 	"sort"
 	"strings"
 	"text/template"
-
-	"github.com/aws/aws-sdk-go/internal/util"
 )
 
 // An Operation defines a specific API Operation.
@@ -46,12 +44,12 @@ const op{{ .ExportedName }} = "{{ .Name }}"
 
 // {{ .ExportedName }}Request generates a request for the {{ .ExportedName }} operation.
 func (c *{{ .API.StructName }}) {{ .ExportedName }}Request(` +
-	`input {{ .InputRef.GoType }}) (req *aws.Request, output {{ .OutputRef.GoType }}) {
-	op := &aws.Operation{
+	`input {{ .InputRef.GoType }}) (req *service.Request, output {{ .OutputRef.GoType }}) {
+	op := &service.Operation{
 		Name:       op{{ .ExportedName }},
 		{{ if ne .HTTP.Method "" }}HTTPMethod: "{{ .HTTP.Method }}",
 		{{ end }}{{ if ne .HTTP.RequestURI "" }}HTTPPath:   "{{ .HTTP.RequestURI }}",
-		{{ end }}{{ if .Paginator }}Paginator: &aws.Paginator{
+		{{ end }}{{ if .Paginator }}Paginator: &service.Paginator{
 				InputTokens: {{ .Paginator.InputTokensString }},
 				OutputTokens: {{ .Paginator.OutputTokensString }},
 				LimitToken: "{{ .Paginator.LimitKey }}",
@@ -96,12 +94,16 @@ func (o *Operation) GoCode() string {
 		panic(err)
 	}
 
-	return strings.TrimSpace(util.GoFmt(buf.String()))
+	return strings.TrimSpace(buf.String())
 }
 
 // tplInfSig defines the template for rendering an Operation's signature within an Interface definition.
 var tplInfSig = template.Must(template.New("opsig").Parse(`
+{{ .ExportedName }}Request({{ .InputRef.GoTypeWithPkgName }}) (*service.Request, {{ .OutputRef.GoTypeWithPkgName }})
+
 {{ .ExportedName }}({{ .InputRef.GoTypeWithPkgName }}) ({{ .OutputRef.GoTypeWithPkgName }}, error)
+{{ if .Paginator }}
+{{ .ExportedName }}Pages({{ .InputRef.GoTypeWithPkgName }}, func({{ .OutputRef.GoTypeWithPkgName }}, bool) bool) error{{ end }}
 `))
 
 // InterfaceSignature returns a string representing the Operation's interface{}
@@ -113,7 +115,7 @@ func (o *Operation) InterfaceSignature() string {
 		panic(err)
 	}
 
-	return strings.TrimSpace(util.GoFmt(buf.String()))
+	return strings.TrimSpace(buf.String())
 }
 
 // tplExample defines the template for rendering an Operation example
@@ -140,7 +142,7 @@ func Example{{ .API.StructName }}_{{ .ExportedName }}() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 `))
 
@@ -152,7 +154,7 @@ func (o *Operation) Example() string {
 		panic(err)
 	}
 
-	return strings.TrimSpace(util.GoFmt(buf.String()))
+	return strings.TrimSpace(buf.String())
 }
 
 // ExampleInput return a string of the rendered Go code for an example's input parameters
@@ -290,9 +292,9 @@ func (e *example) traverseScalar(s *Shape, required, payload bool) string {
 	str := ""
 	switch s.Type {
 	case "integer", "long":
-		str = `aws.Long(1)`
+		str = `aws.Int64(1)`
 	case "float", "double":
-		str = `aws.Double(1.0)`
+		str = `aws.Float64(1.0)`
 	case "string", "character":
 		str = `aws.String("` + s.ShapeName + `")`
 	case "blob":
@@ -302,7 +304,7 @@ func (e *example) traverseScalar(s *Shape, required, payload bool) string {
 			str = `[]byte("PAYLOAD")`
 		}
 	case "boolean":
-		str = `aws.Boolean(true)`
+		str = `aws.Bool(true)`
 	case "timestamp":
 		str = `aws.Time(time.Now())`
 	default:

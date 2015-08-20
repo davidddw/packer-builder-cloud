@@ -41,7 +41,7 @@ func ExampleRDS_AddSourceIdentifierToSubscription() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_AddTagsToResource() {
@@ -75,7 +75,7 @@ func ExampleRDS_AddTagsToResource() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_ApplyPendingMaintenanceAction() {
@@ -104,7 +104,7 @@ func ExampleRDS_ApplyPendingMaintenanceAction() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_AuthorizeDBSecurityGroupIngress() {
@@ -113,9 +113,9 @@ func ExampleRDS_AuthorizeDBSecurityGroupIngress() {
 	params := &rds.AuthorizeDBSecurityGroupIngressInput{
 		DBSecurityGroupName:     aws.String("String"), // Required
 		CIDRIP:                  aws.String("String"),
-		EC2SecurityGroupID:      aws.String("String"),
+		EC2SecurityGroupId:      aws.String("String"),
 		EC2SecurityGroupName:    aws.String("String"),
-		EC2SecurityGroupOwnerID: aws.String("String"),
+		EC2SecurityGroupOwnerId: aws.String("String"),
 	}
 	resp, err := svc.AuthorizeDBSecurityGroupIngress(params)
 
@@ -135,7 +135,42 @@ func ExampleRDS_AuthorizeDBSecurityGroupIngress() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
+}
+
+func ExampleRDS_CopyDBClusterSnapshot() {
+	svc := rds.New(nil)
+
+	params := &rds.CopyDBClusterSnapshotInput{
+		SourceDBClusterSnapshotIdentifier: aws.String("String"), // Required
+		TargetDBClusterSnapshotIdentifier: aws.String("String"), // Required
+		Tags: []*rds.Tag{
+			{ // Required
+				Key:   aws.String("String"),
+				Value: aws.String("String"),
+			},
+			// More values...
+		},
+	}
+	resp, err := svc.CopyDBClusterSnapshot(params)
+
+	if err != nil {
+		if awsErr, ok := err.(awserr.Error); ok {
+			// Generic AWS error with Code, Message, and original error (if any)
+			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
+			if reqErr, ok := err.(awserr.RequestFailure); ok {
+				// A service error occurred
+				fmt.Println(reqErr.Code(), reqErr.Message(), reqErr.StatusCode(), reqErr.RequestID())
+			}
+		} else {
+			// This case should never be hit, the SDK should always return an
+			// error which satisfies the awserr.Error interface.
+			fmt.Println(err.Error())
+		}
+	}
+
+	// Pretty-print the response data.
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_CopyDBParameterGroup() {
@@ -171,7 +206,7 @@ func ExampleRDS_CopyDBParameterGroup() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_CopyDBSnapshot() {
@@ -206,7 +241,7 @@ func ExampleRDS_CopyDBSnapshot() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_CopyOptionGroup() {
@@ -242,44 +277,31 @@ func ExampleRDS_CopyOptionGroup() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
-func ExampleRDS_CreateDBInstance() {
+func ExampleRDS_CreateDBCluster() {
 	svc := rds.New(nil)
 
-	params := &rds.CreateDBInstanceInput{
-		AllocatedStorage:        aws.Long(1),          // Required
-		DBInstanceClass:         aws.String("String"), // Required
-		DBInstanceIdentifier:    aws.String("String"), // Required
-		Engine:                  aws.String("String"), // Required
-		MasterUserPassword:      aws.String("String"), // Required
-		MasterUsername:          aws.String("String"), // Required
-		AutoMinorVersionUpgrade: aws.Boolean(true),
-		AvailabilityZone:        aws.String("String"),
-		BackupRetentionPeriod:   aws.Long(1),
-		CharacterSetName:        aws.String("String"),
-		DBName:                  aws.String("String"),
-		DBParameterGroupName:    aws.String("String"),
-		DBSecurityGroups: []*string{
+	params := &rds.CreateDBClusterInput{
+		AvailabilityZones: []*string{
 			aws.String("String"), // Required
 			// More values...
 		},
-		DBSubnetGroupName: aws.String("String"),
-		EngineVersion:     aws.String("String"),
-		IOPS:              aws.Long(1),
-		KMSKeyID:          aws.String("String"),
-		LicenseModel:      aws.String("String"),
-		MultiAZ:           aws.Boolean(true),
-		OptionGroupName:   aws.String("String"),
-		Port:              aws.Long(1),
+		BackupRetentionPeriod:       aws.Int64(1),
+		CharacterSetName:            aws.String("String"),
+		DBClusterIdentifier:         aws.String("String"),
+		DBClusterParameterGroupName: aws.String("String"),
+		DBSubnetGroupName:           aws.String("String"),
+		DatabaseName:                aws.String("String"),
+		Engine:                      aws.String("String"),
+		EngineVersion:               aws.String("String"),
+		MasterUserPassword:          aws.String("String"),
+		MasterUsername:              aws.String("String"),
+		OptionGroupName:             aws.String("String"),
+		Port:                        aws.Int64(1),
 		PreferredBackupWindow:      aws.String("String"),
 		PreferredMaintenanceWindow: aws.String("String"),
-		PubliclyAccessible:         aws.Boolean(true),
-		StorageEncrypted:           aws.Boolean(true),
-		StorageType:                aws.String("String"),
-		TDECredentialARN:           aws.String("String"),
-		TDECredentialPassword:      aws.String("String"),
 		Tags: []*rds.Tag{
 			{ // Required
 				Key:   aws.String("String"),
@@ -287,7 +309,147 @@ func ExampleRDS_CreateDBInstance() {
 			},
 			// More values...
 		},
-		VPCSecurityGroupIDs: []*string{
+		VpcSecurityGroupIds: []*string{
+			aws.String("String"), // Required
+			// More values...
+		},
+	}
+	resp, err := svc.CreateDBCluster(params)
+
+	if err != nil {
+		if awsErr, ok := err.(awserr.Error); ok {
+			// Generic AWS error with Code, Message, and original error (if any)
+			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
+			if reqErr, ok := err.(awserr.RequestFailure); ok {
+				// A service error occurred
+				fmt.Println(reqErr.Code(), reqErr.Message(), reqErr.StatusCode(), reqErr.RequestID())
+			}
+		} else {
+			// This case should never be hit, the SDK should always return an
+			// error which satisfies the awserr.Error interface.
+			fmt.Println(err.Error())
+		}
+	}
+
+	// Pretty-print the response data.
+	fmt.Println(awsutil.Prettify(resp))
+}
+
+func ExampleRDS_CreateDBClusterParameterGroup() {
+	svc := rds.New(nil)
+
+	params := &rds.CreateDBClusterParameterGroupInput{
+		DBClusterParameterGroupName: aws.String("String"), // Required
+		DBParameterGroupFamily:      aws.String("String"), // Required
+		Description:                 aws.String("String"), // Required
+		Tags: []*rds.Tag{
+			{ // Required
+				Key:   aws.String("String"),
+				Value: aws.String("String"),
+			},
+			// More values...
+		},
+	}
+	resp, err := svc.CreateDBClusterParameterGroup(params)
+
+	if err != nil {
+		if awsErr, ok := err.(awserr.Error); ok {
+			// Generic AWS error with Code, Message, and original error (if any)
+			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
+			if reqErr, ok := err.(awserr.RequestFailure); ok {
+				// A service error occurred
+				fmt.Println(reqErr.Code(), reqErr.Message(), reqErr.StatusCode(), reqErr.RequestID())
+			}
+		} else {
+			// This case should never be hit, the SDK should always return an
+			// error which satisfies the awserr.Error interface.
+			fmt.Println(err.Error())
+		}
+	}
+
+	// Pretty-print the response data.
+	fmt.Println(awsutil.Prettify(resp))
+}
+
+func ExampleRDS_CreateDBClusterSnapshot() {
+	svc := rds.New(nil)
+
+	params := &rds.CreateDBClusterSnapshotInput{
+		DBClusterIdentifier:         aws.String("String"), // Required
+		DBClusterSnapshotIdentifier: aws.String("String"), // Required
+		Tags: []*rds.Tag{
+			{ // Required
+				Key:   aws.String("String"),
+				Value: aws.String("String"),
+			},
+			// More values...
+		},
+	}
+	resp, err := svc.CreateDBClusterSnapshot(params)
+
+	if err != nil {
+		if awsErr, ok := err.(awserr.Error); ok {
+			// Generic AWS error with Code, Message, and original error (if any)
+			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
+			if reqErr, ok := err.(awserr.RequestFailure); ok {
+				// A service error occurred
+				fmt.Println(reqErr.Code(), reqErr.Message(), reqErr.StatusCode(), reqErr.RequestID())
+			}
+		} else {
+			// This case should never be hit, the SDK should always return an
+			// error which satisfies the awserr.Error interface.
+			fmt.Println(err.Error())
+		}
+	}
+
+	// Pretty-print the response data.
+	fmt.Println(awsutil.Prettify(resp))
+}
+
+func ExampleRDS_CreateDBInstance() {
+	svc := rds.New(nil)
+
+	params := &rds.CreateDBInstanceInput{
+		DBInstanceClass:         aws.String("String"), // Required
+		DBInstanceIdentifier:    aws.String("String"), // Required
+		Engine:                  aws.String("String"), // Required
+		AllocatedStorage:        aws.Int64(1),
+		AutoMinorVersionUpgrade: aws.Bool(true),
+		AvailabilityZone:        aws.String("String"),
+		BackupRetentionPeriod:   aws.Int64(1),
+		CharacterSetName:        aws.String("String"),
+		DBClusterIdentifier:     aws.String("String"),
+		DBName:                  aws.String("String"),
+		DBParameterGroupName:    aws.String("String"),
+		DBSecurityGroups: []*string{
+			aws.String("String"), // Required
+			// More values...
+		},
+		DBSubnetGroupName:  aws.String("String"),
+		EngineVersion:      aws.String("String"),
+		Iops:               aws.Int64(1),
+		KmsKeyId:           aws.String("String"),
+		LicenseModel:       aws.String("String"),
+		MasterUserPassword: aws.String("String"),
+		MasterUsername:     aws.String("String"),
+		MultiAZ:            aws.Bool(true),
+		OptionGroupName:    aws.String("String"),
+		Port:               aws.Int64(1),
+		PreferredBackupWindow:      aws.String("String"),
+		PreferredMaintenanceWindow: aws.String("String"),
+		PubliclyAccessible:         aws.Bool(true),
+		StorageEncrypted:           aws.Bool(true),
+		StorageType:                aws.String("String"),
+		Tags: []*rds.Tag{
+			{ // Required
+				Key:   aws.String("String"),
+				Value: aws.String("String"),
+			},
+			// More values...
+		},
+		TdeCredentialArn:      aws.String("String"),
+		TdeCredentialPassword: aws.String("String"),
+		VpcSecurityGroupIds: []*string{
 			aws.String("String"), // Required
 			// More values...
 		},
@@ -310,7 +472,7 @@ func ExampleRDS_CreateDBInstance() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_CreateDBInstanceReadReplica() {
@@ -319,14 +481,14 @@ func ExampleRDS_CreateDBInstanceReadReplica() {
 	params := &rds.CreateDBInstanceReadReplicaInput{
 		DBInstanceIdentifier:       aws.String("String"), // Required
 		SourceDBInstanceIdentifier: aws.String("String"), // Required
-		AutoMinorVersionUpgrade:    aws.Boolean(true),
+		AutoMinorVersionUpgrade:    aws.Bool(true),
 		AvailabilityZone:           aws.String("String"),
 		DBInstanceClass:            aws.String("String"),
 		DBSubnetGroupName:          aws.String("String"),
-		IOPS:                       aws.Long(1),
+		Iops:                       aws.Int64(1),
 		OptionGroupName:            aws.String("String"),
-		Port:                       aws.Long(1),
-		PubliclyAccessible:         aws.Boolean(true),
+		Port:                       aws.Int64(1),
+		PubliclyAccessible:         aws.Bool(true),
 		StorageType:                aws.String("String"),
 		Tags: []*rds.Tag{
 			{ // Required
@@ -354,7 +516,7 @@ func ExampleRDS_CreateDBInstanceReadReplica() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_CreateDBParameterGroup() {
@@ -390,7 +552,7 @@ func ExampleRDS_CreateDBParameterGroup() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_CreateDBSecurityGroup() {
@@ -425,7 +587,7 @@ func ExampleRDS_CreateDBSecurityGroup() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_CreateDBSnapshot() {
@@ -460,7 +622,7 @@ func ExampleRDS_CreateDBSnapshot() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_CreateDBSubnetGroup() {
@@ -469,7 +631,7 @@ func ExampleRDS_CreateDBSubnetGroup() {
 	params := &rds.CreateDBSubnetGroupInput{
 		DBSubnetGroupDescription: aws.String("String"), // Required
 		DBSubnetGroupName:        aws.String("String"), // Required
-		SubnetIDs: []*string{ // Required
+		SubnetIds: []*string{ // Required
 			aws.String("String"), // Required
 			// More values...
 		},
@@ -499,21 +661,21 @@ func ExampleRDS_CreateDBSubnetGroup() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_CreateEventSubscription() {
 	svc := rds.New(nil)
 
 	params := &rds.CreateEventSubscriptionInput{
-		SNSTopicARN:      aws.String("String"), // Required
+		SnsTopicArn:      aws.String("String"), // Required
 		SubscriptionName: aws.String("String"), // Required
-		Enabled:          aws.Boolean(true),
+		Enabled:          aws.Bool(true),
 		EventCategories: []*string{
 			aws.String("String"), // Required
 			// More values...
 		},
-		SourceIDs: []*string{
+		SourceIds: []*string{
 			aws.String("String"), // Required
 			// More values...
 		},
@@ -544,7 +706,7 @@ func ExampleRDS_CreateEventSubscription() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_CreateOptionGroup() {
@@ -581,7 +743,90 @@ func ExampleRDS_CreateOptionGroup() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
+}
+
+func ExampleRDS_DeleteDBCluster() {
+	svc := rds.New(nil)
+
+	params := &rds.DeleteDBClusterInput{
+		DBClusterIdentifier:       aws.String("String"),
+		FinalDBSnapshotIdentifier: aws.String("String"),
+		SkipFinalSnapshot:         aws.Bool(true),
+	}
+	resp, err := svc.DeleteDBCluster(params)
+
+	if err != nil {
+		if awsErr, ok := err.(awserr.Error); ok {
+			// Generic AWS error with Code, Message, and original error (if any)
+			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
+			if reqErr, ok := err.(awserr.RequestFailure); ok {
+				// A service error occurred
+				fmt.Println(reqErr.Code(), reqErr.Message(), reqErr.StatusCode(), reqErr.RequestID())
+			}
+		} else {
+			// This case should never be hit, the SDK should always return an
+			// error which satisfies the awserr.Error interface.
+			fmt.Println(err.Error())
+		}
+	}
+
+	// Pretty-print the response data.
+	fmt.Println(awsutil.Prettify(resp))
+}
+
+func ExampleRDS_DeleteDBClusterParameterGroup() {
+	svc := rds.New(nil)
+
+	params := &rds.DeleteDBClusterParameterGroupInput{
+		DBClusterParameterGroupName: aws.String("String"), // Required
+	}
+	resp, err := svc.DeleteDBClusterParameterGroup(params)
+
+	if err != nil {
+		if awsErr, ok := err.(awserr.Error); ok {
+			// Generic AWS error with Code, Message, and original error (if any)
+			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
+			if reqErr, ok := err.(awserr.RequestFailure); ok {
+				// A service error occurred
+				fmt.Println(reqErr.Code(), reqErr.Message(), reqErr.StatusCode(), reqErr.RequestID())
+			}
+		} else {
+			// This case should never be hit, the SDK should always return an
+			// error which satisfies the awserr.Error interface.
+			fmt.Println(err.Error())
+		}
+	}
+
+	// Pretty-print the response data.
+	fmt.Println(awsutil.Prettify(resp))
+}
+
+func ExampleRDS_DeleteDBClusterSnapshot() {
+	svc := rds.New(nil)
+
+	params := &rds.DeleteDBClusterSnapshotInput{
+		DBClusterSnapshotIdentifier: aws.String("String"), // Required
+	}
+	resp, err := svc.DeleteDBClusterSnapshot(params)
+
+	if err != nil {
+		if awsErr, ok := err.(awserr.Error); ok {
+			// Generic AWS error with Code, Message, and original error (if any)
+			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
+			if reqErr, ok := err.(awserr.RequestFailure); ok {
+				// A service error occurred
+				fmt.Println(reqErr.Code(), reqErr.Message(), reqErr.StatusCode(), reqErr.RequestID())
+			}
+		} else {
+			// This case should never be hit, the SDK should always return an
+			// error which satisfies the awserr.Error interface.
+			fmt.Println(err.Error())
+		}
+	}
+
+	// Pretty-print the response data.
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_DeleteDBInstance() {
@@ -590,7 +835,7 @@ func ExampleRDS_DeleteDBInstance() {
 	params := &rds.DeleteDBInstanceInput{
 		DBInstanceIdentifier:      aws.String("String"), // Required
 		FinalDBSnapshotIdentifier: aws.String("String"),
-		SkipFinalSnapshot:         aws.Boolean(true),
+		SkipFinalSnapshot:         aws.Bool(true),
 	}
 	resp, err := svc.DeleteDBInstance(params)
 
@@ -610,7 +855,7 @@ func ExampleRDS_DeleteDBInstance() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_DeleteDBParameterGroup() {
@@ -637,7 +882,7 @@ func ExampleRDS_DeleteDBParameterGroup() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_DeleteDBSecurityGroup() {
@@ -664,7 +909,7 @@ func ExampleRDS_DeleteDBSecurityGroup() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_DeleteDBSnapshot() {
@@ -691,7 +936,7 @@ func ExampleRDS_DeleteDBSnapshot() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_DeleteDBSubnetGroup() {
@@ -718,7 +963,7 @@ func ExampleRDS_DeleteDBSubnetGroup() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_DeleteEventSubscription() {
@@ -745,7 +990,7 @@ func ExampleRDS_DeleteEventSubscription() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_DeleteOptionGroup() {
@@ -772,7 +1017,7 @@ func ExampleRDS_DeleteOptionGroup() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_DescribeAccountAttributes() {
@@ -797,7 +1042,7 @@ func ExampleRDS_DescribeAccountAttributes() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_DescribeCertificates() {
@@ -816,7 +1061,7 @@ func ExampleRDS_DescribeCertificates() {
 			// More values...
 		},
 		Marker:     aws.String("String"),
-		MaxRecords: aws.Long(1),
+		MaxRecords: aws.Int64(1),
 	}
 	resp, err := svc.DescribeCertificates(params)
 
@@ -836,7 +1081,166 @@ func ExampleRDS_DescribeCertificates() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
+}
+
+func ExampleRDS_DescribeDBClusterParameterGroups() {
+	svc := rds.New(nil)
+
+	params := &rds.DescribeDBClusterParameterGroupsInput{
+		DBClusterParameterGroupName: aws.String("String"),
+		Filters: []*rds.Filter{
+			{ // Required
+				Name: aws.String("String"), // Required
+				Values: []*string{ // Required
+					aws.String("String"), // Required
+					// More values...
+				},
+			},
+			// More values...
+		},
+		Marker:     aws.String("String"),
+		MaxRecords: aws.Int64(1),
+	}
+	resp, err := svc.DescribeDBClusterParameterGroups(params)
+
+	if err != nil {
+		if awsErr, ok := err.(awserr.Error); ok {
+			// Generic AWS error with Code, Message, and original error (if any)
+			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
+			if reqErr, ok := err.(awserr.RequestFailure); ok {
+				// A service error occurred
+				fmt.Println(reqErr.Code(), reqErr.Message(), reqErr.StatusCode(), reqErr.RequestID())
+			}
+		} else {
+			// This case should never be hit, the SDK should always return an
+			// error which satisfies the awserr.Error interface.
+			fmt.Println(err.Error())
+		}
+	}
+
+	// Pretty-print the response data.
+	fmt.Println(awsutil.Prettify(resp))
+}
+
+func ExampleRDS_DescribeDBClusterParameters() {
+	svc := rds.New(nil)
+
+	params := &rds.DescribeDBClusterParametersInput{
+		DBClusterParameterGroupName: aws.String("String"), // Required
+		Filters: []*rds.Filter{
+			{ // Required
+				Name: aws.String("String"), // Required
+				Values: []*string{ // Required
+					aws.String("String"), // Required
+					// More values...
+				},
+			},
+			// More values...
+		},
+		Marker:     aws.String("String"),
+		MaxRecords: aws.Int64(1),
+		Source:     aws.String("String"),
+	}
+	resp, err := svc.DescribeDBClusterParameters(params)
+
+	if err != nil {
+		if awsErr, ok := err.(awserr.Error); ok {
+			// Generic AWS error with Code, Message, and original error (if any)
+			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
+			if reqErr, ok := err.(awserr.RequestFailure); ok {
+				// A service error occurred
+				fmt.Println(reqErr.Code(), reqErr.Message(), reqErr.StatusCode(), reqErr.RequestID())
+			}
+		} else {
+			// This case should never be hit, the SDK should always return an
+			// error which satisfies the awserr.Error interface.
+			fmt.Println(err.Error())
+		}
+	}
+
+	// Pretty-print the response data.
+	fmt.Println(awsutil.Prettify(resp))
+}
+
+func ExampleRDS_DescribeDBClusterSnapshots() {
+	svc := rds.New(nil)
+
+	params := &rds.DescribeDBClusterSnapshotsInput{
+		DBClusterIdentifier:         aws.String("String"),
+		DBClusterSnapshotIdentifier: aws.String("String"),
+		Filters: []*rds.Filter{
+			{ // Required
+				Name: aws.String("String"), // Required
+				Values: []*string{ // Required
+					aws.String("String"), // Required
+					// More values...
+				},
+			},
+			// More values...
+		},
+		Marker:       aws.String("String"),
+		MaxRecords:   aws.Int64(1),
+		SnapshotType: aws.String("String"),
+	}
+	resp, err := svc.DescribeDBClusterSnapshots(params)
+
+	if err != nil {
+		if awsErr, ok := err.(awserr.Error); ok {
+			// Generic AWS error with Code, Message, and original error (if any)
+			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
+			if reqErr, ok := err.(awserr.RequestFailure); ok {
+				// A service error occurred
+				fmt.Println(reqErr.Code(), reqErr.Message(), reqErr.StatusCode(), reqErr.RequestID())
+			}
+		} else {
+			// This case should never be hit, the SDK should always return an
+			// error which satisfies the awserr.Error interface.
+			fmt.Println(err.Error())
+		}
+	}
+
+	// Pretty-print the response data.
+	fmt.Println(awsutil.Prettify(resp))
+}
+
+func ExampleRDS_DescribeDBClusters() {
+	svc := rds.New(nil)
+
+	params := &rds.DescribeDBClustersInput{
+		DBClusterIdentifier: aws.String("String"),
+		Filters: []*rds.Filter{
+			{ // Required
+				Name: aws.String("String"), // Required
+				Values: []*string{ // Required
+					aws.String("String"), // Required
+					// More values...
+				},
+			},
+			// More values...
+		},
+		Marker:     aws.String("String"),
+		MaxRecords: aws.Int64(1),
+	}
+	resp, err := svc.DescribeDBClusters(params)
+
+	if err != nil {
+		if awsErr, ok := err.(awserr.Error); ok {
+			// Generic AWS error with Code, Message, and original error (if any)
+			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
+			if reqErr, ok := err.(awserr.RequestFailure); ok {
+				// A service error occurred
+				fmt.Println(reqErr.Code(), reqErr.Message(), reqErr.StatusCode(), reqErr.RequestID())
+			}
+		} else {
+			// This case should never be hit, the SDK should always return an
+			// error which satisfies the awserr.Error interface.
+			fmt.Println(err.Error())
+		}
+	}
+
+	// Pretty-print the response data.
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_DescribeDBEngineVersions() {
@@ -844,7 +1248,7 @@ func ExampleRDS_DescribeDBEngineVersions() {
 
 	params := &rds.DescribeDBEngineVersionsInput{
 		DBParameterGroupFamily: aws.String("String"),
-		DefaultOnly:            aws.Boolean(true),
+		DefaultOnly:            aws.Bool(true),
 		Engine:                 aws.String("String"),
 		EngineVersion:          aws.String("String"),
 		Filters: []*rds.Filter{
@@ -857,9 +1261,9 @@ func ExampleRDS_DescribeDBEngineVersions() {
 			},
 			// More values...
 		},
-		ListSupportedCharacterSets: aws.Boolean(true),
+		ListSupportedCharacterSets: aws.Bool(true),
 		Marker:     aws.String("String"),
-		MaxRecords: aws.Long(1),
+		MaxRecords: aws.Int64(1),
 	}
 	resp, err := svc.DescribeDBEngineVersions(params)
 
@@ -879,7 +1283,7 @@ func ExampleRDS_DescribeDBEngineVersions() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_DescribeDBInstances() {
@@ -898,7 +1302,7 @@ func ExampleRDS_DescribeDBInstances() {
 			// More values...
 		},
 		Marker:     aws.String("String"),
-		MaxRecords: aws.Long(1),
+		MaxRecords: aws.Int64(1),
 	}
 	resp, err := svc.DescribeDBInstances(params)
 
@@ -918,7 +1322,7 @@ func ExampleRDS_DescribeDBInstances() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_DescribeDBLogFiles() {
@@ -926,8 +1330,8 @@ func ExampleRDS_DescribeDBLogFiles() {
 
 	params := &rds.DescribeDBLogFilesInput{
 		DBInstanceIdentifier: aws.String("String"), // Required
-		FileLastWritten:      aws.Long(1),
-		FileSize:             aws.Long(1),
+		FileLastWritten:      aws.Int64(1),
+		FileSize:             aws.Int64(1),
 		FilenameContains:     aws.String("String"),
 		Filters: []*rds.Filter{
 			{ // Required
@@ -940,7 +1344,7 @@ func ExampleRDS_DescribeDBLogFiles() {
 			// More values...
 		},
 		Marker:     aws.String("String"),
-		MaxRecords: aws.Long(1),
+		MaxRecords: aws.Int64(1),
 	}
 	resp, err := svc.DescribeDBLogFiles(params)
 
@@ -960,7 +1364,7 @@ func ExampleRDS_DescribeDBLogFiles() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_DescribeDBParameterGroups() {
@@ -979,7 +1383,7 @@ func ExampleRDS_DescribeDBParameterGroups() {
 			// More values...
 		},
 		Marker:     aws.String("String"),
-		MaxRecords: aws.Long(1),
+		MaxRecords: aws.Int64(1),
 	}
 	resp, err := svc.DescribeDBParameterGroups(params)
 
@@ -999,7 +1403,7 @@ func ExampleRDS_DescribeDBParameterGroups() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_DescribeDBParameters() {
@@ -1018,7 +1422,7 @@ func ExampleRDS_DescribeDBParameters() {
 			// More values...
 		},
 		Marker:     aws.String("String"),
-		MaxRecords: aws.Long(1),
+		MaxRecords: aws.Int64(1),
 		Source:     aws.String("String"),
 	}
 	resp, err := svc.DescribeDBParameters(params)
@@ -1039,7 +1443,7 @@ func ExampleRDS_DescribeDBParameters() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_DescribeDBSecurityGroups() {
@@ -1058,7 +1462,7 @@ func ExampleRDS_DescribeDBSecurityGroups() {
 			// More values...
 		},
 		Marker:     aws.String("String"),
-		MaxRecords: aws.Long(1),
+		MaxRecords: aws.Int64(1),
 	}
 	resp, err := svc.DescribeDBSecurityGroups(params)
 
@@ -1078,7 +1482,7 @@ func ExampleRDS_DescribeDBSecurityGroups() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_DescribeDBSnapshots() {
@@ -1098,7 +1502,7 @@ func ExampleRDS_DescribeDBSnapshots() {
 			// More values...
 		},
 		Marker:       aws.String("String"),
-		MaxRecords:   aws.Long(1),
+		MaxRecords:   aws.Int64(1),
 		SnapshotType: aws.String("String"),
 	}
 	resp, err := svc.DescribeDBSnapshots(params)
@@ -1119,7 +1523,7 @@ func ExampleRDS_DescribeDBSnapshots() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_DescribeDBSubnetGroups() {
@@ -1138,7 +1542,7 @@ func ExampleRDS_DescribeDBSubnetGroups() {
 			// More values...
 		},
 		Marker:     aws.String("String"),
-		MaxRecords: aws.Long(1),
+		MaxRecords: aws.Int64(1),
 	}
 	resp, err := svc.DescribeDBSubnetGroups(params)
 
@@ -1158,7 +1562,46 @@ func ExampleRDS_DescribeDBSubnetGroups() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
+}
+
+func ExampleRDS_DescribeEngineDefaultClusterParameters() {
+	svc := rds.New(nil)
+
+	params := &rds.DescribeEngineDefaultClusterParametersInput{
+		DBParameterGroupFamily: aws.String("String"), // Required
+		Filters: []*rds.Filter{
+			{ // Required
+				Name: aws.String("String"), // Required
+				Values: []*string{ // Required
+					aws.String("String"), // Required
+					// More values...
+				},
+			},
+			// More values...
+		},
+		Marker:     aws.String("String"),
+		MaxRecords: aws.Int64(1),
+	}
+	resp, err := svc.DescribeEngineDefaultClusterParameters(params)
+
+	if err != nil {
+		if awsErr, ok := err.(awserr.Error); ok {
+			// Generic AWS error with Code, Message, and original error (if any)
+			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
+			if reqErr, ok := err.(awserr.RequestFailure); ok {
+				// A service error occurred
+				fmt.Println(reqErr.Code(), reqErr.Message(), reqErr.StatusCode(), reqErr.RequestID())
+			}
+		} else {
+			// This case should never be hit, the SDK should always return an
+			// error which satisfies the awserr.Error interface.
+			fmt.Println(err.Error())
+		}
+	}
+
+	// Pretty-print the response data.
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_DescribeEngineDefaultParameters() {
@@ -1177,7 +1620,7 @@ func ExampleRDS_DescribeEngineDefaultParameters() {
 			// More values...
 		},
 		Marker:     aws.String("String"),
-		MaxRecords: aws.Long(1),
+		MaxRecords: aws.Int64(1),
 	}
 	resp, err := svc.DescribeEngineDefaultParameters(params)
 
@@ -1197,7 +1640,7 @@ func ExampleRDS_DescribeEngineDefaultParameters() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_DescribeEventCategories() {
@@ -1234,7 +1677,7 @@ func ExampleRDS_DescribeEventCategories() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_DescribeEventSubscriptions() {
@@ -1252,7 +1695,7 @@ func ExampleRDS_DescribeEventSubscriptions() {
 			// More values...
 		},
 		Marker:           aws.String("String"),
-		MaxRecords:       aws.Long(1),
+		MaxRecords:       aws.Int64(1),
 		SubscriptionName: aws.String("String"),
 	}
 	resp, err := svc.DescribeEventSubscriptions(params)
@@ -1273,14 +1716,14 @@ func ExampleRDS_DescribeEventSubscriptions() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_DescribeEvents() {
 	svc := rds.New(nil)
 
 	params := &rds.DescribeEventsInput{
-		Duration: aws.Long(1),
+		Duration: aws.Int64(1),
 		EndTime:  aws.Time(time.Now()),
 		EventCategories: []*string{
 			aws.String("String"), // Required
@@ -1297,7 +1740,7 @@ func ExampleRDS_DescribeEvents() {
 			// More values...
 		},
 		Marker:           aws.String("String"),
-		MaxRecords:       aws.Long(1),
+		MaxRecords:       aws.Int64(1),
 		SourceIdentifier: aws.String("String"),
 		SourceType:       aws.String("SourceType"),
 		StartTime:        aws.Time(time.Now()),
@@ -1320,7 +1763,7 @@ func ExampleRDS_DescribeEvents() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_DescribeOptionGroupOptions() {
@@ -1340,7 +1783,7 @@ func ExampleRDS_DescribeOptionGroupOptions() {
 		},
 		MajorEngineVersion: aws.String("String"),
 		Marker:             aws.String("String"),
-		MaxRecords:         aws.Long(1),
+		MaxRecords:         aws.Int64(1),
 	}
 	resp, err := svc.DescribeOptionGroupOptions(params)
 
@@ -1360,7 +1803,7 @@ func ExampleRDS_DescribeOptionGroupOptions() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_DescribeOptionGroups() {
@@ -1380,7 +1823,7 @@ func ExampleRDS_DescribeOptionGroups() {
 		},
 		MajorEngineVersion: aws.String("String"),
 		Marker:             aws.String("String"),
-		MaxRecords:         aws.Long(1),
+		MaxRecords:         aws.Int64(1),
 		OptionGroupName:    aws.String("String"),
 	}
 	resp, err := svc.DescribeOptionGroups(params)
@@ -1401,7 +1844,7 @@ func ExampleRDS_DescribeOptionGroups() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_DescribeOrderableDBInstanceOptions() {
@@ -1423,8 +1866,8 @@ func ExampleRDS_DescribeOrderableDBInstanceOptions() {
 		},
 		LicenseModel: aws.String("String"),
 		Marker:       aws.String("String"),
-		MaxRecords:   aws.Long(1),
-		VPC:          aws.Boolean(true),
+		MaxRecords:   aws.Int64(1),
+		Vpc:          aws.Bool(true),
 	}
 	resp, err := svc.DescribeOrderableDBInstanceOptions(params)
 
@@ -1444,7 +1887,7 @@ func ExampleRDS_DescribeOrderableDBInstanceOptions() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_DescribePendingMaintenanceActions() {
@@ -1462,7 +1905,7 @@ func ExampleRDS_DescribePendingMaintenanceActions() {
 			// More values...
 		},
 		Marker:             aws.String("String"),
-		MaxRecords:         aws.Long(1),
+		MaxRecords:         aws.Int64(1),
 		ResourceIdentifier: aws.String("String"),
 	}
 	resp, err := svc.DescribePendingMaintenanceActions(params)
@@ -1483,7 +1926,7 @@ func ExampleRDS_DescribePendingMaintenanceActions() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_DescribeReservedDBInstances() {
@@ -1503,12 +1946,12 @@ func ExampleRDS_DescribeReservedDBInstances() {
 			// More values...
 		},
 		Marker:                        aws.String("String"),
-		MaxRecords:                    aws.Long(1),
-		MultiAZ:                       aws.Boolean(true),
+		MaxRecords:                    aws.Int64(1),
+		MultiAZ:                       aws.Bool(true),
 		OfferingType:                  aws.String("String"),
 		ProductDescription:            aws.String("String"),
-		ReservedDBInstanceID:          aws.String("String"),
-		ReservedDBInstancesOfferingID: aws.String("String"),
+		ReservedDBInstanceId:          aws.String("String"),
+		ReservedDBInstancesOfferingId: aws.String("String"),
 	}
 	resp, err := svc.DescribeReservedDBInstances(params)
 
@@ -1528,7 +1971,7 @@ func ExampleRDS_DescribeReservedDBInstances() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_DescribeReservedDBInstancesOfferings() {
@@ -1548,11 +1991,11 @@ func ExampleRDS_DescribeReservedDBInstancesOfferings() {
 			// More values...
 		},
 		Marker:                        aws.String("String"),
-		MaxRecords:                    aws.Long(1),
-		MultiAZ:                       aws.Boolean(true),
+		MaxRecords:                    aws.Int64(1),
+		MultiAZ:                       aws.Bool(true),
 		OfferingType:                  aws.String("String"),
 		ProductDescription:            aws.String("String"),
-		ReservedDBInstancesOfferingID: aws.String("String"),
+		ReservedDBInstancesOfferingId: aws.String("String"),
 	}
 	resp, err := svc.DescribeReservedDBInstancesOfferings(params)
 
@@ -1572,7 +2015,7 @@ func ExampleRDS_DescribeReservedDBInstancesOfferings() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_DownloadDBLogFilePortion() {
@@ -1582,7 +2025,7 @@ func ExampleRDS_DownloadDBLogFilePortion() {
 		DBInstanceIdentifier: aws.String("String"), // Required
 		LogFileName:          aws.String("String"), // Required
 		Marker:               aws.String("String"),
-		NumberOfLines:        aws.Long(1),
+		NumberOfLines:        aws.Int64(1),
 	}
 	resp, err := svc.DownloadDBLogFilePortion(params)
 
@@ -1602,7 +2045,34 @@ func ExampleRDS_DownloadDBLogFilePortion() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
+}
+
+func ExampleRDS_FailoverDBCluster() {
+	svc := rds.New(nil)
+
+	params := &rds.FailoverDBClusterInput{
+		DBClusterIdentifier: aws.String("String"),
+	}
+	resp, err := svc.FailoverDBCluster(params)
+
+	if err != nil {
+		if awsErr, ok := err.(awserr.Error); ok {
+			// Generic AWS error with Code, Message, and original error (if any)
+			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
+			if reqErr, ok := err.(awserr.RequestFailure); ok {
+				// A service error occurred
+				fmt.Println(reqErr.Code(), reqErr.Message(), reqErr.StatusCode(), reqErr.RequestID())
+			}
+		} else {
+			// This case should never be hit, the SDK should always return an
+			// error which satisfies the awserr.Error interface.
+			fmt.Println(err.Error())
+		}
+	}
+
+	// Pretty-print the response data.
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_ListTagsForResource() {
@@ -1639,7 +2109,89 @@ func ExampleRDS_ListTagsForResource() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
+}
+
+func ExampleRDS_ModifyDBCluster() {
+	svc := rds.New(nil)
+
+	params := &rds.ModifyDBClusterInput{
+		ApplyImmediately:            aws.Bool(true),
+		BackupRetentionPeriod:       aws.Int64(1),
+		DBClusterIdentifier:         aws.String("String"),
+		DBClusterParameterGroupName: aws.String("String"),
+		MasterUserPassword:          aws.String("String"),
+		NewDBClusterIdentifier:      aws.String("String"),
+		OptionGroupName:             aws.String("String"),
+		Port:                        aws.Int64(1),
+		PreferredBackupWindow:      aws.String("String"),
+		PreferredMaintenanceWindow: aws.String("String"),
+		VpcSecurityGroupIds: []*string{
+			aws.String("String"), // Required
+			// More values...
+		},
+	}
+	resp, err := svc.ModifyDBCluster(params)
+
+	if err != nil {
+		if awsErr, ok := err.(awserr.Error); ok {
+			// Generic AWS error with Code, Message, and original error (if any)
+			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
+			if reqErr, ok := err.(awserr.RequestFailure); ok {
+				// A service error occurred
+				fmt.Println(reqErr.Code(), reqErr.Message(), reqErr.StatusCode(), reqErr.RequestID())
+			}
+		} else {
+			// This case should never be hit, the SDK should always return an
+			// error which satisfies the awserr.Error interface.
+			fmt.Println(err.Error())
+		}
+	}
+
+	// Pretty-print the response data.
+	fmt.Println(awsutil.Prettify(resp))
+}
+
+func ExampleRDS_ModifyDBClusterParameterGroup() {
+	svc := rds.New(nil)
+
+	params := &rds.ModifyDBClusterParameterGroupInput{
+		DBClusterParameterGroupName: aws.String("String"), // Required
+		Parameters: []*rds.Parameter{ // Required
+			{ // Required
+				AllowedValues:        aws.String("String"),
+				ApplyMethod:          aws.String("ApplyMethod"),
+				ApplyType:            aws.String("String"),
+				DataType:             aws.String("String"),
+				Description:          aws.String("String"),
+				IsModifiable:         aws.Bool(true),
+				MinimumEngineVersion: aws.String("String"),
+				ParameterName:        aws.String("String"),
+				ParameterValue:       aws.String("String"),
+				Source:               aws.String("String"),
+			},
+			// More values...
+		},
+	}
+	resp, err := svc.ModifyDBClusterParameterGroup(params)
+
+	if err != nil {
+		if awsErr, ok := err.(awserr.Error); ok {
+			// Generic AWS error with Code, Message, and original error (if any)
+			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
+			if reqErr, ok := err.(awserr.RequestFailure); ok {
+				// A service error occurred
+				fmt.Println(reqErr.Code(), reqErr.Message(), reqErr.StatusCode(), reqErr.RequestID())
+			}
+		} else {
+			// This case should never be hit, the SDK should always return an
+			// error which satisfies the awserr.Error interface.
+			fmt.Println(err.Error())
+		}
+	}
+
+	// Pretty-print the response data.
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_ModifyDBInstance() {
@@ -1647,11 +2199,11 @@ func ExampleRDS_ModifyDBInstance() {
 
 	params := &rds.ModifyDBInstanceInput{
 		DBInstanceIdentifier:     aws.String("String"), // Required
-		AllocatedStorage:         aws.Long(1),
-		AllowMajorVersionUpgrade: aws.Boolean(true),
-		ApplyImmediately:         aws.Boolean(true),
-		AutoMinorVersionUpgrade:  aws.Boolean(true),
-		BackupRetentionPeriod:    aws.Long(1),
+		AllocatedStorage:         aws.Int64(1),
+		AllowMajorVersionUpgrade: aws.Bool(true),
+		ApplyImmediately:         aws.Bool(true),
+		AutoMinorVersionUpgrade:  aws.Bool(true),
+		BackupRetentionPeriod:    aws.Int64(1),
 		CACertificateIdentifier:  aws.String("String"),
 		DBInstanceClass:          aws.String("String"),
 		DBParameterGroupName:     aws.String("String"),
@@ -1660,17 +2212,17 @@ func ExampleRDS_ModifyDBInstance() {
 			// More values...
 		},
 		EngineVersion:              aws.String("String"),
-		IOPS:                       aws.Long(1),
+		Iops:                       aws.Int64(1),
 		MasterUserPassword:         aws.String("String"),
-		MultiAZ:                    aws.Boolean(true),
+		MultiAZ:                    aws.Bool(true),
 		NewDBInstanceIdentifier:    aws.String("String"),
 		OptionGroupName:            aws.String("String"),
 		PreferredBackupWindow:      aws.String("String"),
 		PreferredMaintenanceWindow: aws.String("String"),
 		StorageType:                aws.String("String"),
-		TDECredentialARN:           aws.String("String"),
-		TDECredentialPassword:      aws.String("String"),
-		VPCSecurityGroupIDs: []*string{
+		TdeCredentialArn:           aws.String("String"),
+		TdeCredentialPassword:      aws.String("String"),
+		VpcSecurityGroupIds: []*string{
 			aws.String("String"), // Required
 			// More values...
 		},
@@ -1693,7 +2245,7 @@ func ExampleRDS_ModifyDBInstance() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_ModifyDBParameterGroup() {
@@ -1708,7 +2260,7 @@ func ExampleRDS_ModifyDBParameterGroup() {
 				ApplyType:            aws.String("String"),
 				DataType:             aws.String("String"),
 				Description:          aws.String("String"),
-				IsModifiable:         aws.Boolean(true),
+				IsModifiable:         aws.Bool(true),
 				MinimumEngineVersion: aws.String("String"),
 				ParameterName:        aws.String("String"),
 				ParameterValue:       aws.String("String"),
@@ -1735,7 +2287,7 @@ func ExampleRDS_ModifyDBParameterGroup() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_ModifyDBSubnetGroup() {
@@ -1743,7 +2295,7 @@ func ExampleRDS_ModifyDBSubnetGroup() {
 
 	params := &rds.ModifyDBSubnetGroupInput{
 		DBSubnetGroupName: aws.String("String"), // Required
-		SubnetIDs: []*string{ // Required
+		SubnetIds: []*string{ // Required
 			aws.String("String"), // Required
 			// More values...
 		},
@@ -1767,7 +2319,7 @@ func ExampleRDS_ModifyDBSubnetGroup() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_ModifyEventSubscription() {
@@ -1775,12 +2327,12 @@ func ExampleRDS_ModifyEventSubscription() {
 
 	params := &rds.ModifyEventSubscriptionInput{
 		SubscriptionName: aws.String("String"), // Required
-		Enabled:          aws.Boolean(true),
+		Enabled:          aws.Bool(true),
 		EventCategories: []*string{
 			aws.String("String"), // Required
 			// More values...
 		},
-		SNSTopicARN: aws.String("String"),
+		SnsTopicArn: aws.String("String"),
 		SourceType:  aws.String("String"),
 	}
 	resp, err := svc.ModifyEventSubscription(params)
@@ -1801,7 +2353,7 @@ func ExampleRDS_ModifyEventSubscription() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_ModifyOptionGroup() {
@@ -1809,7 +2361,7 @@ func ExampleRDS_ModifyOptionGroup() {
 
 	params := &rds.ModifyOptionGroupInput{
 		OptionGroupName:  aws.String("String"), // Required
-		ApplyImmediately: aws.Boolean(true),
+		ApplyImmediately: aws.Bool(true),
 		OptionsToInclude: []*rds.OptionConfiguration{
 			{ // Required
 				OptionName: aws.String("String"), // Required
@@ -1824,15 +2376,15 @@ func ExampleRDS_ModifyOptionGroup() {
 						DataType:      aws.String("String"),
 						DefaultValue:  aws.String("String"),
 						Description:   aws.String("String"),
-						IsCollection:  aws.Boolean(true),
-						IsModifiable:  aws.Boolean(true),
+						IsCollection:  aws.Bool(true),
+						IsModifiable:  aws.Bool(true),
 						Name:          aws.String("String"),
 						Value:         aws.String("String"),
 					},
 					// More values...
 				},
-				Port: aws.Long(1),
-				VPCSecurityGroupMemberships: []*string{
+				Port: aws.Int64(1),
+				VpcSecurityGroupMemberships: []*string{
 					aws.String("String"), // Required
 					// More values...
 				},
@@ -1862,7 +2414,7 @@ func ExampleRDS_ModifyOptionGroup() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_PromoteReadReplica() {
@@ -1870,7 +2422,7 @@ func ExampleRDS_PromoteReadReplica() {
 
 	params := &rds.PromoteReadReplicaInput{
 		DBInstanceIdentifier:  aws.String("String"), // Required
-		BackupRetentionPeriod: aws.Long(1),
+		BackupRetentionPeriod: aws.Int64(1),
 		PreferredBackupWindow: aws.String("String"),
 	}
 	resp, err := svc.PromoteReadReplica(params)
@@ -1891,16 +2443,16 @@ func ExampleRDS_PromoteReadReplica() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_PurchaseReservedDBInstancesOffering() {
 	svc := rds.New(nil)
 
 	params := &rds.PurchaseReservedDBInstancesOfferingInput{
-		ReservedDBInstancesOfferingID: aws.String("String"), // Required
-		DBInstanceCount:               aws.Long(1),
-		ReservedDBInstanceID:          aws.String("String"),
+		ReservedDBInstancesOfferingId: aws.String("String"), // Required
+		DBInstanceCount:               aws.Int64(1),
+		ReservedDBInstanceId:          aws.String("String"),
 		Tags: []*rds.Tag{
 			{ // Required
 				Key:   aws.String("String"),
@@ -1927,7 +2479,7 @@ func ExampleRDS_PurchaseReservedDBInstancesOffering() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_RebootDBInstance() {
@@ -1935,7 +2487,7 @@ func ExampleRDS_RebootDBInstance() {
 
 	params := &rds.RebootDBInstanceInput{
 		DBInstanceIdentifier: aws.String("String"), // Required
-		ForceFailover:        aws.Boolean(true),
+		ForceFailover:        aws.Bool(true),
 	}
 	resp, err := svc.RebootDBInstance(params)
 
@@ -1955,7 +2507,7 @@ func ExampleRDS_RebootDBInstance() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_RemoveSourceIdentifierFromSubscription() {
@@ -1983,7 +2535,7 @@ func ExampleRDS_RemoveSourceIdentifierFromSubscription() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_RemoveTagsFromResource() {
@@ -2014,7 +2566,50 @@ func ExampleRDS_RemoveTagsFromResource() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
+}
+
+func ExampleRDS_ResetDBClusterParameterGroup() {
+	svc := rds.New(nil)
+
+	params := &rds.ResetDBClusterParameterGroupInput{
+		DBClusterParameterGroupName: aws.String("String"), // Required
+		Parameters: []*rds.Parameter{
+			{ // Required
+				AllowedValues:        aws.String("String"),
+				ApplyMethod:          aws.String("ApplyMethod"),
+				ApplyType:            aws.String("String"),
+				DataType:             aws.String("String"),
+				Description:          aws.String("String"),
+				IsModifiable:         aws.Bool(true),
+				MinimumEngineVersion: aws.String("String"),
+				ParameterName:        aws.String("String"),
+				ParameterValue:       aws.String("String"),
+				Source:               aws.String("String"),
+			},
+			// More values...
+		},
+		ResetAllParameters: aws.Bool(true),
+	}
+	resp, err := svc.ResetDBClusterParameterGroup(params)
+
+	if err != nil {
+		if awsErr, ok := err.(awserr.Error); ok {
+			// Generic AWS error with Code, Message, and original error (if any)
+			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
+			if reqErr, ok := err.(awserr.RequestFailure); ok {
+				// A service error occurred
+				fmt.Println(reqErr.Code(), reqErr.Message(), reqErr.StatusCode(), reqErr.RequestID())
+			}
+		} else {
+			// This case should never be hit, the SDK should always return an
+			// error which satisfies the awserr.Error interface.
+			fmt.Println(err.Error())
+		}
+	}
+
+	// Pretty-print the response data.
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_ResetDBParameterGroup() {
@@ -2029,7 +2624,7 @@ func ExampleRDS_ResetDBParameterGroup() {
 				ApplyType:            aws.String("String"),
 				DataType:             aws.String("String"),
 				Description:          aws.String("String"),
-				IsModifiable:         aws.Boolean(true),
+				IsModifiable:         aws.Bool(true),
 				MinimumEngineVersion: aws.String("String"),
 				ParameterName:        aws.String("String"),
 				ParameterValue:       aws.String("String"),
@@ -2037,7 +2632,7 @@ func ExampleRDS_ResetDBParameterGroup() {
 			},
 			// More values...
 		},
-		ResetAllParameters: aws.Boolean(true),
+		ResetAllParameters: aws.Bool(true),
 	}
 	resp, err := svc.ResetDBParameterGroup(params)
 
@@ -2057,7 +2652,100 @@ func ExampleRDS_ResetDBParameterGroup() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
+}
+
+func ExampleRDS_RestoreDBClusterFromSnapshot() {
+	svc := rds.New(nil)
+
+	params := &rds.RestoreDBClusterFromSnapshotInput{
+		DBClusterIdentifier: aws.String("String"), // Required
+		Engine:              aws.String("String"), // Required
+		SnapshotIdentifier:  aws.String("String"), // Required
+		AvailabilityZones: []*string{
+			aws.String("String"), // Required
+			// More values...
+		},
+		DBSubnetGroupName: aws.String("String"),
+		DatabaseName:      aws.String("String"),
+		EngineVersion:     aws.String("String"),
+		OptionGroupName:   aws.String("String"),
+		Port:              aws.Int64(1),
+		Tags: []*rds.Tag{
+			{ // Required
+				Key:   aws.String("String"),
+				Value: aws.String("String"),
+			},
+			// More values...
+		},
+		VpcSecurityGroupIds: []*string{
+			aws.String("String"), // Required
+			// More values...
+		},
+	}
+	resp, err := svc.RestoreDBClusterFromSnapshot(params)
+
+	if err != nil {
+		if awsErr, ok := err.(awserr.Error); ok {
+			// Generic AWS error with Code, Message, and original error (if any)
+			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
+			if reqErr, ok := err.(awserr.RequestFailure); ok {
+				// A service error occurred
+				fmt.Println(reqErr.Code(), reqErr.Message(), reqErr.StatusCode(), reqErr.RequestID())
+			}
+		} else {
+			// This case should never be hit, the SDK should always return an
+			// error which satisfies the awserr.Error interface.
+			fmt.Println(err.Error())
+		}
+	}
+
+	// Pretty-print the response data.
+	fmt.Println(awsutil.Prettify(resp))
+}
+
+func ExampleRDS_RestoreDBClusterToPointInTime() {
+	svc := rds.New(nil)
+
+	params := &rds.RestoreDBClusterToPointInTimeInput{
+		DBClusterIdentifier:       aws.String("String"), // Required
+		SourceDBClusterIdentifier: aws.String("String"), // Required
+		DBSubnetGroupName:         aws.String("String"),
+		OptionGroupName:           aws.String("String"),
+		Port:                      aws.Int64(1),
+		RestoreToTime:             aws.Time(time.Now()),
+		Tags: []*rds.Tag{
+			{ // Required
+				Key:   aws.String("String"),
+				Value: aws.String("String"),
+			},
+			// More values...
+		},
+		UseLatestRestorableTime: aws.Bool(true),
+		VpcSecurityGroupIds: []*string{
+			aws.String("String"), // Required
+			// More values...
+		},
+	}
+	resp, err := svc.RestoreDBClusterToPointInTime(params)
+
+	if err != nil {
+		if awsErr, ok := err.(awserr.Error); ok {
+			// Generic AWS error with Code, Message, and original error (if any)
+			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
+			if reqErr, ok := err.(awserr.RequestFailure); ok {
+				// A service error occurred
+				fmt.Println(reqErr.Code(), reqErr.Message(), reqErr.StatusCode(), reqErr.RequestID())
+			}
+		} else {
+			// This case should never be hit, the SDK should always return an
+			// error which satisfies the awserr.Error interface.
+			fmt.Println(err.Error())
+		}
+	}
+
+	// Pretty-print the response data.
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_RestoreDBInstanceFromDBSnapshot() {
@@ -2066,21 +2754,19 @@ func ExampleRDS_RestoreDBInstanceFromDBSnapshot() {
 	params := &rds.RestoreDBInstanceFromDBSnapshotInput{
 		DBInstanceIdentifier:    aws.String("String"), // Required
 		DBSnapshotIdentifier:    aws.String("String"), // Required
-		AutoMinorVersionUpgrade: aws.Boolean(true),
+		AutoMinorVersionUpgrade: aws.Bool(true),
 		AvailabilityZone:        aws.String("String"),
 		DBInstanceClass:         aws.String("String"),
 		DBName:                  aws.String("String"),
 		DBSubnetGroupName:       aws.String("String"),
 		Engine:                  aws.String("String"),
-		IOPS:                    aws.Long(1),
+		Iops:                    aws.Int64(1),
 		LicenseModel:            aws.String("String"),
-		MultiAZ:                 aws.Boolean(true),
+		MultiAZ:                 aws.Bool(true),
 		OptionGroupName:         aws.String("String"),
-		Port:                    aws.Long(1),
-		PubliclyAccessible:      aws.Boolean(true),
+		Port:                    aws.Int64(1),
+		PubliclyAccessible:      aws.Bool(true),
 		StorageType:             aws.String("String"),
-		TDECredentialARN:        aws.String("String"),
-		TDECredentialPassword:   aws.String("String"),
 		Tags: []*rds.Tag{
 			{ // Required
 				Key:   aws.String("String"),
@@ -2088,6 +2774,8 @@ func ExampleRDS_RestoreDBInstanceFromDBSnapshot() {
 			},
 			// More values...
 		},
+		TdeCredentialArn:      aws.String("String"),
+		TdeCredentialPassword: aws.String("String"),
 	}
 	resp, err := svc.RestoreDBInstanceFromDBSnapshot(params)
 
@@ -2107,7 +2795,7 @@ func ExampleRDS_RestoreDBInstanceFromDBSnapshot() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_RestoreDBInstanceToPointInTime() {
@@ -2116,22 +2804,20 @@ func ExampleRDS_RestoreDBInstanceToPointInTime() {
 	params := &rds.RestoreDBInstanceToPointInTimeInput{
 		SourceDBInstanceIdentifier: aws.String("String"), // Required
 		TargetDBInstanceIdentifier: aws.String("String"), // Required
-		AutoMinorVersionUpgrade:    aws.Boolean(true),
+		AutoMinorVersionUpgrade:    aws.Bool(true),
 		AvailabilityZone:           aws.String("String"),
 		DBInstanceClass:            aws.String("String"),
 		DBName:                     aws.String("String"),
 		DBSubnetGroupName:          aws.String("String"),
 		Engine:                     aws.String("String"),
-		IOPS:                       aws.Long(1),
+		Iops:                       aws.Int64(1),
 		LicenseModel:               aws.String("String"),
-		MultiAZ:                    aws.Boolean(true),
+		MultiAZ:                    aws.Bool(true),
 		OptionGroupName:            aws.String("String"),
-		Port:                       aws.Long(1),
-		PubliclyAccessible:         aws.Boolean(true),
+		Port:                       aws.Int64(1),
+		PubliclyAccessible:         aws.Bool(true),
 		RestoreTime:                aws.Time(time.Now()),
 		StorageType:                aws.String("String"),
-		TDECredentialARN:           aws.String("String"),
-		TDECredentialPassword:      aws.String("String"),
 		Tags: []*rds.Tag{
 			{ // Required
 				Key:   aws.String("String"),
@@ -2139,7 +2825,9 @@ func ExampleRDS_RestoreDBInstanceToPointInTime() {
 			},
 			// More values...
 		},
-		UseLatestRestorableTime: aws.Boolean(true),
+		TdeCredentialArn:        aws.String("String"),
+		TdeCredentialPassword:   aws.String("String"),
+		UseLatestRestorableTime: aws.Bool(true),
 	}
 	resp, err := svc.RestoreDBInstanceToPointInTime(params)
 
@@ -2159,7 +2847,7 @@ func ExampleRDS_RestoreDBInstanceToPointInTime() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRDS_RevokeDBSecurityGroupIngress() {
@@ -2168,9 +2856,9 @@ func ExampleRDS_RevokeDBSecurityGroupIngress() {
 	params := &rds.RevokeDBSecurityGroupIngressInput{
 		DBSecurityGroupName:     aws.String("String"), // Required
 		CIDRIP:                  aws.String("String"),
-		EC2SecurityGroupID:      aws.String("String"),
+		EC2SecurityGroupId:      aws.String("String"),
 		EC2SecurityGroupName:    aws.String("String"),
-		EC2SecurityGroupOwnerID: aws.String("String"),
+		EC2SecurityGroupOwnerId: aws.String("String"),
 	}
 	resp, err := svc.RevokeDBSecurityGroupIngress(params)
 
@@ -2190,5 +2878,5 @@ func ExampleRDS_RevokeDBSecurityGroupIngress() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }

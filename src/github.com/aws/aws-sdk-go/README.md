@@ -79,7 +79,7 @@ func main() {
 	// Create an EC2 service object in the "us-west-2" region
 	// Note that you can also configure your region globally by
 	// exporting the AWS_REGION environment variable
-	svc := ec2.New(&aws.Config{Region: "us-west-2"})
+	svc := ec2.New(&aws.Config{Region: aws.String("us-west-2")})
 
 	// Call the DescribeInstances Operation
 	resp, err := svc.DescribeInstances(nil)
@@ -99,7 +99,7 @@ func main() {
 ```
 
 You can find more information and operations in our
-[API documentation](http://godoc.org/github.com/aws/aws-sdk-go).
+[API documentation](http://docs.aws.amazon.com/sdk-for-go/api/).
 
 ## License
 

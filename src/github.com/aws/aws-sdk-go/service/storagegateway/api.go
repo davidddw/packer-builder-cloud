@@ -6,15 +6,15 @@ package storagegateway
 import (
 	"time"
 
-	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awsutil"
+	"github.com/aws/aws-sdk-go/aws/service"
 )
 
 const opActivateGateway = "ActivateGateway"
 
 // ActivateGatewayRequest generates a request for the ActivateGateway operation.
-func (c *StorageGateway) ActivateGatewayRequest(input *ActivateGatewayInput) (req *aws.Request, output *ActivateGatewayOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) ActivateGatewayRequest(input *ActivateGatewayInput) (req *service.Request, output *ActivateGatewayOutput) {
+	op := &service.Operation{
 		Name:       opActivateGateway,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -48,8 +48,8 @@ func (c *StorageGateway) ActivateGateway(input *ActivateGatewayInput) (*Activate
 const opAddCache = "AddCache"
 
 // AddCacheRequest generates a request for the AddCache operation.
-func (c *StorageGateway) AddCacheRequest(input *AddCacheInput) (req *aws.Request, output *AddCacheOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) AddCacheRequest(input *AddCacheInput) (req *service.Request, output *AddCacheOutput) {
+	op := &service.Operation{
 		Name:       opAddCache,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -81,8 +81,8 @@ func (c *StorageGateway) AddCache(input *AddCacheInput) (*AddCacheOutput, error)
 const opAddUploadBuffer = "AddUploadBuffer"
 
 // AddUploadBufferRequest generates a request for the AddUploadBuffer operation.
-func (c *StorageGateway) AddUploadBufferRequest(input *AddUploadBufferInput) (req *aws.Request, output *AddUploadBufferOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) AddUploadBufferRequest(input *AddUploadBufferInput) (req *service.Request, output *AddUploadBufferOutput) {
+	op := &service.Operation{
 		Name:       opAddUploadBuffer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -114,8 +114,8 @@ func (c *StorageGateway) AddUploadBuffer(input *AddUploadBufferInput) (*AddUploa
 const opAddWorkingStorage = "AddWorkingStorage"
 
 // AddWorkingStorageRequest generates a request for the AddWorkingStorage operation.
-func (c *StorageGateway) AddWorkingStorageRequest(input *AddWorkingStorageInput) (req *aws.Request, output *AddWorkingStorageOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) AddWorkingStorageRequest(input *AddWorkingStorageInput) (req *service.Request, output *AddWorkingStorageOutput) {
+	op := &service.Operation{
 		Name:       opAddWorkingStorage,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -151,8 +151,8 @@ func (c *StorageGateway) AddWorkingStorage(input *AddWorkingStorageInput) (*AddW
 const opCancelArchival = "CancelArchival"
 
 // CancelArchivalRequest generates a request for the CancelArchival operation.
-func (c *StorageGateway) CancelArchivalRequest(input *CancelArchivalInput) (req *aws.Request, output *CancelArchivalOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) CancelArchivalRequest(input *CancelArchivalInput) (req *service.Request, output *CancelArchivalOutput) {
+	op := &service.Operation{
 		Name:       opCancelArchival,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -179,8 +179,8 @@ func (c *StorageGateway) CancelArchival(input *CancelArchivalInput) (*CancelArch
 const opCancelRetrieval = "CancelRetrieval"
 
 // CancelRetrievalRequest generates a request for the CancelRetrieval operation.
-func (c *StorageGateway) CancelRetrievalRequest(input *CancelRetrievalInput) (req *aws.Request, output *CancelRetrievalOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) CancelRetrievalRequest(input *CancelRetrievalInput) (req *service.Request, output *CancelRetrievalOutput) {
+	op := &service.Operation{
 		Name:       opCancelRetrieval,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -208,8 +208,8 @@ func (c *StorageGateway) CancelRetrieval(input *CancelRetrievalInput) (*CancelRe
 const opCreateCachediSCSIVolume = "CreateCachediSCSIVolume"
 
 // CreateCachediSCSIVolumeRequest generates a request for the CreateCachediSCSIVolume operation.
-func (c *StorageGateway) CreateCachediSCSIVolumeRequest(input *CreateCachediSCSIVolumeInput) (req *aws.Request, output *CreateCachediSCSIVolumeOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) CreateCachediSCSIVolumeRequest(input *CreateCachediSCSIVolumeInput) (req *service.Request, output *CreateCachediSCSIVolumeOutput) {
+	op := &service.Operation{
 		Name:       opCreateCachediSCSIVolume,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -245,8 +245,8 @@ func (c *StorageGateway) CreateCachediSCSIVolume(input *CreateCachediSCSIVolumeI
 const opCreateSnapshot = "CreateSnapshot"
 
 // CreateSnapshotRequest generates a request for the CreateSnapshot operation.
-func (c *StorageGateway) CreateSnapshotRequest(input *CreateSnapshotInput) (req *aws.Request, output *CreateSnapshotOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) CreateSnapshotRequest(input *CreateSnapshotInput) (req *service.Request, output *CreateSnapshotOutput) {
+	op := &service.Operation{
 		Name:       opCreateSnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -292,8 +292,8 @@ func (c *StorageGateway) CreateSnapshot(input *CreateSnapshotInput) (*CreateSnap
 const opCreateSnapshotFromVolumeRecoveryPoint = "CreateSnapshotFromVolumeRecoveryPoint"
 
 // CreateSnapshotFromVolumeRecoveryPointRequest generates a request for the CreateSnapshotFromVolumeRecoveryPoint operation.
-func (c *StorageGateway) CreateSnapshotFromVolumeRecoveryPointRequest(input *CreateSnapshotFromVolumeRecoveryPointInput) (req *aws.Request, output *CreateSnapshotFromVolumeRecoveryPointOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) CreateSnapshotFromVolumeRecoveryPointRequest(input *CreateSnapshotFromVolumeRecoveryPointInput) (req *service.Request, output *CreateSnapshotFromVolumeRecoveryPointOutput) {
+	op := &service.Operation{
 		Name:       opCreateSnapshotFromVolumeRecoveryPoint,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -336,8 +336,8 @@ func (c *StorageGateway) CreateSnapshotFromVolumeRecoveryPoint(input *CreateSnap
 const opCreateStorediSCSIVolume = "CreateStorediSCSIVolume"
 
 // CreateStorediSCSIVolumeRequest generates a request for the CreateStorediSCSIVolume operation.
-func (c *StorageGateway) CreateStorediSCSIVolumeRequest(input *CreateStorediSCSIVolumeInput) (req *aws.Request, output *CreateStorediSCSIVolumeOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) CreateStorediSCSIVolumeRequest(input *CreateStorediSCSIVolumeInput) (req *service.Request, output *CreateStorediSCSIVolumeOutput) {
+	op := &service.Operation{
 		Name:       opCreateStorediSCSIVolume,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -375,8 +375,8 @@ func (c *StorageGateway) CreateStorediSCSIVolume(input *CreateStorediSCSIVolumeI
 const opCreateTapes = "CreateTapes"
 
 // CreateTapesRequest generates a request for the CreateTapes operation.
-func (c *StorageGateway) CreateTapesRequest(input *CreateTapesInput) (req *aws.Request, output *CreateTapesOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) CreateTapesRequest(input *CreateTapesInput) (req *service.Request, output *CreateTapesOutput) {
+	op := &service.Operation{
 		Name:       opCreateTapes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -406,8 +406,8 @@ func (c *StorageGateway) CreateTapes(input *CreateTapesInput) (*CreateTapesOutpu
 const opDeleteBandwidthRateLimit = "DeleteBandwidthRateLimit"
 
 // DeleteBandwidthRateLimitRequest generates a request for the DeleteBandwidthRateLimit operation.
-func (c *StorageGateway) DeleteBandwidthRateLimitRequest(input *DeleteBandwidthRateLimitInput) (req *aws.Request, output *DeleteBandwidthRateLimitOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) DeleteBandwidthRateLimitRequest(input *DeleteBandwidthRateLimitInput) (req *service.Request, output *DeleteBandwidthRateLimitOutput) {
+	op := &service.Operation{
 		Name:       opDeleteBandwidthRateLimit,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -437,8 +437,8 @@ func (c *StorageGateway) DeleteBandwidthRateLimit(input *DeleteBandwidthRateLimi
 const opDeleteChapCredentials = "DeleteChapCredentials"
 
 // DeleteChapCredentialsRequest generates a request for the DeleteChapCredentials operation.
-func (c *StorageGateway) DeleteChapCredentialsRequest(input *DeleteChapCredentialsInput) (req *aws.Request, output *DeleteChapCredentialsOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) DeleteChapCredentialsRequest(input *DeleteChapCredentialsInput) (req *service.Request, output *DeleteChapCredentialsOutput) {
+	op := &service.Operation{
 		Name:       opDeleteChapCredentials,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -465,8 +465,8 @@ func (c *StorageGateway) DeleteChapCredentials(input *DeleteChapCredentialsInput
 const opDeleteGateway = "DeleteGateway"
 
 // DeleteGatewayRequest generates a request for the DeleteGateway operation.
-func (c *StorageGateway) DeleteGatewayRequest(input *DeleteGatewayInput) (req *aws.Request, output *DeleteGatewayOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) DeleteGatewayRequest(input *DeleteGatewayInput) (req *service.Request, output *DeleteGatewayOutput) {
+	op := &service.Operation{
 		Name:       opDeleteGateway,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -507,8 +507,8 @@ func (c *StorageGateway) DeleteGateway(input *DeleteGatewayInput) (*DeleteGatewa
 const opDeleteSnapshotSchedule = "DeleteSnapshotSchedule"
 
 // DeleteSnapshotScheduleRequest generates a request for the DeleteSnapshotSchedule operation.
-func (c *StorageGateway) DeleteSnapshotScheduleRequest(input *DeleteSnapshotScheduleInput) (req *aws.Request, output *DeleteSnapshotScheduleOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) DeleteSnapshotScheduleRequest(input *DeleteSnapshotScheduleInput) (req *service.Request, output *DeleteSnapshotScheduleOutput) {
+	op := &service.Operation{
 		Name:       opDeleteSnapshotSchedule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -543,8 +543,8 @@ func (c *StorageGateway) DeleteSnapshotSchedule(input *DeleteSnapshotScheduleInp
 const opDeleteTape = "DeleteTape"
 
 // DeleteTapeRequest generates a request for the DeleteTape operation.
-func (c *StorageGateway) DeleteTapeRequest(input *DeleteTapeInput) (req *aws.Request, output *DeleteTapeOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) DeleteTapeRequest(input *DeleteTapeInput) (req *service.Request, output *DeleteTapeOutput) {
+	op := &service.Operation{
 		Name:       opDeleteTape,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -570,8 +570,8 @@ func (c *StorageGateway) DeleteTape(input *DeleteTapeInput) (*DeleteTapeOutput, 
 const opDeleteTapeArchive = "DeleteTapeArchive"
 
 // DeleteTapeArchiveRequest generates a request for the DeleteTapeArchive operation.
-func (c *StorageGateway) DeleteTapeArchiveRequest(input *DeleteTapeArchiveInput) (req *aws.Request, output *DeleteTapeArchiveOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) DeleteTapeArchiveRequest(input *DeleteTapeArchiveInput) (req *service.Request, output *DeleteTapeArchiveOutput) {
+	op := &service.Operation{
 		Name:       opDeleteTapeArchive,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -597,8 +597,8 @@ func (c *StorageGateway) DeleteTapeArchive(input *DeleteTapeArchiveInput) (*Dele
 const opDeleteVolume = "DeleteVolume"
 
 // DeleteVolumeRequest generates a request for the DeleteVolume operation.
-func (c *StorageGateway) DeleteVolumeRequest(input *DeleteVolumeInput) (req *aws.Request, output *DeleteVolumeOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) DeleteVolumeRequest(input *DeleteVolumeInput) (req *service.Request, output *DeleteVolumeOutput) {
+	op := &service.Operation{
 		Name:       opDeleteVolume,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -637,8 +637,8 @@ func (c *StorageGateway) DeleteVolume(input *DeleteVolumeInput) (*DeleteVolumeOu
 const opDescribeBandwidthRateLimit = "DescribeBandwidthRateLimit"
 
 // DescribeBandwidthRateLimitRequest generates a request for the DescribeBandwidthRateLimit operation.
-func (c *StorageGateway) DescribeBandwidthRateLimitRequest(input *DescribeBandwidthRateLimitInput) (req *aws.Request, output *DescribeBandwidthRateLimitOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) DescribeBandwidthRateLimitRequest(input *DescribeBandwidthRateLimitInput) (req *service.Request, output *DescribeBandwidthRateLimitOutput) {
+	op := &service.Operation{
 		Name:       opDescribeBandwidthRateLimit,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -670,8 +670,8 @@ func (c *StorageGateway) DescribeBandwidthRateLimit(input *DescribeBandwidthRate
 const opDescribeCache = "DescribeCache"
 
 // DescribeCacheRequest generates a request for the DescribeCache operation.
-func (c *StorageGateway) DescribeCacheRequest(input *DescribeCacheInput) (req *aws.Request, output *DescribeCacheOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) DescribeCacheRequest(input *DescribeCacheInput) (req *service.Request, output *DescribeCacheOutput) {
+	op := &service.Operation{
 		Name:       opDescribeCache,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -701,8 +701,8 @@ func (c *StorageGateway) DescribeCache(input *DescribeCacheInput) (*DescribeCach
 const opDescribeCachediSCSIVolumes = "DescribeCachediSCSIVolumes"
 
 // DescribeCachediSCSIVolumesRequest generates a request for the DescribeCachediSCSIVolumes operation.
-func (c *StorageGateway) DescribeCachediSCSIVolumesRequest(input *DescribeCachediSCSIVolumesInput) (req *aws.Request, output *DescribeCachediSCSIVolumesOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) DescribeCachediSCSIVolumesRequest(input *DescribeCachediSCSIVolumesInput) (req *service.Request, output *DescribeCachediSCSIVolumesOutput) {
+	op := &service.Operation{
 		Name:       opDescribeCachediSCSIVolumes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -734,8 +734,8 @@ func (c *StorageGateway) DescribeCachediSCSIVolumes(input *DescribeCachediSCSIVo
 const opDescribeChapCredentials = "DescribeChapCredentials"
 
 // DescribeChapCredentialsRequest generates a request for the DescribeChapCredentials operation.
-func (c *StorageGateway) DescribeChapCredentialsRequest(input *DescribeChapCredentialsInput) (req *aws.Request, output *DescribeChapCredentialsOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) DescribeChapCredentialsRequest(input *DescribeChapCredentialsInput) (req *service.Request, output *DescribeChapCredentialsOutput) {
+	op := &service.Operation{
 		Name:       opDescribeChapCredentials,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -763,8 +763,8 @@ func (c *StorageGateway) DescribeChapCredentials(input *DescribeChapCredentialsI
 const opDescribeGatewayInformation = "DescribeGatewayInformation"
 
 // DescribeGatewayInformationRequest generates a request for the DescribeGatewayInformation operation.
-func (c *StorageGateway) DescribeGatewayInformationRequest(input *DescribeGatewayInformationInput) (req *aws.Request, output *DescribeGatewayInformationOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) DescribeGatewayInformationRequest(input *DescribeGatewayInformationInput) (req *service.Request, output *DescribeGatewayInformationOutput) {
+	op := &service.Operation{
 		Name:       opDescribeGatewayInformation,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -793,8 +793,8 @@ func (c *StorageGateway) DescribeGatewayInformation(input *DescribeGatewayInform
 const opDescribeMaintenanceStartTime = "DescribeMaintenanceStartTime"
 
 // DescribeMaintenanceStartTimeRequest generates a request for the DescribeMaintenanceStartTime operation.
-func (c *StorageGateway) DescribeMaintenanceStartTimeRequest(input *DescribeMaintenanceStartTimeInput) (req *aws.Request, output *DescribeMaintenanceStartTimeOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) DescribeMaintenanceStartTimeRequest(input *DescribeMaintenanceStartTimeInput) (req *service.Request, output *DescribeMaintenanceStartTimeOutput) {
+	op := &service.Operation{
 		Name:       opDescribeMaintenanceStartTime,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -822,8 +822,8 @@ func (c *StorageGateway) DescribeMaintenanceStartTime(input *DescribeMaintenance
 const opDescribeSnapshotSchedule = "DescribeSnapshotSchedule"
 
 // DescribeSnapshotScheduleRequest generates a request for the DescribeSnapshotSchedule operation.
-func (c *StorageGateway) DescribeSnapshotScheduleRequest(input *DescribeSnapshotScheduleInput) (req *aws.Request, output *DescribeSnapshotScheduleOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) DescribeSnapshotScheduleRequest(input *DescribeSnapshotScheduleInput) (req *service.Request, output *DescribeSnapshotScheduleOutput) {
+	op := &service.Operation{
 		Name:       opDescribeSnapshotSchedule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -851,8 +851,8 @@ func (c *StorageGateway) DescribeSnapshotSchedule(input *DescribeSnapshotSchedul
 const opDescribeStorediSCSIVolumes = "DescribeStorediSCSIVolumes"
 
 // DescribeStorediSCSIVolumesRequest generates a request for the DescribeStorediSCSIVolumes operation.
-func (c *StorageGateway) DescribeStorediSCSIVolumesRequest(input *DescribeStorediSCSIVolumesInput) (req *aws.Request, output *DescribeStorediSCSIVolumesOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) DescribeStorediSCSIVolumesRequest(input *DescribeStorediSCSIVolumesInput) (req *service.Request, output *DescribeStorediSCSIVolumesOutput) {
+	op := &service.Operation{
 		Name:       opDescribeStorediSCSIVolumes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -881,12 +881,12 @@ func (c *StorageGateway) DescribeStorediSCSIVolumes(input *DescribeStorediSCSIVo
 const opDescribeTapeArchives = "DescribeTapeArchives"
 
 // DescribeTapeArchivesRequest generates a request for the DescribeTapeArchives operation.
-func (c *StorageGateway) DescribeTapeArchivesRequest(input *DescribeTapeArchivesInput) (req *aws.Request, output *DescribeTapeArchivesOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) DescribeTapeArchivesRequest(input *DescribeTapeArchivesInput) (req *service.Request, output *DescribeTapeArchivesOutput) {
+	op := &service.Operation{
 		Name:       opDescribeTapeArchives,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
+		Paginator: &service.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "Limit",
@@ -925,12 +925,12 @@ func (c *StorageGateway) DescribeTapeArchivesPages(input *DescribeTapeArchivesIn
 const opDescribeTapeRecoveryPoints = "DescribeTapeRecoveryPoints"
 
 // DescribeTapeRecoveryPointsRequest generates a request for the DescribeTapeRecoveryPoints operation.
-func (c *StorageGateway) DescribeTapeRecoveryPointsRequest(input *DescribeTapeRecoveryPointsInput) (req *aws.Request, output *DescribeTapeRecoveryPointsOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) DescribeTapeRecoveryPointsRequest(input *DescribeTapeRecoveryPointsInput) (req *service.Request, output *DescribeTapeRecoveryPointsOutput) {
+	op := &service.Operation{
 		Name:       opDescribeTapeRecoveryPoints,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
+		Paginator: &service.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "Limit",
@@ -970,12 +970,12 @@ func (c *StorageGateway) DescribeTapeRecoveryPointsPages(input *DescribeTapeReco
 const opDescribeTapes = "DescribeTapes"
 
 // DescribeTapesRequest generates a request for the DescribeTapes operation.
-func (c *StorageGateway) DescribeTapesRequest(input *DescribeTapesInput) (req *aws.Request, output *DescribeTapesOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) DescribeTapesRequest(input *DescribeTapesInput) (req *service.Request, output *DescribeTapesOutput) {
+	op := &service.Operation{
 		Name:       opDescribeTapes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
+		Paginator: &service.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "Limit",
@@ -1012,8 +1012,8 @@ func (c *StorageGateway) DescribeTapesPages(input *DescribeTapesInput, fn func(p
 const opDescribeUploadBuffer = "DescribeUploadBuffer"
 
 // DescribeUploadBufferRequest generates a request for the DescribeUploadBuffer operation.
-func (c *StorageGateway) DescribeUploadBufferRequest(input *DescribeUploadBufferInput) (req *aws.Request, output *DescribeUploadBufferOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) DescribeUploadBufferRequest(input *DescribeUploadBufferInput) (req *service.Request, output *DescribeUploadBufferOutput) {
+	op := &service.Operation{
 		Name:       opDescribeUploadBuffer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1044,12 +1044,12 @@ func (c *StorageGateway) DescribeUploadBuffer(input *DescribeUploadBufferInput) 
 const opDescribeVTLDevices = "DescribeVTLDevices"
 
 // DescribeVTLDevicesRequest generates a request for the DescribeVTLDevices operation.
-func (c *StorageGateway) DescribeVTLDevicesRequest(input *DescribeVTLDevicesInput) (req *aws.Request, output *DescribeVTLDevicesOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) DescribeVTLDevicesRequest(input *DescribeVTLDevicesInput) (req *service.Request, output *DescribeVTLDevicesOutput) {
+	op := &service.Operation{
 		Name:       opDescribeVTLDevices,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
+		Paginator: &service.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "Limit",
@@ -1087,8 +1087,8 @@ func (c *StorageGateway) DescribeVTLDevicesPages(input *DescribeVTLDevicesInput,
 const opDescribeWorkingStorage = "DescribeWorkingStorage"
 
 // DescribeWorkingStorageRequest generates a request for the DescribeWorkingStorage operation.
-func (c *StorageGateway) DescribeWorkingStorageRequest(input *DescribeWorkingStorageInput) (req *aws.Request, output *DescribeWorkingStorageOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) DescribeWorkingStorageRequest(input *DescribeWorkingStorageInput) (req *service.Request, output *DescribeWorkingStorageOutput) {
+	op := &service.Operation{
 		Name:       opDescribeWorkingStorage,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1123,8 +1123,8 @@ func (c *StorageGateway) DescribeWorkingStorage(input *DescribeWorkingStorageInp
 const opDisableGateway = "DisableGateway"
 
 // DisableGatewayRequest generates a request for the DisableGateway operation.
-func (c *StorageGateway) DisableGatewayRequest(input *DisableGatewayInput) (req *aws.Request, output *DisableGatewayOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) DisableGatewayRequest(input *DisableGatewayInput) (req *service.Request, output *DisableGatewayOutput) {
+	op := &service.Operation{
 		Name:       opDisableGateway,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1156,12 +1156,12 @@ func (c *StorageGateway) DisableGateway(input *DisableGatewayInput) (*DisableGat
 const opListGateways = "ListGateways"
 
 // ListGatewaysRequest generates a request for the ListGateways operation.
-func (c *StorageGateway) ListGatewaysRequest(input *ListGatewaysInput) (req *aws.Request, output *ListGatewaysOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) ListGatewaysRequest(input *ListGatewaysInput) (req *service.Request, output *ListGatewaysOutput) {
+	op := &service.Operation{
 		Name:       opListGateways,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
+		Paginator: &service.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "Limit",
@@ -1206,8 +1206,8 @@ func (c *StorageGateway) ListGatewaysPages(input *ListGatewaysInput, fn func(p *
 const opListLocalDisks = "ListLocalDisks"
 
 // ListLocalDisksRequest generates a request for the ListLocalDisks operation.
-func (c *StorageGateway) ListLocalDisksRequest(input *ListLocalDisksInput) (req *aws.Request, output *ListLocalDisksOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) ListLocalDisksRequest(input *ListLocalDisksInput) (req *service.Request, output *ListLocalDisksOutput) {
+	op := &service.Operation{
 		Name:       opListLocalDisks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1242,8 +1242,8 @@ func (c *StorageGateway) ListLocalDisks(input *ListLocalDisksInput) (*ListLocalD
 const opListVolumeInitiators = "ListVolumeInitiators"
 
 // ListVolumeInitiatorsRequest generates a request for the ListVolumeInitiators operation.
-func (c *StorageGateway) ListVolumeInitiatorsRequest(input *ListVolumeInitiatorsInput) (req *aws.Request, output *ListVolumeInitiatorsOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) ListVolumeInitiatorsRequest(input *ListVolumeInitiatorsInput) (req *service.Request, output *ListVolumeInitiatorsOutput) {
+	op := &service.Operation{
 		Name:       opListVolumeInitiators,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1270,8 +1270,8 @@ func (c *StorageGateway) ListVolumeInitiators(input *ListVolumeInitiatorsInput) 
 const opListVolumeRecoveryPoints = "ListVolumeRecoveryPoints"
 
 // ListVolumeRecoveryPointsRequest generates a request for the ListVolumeRecoveryPoints operation.
-func (c *StorageGateway) ListVolumeRecoveryPointsRequest(input *ListVolumeRecoveryPointsInput) (req *aws.Request, output *ListVolumeRecoveryPointsOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) ListVolumeRecoveryPointsRequest(input *ListVolumeRecoveryPointsInput) (req *service.Request, output *ListVolumeRecoveryPointsOutput) {
+	op := &service.Operation{
 		Name:       opListVolumeRecoveryPoints,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1303,12 +1303,12 @@ func (c *StorageGateway) ListVolumeRecoveryPoints(input *ListVolumeRecoveryPoint
 const opListVolumes = "ListVolumes"
 
 // ListVolumesRequest generates a request for the ListVolumes operation.
-func (c *StorageGateway) ListVolumesRequest(input *ListVolumesInput) (req *aws.Request, output *ListVolumesOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) ListVolumesRequest(input *ListVolumesInput) (req *service.Request, output *ListVolumesOutput) {
+	op := &service.Operation{
 		Name:       opListVolumes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
+		Paginator: &service.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "Limit",
@@ -1352,8 +1352,8 @@ func (c *StorageGateway) ListVolumesPages(input *ListVolumesInput, fn func(p *Li
 const opResetCache = "ResetCache"
 
 // ResetCacheRequest generates a request for the ResetCache operation.
-func (c *StorageGateway) ResetCacheRequest(input *ResetCacheInput) (req *aws.Request, output *ResetCacheOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) ResetCacheRequest(input *ResetCacheInput) (req *service.Request, output *ResetCacheOutput) {
+	op := &service.Operation{
 		Name:       opResetCache,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1389,8 +1389,8 @@ func (c *StorageGateway) ResetCache(input *ResetCacheInput) (*ResetCacheOutput, 
 const opRetrieveTapeArchive = "RetrieveTapeArchive"
 
 // RetrieveTapeArchiveRequest generates a request for the RetrieveTapeArchive operation.
-func (c *StorageGateway) RetrieveTapeArchiveRequest(input *RetrieveTapeArchiveInput) (req *aws.Request, output *RetrieveTapeArchiveOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) RetrieveTapeArchiveRequest(input *RetrieveTapeArchiveInput) (req *service.Request, output *RetrieveTapeArchiveOutput) {
+	op := &service.Operation{
 		Name:       opRetrieveTapeArchive,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1423,8 +1423,8 @@ func (c *StorageGateway) RetrieveTapeArchive(input *RetrieveTapeArchiveInput) (*
 const opRetrieveTapeRecoveryPoint = "RetrieveTapeRecoveryPoint"
 
 // RetrieveTapeRecoveryPointRequest generates a request for the RetrieveTapeRecoveryPoint operation.
-func (c *StorageGateway) RetrieveTapeRecoveryPointRequest(input *RetrieveTapeRecoveryPointInput) (req *aws.Request, output *RetrieveTapeRecoveryPointOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) RetrieveTapeRecoveryPointRequest(input *RetrieveTapeRecoveryPointInput) (req *service.Request, output *RetrieveTapeRecoveryPointOutput) {
+	op := &service.Operation{
 		Name:       opRetrieveTapeRecoveryPoint,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1458,8 +1458,8 @@ func (c *StorageGateway) RetrieveTapeRecoveryPoint(input *RetrieveTapeRecoveryPo
 const opShutdownGateway = "ShutdownGateway"
 
 // ShutdownGatewayRequest generates a request for the ShutdownGateway operation.
-func (c *StorageGateway) ShutdownGatewayRequest(input *ShutdownGatewayInput) (req *aws.Request, output *ShutdownGatewayOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) ShutdownGatewayRequest(input *ShutdownGatewayInput) (req *service.Request, output *ShutdownGatewayOutput) {
+	op := &service.Operation{
 		Name:       opShutdownGateway,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1503,8 +1503,8 @@ func (c *StorageGateway) ShutdownGateway(input *ShutdownGatewayInput) (*Shutdown
 const opStartGateway = "StartGateway"
 
 // StartGatewayRequest generates a request for the StartGateway operation.
-func (c *StorageGateway) StartGatewayRequest(input *StartGatewayInput) (req *aws.Request, output *StartGatewayOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) StartGatewayRequest(input *StartGatewayInput) (req *service.Request, output *StartGatewayOutput) {
+	op := &service.Operation{
 		Name:       opStartGateway,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1539,8 +1539,8 @@ func (c *StorageGateway) StartGateway(input *StartGatewayInput) (*StartGatewayOu
 const opUpdateBandwidthRateLimit = "UpdateBandwidthRateLimit"
 
 // UpdateBandwidthRateLimitRequest generates a request for the UpdateBandwidthRateLimit operation.
-func (c *StorageGateway) UpdateBandwidthRateLimitRequest(input *UpdateBandwidthRateLimitInput) (req *aws.Request, output *UpdateBandwidthRateLimitOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) UpdateBandwidthRateLimitRequest(input *UpdateBandwidthRateLimitInput) (req *service.Request, output *UpdateBandwidthRateLimitOutput) {
+	op := &service.Operation{
 		Name:       opUpdateBandwidthRateLimit,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1576,8 +1576,8 @@ func (c *StorageGateway) UpdateBandwidthRateLimit(input *UpdateBandwidthRateLimi
 const opUpdateChapCredentials = "UpdateChapCredentials"
 
 // UpdateChapCredentialsRequest generates a request for the UpdateChapCredentials operation.
-func (c *StorageGateway) UpdateChapCredentialsRequest(input *UpdateChapCredentialsInput) (req *aws.Request, output *UpdateChapCredentialsOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) UpdateChapCredentialsRequest(input *UpdateChapCredentialsInput) (req *service.Request, output *UpdateChapCredentialsOutput) {
+	op := &service.Operation{
 		Name:       opUpdateChapCredentials,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1608,8 +1608,8 @@ func (c *StorageGateway) UpdateChapCredentials(input *UpdateChapCredentialsInput
 const opUpdateGatewayInformation = "UpdateGatewayInformation"
 
 // UpdateGatewayInformationRequest generates a request for the UpdateGatewayInformation operation.
-func (c *StorageGateway) UpdateGatewayInformationRequest(input *UpdateGatewayInformationInput) (req *aws.Request, output *UpdateGatewayInformationOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) UpdateGatewayInformationRequest(input *UpdateGatewayInformationInput) (req *service.Request, output *UpdateGatewayInformationOutput) {
+	op := &service.Operation{
 		Name:       opUpdateGatewayInformation,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1637,8 +1637,8 @@ func (c *StorageGateway) UpdateGatewayInformation(input *UpdateGatewayInformatio
 const opUpdateGatewaySoftwareNow = "UpdateGatewaySoftwareNow"
 
 // UpdateGatewaySoftwareNowRequest generates a request for the UpdateGatewaySoftwareNow operation.
-func (c *StorageGateway) UpdateGatewaySoftwareNowRequest(input *UpdateGatewaySoftwareNowInput) (req *aws.Request, output *UpdateGatewaySoftwareNowOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) UpdateGatewaySoftwareNowRequest(input *UpdateGatewaySoftwareNowInput) (req *service.Request, output *UpdateGatewaySoftwareNowOutput) {
+	op := &service.Operation{
 		Name:       opUpdateGatewaySoftwareNow,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1676,8 +1676,8 @@ func (c *StorageGateway) UpdateGatewaySoftwareNow(input *UpdateGatewaySoftwareNo
 const opUpdateMaintenanceStartTime = "UpdateMaintenanceStartTime"
 
 // UpdateMaintenanceStartTimeRequest generates a request for the UpdateMaintenanceStartTime operation.
-func (c *StorageGateway) UpdateMaintenanceStartTimeRequest(input *UpdateMaintenanceStartTimeInput) (req *aws.Request, output *UpdateMaintenanceStartTimeOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) UpdateMaintenanceStartTimeRequest(input *UpdateMaintenanceStartTimeInput) (req *service.Request, output *UpdateMaintenanceStartTimeOutput) {
+	op := &service.Operation{
 		Name:       opUpdateMaintenanceStartTime,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1705,8 +1705,8 @@ func (c *StorageGateway) UpdateMaintenanceStartTime(input *UpdateMaintenanceStar
 const opUpdateSnapshotSchedule = "UpdateSnapshotSchedule"
 
 // UpdateSnapshotScheduleRequest generates a request for the UpdateSnapshotSchedule operation.
-func (c *StorageGateway) UpdateSnapshotScheduleRequest(input *UpdateSnapshotScheduleInput) (req *aws.Request, output *UpdateSnapshotScheduleOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) UpdateSnapshotScheduleRequest(input *UpdateSnapshotScheduleInput) (req *service.Request, output *UpdateSnapshotScheduleOutput) {
+	op := &service.Operation{
 		Name:       opUpdateSnapshotSchedule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1740,8 +1740,8 @@ func (c *StorageGateway) UpdateSnapshotSchedule(input *UpdateSnapshotScheduleInp
 const opUpdateVTLDeviceType = "UpdateVTLDeviceType"
 
 // UpdateVTLDeviceTypeRequest generates a request for the UpdateVTLDeviceType operation.
-func (c *StorageGateway) UpdateVTLDeviceTypeRequest(input *UpdateVTLDeviceTypeInput) (req *aws.Request, output *UpdateVTLDeviceTypeOutput) {
-	op := &aws.Operation{
+func (c *StorageGateway) UpdateVTLDeviceTypeRequest(input *UpdateVTLDeviceTypeInput) (req *service.Request, output *UpdateVTLDeviceTypeOutput) {
+	op := &service.Operation{
 		Name:       opUpdateVTLDeviceType,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1828,7 +1828,7 @@ type metadataActivateGatewayInput struct {
 
 // String returns the string representation
 func (s ActivateGatewayInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1854,7 +1854,7 @@ type metadataActivateGatewayOutput struct {
 
 // String returns the string representation
 func (s ActivateGatewayOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1863,7 +1863,7 @@ func (s ActivateGatewayOutput) GoString() string {
 }
 
 type AddCacheInput struct {
-	DiskIDs []*string `locationName:"DiskIds" type:"list" required:"true"`
+	DiskIds []*string `type:"list" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and region.
@@ -1878,7 +1878,7 @@ type metadataAddCacheInput struct {
 
 // String returns the string representation
 func (s AddCacheInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1900,7 +1900,7 @@ type metadataAddCacheOutput struct {
 
 // String returns the string representation
 func (s AddCacheOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1909,7 +1909,7 @@ func (s AddCacheOutput) GoString() string {
 }
 
 type AddUploadBufferInput struct {
-	DiskIDs []*string `locationName:"DiskIds" type:"list" required:"true"`
+	DiskIds []*string `type:"list" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and region.
@@ -1924,7 +1924,7 @@ type metadataAddUploadBufferInput struct {
 
 // String returns the string representation
 func (s AddUploadBufferInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1946,7 +1946,7 @@ type metadataAddUploadBufferOutput struct {
 
 // String returns the string representation
 func (s AddUploadBufferOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1961,7 +1961,7 @@ type AddWorkingStorageInput struct {
 	// An array of strings that identify disks that are to be configured as working
 	// storage. Each string have a minimum length of 1 and maximum length of 300.
 	// You can get the disk IDs from the ListLocalDisks API.
-	DiskIDs []*string `locationName:"DiskIds" type:"list" required:"true"`
+	DiskIds []*string `type:"list" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and region.
@@ -1976,7 +1976,7 @@ type metadataAddWorkingStorageInput struct {
 
 // String returns the string representation
 func (s AddWorkingStorageInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2000,7 +2000,7 @@ type metadataAddWorkingStorageOutput struct {
 
 // String returns the string representation
 func (s AddWorkingStorageOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2009,11 +2009,11 @@ func (s AddWorkingStorageOutput) GoString() string {
 }
 
 type CachediSCSIVolume struct {
-	SourceSnapshotID *string `locationName:"SourceSnapshotId" type:"string"`
+	SourceSnapshotId *string `type:"string"`
 
 	VolumeARN *string `type:"string"`
 
-	VolumeID *string `locationName:"VolumeId" type:"string"`
+	VolumeId *string `type:"string"`
 
 	VolumeProgress *float64 `type:"double"`
 
@@ -2035,7 +2035,7 @@ type metadataCachediSCSIVolume struct {
 
 // String returns the string representation
 func (s CachediSCSIVolume) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2062,7 +2062,7 @@ type metadataCancelArchivalInput struct {
 
 // String returns the string representation
 func (s CancelArchivalInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2085,7 +2085,7 @@ type metadataCancelArchivalOutput struct {
 
 // String returns the string representation
 func (s CancelArchivalOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2112,7 +2112,7 @@ type metadataCancelRetrievalInput struct {
 
 // String returns the string representation
 func (s CancelRetrievalInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2135,7 +2135,7 @@ type metadataCancelRetrievalOutput struct {
 
 // String returns the string representation
 func (s CancelRetrievalOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2172,7 +2172,7 @@ type metadataChapInfo struct {
 
 // String returns the string representation
 func (s ChapInfo) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2187,9 +2187,9 @@ type CreateCachediSCSIVolumeInput struct {
 	// to return a list of gateways for your account and region.
 	GatewayARN *string `type:"string" required:"true"`
 
-	NetworkInterfaceID *string `locationName:"NetworkInterfaceId" type:"string" required:"true"`
+	NetworkInterfaceId *string `type:"string" required:"true"`
 
-	SnapshotID *string `locationName:"SnapshotId" type:"string"`
+	SnapshotId *string `type:"string"`
 
 	TargetName *string `type:"string" required:"true"`
 
@@ -2204,7 +2204,7 @@ type metadataCreateCachediSCSIVolumeInput struct {
 
 // String returns the string representation
 func (s CreateCachediSCSIVolumeInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2226,7 +2226,7 @@ type metadataCreateCachediSCSIVolumeOutput struct {
 
 // String returns the string representation
 func (s CreateCachediSCSIVolumeOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2248,7 +2248,7 @@ type metadataCreateSnapshotFromVolumeRecoveryPointInput struct {
 
 // String returns the string representation
 func (s CreateSnapshotFromVolumeRecoveryPointInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2257,7 +2257,7 @@ func (s CreateSnapshotFromVolumeRecoveryPointInput) GoString() string {
 }
 
 type CreateSnapshotFromVolumeRecoveryPointOutput struct {
-	SnapshotID *string `locationName:"SnapshotId" type:"string"`
+	SnapshotId *string `type:"string"`
 
 	VolumeARN *string `type:"string"`
 
@@ -2272,7 +2272,7 @@ type metadataCreateSnapshotFromVolumeRecoveryPointOutput struct {
 
 // String returns the string representation
 func (s CreateSnapshotFromVolumeRecoveryPointOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2302,7 +2302,7 @@ type metadataCreateSnapshotInput struct {
 
 // String returns the string representation
 func (s CreateSnapshotInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2315,7 +2315,7 @@ type CreateSnapshotOutput struct {
 	// The snapshot ID that is used to refer to the snapshot in future operations
 	// such as describing snapshots (Amazon Elastic Compute Cloud API DescribeSnapshots)
 	// or creating a volume from a snapshot (CreateStorediSCSIVolume).
-	SnapshotID *string `locationName:"SnapshotId" type:"string"`
+	SnapshotId *string `type:"string"`
 
 	// The Amazon Resource Name (ARN) of the volume of which the snapshot was taken.
 	VolumeARN *string `type:"string"`
@@ -2329,7 +2329,7 @@ type metadataCreateSnapshotOutput struct {
 
 // String returns the string representation
 func (s CreateSnapshotOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2346,7 +2346,7 @@ type CreateStorediSCSIVolumeInput struct {
 	// The unique identifier for the gateway local disk that is configured as a
 	// stored volume. Use ListLocalDisks (http://docs.aws.amazon.com/storagegateway/latest/userguide/API_ListLocalDisks.html)
 	// to list disk IDs for a gateway.
-	DiskID *string `locationName:"DiskId" type:"string" required:"true"`
+	DiskId *string `type:"string" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and region.
@@ -2357,7 +2357,7 @@ type CreateStorediSCSIVolumeInput struct {
 	// list of the network interfaces available on a gateway.
 	//
 	// Valid Values: A valid IP address.
-	NetworkInterfaceID *string `locationName:"NetworkInterfaceId" type:"string" required:"true"`
+	NetworkInterfaceId *string `type:"string" required:"true"`
 
 	// Specify this field as true if you want to preserve the data on the local
 	// disk. Otherwise, specifying this field as false creates an empty volume.
@@ -2370,7 +2370,7 @@ type CreateStorediSCSIVolumeInput struct {
 	// volume from a snapshot otherwise do not include this field. To list snapshots
 	// for your account use DescribeSnapshots (http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html)
 	// in the Amazon Elastic Compute Cloud API Reference.
-	SnapshotID *string `locationName:"SnapshotId" type:"string"`
+	SnapshotId *string `type:"string"`
 
 	// The name of the iSCSI target used by initiators to connect to the target
 	// and as a suffix for the target ARN. For example, specifying TargetName as
@@ -2387,7 +2387,7 @@ type metadataCreateStorediSCSIVolumeInput struct {
 
 // String returns the string representation
 func (s CreateStorediSCSIVolumeInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2416,7 +2416,7 @@ type metadataCreateStorediSCSIVolumeOutput struct {
 
 // String returns the string representation
 func (s CreateStorediSCSIVolumeOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2461,7 +2461,7 @@ type metadataCreateTapesInput struct {
 
 // String returns the string representation
 func (s CreateTapesInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2484,7 +2484,7 @@ type metadataCreateTapesOutput struct {
 
 // String returns the string representation
 func (s CreateTapesOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2508,7 +2508,7 @@ type metadataDeleteBandwidthRateLimitInput struct {
 
 // String returns the string representation
 func (s DeleteBandwidthRateLimitInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2532,7 +2532,7 @@ type metadataDeleteBandwidthRateLimitOutput struct {
 
 // String returns the string representation
 func (s DeleteBandwidthRateLimitOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2560,7 +2560,7 @@ type metadataDeleteChapCredentialsInput struct {
 
 // String returns the string representation
 func (s DeleteChapCredentialsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2585,7 +2585,7 @@ type metadataDeleteChapCredentialsOutput struct {
 
 // String returns the string representation
 func (s DeleteChapCredentialsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2608,7 +2608,7 @@ type metadataDeleteGatewayInput struct {
 
 // String returns the string representation
 func (s DeleteGatewayInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2631,7 +2631,7 @@ type metadataDeleteGatewayOutput struct {
 
 // String returns the string representation
 func (s DeleteGatewayOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2651,7 +2651,7 @@ type metadataDeleteSnapshotScheduleInput struct {
 
 // String returns the string representation
 func (s DeleteSnapshotScheduleInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2671,7 +2671,7 @@ type metadataDeleteSnapshotScheduleOutput struct {
 
 // String returns the string representation
 func (s DeleteSnapshotScheduleOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2694,7 +2694,7 @@ type metadataDeleteTapeArchiveInput struct {
 
 // String returns the string representation
 func (s DeleteTapeArchiveInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2717,7 +2717,7 @@ type metadataDeleteTapeArchiveOutput struct {
 
 // String returns the string representation
 func (s DeleteTapeArchiveOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2744,7 +2744,7 @@ type metadataDeleteTapeInput struct {
 
 // String returns the string representation
 func (s DeleteTapeInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2766,7 +2766,7 @@ type metadataDeleteTapeOutput struct {
 
 // String returns the string representation
 func (s DeleteTapeOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2789,7 +2789,7 @@ type metadataDeleteVolumeInput struct {
 
 // String returns the string representation
 func (s DeleteVolumeInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2812,7 +2812,7 @@ type metadataDeleteVolumeOutput struct {
 
 // String returns the string representation
 func (s DeleteVolumeOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2835,7 +2835,7 @@ type metadataDescribeBandwidthRateLimitInput struct {
 
 // String returns the string representation
 func (s DescribeBandwidthRateLimitInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2866,7 +2866,7 @@ type metadataDescribeBandwidthRateLimitOutput struct {
 
 // String returns the string representation
 func (s DescribeBandwidthRateLimitOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2888,7 +2888,7 @@ type metadataDescribeCacheInput struct {
 
 // String returns the string representation
 func (s DescribeCacheInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2907,7 +2907,7 @@ type DescribeCacheOutput struct {
 
 	CacheUsedPercentage *float64 `type:"double"`
 
-	DiskIDs []*string `locationName:"DiskIds" type:"list"`
+	DiskIds []*string `type:"list"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and region.
@@ -2922,7 +2922,7 @@ type metadataDescribeCacheOutput struct {
 
 // String returns the string representation
 func (s DescribeCacheOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2942,7 +2942,7 @@ type metadataDescribeCachediSCSIVolumesInput struct {
 
 // String returns the string representation
 func (s DescribeCachediSCSIVolumesInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2965,7 +2965,7 @@ type metadataDescribeCachediSCSIVolumesOutput struct {
 
 // String returns the string representation
 func (s DescribeCachediSCSIVolumesOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -2989,7 +2989,7 @@ type metadataDescribeChapCredentialsInput struct {
 
 // String returns the string representation
 func (s DescribeChapCredentialsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3025,7 +3025,7 @@ type metadataDescribeChapCredentialsOutput struct {
 
 // String returns the string representation
 func (s DescribeChapCredentialsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3048,7 +3048,7 @@ type metadataDescribeGatewayInformationInput struct {
 
 // String returns the string representation
 func (s DescribeGatewayInformationInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3063,7 +3063,7 @@ type DescribeGatewayInformationOutput struct {
 	GatewayARN *string `type:"string"`
 
 	// The gateway ID.
-	GatewayID *string `locationName:"GatewayId" type:"string"`
+	GatewayId *string `type:"string"`
 
 	// A NetworkInterface array that contains descriptions of the gateway network
 	// interfaces.
@@ -3097,7 +3097,7 @@ type metadataDescribeGatewayInformationOutput struct {
 
 // String returns the string representation
 func (s DescribeGatewayInformationOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3120,7 +3120,7 @@ type metadataDescribeMaintenanceStartTimeInput struct {
 
 // String returns the string representation
 func (s DescribeMaintenanceStartTimeInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3150,7 +3150,7 @@ type metadataDescribeMaintenanceStartTimeOutput struct {
 
 // String returns the string representation
 func (s DescribeMaintenanceStartTimeOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3174,7 +3174,7 @@ type metadataDescribeSnapshotScheduleInput struct {
 
 // String returns the string representation
 func (s DescribeSnapshotScheduleInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3202,7 +3202,7 @@ type metadataDescribeSnapshotScheduleOutput struct {
 
 // String returns the string representation
 func (s DescribeSnapshotScheduleOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3226,7 +3226,7 @@ type metadataDescribeStorediSCSIVolumesInput struct {
 
 // String returns the string representation
 func (s DescribeStorediSCSIVolumesInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3246,7 +3246,7 @@ type metadataDescribeStorediSCSIVolumesOutput struct {
 
 // String returns the string representation
 func (s DescribeStorediSCSIVolumesOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3277,7 +3277,7 @@ type metadataDescribeTapeArchivesInput struct {
 
 // String returns the string representation
 func (s DescribeTapeArchivesInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3309,7 +3309,7 @@ type metadataDescribeTapeArchivesOutput struct {
 
 // String returns the string representation
 func (s DescribeTapeArchivesOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3340,7 +3340,7 @@ type metadataDescribeTapeRecoveryPointsInput struct {
 
 // String returns the string representation
 func (s DescribeTapeRecoveryPointsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3374,7 +3374,7 @@ type metadataDescribeTapeRecoveryPointsOutput struct {
 
 // String returns the string representation
 func (s DescribeTapeRecoveryPointsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3415,7 +3415,7 @@ type metadataDescribeTapesInput struct {
 
 // String returns the string representation
 func (s DescribeTapesInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3444,7 +3444,7 @@ type metadataDescribeTapesOutput struct {
 
 // String returns the string representation
 func (s DescribeTapesOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3466,7 +3466,7 @@ type metadataDescribeUploadBufferInput struct {
 
 // String returns the string representation
 func (s DescribeUploadBufferInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3475,7 +3475,7 @@ func (s DescribeUploadBufferInput) GoString() string {
 }
 
 type DescribeUploadBufferOutput struct {
-	DiskIDs []*string `locationName:"DiskIds" type:"list"`
+	DiskIds []*string `type:"list"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and region.
@@ -3494,7 +3494,7 @@ type metadataDescribeUploadBufferOutput struct {
 
 // String returns the string representation
 func (s DescribeUploadBufferOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3533,7 +3533,7 @@ type metadataDescribeVTLDevicesInput struct {
 
 // String returns the string representation
 func (s DescribeVTLDevicesInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3566,7 +3566,7 @@ type metadataDescribeVTLDevicesOutput struct {
 
 // String returns the string representation
 func (s DescribeVTLDevicesOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3589,7 +3589,7 @@ type metadataDescribeWorkingStorageInput struct {
 
 // String returns the string representation
 func (s DescribeWorkingStorageInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3603,7 +3603,7 @@ type DescribeWorkingStorageOutput struct {
 	// Each local disk ID is specified as a string (minimum length of 1 and maximum
 	// length of 300). If no local disks are configured as working storage, then
 	// the DiskIds array is empty.
-	DiskIDs []*string `locationName:"DiskIds" type:"list"`
+	DiskIds []*string `type:"list"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and region.
@@ -3626,7 +3626,7 @@ type metadataDescribeWorkingStorageOutput struct {
 
 // String returns the string representation
 func (s DescribeWorkingStorageOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3640,7 +3640,7 @@ type DeviceiSCSIAttributes struct {
 	ChapEnabled *bool `type:"boolean"`
 
 	// The network interface identifier of the VTL device.
-	NetworkInterfaceID *string `locationName:"NetworkInterfaceId" type:"string"`
+	NetworkInterfaceId *string `type:"string"`
 
 	// The port used to communicate with iSCSI VTL device targets.
 	NetworkInterfacePort *int64 `type:"integer"`
@@ -3658,7 +3658,7 @@ type metadataDeviceiSCSIAttributes struct {
 
 // String returns the string representation
 func (s DeviceiSCSIAttributes) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3681,7 +3681,7 @@ type metadataDisableGatewayInput struct {
 
 // String returns the string representation
 func (s DisableGatewayInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3703,7 +3703,7 @@ type metadataDisableGatewayOutput struct {
 
 // String returns the string representation
 func (s DisableGatewayOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3716,7 +3716,7 @@ type Disk struct {
 
 	DiskAllocationType *string `type:"string"`
 
-	DiskID *string `locationName:"DiskId" type:"string"`
+	DiskId *string `type:"string"`
 
 	DiskNode *string `type:"string"`
 
@@ -3735,7 +3735,7 @@ type metadataDisk struct {
 
 // String returns the string representation
 func (s Disk) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3748,7 +3748,7 @@ func (s Disk) GoString() string {
 // about the error.
 type Error struct {
 	// Additional information about the error.
-	ErrorCode *string `locationName:"errorCode" type:"string"`
+	ErrorCode *string `locationName:"errorCode" type:"string" enum:"ErrorCode"`
 
 	// Human-readable text that provides detail about the error that occurred.
 	ErrorDetails map[string]*string `locationName:"errorDetails" type:"map"`
@@ -3762,7 +3762,7 @@ type metadataError struct {
 
 // String returns the string representation
 func (s Error) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3788,7 +3788,7 @@ type metadataGatewayInfo struct {
 
 // String returns the string representation
 func (s GatewayInfo) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3817,7 +3817,7 @@ type metadataListGatewaysInput struct {
 
 // String returns the string representation
 func (s ListGatewaysInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3839,7 +3839,7 @@ type metadataListGatewaysOutput struct {
 
 // String returns the string representation
 func (s ListGatewaysOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3862,7 +3862,7 @@ type metadataListLocalDisksInput struct {
 
 // String returns the string representation
 func (s ListLocalDisksInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3886,7 +3886,7 @@ type metadataListLocalDisksOutput struct {
 
 // String returns the string representation
 func (s ListLocalDisksOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3909,7 +3909,7 @@ type metadataListVolumeInitiatorsInput struct {
 
 // String returns the string representation
 func (s ListVolumeInitiatorsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3932,7 +3932,7 @@ type metadataListVolumeInitiatorsOutput struct {
 
 // String returns the string representation
 func (s ListVolumeInitiatorsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3954,7 +3954,7 @@ type metadataListVolumeRecoveryPointsInput struct {
 
 // String returns the string representation
 func (s ListVolumeRecoveryPointsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -3978,7 +3978,7 @@ type metadataListVolumeRecoveryPointsOutput struct {
 
 // String returns the string representation
 func (s ListVolumeRecoveryPointsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4012,7 +4012,7 @@ type metadataListVolumesInput struct {
 
 // String returns the string representation
 func (s ListVolumesInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4038,7 +4038,7 @@ type metadataListVolumesOutput struct {
 
 // String returns the string representation
 func (s ListVolumesOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4049,16 +4049,16 @@ func (s ListVolumesOutput) GoString() string {
 // Describes a gateway's network interface.
 type NetworkInterface struct {
 	// The Internet Protocol version 4 (IPv4) address of the interface.
-	IPV4Address *string `locationName:"Ipv4Address" type:"string"`
+	Ipv4Address *string `type:"string"`
 
 	// The Internet Protocol version 6 (IPv6) address of the interface. Currently
 	// not supported.
-	IPV6Address *string `locationName:"Ipv6Address" type:"string"`
+	Ipv6Address *string `type:"string"`
 
 	// The Media Access Control (MAC) address of the interface.
 	//
 	// This is currently unsupported and will not be returned in output.
-	MACAddress *string `locationName:"MacAddress" type:"string"`
+	MacAddress *string `type:"string"`
 
 	metadataNetworkInterface `json:"-" xml:"-"`
 }
@@ -4069,7 +4069,7 @@ type metadataNetworkInterface struct {
 
 // String returns the string representation
 func (s NetworkInterface) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4091,7 +4091,7 @@ type metadataResetCacheInput struct {
 
 // String returns the string representation
 func (s ResetCacheInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4113,7 +4113,7 @@ type metadataResetCacheOutput struct {
 
 // String returns the string representation
 func (s ResetCacheOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4144,7 +4144,7 @@ type metadataRetrieveTapeArchiveInput struct {
 
 // String returns the string representation
 func (s RetrieveTapeArchiveInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4166,7 +4166,7 @@ type metadataRetrieveTapeArchiveOutput struct {
 
 // String returns the string representation
 func (s RetrieveTapeArchiveOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4193,7 +4193,7 @@ type metadataRetrieveTapeRecoveryPointInput struct {
 
 // String returns the string representation
 func (s RetrieveTapeRecoveryPointInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4216,7 +4216,7 @@ type metadataRetrieveTapeRecoveryPointOutput struct {
 
 // String returns the string representation
 func (s RetrieveTapeRecoveryPointOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4239,7 +4239,7 @@ type metadataShutdownGatewayInput struct {
 
 // String returns the string representation
 func (s ShutdownGatewayInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4262,7 +4262,7 @@ type metadataShutdownGatewayOutput struct {
 
 // String returns the string representation
 func (s ShutdownGatewayOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4285,7 +4285,7 @@ type metadataStartGatewayInput struct {
 
 // String returns the string representation
 func (s StartGatewayInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4308,7 +4308,7 @@ type metadataStartGatewayOutput struct {
 
 // String returns the string representation
 func (s StartGatewayOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4319,13 +4319,13 @@ func (s StartGatewayOutput) GoString() string {
 type StorediSCSIVolume struct {
 	PreservedExistingData *bool `type:"boolean"`
 
-	SourceSnapshotID *string `locationName:"SourceSnapshotId" type:"string"`
+	SourceSnapshotId *string `type:"string"`
 
 	VolumeARN *string `type:"string"`
 
-	VolumeDiskID *string `locationName:"VolumeDiskId" type:"string"`
+	VolumeDiskId *string `type:"string"`
 
-	VolumeID *string `locationName:"VolumeId" type:"string"`
+	VolumeId *string `type:"string"`
 
 	VolumeProgress *float64 `type:"double"`
 
@@ -4347,7 +4347,7 @@ type metadataStorediSCSIVolume struct {
 
 // String returns the string representation
 func (s StorediSCSIVolume) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4388,7 +4388,7 @@ type metadataTape struct {
 
 // String returns the string representation
 func (s Tape) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4431,7 +4431,7 @@ type metadataTapeArchive struct {
 
 // String returns the string representation
 func (s TapeArchive) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4465,7 +4465,7 @@ type metadataTapeRecoveryPointInfo struct {
 
 // String returns the string representation
 func (s TapeRecoveryPointInfo) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4496,7 +4496,7 @@ type metadataUpdateBandwidthRateLimitInput struct {
 
 // String returns the string representation
 func (s UpdateBandwidthRateLimitInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4520,7 +4520,7 @@ type metadataUpdateBandwidthRateLimitOutput struct {
 
 // String returns the string representation
 func (s UpdateBandwidthRateLimitOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4563,7 +4563,7 @@ type metadataUpdateChapCredentialsInput struct {
 
 // String returns the string representation
 func (s UpdateChapCredentialsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4590,7 +4590,7 @@ type metadataUpdateChapCredentialsOutput struct {
 
 // String returns the string representation
 func (s UpdateChapCredentialsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4618,7 +4618,7 @@ type metadataUpdateGatewayInformationInput struct {
 
 // String returns the string representation
 func (s UpdateGatewayInformationInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4641,7 +4641,7 @@ type metadataUpdateGatewayInformationOutput struct {
 
 // String returns the string representation
 func (s UpdateGatewayInformationOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4664,7 +4664,7 @@ type metadataUpdateGatewaySoftwareNowInput struct {
 
 // String returns the string representation
 func (s UpdateGatewaySoftwareNowInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4687,7 +4687,7 @@ type metadataUpdateGatewaySoftwareNowOutput struct {
 
 // String returns the string representation
 func (s UpdateGatewaySoftwareNowOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4726,7 +4726,7 @@ type metadataUpdateMaintenanceStartTimeInput struct {
 
 // String returns the string representation
 func (s UpdateMaintenanceStartTimeInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4750,7 +4750,7 @@ type metadataUpdateMaintenanceStartTimeOutput struct {
 
 // String returns the string representation
 func (s UpdateMaintenanceStartTimeOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4787,7 +4787,7 @@ type metadataUpdateSnapshotScheduleInput struct {
 
 // String returns the string representation
 func (s UpdateSnapshotScheduleInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4808,7 +4808,7 @@ type metadataUpdateSnapshotScheduleOutput struct {
 
 // String returns the string representation
 func (s UpdateSnapshotScheduleOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4835,7 +4835,7 @@ type metadataUpdateVTLDeviceTypeInput struct {
 
 // String returns the string representation
 func (s UpdateVTLDeviceTypeInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4857,7 +4857,7 @@ type metadataUpdateVTLDeviceTypeOutput struct {
 
 // String returns the string representation
 func (s UpdateVTLDeviceTypeOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4889,7 +4889,7 @@ type metadataVTLDevice struct {
 
 // String returns the string representation
 func (s VTLDevice) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4911,7 +4911,7 @@ type metadataVolumeInfo struct {
 
 // String returns the string representation
 func (s VolumeInfo) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4937,7 +4937,7 @@ type metadataVolumeRecoveryPointInfo struct {
 
 // String returns the string representation
 func (s VolumeRecoveryPointInfo) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -4954,7 +4954,7 @@ type VolumeiSCSIAttributes struct {
 	LunNumber *int64 `type:"integer"`
 
 	// The network interface identifier.
-	NetworkInterfaceID *string `locationName:"NetworkInterfaceId" type:"string"`
+	NetworkInterfaceId *string `type:"string"`
 
 	// The port used to communicate with iSCSI targets.
 	NetworkInterfacePort *int64 `type:"integer"`
@@ -4971,10 +4971,135 @@ type metadataVolumeiSCSIAttributes struct {
 
 // String returns the string representation
 func (s VolumeiSCSIAttributes) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
 func (s VolumeiSCSIAttributes) GoString() string {
 	return s.String()
 }
+
+const (
+	// @enum ErrorCode
+	ErrorCodeActivationKeyExpired = "ActivationKeyExpired"
+	// @enum ErrorCode
+	ErrorCodeActivationKeyInvalid = "ActivationKeyInvalid"
+	// @enum ErrorCode
+	ErrorCodeActivationKeyNotFound = "ActivationKeyNotFound"
+	// @enum ErrorCode
+	ErrorCodeGatewayInternalError = "GatewayInternalError"
+	// @enum ErrorCode
+	ErrorCodeGatewayNotConnected = "GatewayNotConnected"
+	// @enum ErrorCode
+	ErrorCodeGatewayNotFound = "GatewayNotFound"
+	// @enum ErrorCode
+	ErrorCodeGatewayProxyNetworkConnectionBusy = "GatewayProxyNetworkConnectionBusy"
+	// @enum ErrorCode
+	ErrorCodeAuthenticationFailure = "AuthenticationFailure"
+	// @enum ErrorCode
+	ErrorCodeBandwidthThrottleScheduleNotFound = "BandwidthThrottleScheduleNotFound"
+	// @enum ErrorCode
+	ErrorCodeBlocked = "Blocked"
+	// @enum ErrorCode
+	ErrorCodeCannotExportSnapshot = "CannotExportSnapshot"
+	// @enum ErrorCode
+	ErrorCodeChapCredentialNotFound = "ChapCredentialNotFound"
+	// @enum ErrorCode
+	ErrorCodeDiskAlreadyAllocated = "DiskAlreadyAllocated"
+	// @enum ErrorCode
+	ErrorCodeDiskDoesNotExist = "DiskDoesNotExist"
+	// @enum ErrorCode
+	ErrorCodeDiskSizeGreaterThanVolumeMaxSize = "DiskSizeGreaterThanVolumeMaxSize"
+	// @enum ErrorCode
+	ErrorCodeDiskSizeLessThanVolumeSize = "DiskSizeLessThanVolumeSize"
+	// @enum ErrorCode
+	ErrorCodeDiskSizeNotGigAligned = "DiskSizeNotGigAligned"
+	// @enum ErrorCode
+	ErrorCodeDuplicateCertificateInfo = "DuplicateCertificateInfo"
+	// @enum ErrorCode
+	ErrorCodeDuplicateSchedule = "DuplicateSchedule"
+	// @enum ErrorCode
+	ErrorCodeEndpointNotFound = "EndpointNotFound"
+	// @enum ErrorCode
+	ErrorCodeIamnotSupported = "IAMNotSupported"
+	// @enum ErrorCode
+	ErrorCodeInitiatorInvalid = "InitiatorInvalid"
+	// @enum ErrorCode
+	ErrorCodeInitiatorNotFound = "InitiatorNotFound"
+	// @enum ErrorCode
+	ErrorCodeInternalError = "InternalError"
+	// @enum ErrorCode
+	ErrorCodeInvalidGateway = "InvalidGateway"
+	// @enum ErrorCode
+	ErrorCodeInvalidEndpoint = "InvalidEndpoint"
+	// @enum ErrorCode
+	ErrorCodeInvalidParameters = "InvalidParameters"
+	// @enum ErrorCode
+	ErrorCodeInvalidSchedule = "InvalidSchedule"
+	// @enum ErrorCode
+	ErrorCodeLocalStorageLimitExceeded = "LocalStorageLimitExceeded"
+	// @enum ErrorCode
+	ErrorCodeLunAlreadyAllocated = "LunAlreadyAllocated "
+	// @enum ErrorCode
+	ErrorCodeLunInvalid = "LunInvalid"
+	// @enum ErrorCode
+	ErrorCodeMaximumContentLengthExceeded = "MaximumContentLengthExceeded"
+	// @enum ErrorCode
+	ErrorCodeMaximumTapeCartridgeCountExceeded = "MaximumTapeCartridgeCountExceeded"
+	// @enum ErrorCode
+	ErrorCodeMaximumVolumeCountExceeded = "MaximumVolumeCountExceeded"
+	// @enum ErrorCode
+	ErrorCodeNetworkConfigurationChanged = "NetworkConfigurationChanged"
+	// @enum ErrorCode
+	ErrorCodeNoDisksAvailable = "NoDisksAvailable"
+	// @enum ErrorCode
+	ErrorCodeNotImplemented = "NotImplemented"
+	// @enum ErrorCode
+	ErrorCodeNotSupported = "NotSupported"
+	// @enum ErrorCode
+	ErrorCodeOperationAborted = "OperationAborted"
+	// @enum ErrorCode
+	ErrorCodeOutdatedGateway = "OutdatedGateway"
+	// @enum ErrorCode
+	ErrorCodeParametersNotImplemented = "ParametersNotImplemented"
+	// @enum ErrorCode
+	ErrorCodeRegionInvalid = "RegionInvalid"
+	// @enum ErrorCode
+	ErrorCodeRequestTimeout = "RequestTimeout"
+	// @enum ErrorCode
+	ErrorCodeServiceUnavailable = "ServiceUnavailable"
+	// @enum ErrorCode
+	ErrorCodeSnapshotDeleted = "SnapshotDeleted"
+	// @enum ErrorCode
+	ErrorCodeSnapshotIdInvalid = "SnapshotIdInvalid"
+	// @enum ErrorCode
+	ErrorCodeSnapshotInProgress = "SnapshotInProgress"
+	// @enum ErrorCode
+	ErrorCodeSnapshotNotFound = "SnapshotNotFound"
+	// @enum ErrorCode
+	ErrorCodeSnapshotScheduleNotFound = "SnapshotScheduleNotFound"
+	// @enum ErrorCode
+	ErrorCodeStagingAreaFull = "StagingAreaFull"
+	// @enum ErrorCode
+	ErrorCodeStorageFailure = "StorageFailure"
+	// @enum ErrorCode
+	ErrorCodeTapeCartridgeNotFound = "TapeCartridgeNotFound"
+	// @enum ErrorCode
+	ErrorCodeTargetAlreadyExists = "TargetAlreadyExists"
+	// @enum ErrorCode
+	ErrorCodeTargetInvalid = "TargetInvalid"
+	// @enum ErrorCode
+	ErrorCodeTargetNotFound = "TargetNotFound"
+	// @enum ErrorCode
+	ErrorCodeUnauthorizedOperation = "UnauthorizedOperation"
+	// @enum ErrorCode
+	ErrorCodeVolumeAlreadyExists = "VolumeAlreadyExists"
+	// @enum ErrorCode
+	ErrorCodeVolumeIdInvalid = "VolumeIdInvalid"
+	// @enum ErrorCode
+	ErrorCodeVolumeInUse = "VolumeInUse"
+	// @enum ErrorCode
+	ErrorCodeVolumeNotFound = "VolumeNotFound"
+	// @enum ErrorCode
+	ErrorCodeVolumeNotReady = "VolumeNotReady"
+)

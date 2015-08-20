@@ -26,7 +26,7 @@ func ExampleCloudSearch_BuildSuggesters() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -40,7 +40,7 @@ func ExampleCloudSearch_BuildSuggesters() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleCloudSearch_CreateDomain() {
@@ -53,7 +53,7 @@ func ExampleCloudSearch_CreateDomain() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -67,7 +67,7 @@ func ExampleCloudSearch_CreateDomain() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleCloudSearch_DefineAnalysisScheme() {
@@ -91,7 +91,7 @@ func ExampleCloudSearch_DefineAnalysisScheme() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -105,7 +105,7 @@ func ExampleCloudSearch_DefineAnalysisScheme() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleCloudSearch_DefineExpression() {
@@ -122,7 +122,7 @@ func ExampleCloudSearch_DefineExpression() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -136,7 +136,7 @@ func ExampleCloudSearch_DefineExpression() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleCloudSearch_DefineIndexField() {
@@ -149,85 +149,85 @@ func ExampleCloudSearch_DefineIndexField() {
 			IndexFieldType: aws.String("IndexFieldType"),   // Required
 			DateArrayOptions: &cloudsearch.DateArrayOptions{
 				DefaultValue:  aws.String("FieldValue"),
-				FacetEnabled:  aws.Boolean(true),
-				ReturnEnabled: aws.Boolean(true),
-				SearchEnabled: aws.Boolean(true),
+				FacetEnabled:  aws.Bool(true),
+				ReturnEnabled: aws.Bool(true),
+				SearchEnabled: aws.Bool(true),
 				SourceFields:  aws.String("FieldNameCommaList"),
 			},
 			DateOptions: &cloudsearch.DateOptions{
 				DefaultValue:  aws.String("FieldValue"),
-				FacetEnabled:  aws.Boolean(true),
-				ReturnEnabled: aws.Boolean(true),
-				SearchEnabled: aws.Boolean(true),
-				SortEnabled:   aws.Boolean(true),
+				FacetEnabled:  aws.Bool(true),
+				ReturnEnabled: aws.Bool(true),
+				SearchEnabled: aws.Bool(true),
+				SortEnabled:   aws.Bool(true),
 				SourceField:   aws.String("FieldName"),
 			},
 			DoubleArrayOptions: &cloudsearch.DoubleArrayOptions{
-				DefaultValue:  aws.Double(1.0),
-				FacetEnabled:  aws.Boolean(true),
-				ReturnEnabled: aws.Boolean(true),
-				SearchEnabled: aws.Boolean(true),
+				DefaultValue:  aws.Float64(1.0),
+				FacetEnabled:  aws.Bool(true),
+				ReturnEnabled: aws.Bool(true),
+				SearchEnabled: aws.Bool(true),
 				SourceFields:  aws.String("FieldNameCommaList"),
 			},
 			DoubleOptions: &cloudsearch.DoubleOptions{
-				DefaultValue:  aws.Double(1.0),
-				FacetEnabled:  aws.Boolean(true),
-				ReturnEnabled: aws.Boolean(true),
-				SearchEnabled: aws.Boolean(true),
-				SortEnabled:   aws.Boolean(true),
+				DefaultValue:  aws.Float64(1.0),
+				FacetEnabled:  aws.Bool(true),
+				ReturnEnabled: aws.Bool(true),
+				SearchEnabled: aws.Bool(true),
+				SortEnabled:   aws.Bool(true),
 				SourceField:   aws.String("FieldName"),
 			},
 			IntArrayOptions: &cloudsearch.IntArrayOptions{
-				DefaultValue:  aws.Long(1),
-				FacetEnabled:  aws.Boolean(true),
-				ReturnEnabled: aws.Boolean(true),
-				SearchEnabled: aws.Boolean(true),
+				DefaultValue:  aws.Int64(1),
+				FacetEnabled:  aws.Bool(true),
+				ReturnEnabled: aws.Bool(true),
+				SearchEnabled: aws.Bool(true),
 				SourceFields:  aws.String("FieldNameCommaList"),
 			},
 			IntOptions: &cloudsearch.IntOptions{
-				DefaultValue:  aws.Long(1),
-				FacetEnabled:  aws.Boolean(true),
-				ReturnEnabled: aws.Boolean(true),
-				SearchEnabled: aws.Boolean(true),
-				SortEnabled:   aws.Boolean(true),
+				DefaultValue:  aws.Int64(1),
+				FacetEnabled:  aws.Bool(true),
+				ReturnEnabled: aws.Bool(true),
+				SearchEnabled: aws.Bool(true),
+				SortEnabled:   aws.Bool(true),
 				SourceField:   aws.String("FieldName"),
 			},
 			LatLonOptions: &cloudsearch.LatLonOptions{
 				DefaultValue:  aws.String("FieldValue"),
-				FacetEnabled:  aws.Boolean(true),
-				ReturnEnabled: aws.Boolean(true),
-				SearchEnabled: aws.Boolean(true),
-				SortEnabled:   aws.Boolean(true),
+				FacetEnabled:  aws.Bool(true),
+				ReturnEnabled: aws.Bool(true),
+				SearchEnabled: aws.Bool(true),
+				SortEnabled:   aws.Bool(true),
 				SourceField:   aws.String("FieldName"),
 			},
 			LiteralArrayOptions: &cloudsearch.LiteralArrayOptions{
 				DefaultValue:  aws.String("FieldValue"),
-				FacetEnabled:  aws.Boolean(true),
-				ReturnEnabled: aws.Boolean(true),
-				SearchEnabled: aws.Boolean(true),
+				FacetEnabled:  aws.Bool(true),
+				ReturnEnabled: aws.Bool(true),
+				SearchEnabled: aws.Bool(true),
 				SourceFields:  aws.String("FieldNameCommaList"),
 			},
 			LiteralOptions: &cloudsearch.LiteralOptions{
 				DefaultValue:  aws.String("FieldValue"),
-				FacetEnabled:  aws.Boolean(true),
-				ReturnEnabled: aws.Boolean(true),
-				SearchEnabled: aws.Boolean(true),
-				SortEnabled:   aws.Boolean(true),
+				FacetEnabled:  aws.Bool(true),
+				ReturnEnabled: aws.Bool(true),
+				SearchEnabled: aws.Bool(true),
+				SortEnabled:   aws.Bool(true),
 				SourceField:   aws.String("FieldName"),
 			},
 			TextArrayOptions: &cloudsearch.TextArrayOptions{
 				AnalysisScheme:   aws.String("Word"),
 				DefaultValue:     aws.String("FieldValue"),
-				HighlightEnabled: aws.Boolean(true),
-				ReturnEnabled:    aws.Boolean(true),
+				HighlightEnabled: aws.Bool(true),
+				ReturnEnabled:    aws.Bool(true),
 				SourceFields:     aws.String("FieldNameCommaList"),
 			},
 			TextOptions: &cloudsearch.TextOptions{
 				AnalysisScheme:   aws.String("Word"),
 				DefaultValue:     aws.String("FieldValue"),
-				HighlightEnabled: aws.Boolean(true),
-				ReturnEnabled:    aws.Boolean(true),
-				SortEnabled:      aws.Boolean(true),
+				HighlightEnabled: aws.Bool(true),
+				ReturnEnabled:    aws.Bool(true),
+				SortEnabled:      aws.Bool(true),
 				SourceField:      aws.String("FieldName"),
 			},
 		},
@@ -236,7 +236,7 @@ func ExampleCloudSearch_DefineIndexField() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -250,7 +250,7 @@ func ExampleCloudSearch_DefineIndexField() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleCloudSearch_DefineSuggester() {
@@ -271,7 +271,7 @@ func ExampleCloudSearch_DefineSuggester() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -285,7 +285,7 @@ func ExampleCloudSearch_DefineSuggester() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleCloudSearch_DeleteAnalysisScheme() {
@@ -299,7 +299,7 @@ func ExampleCloudSearch_DeleteAnalysisScheme() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -313,7 +313,7 @@ func ExampleCloudSearch_DeleteAnalysisScheme() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleCloudSearch_DeleteDomain() {
@@ -326,7 +326,7 @@ func ExampleCloudSearch_DeleteDomain() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -340,7 +340,7 @@ func ExampleCloudSearch_DeleteDomain() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleCloudSearch_DeleteExpression() {
@@ -354,7 +354,7 @@ func ExampleCloudSearch_DeleteExpression() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -368,7 +368,7 @@ func ExampleCloudSearch_DeleteExpression() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleCloudSearch_DeleteIndexField() {
@@ -382,7 +382,7 @@ func ExampleCloudSearch_DeleteIndexField() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -396,7 +396,7 @@ func ExampleCloudSearch_DeleteIndexField() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleCloudSearch_DeleteSuggester() {
@@ -410,7 +410,7 @@ func ExampleCloudSearch_DeleteSuggester() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -424,7 +424,7 @@ func ExampleCloudSearch_DeleteSuggester() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleCloudSearch_DescribeAnalysisSchemes() {
@@ -436,13 +436,13 @@ func ExampleCloudSearch_DescribeAnalysisSchemes() {
 			aws.String("StandardName"), // Required
 			// More values...
 		},
-		Deployed: aws.Boolean(true),
+		Deployed: aws.Bool(true),
 	}
 	resp, err := svc.DescribeAnalysisSchemes(params)
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -456,7 +456,7 @@ func ExampleCloudSearch_DescribeAnalysisSchemes() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleCloudSearch_DescribeAvailabilityOptions() {
@@ -464,13 +464,13 @@ func ExampleCloudSearch_DescribeAvailabilityOptions() {
 
 	params := &cloudsearch.DescribeAvailabilityOptionsInput{
 		DomainName: aws.String("DomainName"), // Required
-		Deployed:   aws.Boolean(true),
+		Deployed:   aws.Bool(true),
 	}
 	resp, err := svc.DescribeAvailabilityOptions(params)
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -484,7 +484,7 @@ func ExampleCloudSearch_DescribeAvailabilityOptions() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleCloudSearch_DescribeDomains() {
@@ -500,7 +500,7 @@ func ExampleCloudSearch_DescribeDomains() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -514,7 +514,7 @@ func ExampleCloudSearch_DescribeDomains() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleCloudSearch_DescribeExpressions() {
@@ -522,7 +522,7 @@ func ExampleCloudSearch_DescribeExpressions() {
 
 	params := &cloudsearch.DescribeExpressionsInput{
 		DomainName: aws.String("DomainName"), // Required
-		Deployed:   aws.Boolean(true),
+		Deployed:   aws.Bool(true),
 		ExpressionNames: []*string{
 			aws.String("StandardName"), // Required
 			// More values...
@@ -532,7 +532,7 @@ func ExampleCloudSearch_DescribeExpressions() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -546,7 +546,7 @@ func ExampleCloudSearch_DescribeExpressions() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleCloudSearch_DescribeIndexFields() {
@@ -554,7 +554,7 @@ func ExampleCloudSearch_DescribeIndexFields() {
 
 	params := &cloudsearch.DescribeIndexFieldsInput{
 		DomainName: aws.String("DomainName"), // Required
-		Deployed:   aws.Boolean(true),
+		Deployed:   aws.Bool(true),
 		FieldNames: []*string{
 			aws.String("DynamicFieldName"), // Required
 			// More values...
@@ -564,7 +564,7 @@ func ExampleCloudSearch_DescribeIndexFields() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -578,7 +578,7 @@ func ExampleCloudSearch_DescribeIndexFields() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleCloudSearch_DescribeScalingParameters() {
@@ -591,7 +591,7 @@ func ExampleCloudSearch_DescribeScalingParameters() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -605,7 +605,7 @@ func ExampleCloudSearch_DescribeScalingParameters() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleCloudSearch_DescribeServiceAccessPolicies() {
@@ -613,13 +613,13 @@ func ExampleCloudSearch_DescribeServiceAccessPolicies() {
 
 	params := &cloudsearch.DescribeServiceAccessPoliciesInput{
 		DomainName: aws.String("DomainName"), // Required
-		Deployed:   aws.Boolean(true),
+		Deployed:   aws.Bool(true),
 	}
 	resp, err := svc.DescribeServiceAccessPolicies(params)
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -633,7 +633,7 @@ func ExampleCloudSearch_DescribeServiceAccessPolicies() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleCloudSearch_DescribeSuggesters() {
@@ -641,7 +641,7 @@ func ExampleCloudSearch_DescribeSuggesters() {
 
 	params := &cloudsearch.DescribeSuggestersInput{
 		DomainName: aws.String("DomainName"), // Required
-		Deployed:   aws.Boolean(true),
+		Deployed:   aws.Bool(true),
 		SuggesterNames: []*string{
 			aws.String("StandardName"), // Required
 			// More values...
@@ -651,7 +651,7 @@ func ExampleCloudSearch_DescribeSuggesters() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -665,7 +665,7 @@ func ExampleCloudSearch_DescribeSuggesters() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleCloudSearch_IndexDocuments() {
@@ -678,7 +678,7 @@ func ExampleCloudSearch_IndexDocuments() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -692,7 +692,7 @@ func ExampleCloudSearch_IndexDocuments() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleCloudSearch_ListDomainNames() {
@@ -703,7 +703,7 @@ func ExampleCloudSearch_ListDomainNames() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -717,7 +717,7 @@ func ExampleCloudSearch_ListDomainNames() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleCloudSearch_UpdateAvailabilityOptions() {
@@ -725,13 +725,13 @@ func ExampleCloudSearch_UpdateAvailabilityOptions() {
 
 	params := &cloudsearch.UpdateAvailabilityOptionsInput{
 		DomainName: aws.String("DomainName"), // Required
-		MultiAZ:    aws.Boolean(true),        // Required
+		MultiAZ:    aws.Bool(true),           // Required
 	}
 	resp, err := svc.UpdateAvailabilityOptions(params)
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -745,7 +745,7 @@ func ExampleCloudSearch_UpdateAvailabilityOptions() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleCloudSearch_UpdateScalingParameters() {
@@ -755,15 +755,15 @@ func ExampleCloudSearch_UpdateScalingParameters() {
 		DomainName: aws.String("DomainName"), // Required
 		ScalingParameters: &cloudsearch.ScalingParameters{ // Required
 			DesiredInstanceType:     aws.String("PartitionInstanceType"),
-			DesiredPartitionCount:   aws.Long(1),
-			DesiredReplicationCount: aws.Long(1),
+			DesiredPartitionCount:   aws.Int64(1),
+			DesiredReplicationCount: aws.Int64(1),
 		},
 	}
 	resp, err := svc.UpdateScalingParameters(params)
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -777,7 +777,7 @@ func ExampleCloudSearch_UpdateScalingParameters() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleCloudSearch_UpdateServiceAccessPolicies() {
@@ -791,7 +791,7 @@ func ExampleCloudSearch_UpdateServiceAccessPolicies() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -805,5 +805,5 @@ func ExampleCloudSearch_UpdateServiceAccessPolicies() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }

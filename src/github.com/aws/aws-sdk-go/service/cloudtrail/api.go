@@ -6,15 +6,15 @@ package cloudtrail
 import (
 	"time"
 
-	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awsutil"
+	"github.com/aws/aws-sdk-go/aws/service"
 )
 
 const opCreateTrail = "CreateTrail"
 
 // CreateTrailRequest generates a request for the CreateTrail operation.
-func (c *CloudTrail) CreateTrailRequest(input *CreateTrailInput) (req *aws.Request, output *CreateTrailOutput) {
-	op := &aws.Operation{
+func (c *CloudTrail) CreateTrailRequest(input *CreateTrailInput) (req *service.Request, output *CreateTrailOutput) {
+	op := &service.Operation{
 		Name:       opCreateTrail,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -43,8 +43,8 @@ func (c *CloudTrail) CreateTrail(input *CreateTrailInput) (*CreateTrailOutput, e
 const opDeleteTrail = "DeleteTrail"
 
 // DeleteTrailRequest generates a request for the DeleteTrail operation.
-func (c *CloudTrail) DeleteTrailRequest(input *DeleteTrailInput) (req *aws.Request, output *DeleteTrailOutput) {
-	op := &aws.Operation{
+func (c *CloudTrail) DeleteTrailRequest(input *DeleteTrailInput) (req *service.Request, output *DeleteTrailOutput) {
+	op := &service.Operation{
 		Name:       opDeleteTrail,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -70,8 +70,8 @@ func (c *CloudTrail) DeleteTrail(input *DeleteTrailInput) (*DeleteTrailOutput, e
 const opDescribeTrails = "DescribeTrails"
 
 // DescribeTrailsRequest generates a request for the DescribeTrails operation.
-func (c *CloudTrail) DescribeTrailsRequest(input *DescribeTrailsInput) (req *aws.Request, output *DescribeTrailsOutput) {
-	op := &aws.Operation{
+func (c *CloudTrail) DescribeTrailsRequest(input *DescribeTrailsInput) (req *service.Request, output *DescribeTrailsOutput) {
+	op := &service.Operation{
 		Name:       opDescribeTrails,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -98,8 +98,8 @@ func (c *CloudTrail) DescribeTrails(input *DescribeTrailsInput) (*DescribeTrails
 const opGetTrailStatus = "GetTrailStatus"
 
 // GetTrailStatusRequest generates a request for the GetTrailStatus operation.
-func (c *CloudTrail) GetTrailStatusRequest(input *GetTrailStatusInput) (req *aws.Request, output *GetTrailStatusOutput) {
-	op := &aws.Operation{
+func (c *CloudTrail) GetTrailStatusRequest(input *GetTrailStatusInput) (req *service.Request, output *GetTrailStatusOutput) {
+	op := &service.Operation{
 		Name:       opGetTrailStatus,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -127,8 +127,8 @@ func (c *CloudTrail) GetTrailStatus(input *GetTrailStatusInput) (*GetTrailStatus
 const opLookupEvents = "LookupEvents"
 
 // LookupEventsRequest generates a request for the LookupEvents operation.
-func (c *CloudTrail) LookupEventsRequest(input *LookupEventsInput) (req *aws.Request, output *LookupEventsOutput) {
-	op := &aws.Operation{
+func (c *CloudTrail) LookupEventsRequest(input *LookupEventsInput) (req *service.Request, output *LookupEventsOutput) {
+	op := &service.Operation{
 		Name:       opLookupEvents,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -167,8 +167,8 @@ func (c *CloudTrail) LookupEvents(input *LookupEventsInput) (*LookupEventsOutput
 const opStartLogging = "StartLogging"
 
 // StartLoggingRequest generates a request for the StartLogging operation.
-func (c *CloudTrail) StartLoggingRequest(input *StartLoggingInput) (req *aws.Request, output *StartLoggingOutput) {
-	op := &aws.Operation{
+func (c *CloudTrail) StartLoggingRequest(input *StartLoggingInput) (req *service.Request, output *StartLoggingOutput) {
+	op := &service.Operation{
 		Name:       opStartLogging,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -194,8 +194,8 @@ func (c *CloudTrail) StartLogging(input *StartLoggingInput) (*StartLoggingOutput
 const opStopLogging = "StopLogging"
 
 // StopLoggingRequest generates a request for the StopLogging operation.
-func (c *CloudTrail) StopLoggingRequest(input *StopLoggingInput) (req *aws.Request, output *StopLoggingOutput) {
-	op := &aws.Operation{
+func (c *CloudTrail) StopLoggingRequest(input *StopLoggingInput) (req *service.Request, output *StopLoggingOutput) {
+	op := &service.Operation{
 		Name:       opStopLogging,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -224,8 +224,8 @@ func (c *CloudTrail) StopLogging(input *StopLoggingInput) (*StopLoggingOutput, e
 const opUpdateTrail = "UpdateTrail"
 
 // UpdateTrailRequest generates a request for the UpdateTrail operation.
-func (c *CloudTrail) UpdateTrailRequest(input *UpdateTrailInput) (req *aws.Request, output *UpdateTrailOutput) {
-	op := &aws.Operation{
+func (c *CloudTrail) UpdateTrailRequest(input *UpdateTrailInput) (req *service.Request, output *UpdateTrailOutput) {
+	op := &service.Operation{
 		Name:       opUpdateTrail,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -258,11 +258,11 @@ type CreateTrailInput struct {
 	// Specifies a log group name using an Amazon Resource Name (ARN), a unique
 	// identifier that represents the log group to which CloudTrail logs will be
 	// delivered. Not required unless you specify CloudWatchLogsRoleArn.
-	CloudWatchLogsLogGroupARN *string `locationName:"CloudWatchLogsLogGroupArn" type:"string"`
+	CloudWatchLogsLogGroupArn *string `type:"string"`
 
 	// Specifies the role for the CloudWatch Logs endpoint to assume to write to
 	// a user’s log group.
-	CloudWatchLogsRoleARN *string `locationName:"CloudWatchLogsRoleArn" type:"string"`
+	CloudWatchLogsRoleArn *string `type:"string"`
 
 	// Specifies whether the trail is publishing events from global services such
 	// as IAM to the log files.
@@ -281,7 +281,7 @@ type CreateTrailInput struct {
 
 	// Specifies the name of the Amazon SNS topic defined for notification of log
 	// file delivery.
-	SNSTopicName *string `locationName:"SnsTopicName" type:"string"`
+	SnsTopicName *string `type:"string"`
 
 	metadataCreateTrailInput `json:"-" xml:"-"`
 }
@@ -292,7 +292,7 @@ type metadataCreateTrailInput struct {
 
 // String returns the string representation
 func (s CreateTrailInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -305,11 +305,11 @@ func (s CreateTrailInput) GoString() string {
 type CreateTrailOutput struct {
 	// Specifies the Amazon Resource Name (ARN) of the log group to which CloudTrail
 	// logs will be delivered.
-	CloudWatchLogsLogGroupARN *string `locationName:"CloudWatchLogsLogGroupArn" type:"string"`
+	CloudWatchLogsLogGroupArn *string `type:"string"`
 
 	// Specifies the role for the CloudWatch Logs endpoint to assume to write to
 	// a user’s log group.
-	CloudWatchLogsRoleARN *string `locationName:"CloudWatchLogsRoleArn" type:"string"`
+	CloudWatchLogsRoleArn *string `type:"string"`
 
 	// Specifies whether the trail is publishing events from global services such
 	// as IAM to the log files.
@@ -328,7 +328,7 @@ type CreateTrailOutput struct {
 
 	// Specifies the name of the Amazon SNS topic defined for notification of log
 	// file delivery.
-	SNSTopicName *string `locationName:"SnsTopicName" type:"string"`
+	SnsTopicName *string `type:"string"`
 
 	metadataCreateTrailOutput `json:"-" xml:"-"`
 }
@@ -339,7 +339,7 @@ type metadataCreateTrailOutput struct {
 
 // String returns the string representation
 func (s CreateTrailOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -361,7 +361,7 @@ type metadataDeleteTrailInput struct {
 
 // String returns the string representation
 func (s DeleteTrailInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -381,7 +381,7 @@ type metadataDeleteTrailOutput struct {
 
 // String returns the string representation
 func (s DeleteTrailOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -403,7 +403,7 @@ type metadataDescribeTrailsInput struct {
 
 // String returns the string representation
 func (s DescribeTrailsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -426,7 +426,7 @@ type metadataDescribeTrailsOutput struct {
 
 // String returns the string representation
 func (s DescribeTrailsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -441,7 +441,7 @@ type Event struct {
 	CloudTrailEvent *string `type:"string"`
 
 	// The CloudTrail ID of the event returned.
-	EventID *string `locationName:"EventId" type:"string"`
+	EventId *string `type:"string"`
 
 	// The name of the event returned.
 	EventName *string `type:"string"`
@@ -465,7 +465,7 @@ type metadataEvent struct {
 
 // String returns the string representation
 func (s Event) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -487,7 +487,7 @@ type metadataGetTrailStatusInput struct {
 
 // String returns the string representation
 func (s GetTrailStatusInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -545,7 +545,7 @@ type metadataGetTrailStatusOutput struct {
 
 // String returns the string representation
 func (s GetTrailStatusOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -556,7 +556,7 @@ func (s GetTrailStatusOutput) GoString() string {
 // Specifies an attribute and value that filter the events returned.
 type LookupAttribute struct {
 	// Specifies an attribute on which to filter the events returned.
-	AttributeKey *string `type:"string" required:"true"`
+	AttributeKey *string `type:"string" required:"true" enum:"LookupAttributeKey"`
 
 	// Specifies a value for the specified AttributeKey.
 	AttributeValue *string `type:"string" required:"true"`
@@ -570,7 +570,7 @@ type metadataLookupAttribute struct {
 
 // String returns the string representation
 func (s LookupAttribute) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -614,7 +614,7 @@ type metadataLookupEventsInput struct {
 
 // String returns the string representation
 func (s LookupEventsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -645,7 +645,7 @@ type metadataLookupEventsOutput struct {
 
 // String returns the string representation
 func (s LookupEventsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -677,7 +677,7 @@ type metadataResource struct {
 
 // String returns the string representation
 func (s Resource) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -699,7 +699,7 @@ type metadataStartLoggingInput struct {
 
 // String returns the string representation
 func (s StartLoggingInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -719,7 +719,7 @@ type metadataStartLoggingOutput struct {
 
 // String returns the string representation
 func (s StartLoggingOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -743,7 +743,7 @@ type metadataStopLoggingInput struct {
 
 // String returns the string representation
 func (s StopLoggingInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -763,7 +763,7 @@ type metadataStopLoggingOutput struct {
 
 // String returns the string representation
 func (s StopLoggingOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -775,11 +775,11 @@ func (s StopLoggingOutput) GoString() string {
 type Trail struct {
 	// Specifies an Amazon Resource Name (ARN), a unique identifier that represents
 	// the log group to which CloudTrail logs will be delivered.
-	CloudWatchLogsLogGroupARN *string `locationName:"CloudWatchLogsLogGroupArn" type:"string"`
+	CloudWatchLogsLogGroupArn *string `type:"string"`
 
 	// Specifies the role for the CloudWatch Logs endpoint to assume to write to
 	// a user’s log group.
-	CloudWatchLogsRoleARN *string `locationName:"CloudWatchLogsRoleArn" type:"string"`
+	CloudWatchLogsRoleArn *string `type:"string"`
 
 	// Set to True to include AWS API calls from AWS global services such as IAM.
 	// Otherwise, False.
@@ -796,7 +796,7 @@ type Trail struct {
 
 	// Name of the existing Amazon SNS topic that CloudTrail uses to notify the
 	// account owner when new CloudTrail log files have been delivered.
-	SNSTopicName *string `locationName:"SnsTopicName" type:"string"`
+	SnsTopicName *string `type:"string"`
 
 	metadataTrail `json:"-" xml:"-"`
 }
@@ -807,7 +807,7 @@ type metadataTrail struct {
 
 // String returns the string representation
 func (s Trail) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -820,11 +820,11 @@ type UpdateTrailInput struct {
 	// Specifies a log group name using an Amazon Resource Name (ARN), a unique
 	// identifier that represents the log group to which CloudTrail logs will be
 	// delivered. Not required unless you specify CloudWatchLogsRoleArn.
-	CloudWatchLogsLogGroupARN *string `locationName:"CloudWatchLogsLogGroupArn" type:"string"`
+	CloudWatchLogsLogGroupArn *string `type:"string"`
 
 	// Specifies the role for the CloudWatch Logs endpoint to assume to write to
 	// a user’s log group.
-	CloudWatchLogsRoleARN *string `locationName:"CloudWatchLogsRoleArn" type:"string"`
+	CloudWatchLogsRoleArn *string `type:"string"`
 
 	// Specifies whether the trail is publishing events from global services such
 	// as IAM to the log files.
@@ -843,7 +843,7 @@ type UpdateTrailInput struct {
 
 	// Specifies the name of the Amazon SNS topic defined for notification of log
 	// file delivery.
-	SNSTopicName *string `locationName:"SnsTopicName" type:"string"`
+	SnsTopicName *string `type:"string"`
 
 	metadataUpdateTrailInput `json:"-" xml:"-"`
 }
@@ -854,7 +854,7 @@ type metadataUpdateTrailInput struct {
 
 // String returns the string representation
 func (s UpdateTrailInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -867,11 +867,11 @@ func (s UpdateTrailInput) GoString() string {
 type UpdateTrailOutput struct {
 	// Specifies the Amazon Resource Name (ARN) of the log group to which CloudTrail
 	// logs will be delivered.
-	CloudWatchLogsLogGroupARN *string `locationName:"CloudWatchLogsLogGroupArn" type:"string"`
+	CloudWatchLogsLogGroupArn *string `type:"string"`
 
 	// Specifies the role for the CloudWatch Logs endpoint to assume to write to
 	// a user’s log group.
-	CloudWatchLogsRoleARN *string `locationName:"CloudWatchLogsRoleArn" type:"string"`
+	CloudWatchLogsRoleArn *string `type:"string"`
 
 	// Specifies whether the trail is publishing events from global services such
 	// as IAM to the log files.
@@ -890,7 +890,7 @@ type UpdateTrailOutput struct {
 
 	// Specifies the name of the Amazon SNS topic defined for notification of log
 	// file delivery.
-	SNSTopicName *string `locationName:"SnsTopicName" type:"string"`
+	SnsTopicName *string `type:"string"`
 
 	metadataUpdateTrailOutput `json:"-" xml:"-"`
 }
@@ -901,10 +901,23 @@ type metadataUpdateTrailOutput struct {
 
 // String returns the string representation
 func (s UpdateTrailOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
 func (s UpdateTrailOutput) GoString() string {
 	return s.String()
 }
+
+const (
+	// @enum LookupAttributeKey
+	LookupAttributeKeyEventId = "EventId"
+	// @enum LookupAttributeKey
+	LookupAttributeKeyEventName = "EventName"
+	// @enum LookupAttributeKey
+	LookupAttributeKeyUsername = "Username"
+	// @enum LookupAttributeKey
+	LookupAttributeKeyResourceType = "ResourceType"
+	// @enum LookupAttributeKey
+	LookupAttributeKeyResourceName = "ResourceName"
+)

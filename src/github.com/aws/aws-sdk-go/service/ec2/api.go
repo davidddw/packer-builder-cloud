@@ -6,26 +6,26 @@ package ec2
 import (
 	"time"
 
-	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awsutil"
+	"github.com/aws/aws-sdk-go/aws/service"
 )
 
-const opAcceptVPCPeeringConnection = "AcceptVpcPeeringConnection"
+const opAcceptVpcPeeringConnection = "AcceptVpcPeeringConnection"
 
-// AcceptVPCPeeringConnectionRequest generates a request for the AcceptVPCPeeringConnection operation.
-func (c *EC2) AcceptVPCPeeringConnectionRequest(input *AcceptVPCPeeringConnectionInput) (req *aws.Request, output *AcceptVPCPeeringConnectionOutput) {
-	op := &aws.Operation{
-		Name:       opAcceptVPCPeeringConnection,
+// AcceptVpcPeeringConnectionRequest generates a request for the AcceptVpcPeeringConnection operation.
+func (c *EC2) AcceptVpcPeeringConnectionRequest(input *AcceptVpcPeeringConnectionInput) (req *service.Request, output *AcceptVpcPeeringConnectionOutput) {
+	op := &service.Operation{
+		Name:       opAcceptVpcPeeringConnection,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &AcceptVPCPeeringConnectionInput{}
+		input = &AcceptVpcPeeringConnectionInput{}
 	}
 
 	req = c.newRequest(op, input, output)
-	output = &AcceptVPCPeeringConnectionOutput{}
+	output = &AcceptVpcPeeringConnectionOutput{}
 	req.Data = output
 	return
 }
@@ -34,8 +34,8 @@ func (c *EC2) AcceptVPCPeeringConnectionRequest(input *AcceptVPCPeeringConnectio
 // connection must be in the pending-acceptance state, and you must be the owner
 // of the peer VPC. Use the DescribeVpcPeeringConnections request to view your
 // outstanding VPC peering connection requests.
-func (c *EC2) AcceptVPCPeeringConnection(input *AcceptVPCPeeringConnectionInput) (*AcceptVPCPeeringConnectionOutput, error) {
-	req, out := c.AcceptVPCPeeringConnectionRequest(input)
+func (c *EC2) AcceptVpcPeeringConnection(input *AcceptVpcPeeringConnectionInput) (*AcceptVpcPeeringConnectionOutput, error) {
+	req, out := c.AcceptVpcPeeringConnectionRequest(input)
 	err := req.Send()
 	return out, err
 }
@@ -43,8 +43,8 @@ func (c *EC2) AcceptVPCPeeringConnection(input *AcceptVPCPeeringConnectionInput)
 const opAllocateAddress = "AllocateAddress"
 
 // AllocateAddressRequest generates a request for the AllocateAddress operation.
-func (c *EC2) AllocateAddressRequest(input *AllocateAddressInput) (req *aws.Request, output *AllocateAddressOutput) {
-	op := &aws.Operation{
+func (c *EC2) AllocateAddressRequest(input *AllocateAddressInput) (req *service.Request, output *AllocateAddressOutput) {
+	op := &service.Operation{
 		Name:       opAllocateAddress,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -71,22 +71,22 @@ func (c *EC2) AllocateAddress(input *AllocateAddressInput) (*AllocateAddressOutp
 	return out, err
 }
 
-const opAssignPrivateIPAddresses = "AssignPrivateIpAddresses"
+const opAssignPrivateIpAddresses = "AssignPrivateIpAddresses"
 
-// AssignPrivateIPAddressesRequest generates a request for the AssignPrivateIPAddresses operation.
-func (c *EC2) AssignPrivateIPAddressesRequest(input *AssignPrivateIPAddressesInput) (req *aws.Request, output *AssignPrivateIPAddressesOutput) {
-	op := &aws.Operation{
-		Name:       opAssignPrivateIPAddresses,
+// AssignPrivateIpAddressesRequest generates a request for the AssignPrivateIpAddresses operation.
+func (c *EC2) AssignPrivateIpAddressesRequest(input *AssignPrivateIpAddressesInput) (req *service.Request, output *AssignPrivateIpAddressesOutput) {
+	op := &service.Operation{
+		Name:       opAssignPrivateIpAddresses,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &AssignPrivateIPAddressesInput{}
+		input = &AssignPrivateIpAddressesInput{}
 	}
 
 	req = c.newRequest(op, input, output)
-	output = &AssignPrivateIPAddressesOutput{}
+	output = &AssignPrivateIpAddressesOutput{}
 	req.Data = output
 	return
 }
@@ -102,8 +102,8 @@ func (c *EC2) AssignPrivateIPAddressesRequest(input *AssignPrivateIPAddressesInp
 // in the Amazon Elastic Compute Cloud User Guide.
 //
 // AssignPrivateIpAddresses is available only in EC2-VPC.
-func (c *EC2) AssignPrivateIPAddresses(input *AssignPrivateIPAddressesInput) (*AssignPrivateIPAddressesOutput, error) {
-	req, out := c.AssignPrivateIPAddressesRequest(input)
+func (c *EC2) AssignPrivateIpAddresses(input *AssignPrivateIpAddressesInput) (*AssignPrivateIpAddressesOutput, error) {
+	req, out := c.AssignPrivateIpAddressesRequest(input)
 	err := req.Send()
 	return out, err
 }
@@ -111,8 +111,8 @@ func (c *EC2) AssignPrivateIPAddresses(input *AssignPrivateIPAddressesInput) (*A
 const opAssociateAddress = "AssociateAddress"
 
 // AssociateAddressRequest generates a request for the AssociateAddress operation.
-func (c *EC2) AssociateAddressRequest(input *AssociateAddressInput) (req *aws.Request, output *AssociateAddressOutput) {
-	op := &aws.Operation{
+func (c *EC2) AssociateAddressRequest(input *AssociateAddressInput) (req *service.Request, output *AssociateAddressOutput) {
+	op := &service.Operation{
 		Name:       opAssociateAddress,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -151,22 +151,22 @@ func (c *EC2) AssociateAddress(input *AssociateAddressInput) (*AssociateAddressO
 	return out, err
 }
 
-const opAssociateDHCPOptions = "AssociateDhcpOptions"
+const opAssociateDhcpOptions = "AssociateDhcpOptions"
 
-// AssociateDHCPOptionsRequest generates a request for the AssociateDHCPOptions operation.
-func (c *EC2) AssociateDHCPOptionsRequest(input *AssociateDHCPOptionsInput) (req *aws.Request, output *AssociateDHCPOptionsOutput) {
-	op := &aws.Operation{
-		Name:       opAssociateDHCPOptions,
+// AssociateDhcpOptionsRequest generates a request for the AssociateDhcpOptions operation.
+func (c *EC2) AssociateDhcpOptionsRequest(input *AssociateDhcpOptionsInput) (req *service.Request, output *AssociateDhcpOptionsOutput) {
+	op := &service.Operation{
+		Name:       opAssociateDhcpOptions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &AssociateDHCPOptionsInput{}
+		input = &AssociateDhcpOptionsInput{}
 	}
 
 	req = c.newRequest(op, input, output)
-	output = &AssociateDHCPOptionsOutput{}
+	output = &AssociateDhcpOptionsOutput{}
 	req.Data = output
 	return
 }
@@ -183,8 +183,8 @@ func (c *EC2) AssociateDHCPOptionsRequest(input *AssociateDHCPOptionsInput) (req
 //
 // For more information, see DHCP Options Sets (http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_DHCP_Options.html)
 // in the Amazon Virtual Private Cloud User Guide.
-func (c *EC2) AssociateDHCPOptions(input *AssociateDHCPOptionsInput) (*AssociateDHCPOptionsOutput, error) {
-	req, out := c.AssociateDHCPOptionsRequest(input)
+func (c *EC2) AssociateDhcpOptions(input *AssociateDhcpOptionsInput) (*AssociateDhcpOptionsOutput, error) {
+	req, out := c.AssociateDhcpOptionsRequest(input)
 	err := req.Send()
 	return out, err
 }
@@ -192,8 +192,8 @@ func (c *EC2) AssociateDHCPOptions(input *AssociateDHCPOptionsInput) (*Associate
 const opAssociateRouteTable = "AssociateRouteTable"
 
 // AssociateRouteTableRequest generates a request for the AssociateRouteTable operation.
-func (c *EC2) AssociateRouteTableRequest(input *AssociateRouteTableInput) (req *aws.Request, output *AssociateRouteTableOutput) {
-	op := &aws.Operation{
+func (c *EC2) AssociateRouteTableRequest(input *AssociateRouteTableInput) (req *service.Request, output *AssociateRouteTableOutput) {
+	op := &service.Operation{
 		Name:       opAssociateRouteTable,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -223,22 +223,22 @@ func (c *EC2) AssociateRouteTable(input *AssociateRouteTableInput) (*AssociateRo
 	return out, err
 }
 
-const opAttachClassicLinkVPC = "AttachClassicLinkVpc"
+const opAttachClassicLinkVpc = "AttachClassicLinkVpc"
 
-// AttachClassicLinkVPCRequest generates a request for the AttachClassicLinkVPC operation.
-func (c *EC2) AttachClassicLinkVPCRequest(input *AttachClassicLinkVPCInput) (req *aws.Request, output *AttachClassicLinkVPCOutput) {
-	op := &aws.Operation{
-		Name:       opAttachClassicLinkVPC,
+// AttachClassicLinkVpcRequest generates a request for the AttachClassicLinkVpc operation.
+func (c *EC2) AttachClassicLinkVpcRequest(input *AttachClassicLinkVpcInput) (req *service.Request, output *AttachClassicLinkVpcOutput) {
+	op := &service.Operation{
+		Name:       opAttachClassicLinkVpc,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &AttachClassicLinkVPCInput{}
+		input = &AttachClassicLinkVpcInput{}
 	}
 
 	req = c.newRequest(op, input, output)
-	output = &AttachClassicLinkVPCOutput{}
+	output = &AttachClassicLinkVpcOutput{}
 	req.Data = output
 	return
 }
@@ -255,8 +255,8 @@ func (c *EC2) AttachClassicLinkVPCRequest(input *AttachClassicLinkVPCInput) (req
 //
 // Linking your instance to a VPC is sometimes referred to as attaching your
 // instance.
-func (c *EC2) AttachClassicLinkVPC(input *AttachClassicLinkVPCInput) (*AttachClassicLinkVPCOutput, error) {
-	req, out := c.AttachClassicLinkVPCRequest(input)
+func (c *EC2) AttachClassicLinkVpc(input *AttachClassicLinkVpcInput) (*AttachClassicLinkVpcOutput, error) {
+	req, out := c.AttachClassicLinkVpcRequest(input)
 	err := req.Send()
 	return out, err
 }
@@ -264,8 +264,8 @@ func (c *EC2) AttachClassicLinkVPC(input *AttachClassicLinkVPCInput) (*AttachCla
 const opAttachInternetGateway = "AttachInternetGateway"
 
 // AttachInternetGatewayRequest generates a request for the AttachInternetGateway operation.
-func (c *EC2) AttachInternetGatewayRequest(input *AttachInternetGatewayInput) (req *aws.Request, output *AttachInternetGatewayOutput) {
-	op := &aws.Operation{
+func (c *EC2) AttachInternetGatewayRequest(input *AttachInternetGatewayInput) (req *service.Request, output *AttachInternetGatewayOutput) {
+	op := &service.Operation{
 		Name:       opAttachInternetGateway,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -293,8 +293,8 @@ func (c *EC2) AttachInternetGateway(input *AttachInternetGatewayInput) (*AttachI
 const opAttachNetworkInterface = "AttachNetworkInterface"
 
 // AttachNetworkInterfaceRequest generates a request for the AttachNetworkInterface operation.
-func (c *EC2) AttachNetworkInterfaceRequest(input *AttachNetworkInterfaceInput) (req *aws.Request, output *AttachNetworkInterfaceOutput) {
-	op := &aws.Operation{
+func (c *EC2) AttachNetworkInterfaceRequest(input *AttachNetworkInterfaceInput) (req *service.Request, output *AttachNetworkInterfaceOutput) {
+	op := &service.Operation{
 		Name:       opAttachNetworkInterface,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -317,40 +317,11 @@ func (c *EC2) AttachNetworkInterface(input *AttachNetworkInterfaceInput) (*Attac
 	return out, err
 }
 
-const opAttachVPNGateway = "AttachVpnGateway"
-
-// AttachVPNGatewayRequest generates a request for the AttachVPNGateway operation.
-func (c *EC2) AttachVPNGatewayRequest(input *AttachVPNGatewayInput) (req *aws.Request, output *AttachVPNGatewayOutput) {
-	op := &aws.Operation{
-		Name:       opAttachVPNGateway,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &AttachVPNGatewayInput{}
-	}
-
-	req = c.newRequest(op, input, output)
-	output = &AttachVPNGatewayOutput{}
-	req.Data = output
-	return
-}
-
-// Attaches a virtual private gateway to a VPC. For more information, see Adding
-// a Hardware Virtual Private Gateway to Your VPC (http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html)
-// in the Amazon Virtual Private Cloud User Guide.
-func (c *EC2) AttachVPNGateway(input *AttachVPNGatewayInput) (*AttachVPNGatewayOutput, error) {
-	req, out := c.AttachVPNGatewayRequest(input)
-	err := req.Send()
-	return out, err
-}
-
 const opAttachVolume = "AttachVolume"
 
 // AttachVolumeRequest generates a request for the AttachVolume operation.
-func (c *EC2) AttachVolumeRequest(input *AttachVolumeInput) (req *aws.Request, output *VolumeAttachment) {
-	op := &aws.Operation{
+func (c *EC2) AttachVolumeRequest(input *AttachVolumeInput) (req *service.Request, output *VolumeAttachment) {
+	op := &service.Operation{
 		Name:       opAttachVolume,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -397,11 +368,40 @@ func (c *EC2) AttachVolume(input *AttachVolumeInput) (*VolumeAttachment, error) 
 	return out, err
 }
 
+const opAttachVpnGateway = "AttachVpnGateway"
+
+// AttachVpnGatewayRequest generates a request for the AttachVpnGateway operation.
+func (c *EC2) AttachVpnGatewayRequest(input *AttachVpnGatewayInput) (req *service.Request, output *AttachVpnGatewayOutput) {
+	op := &service.Operation{
+		Name:       opAttachVpnGateway,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &AttachVpnGatewayInput{}
+	}
+
+	req = c.newRequest(op, input, output)
+	output = &AttachVpnGatewayOutput{}
+	req.Data = output
+	return
+}
+
+// Attaches a virtual private gateway to a VPC. For more information, see Adding
+// a Hardware Virtual Private Gateway to Your VPC (http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html)
+// in the Amazon Virtual Private Cloud User Guide.
+func (c *EC2) AttachVpnGateway(input *AttachVpnGatewayInput) (*AttachVpnGatewayOutput, error) {
+	req, out := c.AttachVpnGatewayRequest(input)
+	err := req.Send()
+	return out, err
+}
+
 const opAuthorizeSecurityGroupEgress = "AuthorizeSecurityGroupEgress"
 
 // AuthorizeSecurityGroupEgressRequest generates a request for the AuthorizeSecurityGroupEgress operation.
-func (c *EC2) AuthorizeSecurityGroupEgressRequest(input *AuthorizeSecurityGroupEgressInput) (req *aws.Request, output *AuthorizeSecurityGroupEgressOutput) {
-	op := &aws.Operation{
+func (c *EC2) AuthorizeSecurityGroupEgressRequest(input *AuthorizeSecurityGroupEgressInput) (req *service.Request, output *AuthorizeSecurityGroupEgressOutput) {
+	op := &service.Operation{
 		Name:       opAuthorizeSecurityGroupEgress,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -447,8 +447,8 @@ func (c *EC2) AuthorizeSecurityGroupEgress(input *AuthorizeSecurityGroupEgressIn
 const opAuthorizeSecurityGroupIngress = "AuthorizeSecurityGroupIngress"
 
 // AuthorizeSecurityGroupIngressRequest generates a request for the AuthorizeSecurityGroupIngress operation.
-func (c *EC2) AuthorizeSecurityGroupIngressRequest(input *AuthorizeSecurityGroupIngressInput) (req *aws.Request, output *AuthorizeSecurityGroupIngressOutput) {
-	op := &aws.Operation{
+func (c *EC2) AuthorizeSecurityGroupIngressRequest(input *AuthorizeSecurityGroupIngressInput) (req *service.Request, output *AuthorizeSecurityGroupIngressOutput) {
+	op := &service.Operation{
 		Name:       opAuthorizeSecurityGroupIngress,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -492,8 +492,8 @@ func (c *EC2) AuthorizeSecurityGroupIngress(input *AuthorizeSecurityGroupIngress
 const opBundleInstance = "BundleInstance"
 
 // BundleInstanceRequest generates a request for the BundleInstance operation.
-func (c *EC2) BundleInstanceRequest(input *BundleInstanceInput) (req *aws.Request, output *BundleInstanceOutput) {
-	op := &aws.Operation{
+func (c *EC2) BundleInstanceRequest(input *BundleInstanceInput) (req *service.Request, output *BundleInstanceOutput) {
+	op := &service.Operation{
 		Name:       opBundleInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -528,8 +528,8 @@ func (c *EC2) BundleInstance(input *BundleInstanceInput) (*BundleInstanceOutput,
 const opCancelBundleTask = "CancelBundleTask"
 
 // CancelBundleTaskRequest generates a request for the CancelBundleTask operation.
-func (c *EC2) CancelBundleTaskRequest(input *CancelBundleTaskInput) (req *aws.Request, output *CancelBundleTaskOutput) {
-	op := &aws.Operation{
+func (c *EC2) CancelBundleTaskRequest(input *CancelBundleTaskInput) (req *service.Request, output *CancelBundleTaskOutput) {
+	op := &service.Operation{
 		Name:       opCancelBundleTask,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -555,8 +555,8 @@ func (c *EC2) CancelBundleTask(input *CancelBundleTaskInput) (*CancelBundleTaskO
 const opCancelConversionTask = "CancelConversionTask"
 
 // CancelConversionTaskRequest generates a request for the CancelConversionTask operation.
-func (c *EC2) CancelConversionTaskRequest(input *CancelConversionTaskInput) (req *aws.Request, output *CancelConversionTaskOutput) {
-	op := &aws.Operation{
+func (c *EC2) CancelConversionTaskRequest(input *CancelConversionTaskInput) (req *service.Request, output *CancelConversionTaskOutput) {
+	op := &service.Operation{
 		Name:       opCancelConversionTask,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -590,8 +590,8 @@ func (c *EC2) CancelConversionTask(input *CancelConversionTaskInput) (*CancelCon
 const opCancelExportTask = "CancelExportTask"
 
 // CancelExportTaskRequest generates a request for the CancelExportTask operation.
-func (c *EC2) CancelExportTaskRequest(input *CancelExportTaskInput) (req *aws.Request, output *CancelExportTaskOutput) {
-	op := &aws.Operation{
+func (c *EC2) CancelExportTaskRequest(input *CancelExportTaskInput) (req *service.Request, output *CancelExportTaskOutput) {
+	op := &service.Operation{
 		Name:       opCancelExportTask,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -620,8 +620,8 @@ func (c *EC2) CancelExportTask(input *CancelExportTaskInput) (*CancelExportTaskO
 const opCancelImportTask = "CancelImportTask"
 
 // CancelImportTaskRequest generates a request for the CancelImportTask operation.
-func (c *EC2) CancelImportTaskRequest(input *CancelImportTaskInput) (req *aws.Request, output *CancelImportTaskOutput) {
-	op := &aws.Operation{
+func (c *EC2) CancelImportTaskRequest(input *CancelImportTaskInput) (req *service.Request, output *CancelImportTaskOutput) {
+	op := &service.Operation{
 		Name:       opCancelImportTask,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -647,8 +647,8 @@ func (c *EC2) CancelImportTask(input *CancelImportTaskInput) (*CancelImportTaskO
 const opCancelReservedInstancesListing = "CancelReservedInstancesListing"
 
 // CancelReservedInstancesListingRequest generates a request for the CancelReservedInstancesListing operation.
-func (c *EC2) CancelReservedInstancesListingRequest(input *CancelReservedInstancesListingInput) (req *aws.Request, output *CancelReservedInstancesListingOutput) {
-	op := &aws.Operation{
+func (c *EC2) CancelReservedInstancesListingRequest(input *CancelReservedInstancesListingInput) (req *service.Request, output *CancelReservedInstancesListingOutput) {
+	op := &service.Operation{
 		Name:       opCancelReservedInstancesListing,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -678,8 +678,8 @@ func (c *EC2) CancelReservedInstancesListing(input *CancelReservedInstancesListi
 const opCancelSpotFleetRequests = "CancelSpotFleetRequests"
 
 // CancelSpotFleetRequestsRequest generates a request for the CancelSpotFleetRequests operation.
-func (c *EC2) CancelSpotFleetRequestsRequest(input *CancelSpotFleetRequestsInput) (req *aws.Request, output *CancelSpotFleetRequestsOutput) {
-	op := &aws.Operation{
+func (c *EC2) CancelSpotFleetRequestsRequest(input *CancelSpotFleetRequestsInput) (req *service.Request, output *CancelSpotFleetRequestsOutput) {
+	op := &service.Operation{
 		Name:       opCancelSpotFleetRequests,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -705,8 +705,8 @@ func (c *EC2) CancelSpotFleetRequests(input *CancelSpotFleetRequestsInput) (*Can
 const opCancelSpotInstanceRequests = "CancelSpotInstanceRequests"
 
 // CancelSpotInstanceRequestsRequest generates a request for the CancelSpotInstanceRequests operation.
-func (c *EC2) CancelSpotInstanceRequestsRequest(input *CancelSpotInstanceRequestsInput) (req *aws.Request, output *CancelSpotInstanceRequestsOutput) {
-	op := &aws.Operation{
+func (c *EC2) CancelSpotInstanceRequestsRequest(input *CancelSpotInstanceRequestsInput) (req *service.Request, output *CancelSpotInstanceRequestsOutput) {
+	op := &service.Operation{
 		Name:       opCancelSpotInstanceRequests,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -740,8 +740,8 @@ func (c *EC2) CancelSpotInstanceRequests(input *CancelSpotInstanceRequestsInput)
 const opConfirmProductInstance = "ConfirmProductInstance"
 
 // ConfirmProductInstanceRequest generates a request for the ConfirmProductInstance operation.
-func (c *EC2) ConfirmProductInstanceRequest(input *ConfirmProductInstanceInput) (req *aws.Request, output *ConfirmProductInstanceOutput) {
-	op := &aws.Operation{
+func (c *EC2) ConfirmProductInstanceRequest(input *ConfirmProductInstanceInput) (req *service.Request, output *ConfirmProductInstanceOutput) {
+	op := &service.Operation{
 		Name:       opConfirmProductInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -770,8 +770,8 @@ func (c *EC2) ConfirmProductInstance(input *ConfirmProductInstanceInput) (*Confi
 const opCopyImage = "CopyImage"
 
 // CopyImageRequest generates a request for the CopyImage operation.
-func (c *EC2) CopyImageRequest(input *CopyImageInput) (req *aws.Request, output *CopyImageOutput) {
-	op := &aws.Operation{
+func (c *EC2) CopyImageRequest(input *CopyImageInput) (req *service.Request, output *CopyImageOutput) {
+	op := &service.Operation{
 		Name:       opCopyImage,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -803,8 +803,8 @@ func (c *EC2) CopyImage(input *CopyImageInput) (*CopyImageOutput, error) {
 const opCopySnapshot = "CopySnapshot"
 
 // CopySnapshotRequest generates a request for the CopySnapshot operation.
-func (c *EC2) CopySnapshotRequest(input *CopySnapshotInput) (req *aws.Request, output *CopySnapshotOutput) {
-	op := &aws.Operation{
+func (c *EC2) CopySnapshotRequest(input *CopySnapshotInput) (req *service.Request, output *CopySnapshotOutput) {
+	op := &service.Operation{
 		Name:       opCopySnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -829,7 +829,7 @@ func (c *EC2) CopySnapshotRequest(input *CopySnapshotInput) (req *aws.Request, o
 // Copies of encrypted EBS snapshots remain encrypted. Copies of unencrypted
 // snapshots remain unencrypted, unless the Encrypted flag is specified during
 // the snapshot copy operation. By default, encrypted snapshot copies use the
-// default AWS Key Management Service (KMS) Customer Master Key (CMK); however,
+// default AWS Key Management Service (AWS KMS) customer master key (CMK); however,
 // you can specify a non-default CMK with the KmsKeyId parameter.
 //
 // For more information, see Copying an Amazon EBS Snapshot (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-copy-snapshot.html)
@@ -843,8 +843,8 @@ func (c *EC2) CopySnapshot(input *CopySnapshotInput) (*CopySnapshotOutput, error
 const opCreateCustomerGateway = "CreateCustomerGateway"
 
 // CreateCustomerGatewayRequest generates a request for the CreateCustomerGateway operation.
-func (c *EC2) CreateCustomerGatewayRequest(input *CreateCustomerGatewayInput) (req *aws.Request, output *CreateCustomerGatewayOutput) {
-	op := &aws.Operation{
+func (c *EC2) CreateCustomerGatewayRequest(input *CreateCustomerGatewayInput) (req *service.Request, output *CreateCustomerGatewayOutput) {
+	op := &service.Operation{
 		Name:       opCreateCustomerGateway,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -891,22 +891,22 @@ func (c *EC2) CreateCustomerGateway(input *CreateCustomerGatewayInput) (*CreateC
 	return out, err
 }
 
-const opCreateDHCPOptions = "CreateDhcpOptions"
+const opCreateDhcpOptions = "CreateDhcpOptions"
 
-// CreateDHCPOptionsRequest generates a request for the CreateDHCPOptions operation.
-func (c *EC2) CreateDHCPOptionsRequest(input *CreateDHCPOptionsInput) (req *aws.Request, output *CreateDHCPOptionsOutput) {
-	op := &aws.Operation{
-		Name:       opCreateDHCPOptions,
+// CreateDhcpOptionsRequest generates a request for the CreateDhcpOptions operation.
+func (c *EC2) CreateDhcpOptionsRequest(input *CreateDhcpOptionsInput) (req *service.Request, output *CreateDhcpOptionsOutput) {
+	op := &service.Operation{
+		Name:       opCreateDhcpOptions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateDHCPOptionsInput{}
+		input = &CreateDhcpOptionsInput{}
 	}
 
 	req = c.newRequest(op, input, output)
-	output = &CreateDHCPOptionsOutput{}
+	output = &CreateDhcpOptionsOutput{}
 	req.Data = output
 	return
 }
@@ -940,8 +940,8 @@ func (c *EC2) CreateDHCPOptionsRequest(input *CreateDHCPOptionsInput) (req *aws.
 // either to AmazonProvidedDNS or to a domain name server of your choice. For
 // more information about DHCP options, see DHCP Options Sets (http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_DHCP_Options.html)
 // in the Amazon Virtual Private Cloud User Guide.
-func (c *EC2) CreateDHCPOptions(input *CreateDHCPOptionsInput) (*CreateDHCPOptionsOutput, error) {
-	req, out := c.CreateDHCPOptionsRequest(input)
+func (c *EC2) CreateDhcpOptions(input *CreateDhcpOptionsInput) (*CreateDhcpOptionsOutput, error) {
+	req, out := c.CreateDhcpOptionsRequest(input)
 	err := req.Send()
 	return out, err
 }
@@ -949,8 +949,8 @@ func (c *EC2) CreateDHCPOptions(input *CreateDHCPOptionsInput) (*CreateDHCPOptio
 const opCreateFlowLogs = "CreateFlowLogs"
 
 // CreateFlowLogsRequest generates a request for the CreateFlowLogs operation.
-func (c *EC2) CreateFlowLogsRequest(input *CreateFlowLogsInput) (req *aws.Request, output *CreateFlowLogsOutput) {
-	op := &aws.Operation{
+func (c *EC2) CreateFlowLogsRequest(input *CreateFlowLogsInput) (req *service.Request, output *CreateFlowLogsOutput) {
+	op := &service.Operation{
 		Name:       opCreateFlowLogs,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -985,8 +985,8 @@ func (c *EC2) CreateFlowLogs(input *CreateFlowLogsInput) (*CreateFlowLogsOutput,
 const opCreateImage = "CreateImage"
 
 // CreateImageRequest generates a request for the CreateImage operation.
-func (c *EC2) CreateImageRequest(input *CreateImageInput) (req *aws.Request, output *CreateImageOutput) {
-	op := &aws.Operation{
+func (c *EC2) CreateImageRequest(input *CreateImageInput) (req *service.Request, output *CreateImageOutput) {
+	op := &service.Operation{
 		Name:       opCreateImage,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1021,8 +1021,8 @@ func (c *EC2) CreateImage(input *CreateImageInput) (*CreateImageOutput, error) {
 const opCreateInstanceExportTask = "CreateInstanceExportTask"
 
 // CreateInstanceExportTaskRequest generates a request for the CreateInstanceExportTask operation.
-func (c *EC2) CreateInstanceExportTaskRequest(input *CreateInstanceExportTaskInput) (req *aws.Request, output *CreateInstanceExportTaskOutput) {
-	op := &aws.Operation{
+func (c *EC2) CreateInstanceExportTaskRequest(input *CreateInstanceExportTaskInput) (req *service.Request, output *CreateInstanceExportTaskOutput) {
+	op := &service.Operation{
 		Name:       opCreateInstanceExportTask,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1053,8 +1053,8 @@ func (c *EC2) CreateInstanceExportTask(input *CreateInstanceExportTaskInput) (*C
 const opCreateInternetGateway = "CreateInternetGateway"
 
 // CreateInternetGatewayRequest generates a request for the CreateInternetGateway operation.
-func (c *EC2) CreateInternetGatewayRequest(input *CreateInternetGatewayInput) (req *aws.Request, output *CreateInternetGatewayOutput) {
-	op := &aws.Operation{
+func (c *EC2) CreateInternetGatewayRequest(input *CreateInternetGatewayInput) (req *service.Request, output *CreateInternetGatewayOutput) {
+	op := &service.Operation{
 		Name:       opCreateInternetGateway,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1084,8 +1084,8 @@ func (c *EC2) CreateInternetGateway(input *CreateInternetGatewayInput) (*CreateI
 const opCreateKeyPair = "CreateKeyPair"
 
 // CreateKeyPairRequest generates a request for the CreateKeyPair operation.
-func (c *EC2) CreateKeyPairRequest(input *CreateKeyPairInput) (req *aws.Request, output *CreateKeyPairOutput) {
-	op := &aws.Operation{
+func (c *EC2) CreateKeyPairRequest(input *CreateKeyPairInput) (req *service.Request, output *CreateKeyPairOutput) {
+	op := &service.Operation{
 		Name:       opCreateKeyPair,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1119,22 +1119,22 @@ func (c *EC2) CreateKeyPair(input *CreateKeyPairInput) (*CreateKeyPairOutput, er
 	return out, err
 }
 
-const opCreateNetworkACL = "CreateNetworkAcl"
+const opCreateNetworkAcl = "CreateNetworkAcl"
 
-// CreateNetworkACLRequest generates a request for the CreateNetworkACL operation.
-func (c *EC2) CreateNetworkACLRequest(input *CreateNetworkACLInput) (req *aws.Request, output *CreateNetworkACLOutput) {
-	op := &aws.Operation{
-		Name:       opCreateNetworkACL,
+// CreateNetworkAclRequest generates a request for the CreateNetworkAcl operation.
+func (c *EC2) CreateNetworkAclRequest(input *CreateNetworkAclInput) (req *service.Request, output *CreateNetworkAclOutput) {
+	op := &service.Operation{
+		Name:       opCreateNetworkAcl,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateNetworkACLInput{}
+		input = &CreateNetworkAclInput{}
 	}
 
 	req = c.newRequest(op, input, output)
-	output = &CreateNetworkACLOutput{}
+	output = &CreateNetworkAclOutput{}
 	req.Data = output
 	return
 }
@@ -1144,28 +1144,28 @@ func (c *EC2) CreateNetworkACLRequest(input *CreateNetworkACLInput) (req *aws.Re
 //
 // For more information about network ACLs, see Network ACLs (http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_ACLs.html)
 // in the Amazon Virtual Private Cloud User Guide.
-func (c *EC2) CreateNetworkACL(input *CreateNetworkACLInput) (*CreateNetworkACLOutput, error) {
-	req, out := c.CreateNetworkACLRequest(input)
+func (c *EC2) CreateNetworkAcl(input *CreateNetworkAclInput) (*CreateNetworkAclOutput, error) {
+	req, out := c.CreateNetworkAclRequest(input)
 	err := req.Send()
 	return out, err
 }
 
-const opCreateNetworkACLEntry = "CreateNetworkAclEntry"
+const opCreateNetworkAclEntry = "CreateNetworkAclEntry"
 
-// CreateNetworkACLEntryRequest generates a request for the CreateNetworkACLEntry operation.
-func (c *EC2) CreateNetworkACLEntryRequest(input *CreateNetworkACLEntryInput) (req *aws.Request, output *CreateNetworkACLEntryOutput) {
-	op := &aws.Operation{
-		Name:       opCreateNetworkACLEntry,
+// CreateNetworkAclEntryRequest generates a request for the CreateNetworkAclEntry operation.
+func (c *EC2) CreateNetworkAclEntryRequest(input *CreateNetworkAclEntryInput) (req *service.Request, output *CreateNetworkAclEntryOutput) {
+	op := &service.Operation{
+		Name:       opCreateNetworkAclEntry,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateNetworkACLEntryInput{}
+		input = &CreateNetworkAclEntryInput{}
 	}
 
 	req = c.newRequest(op, input, output)
-	output = &CreateNetworkACLEntryOutput{}
+	output = &CreateNetworkAclEntryOutput{}
 	req.Data = output
 	return
 }
@@ -1187,8 +1187,8 @@ func (c *EC2) CreateNetworkACLEntryRequest(input *CreateNetworkACLEntryInput) (r
 //
 // For more information about network ACLs, see Network ACLs (http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_ACLs.html)
 // in the Amazon Virtual Private Cloud User Guide.
-func (c *EC2) CreateNetworkACLEntry(input *CreateNetworkACLEntryInput) (*CreateNetworkACLEntryOutput, error) {
-	req, out := c.CreateNetworkACLEntryRequest(input)
+func (c *EC2) CreateNetworkAclEntry(input *CreateNetworkAclEntryInput) (*CreateNetworkAclEntryOutput, error) {
+	req, out := c.CreateNetworkAclEntryRequest(input)
 	err := req.Send()
 	return out, err
 }
@@ -1196,8 +1196,8 @@ func (c *EC2) CreateNetworkACLEntry(input *CreateNetworkACLEntryInput) (*CreateN
 const opCreateNetworkInterface = "CreateNetworkInterface"
 
 // CreateNetworkInterfaceRequest generates a request for the CreateNetworkInterface operation.
-func (c *EC2) CreateNetworkInterfaceRequest(input *CreateNetworkInterfaceInput) (req *aws.Request, output *CreateNetworkInterfaceOutput) {
-	op := &aws.Operation{
+func (c *EC2) CreateNetworkInterfaceRequest(input *CreateNetworkInterfaceInput) (req *service.Request, output *CreateNetworkInterfaceOutput) {
+	op := &service.Operation{
 		Name:       opCreateNetworkInterface,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1227,8 +1227,8 @@ func (c *EC2) CreateNetworkInterface(input *CreateNetworkInterfaceInput) (*Creat
 const opCreatePlacementGroup = "CreatePlacementGroup"
 
 // CreatePlacementGroupRequest generates a request for the CreatePlacementGroup operation.
-func (c *EC2) CreatePlacementGroupRequest(input *CreatePlacementGroupInput) (req *aws.Request, output *CreatePlacementGroupOutput) {
-	op := &aws.Operation{
+func (c *EC2) CreatePlacementGroupRequest(input *CreatePlacementGroupInput) (req *service.Request, output *CreatePlacementGroupOutput) {
+	op := &service.Operation{
 		Name:       opCreatePlacementGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1259,8 +1259,8 @@ func (c *EC2) CreatePlacementGroup(input *CreatePlacementGroupInput) (*CreatePla
 const opCreateReservedInstancesListing = "CreateReservedInstancesListing"
 
 // CreateReservedInstancesListingRequest generates a request for the CreateReservedInstancesListing operation.
-func (c *EC2) CreateReservedInstancesListingRequest(input *CreateReservedInstancesListingInput) (req *aws.Request, output *CreateReservedInstancesListingOutput) {
-	op := &aws.Operation{
+func (c *EC2) CreateReservedInstancesListingRequest(input *CreateReservedInstancesListingInput) (req *service.Request, output *CreateReservedInstancesListingOutput) {
+	op := &service.Operation{
 		Name:       opCreateReservedInstancesListing,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1305,8 +1305,8 @@ func (c *EC2) CreateReservedInstancesListing(input *CreateReservedInstancesListi
 const opCreateRoute = "CreateRoute"
 
 // CreateRouteRequest generates a request for the CreateRoute operation.
-func (c *EC2) CreateRouteRequest(input *CreateRouteInput) (req *aws.Request, output *CreateRouteOutput) {
-	op := &aws.Operation{
+func (c *EC2) CreateRouteRequest(input *CreateRouteInput) (req *service.Request, output *CreateRouteOutput) {
+	op := &service.Operation{
 		Name:       opCreateRoute,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1350,8 +1350,8 @@ func (c *EC2) CreateRoute(input *CreateRouteInput) (*CreateRouteOutput, error) {
 const opCreateRouteTable = "CreateRouteTable"
 
 // CreateRouteTableRequest generates a request for the CreateRouteTable operation.
-func (c *EC2) CreateRouteTableRequest(input *CreateRouteTableInput) (req *aws.Request, output *CreateRouteTableOutput) {
-	op := &aws.Operation{
+func (c *EC2) CreateRouteTableRequest(input *CreateRouteTableInput) (req *service.Request, output *CreateRouteTableOutput) {
+	op := &service.Operation{
 		Name:       opCreateRouteTable,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1381,8 +1381,8 @@ func (c *EC2) CreateRouteTable(input *CreateRouteTableInput) (*CreateRouteTableO
 const opCreateSecurityGroup = "CreateSecurityGroup"
 
 // CreateSecurityGroupRequest generates a request for the CreateSecurityGroup operation.
-func (c *EC2) CreateSecurityGroupRequest(input *CreateSecurityGroupInput) (req *aws.Request, output *CreateSecurityGroupOutput) {
-	op := &aws.Operation{
+func (c *EC2) CreateSecurityGroupRequest(input *CreateSecurityGroupInput) (req *service.Request, output *CreateSecurityGroupOutput) {
+	op := &service.Operation{
 		Name:       opCreateSecurityGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1434,8 +1434,8 @@ func (c *EC2) CreateSecurityGroup(input *CreateSecurityGroupInput) (*CreateSecur
 const opCreateSnapshot = "CreateSnapshot"
 
 // CreateSnapshotRequest generates a request for the CreateSnapshot operation.
-func (c *EC2) CreateSnapshotRequest(input *CreateSnapshotInput) (req *aws.Request, output *Snapshot) {
-	op := &aws.Operation{
+func (c *EC2) CreateSnapshotRequest(input *CreateSnapshotInput) (req *service.Request, output *Snapshot) {
+	op := &service.Operation{
 		Name:       opCreateSnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1488,8 +1488,8 @@ func (c *EC2) CreateSnapshot(input *CreateSnapshotInput) (*Snapshot, error) {
 const opCreateSpotDatafeedSubscription = "CreateSpotDatafeedSubscription"
 
 // CreateSpotDatafeedSubscriptionRequest generates a request for the CreateSpotDatafeedSubscription operation.
-func (c *EC2) CreateSpotDatafeedSubscriptionRequest(input *CreateSpotDatafeedSubscriptionInput) (req *aws.Request, output *CreateSpotDatafeedSubscriptionOutput) {
-	op := &aws.Operation{
+func (c *EC2) CreateSpotDatafeedSubscriptionRequest(input *CreateSpotDatafeedSubscriptionInput) (req *service.Request, output *CreateSpotDatafeedSubscriptionOutput) {
+	op := &service.Operation{
 		Name:       opCreateSpotDatafeedSubscription,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1518,8 +1518,8 @@ func (c *EC2) CreateSpotDatafeedSubscription(input *CreateSpotDatafeedSubscripti
 const opCreateSubnet = "CreateSubnet"
 
 // CreateSubnetRequest generates a request for the CreateSubnet operation.
-func (c *EC2) CreateSubnetRequest(input *CreateSubnetInput) (req *aws.Request, output *CreateSubnetOutput) {
-	op := &aws.Operation{
+func (c *EC2) CreateSubnetRequest(input *CreateSubnetInput) (req *service.Request, output *CreateSubnetOutput) {
+	op := &service.Operation{
 		Name:       opCreateSubnet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1569,8 +1569,8 @@ func (c *EC2) CreateSubnet(input *CreateSubnetInput) (*CreateSubnetOutput, error
 const opCreateTags = "CreateTags"
 
 // CreateTagsRequest generates a request for the CreateTags operation.
-func (c *EC2) CreateTagsRequest(input *CreateTagsInput) (req *aws.Request, output *CreateTagsOutput) {
-	op := &aws.Operation{
+func (c *EC2) CreateTagsRequest(input *CreateTagsInput) (req *service.Request, output *CreateTagsOutput) {
+	op := &service.Operation{
 		Name:       opCreateTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1598,228 +1598,11 @@ func (c *EC2) CreateTags(input *CreateTagsInput) (*CreateTagsOutput, error) {
 	return out, err
 }
 
-const opCreateVPC = "CreateVpc"
-
-// CreateVPCRequest generates a request for the CreateVPC operation.
-func (c *EC2) CreateVPCRequest(input *CreateVPCInput) (req *aws.Request, output *CreateVPCOutput) {
-	op := &aws.Operation{
-		Name:       opCreateVPC,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateVPCInput{}
-	}
-
-	req = c.newRequest(op, input, output)
-	output = &CreateVPCOutput{}
-	req.Data = output
-	return
-}
-
-// Creates a VPC with the specified CIDR block.
-//
-// The smallest VPC you can create uses a /28 netmask (16 IP addresses), and
-// the largest uses a /16 netmask (65,536 IP addresses). To help you decide
-// how big to make your VPC, see Your VPC and Subnets (http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html)
-// in the Amazon Virtual Private Cloud User Guide.
-//
-// By default, each instance you launch in the VPC has the default DHCP options,
-// which includes only a default DNS server that we provide (AmazonProvidedDNS).
-// For more information about DHCP options, see DHCP Options Sets (http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_DHCP_Options.html)
-// in the Amazon Virtual Private Cloud User Guide.
-func (c *EC2) CreateVPC(input *CreateVPCInput) (*CreateVPCOutput, error) {
-	req, out := c.CreateVPCRequest(input)
-	err := req.Send()
-	return out, err
-}
-
-const opCreateVPCEndpoint = "CreateVpcEndpoint"
-
-// CreateVPCEndpointRequest generates a request for the CreateVPCEndpoint operation.
-func (c *EC2) CreateVPCEndpointRequest(input *CreateVPCEndpointInput) (req *aws.Request, output *CreateVPCEndpointOutput) {
-	op := &aws.Operation{
-		Name:       opCreateVPCEndpoint,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateVPCEndpointInput{}
-	}
-
-	req = c.newRequest(op, input, output)
-	output = &CreateVPCEndpointOutput{}
-	req.Data = output
-	return
-}
-
-// Creates a VPC endpoint for a specified AWS service. An endpoint enables you
-// to create a private connection between your VPC and another AWS service in
-// your account. You can specify an endpoint policy to attach to the endpoint
-// that will control access to the service from your VPC. You can also specify
-// the VPC route tables that use the endpoint.
-//
-// Currently, only endpoints to Amazon S3 are supported.
-func (c *EC2) CreateVPCEndpoint(input *CreateVPCEndpointInput) (*CreateVPCEndpointOutput, error) {
-	req, out := c.CreateVPCEndpointRequest(input)
-	err := req.Send()
-	return out, err
-}
-
-const opCreateVPCPeeringConnection = "CreateVpcPeeringConnection"
-
-// CreateVPCPeeringConnectionRequest generates a request for the CreateVPCPeeringConnection operation.
-func (c *EC2) CreateVPCPeeringConnectionRequest(input *CreateVPCPeeringConnectionInput) (req *aws.Request, output *CreateVPCPeeringConnectionOutput) {
-	op := &aws.Operation{
-		Name:       opCreateVPCPeeringConnection,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateVPCPeeringConnectionInput{}
-	}
-
-	req = c.newRequest(op, input, output)
-	output = &CreateVPCPeeringConnectionOutput{}
-	req.Data = output
-	return
-}
-
-// Requests a VPC peering connection between two VPCs: a requester VPC that
-// you own and a peer VPC with which to create the connection. The peer VPC
-// can belong to another AWS account. The requester VPC and peer VPC cannot
-// have overlapping CIDR blocks.
-//
-// The owner of the peer VPC must accept the peering request to activate the
-// peering connection. The VPC peering connection request expires after 7 days,
-// after which it cannot be accepted or rejected.
-//
-// A CreateVpcPeeringConnection request between VPCs with overlapping CIDR
-// blocks results in the VPC peering connection having a status of failed.
-func (c *EC2) CreateVPCPeeringConnection(input *CreateVPCPeeringConnectionInput) (*CreateVPCPeeringConnectionOutput, error) {
-	req, out := c.CreateVPCPeeringConnectionRequest(input)
-	err := req.Send()
-	return out, err
-}
-
-const opCreateVPNConnection = "CreateVpnConnection"
-
-// CreateVPNConnectionRequest generates a request for the CreateVPNConnection operation.
-func (c *EC2) CreateVPNConnectionRequest(input *CreateVPNConnectionInput) (req *aws.Request, output *CreateVPNConnectionOutput) {
-	op := &aws.Operation{
-		Name:       opCreateVPNConnection,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateVPNConnectionInput{}
-	}
-
-	req = c.newRequest(op, input, output)
-	output = &CreateVPNConnectionOutput{}
-	req.Data = output
-	return
-}
-
-// Creates a VPN connection between an existing virtual private gateway and
-// a VPN customer gateway. The only supported connection type is ipsec.1.
-//
-// The response includes information that you need to give to your network
-// administrator to configure your customer gateway.
-//
-//  We strongly recommend that you use HTTPS when calling this operation because
-// the response contains sensitive cryptographic information for configuring
-// your customer gateway.
-//
-//  If you decide to shut down your VPN connection for any reason and later
-// create a new VPN connection, you must reconfigure your customer gateway with
-// the new information returned from this call.
-//
-// For more information about VPN connections, see Adding a Hardware Virtual
-// Private Gateway to Your VPC (http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html)
-// in the Amazon Virtual Private Cloud User Guide.
-func (c *EC2) CreateVPNConnection(input *CreateVPNConnectionInput) (*CreateVPNConnectionOutput, error) {
-	req, out := c.CreateVPNConnectionRequest(input)
-	err := req.Send()
-	return out, err
-}
-
-const opCreateVPNConnectionRoute = "CreateVpnConnectionRoute"
-
-// CreateVPNConnectionRouteRequest generates a request for the CreateVPNConnectionRoute operation.
-func (c *EC2) CreateVPNConnectionRouteRequest(input *CreateVPNConnectionRouteInput) (req *aws.Request, output *CreateVPNConnectionRouteOutput) {
-	op := &aws.Operation{
-		Name:       opCreateVPNConnectionRoute,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateVPNConnectionRouteInput{}
-	}
-
-	req = c.newRequest(op, input, output)
-	output = &CreateVPNConnectionRouteOutput{}
-	req.Data = output
-	return
-}
-
-// Creates a static route associated with a VPN connection between an existing
-// virtual private gateway and a VPN customer gateway. The static route allows
-// traffic to be routed from the virtual private gateway to the VPN customer
-// gateway.
-//
-// For more information about VPN connections, see Adding a Hardware Virtual
-// Private Gateway to Your VPC (http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html)
-// in the Amazon Virtual Private Cloud User Guide.
-func (c *EC2) CreateVPNConnectionRoute(input *CreateVPNConnectionRouteInput) (*CreateVPNConnectionRouteOutput, error) {
-	req, out := c.CreateVPNConnectionRouteRequest(input)
-	err := req.Send()
-	return out, err
-}
-
-const opCreateVPNGateway = "CreateVpnGateway"
-
-// CreateVPNGatewayRequest generates a request for the CreateVPNGateway operation.
-func (c *EC2) CreateVPNGatewayRequest(input *CreateVPNGatewayInput) (req *aws.Request, output *CreateVPNGatewayOutput) {
-	op := &aws.Operation{
-		Name:       opCreateVPNGateway,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateVPNGatewayInput{}
-	}
-
-	req = c.newRequest(op, input, output)
-	output = &CreateVPNGatewayOutput{}
-	req.Data = output
-	return
-}
-
-// Creates a virtual private gateway. A virtual private gateway is the endpoint
-// on the VPC side of your VPN connection. You can create a virtual private
-// gateway before creating the VPC itself.
-//
-// For more information about virtual private gateways, see Adding a Hardware
-// Virtual Private Gateway to Your VPC (http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html)
-// in the Amazon Virtual Private Cloud User Guide.
-func (c *EC2) CreateVPNGateway(input *CreateVPNGatewayInput) (*CreateVPNGatewayOutput, error) {
-	req, out := c.CreateVPNGatewayRequest(input)
-	err := req.Send()
-	return out, err
-}
-
 const opCreateVolume = "CreateVolume"
 
 // CreateVolumeRequest generates a request for the CreateVolume operation.
-func (c *EC2) CreateVolumeRequest(input *CreateVolumeInput) (req *aws.Request, output *Volume) {
-	op := &aws.Operation{
+func (c *EC2) CreateVolumeRequest(input *CreateVolumeInput) (req *service.Request, output *Volume) {
+	op := &service.Operation{
 		Name:       opCreateVolume,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1857,11 +1640,228 @@ func (c *EC2) CreateVolume(input *CreateVolumeInput) (*Volume, error) {
 	return out, err
 }
 
+const opCreateVpc = "CreateVpc"
+
+// CreateVpcRequest generates a request for the CreateVpc operation.
+func (c *EC2) CreateVpcRequest(input *CreateVpcInput) (req *service.Request, output *CreateVpcOutput) {
+	op := &service.Operation{
+		Name:       opCreateVpc,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateVpcInput{}
+	}
+
+	req = c.newRequest(op, input, output)
+	output = &CreateVpcOutput{}
+	req.Data = output
+	return
+}
+
+// Creates a VPC with the specified CIDR block.
+//
+// The smallest VPC you can create uses a /28 netmask (16 IP addresses), and
+// the largest uses a /16 netmask (65,536 IP addresses). To help you decide
+// how big to make your VPC, see Your VPC and Subnets (http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html)
+// in the Amazon Virtual Private Cloud User Guide.
+//
+// By default, each instance you launch in the VPC has the default DHCP options,
+// which includes only a default DNS server that we provide (AmazonProvidedDNS).
+// For more information about DHCP options, see DHCP Options Sets (http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_DHCP_Options.html)
+// in the Amazon Virtual Private Cloud User Guide.
+func (c *EC2) CreateVpc(input *CreateVpcInput) (*CreateVpcOutput, error) {
+	req, out := c.CreateVpcRequest(input)
+	err := req.Send()
+	return out, err
+}
+
+const opCreateVpcEndpoint = "CreateVpcEndpoint"
+
+// CreateVpcEndpointRequest generates a request for the CreateVpcEndpoint operation.
+func (c *EC2) CreateVpcEndpointRequest(input *CreateVpcEndpointInput) (req *service.Request, output *CreateVpcEndpointOutput) {
+	op := &service.Operation{
+		Name:       opCreateVpcEndpoint,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateVpcEndpointInput{}
+	}
+
+	req = c.newRequest(op, input, output)
+	output = &CreateVpcEndpointOutput{}
+	req.Data = output
+	return
+}
+
+// Creates a VPC endpoint for a specified AWS service. An endpoint enables you
+// to create a private connection between your VPC and another AWS service in
+// your account. You can specify an endpoint policy to attach to the endpoint
+// that will control access to the service from your VPC. You can also specify
+// the VPC route tables that use the endpoint.
+//
+// Currently, only endpoints to Amazon S3 are supported.
+func (c *EC2) CreateVpcEndpoint(input *CreateVpcEndpointInput) (*CreateVpcEndpointOutput, error) {
+	req, out := c.CreateVpcEndpointRequest(input)
+	err := req.Send()
+	return out, err
+}
+
+const opCreateVpcPeeringConnection = "CreateVpcPeeringConnection"
+
+// CreateVpcPeeringConnectionRequest generates a request for the CreateVpcPeeringConnection operation.
+func (c *EC2) CreateVpcPeeringConnectionRequest(input *CreateVpcPeeringConnectionInput) (req *service.Request, output *CreateVpcPeeringConnectionOutput) {
+	op := &service.Operation{
+		Name:       opCreateVpcPeeringConnection,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateVpcPeeringConnectionInput{}
+	}
+
+	req = c.newRequest(op, input, output)
+	output = &CreateVpcPeeringConnectionOutput{}
+	req.Data = output
+	return
+}
+
+// Requests a VPC peering connection between two VPCs: a requester VPC that
+// you own and a peer VPC with which to create the connection. The peer VPC
+// can belong to another AWS account. The requester VPC and peer VPC cannot
+// have overlapping CIDR blocks.
+//
+// The owner of the peer VPC must accept the peering request to activate the
+// peering connection. The VPC peering connection request expires after 7 days,
+// after which it cannot be accepted or rejected.
+//
+// A CreateVpcPeeringConnection request between VPCs with overlapping CIDR
+// blocks results in the VPC peering connection having a status of failed.
+func (c *EC2) CreateVpcPeeringConnection(input *CreateVpcPeeringConnectionInput) (*CreateVpcPeeringConnectionOutput, error) {
+	req, out := c.CreateVpcPeeringConnectionRequest(input)
+	err := req.Send()
+	return out, err
+}
+
+const opCreateVpnConnection = "CreateVpnConnection"
+
+// CreateVpnConnectionRequest generates a request for the CreateVpnConnection operation.
+func (c *EC2) CreateVpnConnectionRequest(input *CreateVpnConnectionInput) (req *service.Request, output *CreateVpnConnectionOutput) {
+	op := &service.Operation{
+		Name:       opCreateVpnConnection,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateVpnConnectionInput{}
+	}
+
+	req = c.newRequest(op, input, output)
+	output = &CreateVpnConnectionOutput{}
+	req.Data = output
+	return
+}
+
+// Creates a VPN connection between an existing virtual private gateway and
+// a VPN customer gateway. The only supported connection type is ipsec.1.
+//
+// The response includes information that you need to give to your network
+// administrator to configure your customer gateway.
+//
+//  We strongly recommend that you use HTTPS when calling this operation because
+// the response contains sensitive cryptographic information for configuring
+// your customer gateway.
+//
+//  If you decide to shut down your VPN connection for any reason and later
+// create a new VPN connection, you must reconfigure your customer gateway with
+// the new information returned from this call.
+//
+// For more information about VPN connections, see Adding a Hardware Virtual
+// Private Gateway to Your VPC (http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html)
+// in the Amazon Virtual Private Cloud User Guide.
+func (c *EC2) CreateVpnConnection(input *CreateVpnConnectionInput) (*CreateVpnConnectionOutput, error) {
+	req, out := c.CreateVpnConnectionRequest(input)
+	err := req.Send()
+	return out, err
+}
+
+const opCreateVpnConnectionRoute = "CreateVpnConnectionRoute"
+
+// CreateVpnConnectionRouteRequest generates a request for the CreateVpnConnectionRoute operation.
+func (c *EC2) CreateVpnConnectionRouteRequest(input *CreateVpnConnectionRouteInput) (req *service.Request, output *CreateVpnConnectionRouteOutput) {
+	op := &service.Operation{
+		Name:       opCreateVpnConnectionRoute,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateVpnConnectionRouteInput{}
+	}
+
+	req = c.newRequest(op, input, output)
+	output = &CreateVpnConnectionRouteOutput{}
+	req.Data = output
+	return
+}
+
+// Creates a static route associated with a VPN connection between an existing
+// virtual private gateway and a VPN customer gateway. The static route allows
+// traffic to be routed from the virtual private gateway to the VPN customer
+// gateway.
+//
+// For more information about VPN connections, see Adding a Hardware Virtual
+// Private Gateway to Your VPC (http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html)
+// in the Amazon Virtual Private Cloud User Guide.
+func (c *EC2) CreateVpnConnectionRoute(input *CreateVpnConnectionRouteInput) (*CreateVpnConnectionRouteOutput, error) {
+	req, out := c.CreateVpnConnectionRouteRequest(input)
+	err := req.Send()
+	return out, err
+}
+
+const opCreateVpnGateway = "CreateVpnGateway"
+
+// CreateVpnGatewayRequest generates a request for the CreateVpnGateway operation.
+func (c *EC2) CreateVpnGatewayRequest(input *CreateVpnGatewayInput) (req *service.Request, output *CreateVpnGatewayOutput) {
+	op := &service.Operation{
+		Name:       opCreateVpnGateway,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateVpnGatewayInput{}
+	}
+
+	req = c.newRequest(op, input, output)
+	output = &CreateVpnGatewayOutput{}
+	req.Data = output
+	return
+}
+
+// Creates a virtual private gateway. A virtual private gateway is the endpoint
+// on the VPC side of your VPN connection. You can create a virtual private
+// gateway before creating the VPC itself.
+//
+// For more information about virtual private gateways, see Adding a Hardware
+// Virtual Private Gateway to Your VPC (http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html)
+// in the Amazon Virtual Private Cloud User Guide.
+func (c *EC2) CreateVpnGateway(input *CreateVpnGatewayInput) (*CreateVpnGatewayOutput, error) {
+	req, out := c.CreateVpnGatewayRequest(input)
+	err := req.Send()
+	return out, err
+}
+
 const opDeleteCustomerGateway = "DeleteCustomerGateway"
 
 // DeleteCustomerGatewayRequest generates a request for the DeleteCustomerGateway operation.
-func (c *EC2) DeleteCustomerGatewayRequest(input *DeleteCustomerGatewayInput) (req *aws.Request, output *DeleteCustomerGatewayOutput) {
-	op := &aws.Operation{
+func (c *EC2) DeleteCustomerGatewayRequest(input *DeleteCustomerGatewayInput) (req *service.Request, output *DeleteCustomerGatewayOutput) {
+	op := &service.Operation{
 		Name:       opDeleteCustomerGateway,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1885,22 +1885,22 @@ func (c *EC2) DeleteCustomerGateway(input *DeleteCustomerGatewayInput) (*DeleteC
 	return out, err
 }
 
-const opDeleteDHCPOptions = "DeleteDhcpOptions"
+const opDeleteDhcpOptions = "DeleteDhcpOptions"
 
-// DeleteDHCPOptionsRequest generates a request for the DeleteDHCPOptions operation.
-func (c *EC2) DeleteDHCPOptionsRequest(input *DeleteDHCPOptionsInput) (req *aws.Request, output *DeleteDHCPOptionsOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteDHCPOptions,
+// DeleteDhcpOptionsRequest generates a request for the DeleteDhcpOptions operation.
+func (c *EC2) DeleteDhcpOptionsRequest(input *DeleteDhcpOptionsInput) (req *service.Request, output *DeleteDhcpOptionsOutput) {
+	op := &service.Operation{
+		Name:       opDeleteDhcpOptions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DeleteDHCPOptionsInput{}
+		input = &DeleteDhcpOptionsInput{}
 	}
 
 	req = c.newRequest(op, input, output)
-	output = &DeleteDHCPOptionsOutput{}
+	output = &DeleteDhcpOptionsOutput{}
 	req.Data = output
 	return
 }
@@ -1909,8 +1909,8 @@ func (c *EC2) DeleteDHCPOptionsRequest(input *DeleteDHCPOptionsInput) (req *aws.
 // of DHCP options before you can delete it. You can disassociate the set of
 // DHCP options by associating either a new set of options or the default set
 // of options with the VPC.
-func (c *EC2) DeleteDHCPOptions(input *DeleteDHCPOptionsInput) (*DeleteDHCPOptionsOutput, error) {
-	req, out := c.DeleteDHCPOptionsRequest(input)
+func (c *EC2) DeleteDhcpOptions(input *DeleteDhcpOptionsInput) (*DeleteDhcpOptionsOutput, error) {
+	req, out := c.DeleteDhcpOptionsRequest(input)
 	err := req.Send()
 	return out, err
 }
@@ -1918,8 +1918,8 @@ func (c *EC2) DeleteDHCPOptions(input *DeleteDHCPOptionsInput) (*DeleteDHCPOptio
 const opDeleteFlowLogs = "DeleteFlowLogs"
 
 // DeleteFlowLogsRequest generates a request for the DeleteFlowLogs operation.
-func (c *EC2) DeleteFlowLogsRequest(input *DeleteFlowLogsInput) (req *aws.Request, output *DeleteFlowLogsOutput) {
-	op := &aws.Operation{
+func (c *EC2) DeleteFlowLogsRequest(input *DeleteFlowLogsInput) (req *service.Request, output *DeleteFlowLogsOutput) {
+	op := &service.Operation{
 		Name:       opDeleteFlowLogs,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1945,8 +1945,8 @@ func (c *EC2) DeleteFlowLogs(input *DeleteFlowLogsInput) (*DeleteFlowLogsOutput,
 const opDeleteInternetGateway = "DeleteInternetGateway"
 
 // DeleteInternetGatewayRequest generates a request for the DeleteInternetGateway operation.
-func (c *EC2) DeleteInternetGatewayRequest(input *DeleteInternetGatewayInput) (req *aws.Request, output *DeleteInternetGatewayOutput) {
-	op := &aws.Operation{
+func (c *EC2) DeleteInternetGatewayRequest(input *DeleteInternetGatewayInput) (req *service.Request, output *DeleteInternetGatewayOutput) {
+	op := &service.Operation{
 		Name:       opDeleteInternetGateway,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1973,8 +1973,8 @@ func (c *EC2) DeleteInternetGateway(input *DeleteInternetGatewayInput) (*DeleteI
 const opDeleteKeyPair = "DeleteKeyPair"
 
 // DeleteKeyPairRequest generates a request for the DeleteKeyPair operation.
-func (c *EC2) DeleteKeyPairRequest(input *DeleteKeyPairInput) (req *aws.Request, output *DeleteKeyPairOutput) {
-	op := &aws.Operation{
+func (c *EC2) DeleteKeyPairRequest(input *DeleteKeyPairInput) (req *service.Request, output *DeleteKeyPairOutput) {
+	op := &service.Operation{
 		Name:       opDeleteKeyPair,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1997,58 +1997,58 @@ func (c *EC2) DeleteKeyPair(input *DeleteKeyPairInput) (*DeleteKeyPairOutput, er
 	return out, err
 }
 
-const opDeleteNetworkACL = "DeleteNetworkAcl"
+const opDeleteNetworkAcl = "DeleteNetworkAcl"
 
-// DeleteNetworkACLRequest generates a request for the DeleteNetworkACL operation.
-func (c *EC2) DeleteNetworkACLRequest(input *DeleteNetworkACLInput) (req *aws.Request, output *DeleteNetworkACLOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteNetworkACL,
+// DeleteNetworkAclRequest generates a request for the DeleteNetworkAcl operation.
+func (c *EC2) DeleteNetworkAclRequest(input *DeleteNetworkAclInput) (req *service.Request, output *DeleteNetworkAclOutput) {
+	op := &service.Operation{
+		Name:       opDeleteNetworkAcl,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DeleteNetworkACLInput{}
+		input = &DeleteNetworkAclInput{}
 	}
 
 	req = c.newRequest(op, input, output)
-	output = &DeleteNetworkACLOutput{}
+	output = &DeleteNetworkAclOutput{}
 	req.Data = output
 	return
 }
 
 // Deletes the specified network ACL. You can't delete the ACL if it's associated
 // with any subnets. You can't delete the default network ACL.
-func (c *EC2) DeleteNetworkACL(input *DeleteNetworkACLInput) (*DeleteNetworkACLOutput, error) {
-	req, out := c.DeleteNetworkACLRequest(input)
+func (c *EC2) DeleteNetworkAcl(input *DeleteNetworkAclInput) (*DeleteNetworkAclOutput, error) {
+	req, out := c.DeleteNetworkAclRequest(input)
 	err := req.Send()
 	return out, err
 }
 
-const opDeleteNetworkACLEntry = "DeleteNetworkAclEntry"
+const opDeleteNetworkAclEntry = "DeleteNetworkAclEntry"
 
-// DeleteNetworkACLEntryRequest generates a request for the DeleteNetworkACLEntry operation.
-func (c *EC2) DeleteNetworkACLEntryRequest(input *DeleteNetworkACLEntryInput) (req *aws.Request, output *DeleteNetworkACLEntryOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteNetworkACLEntry,
+// DeleteNetworkAclEntryRequest generates a request for the DeleteNetworkAclEntry operation.
+func (c *EC2) DeleteNetworkAclEntryRequest(input *DeleteNetworkAclEntryInput) (req *service.Request, output *DeleteNetworkAclEntryOutput) {
+	op := &service.Operation{
+		Name:       opDeleteNetworkAclEntry,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DeleteNetworkACLEntryInput{}
+		input = &DeleteNetworkAclEntryInput{}
 	}
 
 	req = c.newRequest(op, input, output)
-	output = &DeleteNetworkACLEntryOutput{}
+	output = &DeleteNetworkAclEntryOutput{}
 	req.Data = output
 	return
 }
 
 // Deletes the specified ingress or egress entry (rule) from the specified network
 // ACL.
-func (c *EC2) DeleteNetworkACLEntry(input *DeleteNetworkACLEntryInput) (*DeleteNetworkACLEntryOutput, error) {
-	req, out := c.DeleteNetworkACLEntryRequest(input)
+func (c *EC2) DeleteNetworkAclEntry(input *DeleteNetworkAclEntryInput) (*DeleteNetworkAclEntryOutput, error) {
+	req, out := c.DeleteNetworkAclEntryRequest(input)
 	err := req.Send()
 	return out, err
 }
@@ -2056,8 +2056,8 @@ func (c *EC2) DeleteNetworkACLEntry(input *DeleteNetworkACLEntryInput) (*DeleteN
 const opDeleteNetworkInterface = "DeleteNetworkInterface"
 
 // DeleteNetworkInterfaceRequest generates a request for the DeleteNetworkInterface operation.
-func (c *EC2) DeleteNetworkInterfaceRequest(input *DeleteNetworkInterfaceInput) (req *aws.Request, output *DeleteNetworkInterfaceOutput) {
-	op := &aws.Operation{
+func (c *EC2) DeleteNetworkInterfaceRequest(input *DeleteNetworkInterfaceInput) (req *service.Request, output *DeleteNetworkInterfaceOutput) {
+	op := &service.Operation{
 		Name:       opDeleteNetworkInterface,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2084,8 +2084,8 @@ func (c *EC2) DeleteNetworkInterface(input *DeleteNetworkInterfaceInput) (*Delet
 const opDeletePlacementGroup = "DeletePlacementGroup"
 
 // DeletePlacementGroupRequest generates a request for the DeletePlacementGroup operation.
-func (c *EC2) DeletePlacementGroupRequest(input *DeletePlacementGroupInput) (req *aws.Request, output *DeletePlacementGroupOutput) {
-	op := &aws.Operation{
+func (c *EC2) DeletePlacementGroupRequest(input *DeletePlacementGroupInput) (req *service.Request, output *DeletePlacementGroupOutput) {
+	op := &service.Operation{
 		Name:       opDeletePlacementGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2114,8 +2114,8 @@ func (c *EC2) DeletePlacementGroup(input *DeletePlacementGroupInput) (*DeletePla
 const opDeleteRoute = "DeleteRoute"
 
 // DeleteRouteRequest generates a request for the DeleteRoute operation.
-func (c *EC2) DeleteRouteRequest(input *DeleteRouteInput) (req *aws.Request, output *DeleteRouteOutput) {
-	op := &aws.Operation{
+func (c *EC2) DeleteRouteRequest(input *DeleteRouteInput) (req *service.Request, output *DeleteRouteOutput) {
+	op := &service.Operation{
 		Name:       opDeleteRoute,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2141,8 +2141,8 @@ func (c *EC2) DeleteRoute(input *DeleteRouteInput) (*DeleteRouteOutput, error) {
 const opDeleteRouteTable = "DeleteRouteTable"
 
 // DeleteRouteTableRequest generates a request for the DeleteRouteTable operation.
-func (c *EC2) DeleteRouteTableRequest(input *DeleteRouteTableInput) (req *aws.Request, output *DeleteRouteTableOutput) {
-	op := &aws.Operation{
+func (c *EC2) DeleteRouteTableRequest(input *DeleteRouteTableInput) (req *service.Request, output *DeleteRouteTableOutput) {
+	op := &service.Operation{
 		Name:       opDeleteRouteTable,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2170,8 +2170,8 @@ func (c *EC2) DeleteRouteTable(input *DeleteRouteTableInput) (*DeleteRouteTableO
 const opDeleteSecurityGroup = "DeleteSecurityGroup"
 
 // DeleteSecurityGroupRequest generates a request for the DeleteSecurityGroup operation.
-func (c *EC2) DeleteSecurityGroupRequest(input *DeleteSecurityGroupInput) (req *aws.Request, output *DeleteSecurityGroupOutput) {
-	op := &aws.Operation{
+func (c *EC2) DeleteSecurityGroupRequest(input *DeleteSecurityGroupInput) (req *service.Request, output *DeleteSecurityGroupOutput) {
+	op := &service.Operation{
 		Name:       opDeleteSecurityGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2201,8 +2201,8 @@ func (c *EC2) DeleteSecurityGroup(input *DeleteSecurityGroupInput) (*DeleteSecur
 const opDeleteSnapshot = "DeleteSnapshot"
 
 // DeleteSnapshotRequest generates a request for the DeleteSnapshot operation.
-func (c *EC2) DeleteSnapshotRequest(input *DeleteSnapshotInput) (req *aws.Request, output *DeleteSnapshotOutput) {
-	op := &aws.Operation{
+func (c *EC2) DeleteSnapshotRequest(input *DeleteSnapshotInput) (req *service.Request, output *DeleteSnapshotOutput) {
+	op := &service.Operation{
 		Name:       opDeleteSnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2242,8 +2242,8 @@ func (c *EC2) DeleteSnapshot(input *DeleteSnapshotInput) (*DeleteSnapshotOutput,
 const opDeleteSpotDatafeedSubscription = "DeleteSpotDatafeedSubscription"
 
 // DeleteSpotDatafeedSubscriptionRequest generates a request for the DeleteSpotDatafeedSubscription operation.
-func (c *EC2) DeleteSpotDatafeedSubscriptionRequest(input *DeleteSpotDatafeedSubscriptionInput) (req *aws.Request, output *DeleteSpotDatafeedSubscriptionOutput) {
-	op := &aws.Operation{
+func (c *EC2) DeleteSpotDatafeedSubscriptionRequest(input *DeleteSpotDatafeedSubscriptionInput) (req *service.Request, output *DeleteSpotDatafeedSubscriptionOutput) {
+	op := &service.Operation{
 		Name:       opDeleteSpotDatafeedSubscription,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2271,8 +2271,8 @@ func (c *EC2) DeleteSpotDatafeedSubscription(input *DeleteSpotDatafeedSubscripti
 const opDeleteSubnet = "DeleteSubnet"
 
 // DeleteSubnetRequest generates a request for the DeleteSubnet operation.
-func (c *EC2) DeleteSubnetRequest(input *DeleteSubnetInput) (req *aws.Request, output *DeleteSubnetOutput) {
-	op := &aws.Operation{
+func (c *EC2) DeleteSubnetRequest(input *DeleteSubnetInput) (req *service.Request, output *DeleteSubnetOutput) {
+	op := &service.Operation{
 		Name:       opDeleteSubnet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2299,8 +2299,8 @@ func (c *EC2) DeleteSubnet(input *DeleteSubnetInput) (*DeleteSubnetOutput, error
 const opDeleteTags = "DeleteTags"
 
 // DeleteTagsRequest generates a request for the DeleteTags operation.
-func (c *EC2) DeleteTagsRequest(input *DeleteTagsInput) (req *aws.Request, output *DeleteTagsOutput) {
-	op := &aws.Operation{
+func (c *EC2) DeleteTagsRequest(input *DeleteTagsInput) (req *service.Request, output *DeleteTagsOutput) {
+	op := &service.Operation{
 		Name:       opDeleteTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2327,197 +2327,11 @@ func (c *EC2) DeleteTags(input *DeleteTagsInput) (*DeleteTagsOutput, error) {
 	return out, err
 }
 
-const opDeleteVPC = "DeleteVpc"
-
-// DeleteVPCRequest generates a request for the DeleteVPC operation.
-func (c *EC2) DeleteVPCRequest(input *DeleteVPCInput) (req *aws.Request, output *DeleteVPCOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteVPC,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DeleteVPCInput{}
-	}
-
-	req = c.newRequest(op, input, output)
-	output = &DeleteVPCOutput{}
-	req.Data = output
-	return
-}
-
-// Deletes the specified VPC. You must detach or delete all gateways and resources
-// that are associated with the VPC before you can delete it. For example, you
-// must terminate all instances running in the VPC, delete all security groups
-// associated with the VPC (except the default one), delete all route tables
-// associated with the VPC (except the default one), and so on.
-func (c *EC2) DeleteVPC(input *DeleteVPCInput) (*DeleteVPCOutput, error) {
-	req, out := c.DeleteVPCRequest(input)
-	err := req.Send()
-	return out, err
-}
-
-const opDeleteVPCEndpoints = "DeleteVpcEndpoints"
-
-// DeleteVPCEndpointsRequest generates a request for the DeleteVPCEndpoints operation.
-func (c *EC2) DeleteVPCEndpointsRequest(input *DeleteVPCEndpointsInput) (req *aws.Request, output *DeleteVPCEndpointsOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteVPCEndpoints,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DeleteVPCEndpointsInput{}
-	}
-
-	req = c.newRequest(op, input, output)
-	output = &DeleteVPCEndpointsOutput{}
-	req.Data = output
-	return
-}
-
-// Deletes one or more specified VPC endpoints. Deleting the endpoint also deletes
-// the endpoint routes in the route tables that were associated with the endpoint.
-func (c *EC2) DeleteVPCEndpoints(input *DeleteVPCEndpointsInput) (*DeleteVPCEndpointsOutput, error) {
-	req, out := c.DeleteVPCEndpointsRequest(input)
-	err := req.Send()
-	return out, err
-}
-
-const opDeleteVPCPeeringConnection = "DeleteVpcPeeringConnection"
-
-// DeleteVPCPeeringConnectionRequest generates a request for the DeleteVPCPeeringConnection operation.
-func (c *EC2) DeleteVPCPeeringConnectionRequest(input *DeleteVPCPeeringConnectionInput) (req *aws.Request, output *DeleteVPCPeeringConnectionOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteVPCPeeringConnection,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DeleteVPCPeeringConnectionInput{}
-	}
-
-	req = c.newRequest(op, input, output)
-	output = &DeleteVPCPeeringConnectionOutput{}
-	req.Data = output
-	return
-}
-
-// Deletes a VPC peering connection. Either the owner of the requester VPC or
-// the owner of the peer VPC can delete the VPC peering connection if it's in
-// the active state. The owner of the requester VPC can delete a VPC peering
-// connection in the pending-acceptance state.
-func (c *EC2) DeleteVPCPeeringConnection(input *DeleteVPCPeeringConnectionInput) (*DeleteVPCPeeringConnectionOutput, error) {
-	req, out := c.DeleteVPCPeeringConnectionRequest(input)
-	err := req.Send()
-	return out, err
-}
-
-const opDeleteVPNConnection = "DeleteVpnConnection"
-
-// DeleteVPNConnectionRequest generates a request for the DeleteVPNConnection operation.
-func (c *EC2) DeleteVPNConnectionRequest(input *DeleteVPNConnectionInput) (req *aws.Request, output *DeleteVPNConnectionOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteVPNConnection,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DeleteVPNConnectionInput{}
-	}
-
-	req = c.newRequest(op, input, output)
-	output = &DeleteVPNConnectionOutput{}
-	req.Data = output
-	return
-}
-
-// Deletes the specified VPN connection.
-//
-// If you're deleting the VPC and its associated components, we recommend that
-// you detach the virtual private gateway from the VPC and delete the VPC before
-// deleting the VPN connection. If you believe that the tunnel credentials for
-// your VPN connection have been compromised, you can delete the VPN connection
-// and create a new one that has new keys, without needing to delete the VPC
-// or virtual private gateway. If you create a new VPN connection, you must
-// reconfigure the customer gateway using the new configuration information
-// returned with the new VPN connection ID.
-func (c *EC2) DeleteVPNConnection(input *DeleteVPNConnectionInput) (*DeleteVPNConnectionOutput, error) {
-	req, out := c.DeleteVPNConnectionRequest(input)
-	err := req.Send()
-	return out, err
-}
-
-const opDeleteVPNConnectionRoute = "DeleteVpnConnectionRoute"
-
-// DeleteVPNConnectionRouteRequest generates a request for the DeleteVPNConnectionRoute operation.
-func (c *EC2) DeleteVPNConnectionRouteRequest(input *DeleteVPNConnectionRouteInput) (req *aws.Request, output *DeleteVPNConnectionRouteOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteVPNConnectionRoute,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DeleteVPNConnectionRouteInput{}
-	}
-
-	req = c.newRequest(op, input, output)
-	output = &DeleteVPNConnectionRouteOutput{}
-	req.Data = output
-	return
-}
-
-// Deletes the specified static route associated with a VPN connection between
-// an existing virtual private gateway and a VPN customer gateway. The static
-// route allows traffic to be routed from the virtual private gateway to the
-// VPN customer gateway.
-func (c *EC2) DeleteVPNConnectionRoute(input *DeleteVPNConnectionRouteInput) (*DeleteVPNConnectionRouteOutput, error) {
-	req, out := c.DeleteVPNConnectionRouteRequest(input)
-	err := req.Send()
-	return out, err
-}
-
-const opDeleteVPNGateway = "DeleteVpnGateway"
-
-// DeleteVPNGatewayRequest generates a request for the DeleteVPNGateway operation.
-func (c *EC2) DeleteVPNGatewayRequest(input *DeleteVPNGatewayInput) (req *aws.Request, output *DeleteVPNGatewayOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteVPNGateway,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DeleteVPNGatewayInput{}
-	}
-
-	req = c.newRequest(op, input, output)
-	output = &DeleteVPNGatewayOutput{}
-	req.Data = output
-	return
-}
-
-// Deletes the specified virtual private gateway. We recommend that before you
-// delete a virtual private gateway, you detach it from the VPC and delete the
-// VPN connection. Note that you don't need to delete the virtual private gateway
-// if you plan to delete and recreate the VPN connection between your VPC and
-// your network.
-func (c *EC2) DeleteVPNGateway(input *DeleteVPNGatewayInput) (*DeleteVPNGatewayOutput, error) {
-	req, out := c.DeleteVPNGatewayRequest(input)
-	err := req.Send()
-	return out, err
-}
-
 const opDeleteVolume = "DeleteVolume"
 
 // DeleteVolumeRequest generates a request for the DeleteVolume operation.
-func (c *EC2) DeleteVolumeRequest(input *DeleteVolumeInput) (req *aws.Request, output *DeleteVolumeOutput) {
-	op := &aws.Operation{
+func (c *EC2) DeleteVolumeRequest(input *DeleteVolumeInput) (req *service.Request, output *DeleteVolumeOutput) {
+	op := &service.Operation{
 		Name:       opDeleteVolume,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2546,11 +2360,197 @@ func (c *EC2) DeleteVolume(input *DeleteVolumeInput) (*DeleteVolumeOutput, error
 	return out, err
 }
 
+const opDeleteVpc = "DeleteVpc"
+
+// DeleteVpcRequest generates a request for the DeleteVpc operation.
+func (c *EC2) DeleteVpcRequest(input *DeleteVpcInput) (req *service.Request, output *DeleteVpcOutput) {
+	op := &service.Operation{
+		Name:       opDeleteVpc,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteVpcInput{}
+	}
+
+	req = c.newRequest(op, input, output)
+	output = &DeleteVpcOutput{}
+	req.Data = output
+	return
+}
+
+// Deletes the specified VPC. You must detach or delete all gateways and resources
+// that are associated with the VPC before you can delete it. For example, you
+// must terminate all instances running in the VPC, delete all security groups
+// associated with the VPC (except the default one), delete all route tables
+// associated with the VPC (except the default one), and so on.
+func (c *EC2) DeleteVpc(input *DeleteVpcInput) (*DeleteVpcOutput, error) {
+	req, out := c.DeleteVpcRequest(input)
+	err := req.Send()
+	return out, err
+}
+
+const opDeleteVpcEndpoints = "DeleteVpcEndpoints"
+
+// DeleteVpcEndpointsRequest generates a request for the DeleteVpcEndpoints operation.
+func (c *EC2) DeleteVpcEndpointsRequest(input *DeleteVpcEndpointsInput) (req *service.Request, output *DeleteVpcEndpointsOutput) {
+	op := &service.Operation{
+		Name:       opDeleteVpcEndpoints,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteVpcEndpointsInput{}
+	}
+
+	req = c.newRequest(op, input, output)
+	output = &DeleteVpcEndpointsOutput{}
+	req.Data = output
+	return
+}
+
+// Deletes one or more specified VPC endpoints. Deleting the endpoint also deletes
+// the endpoint routes in the route tables that were associated with the endpoint.
+func (c *EC2) DeleteVpcEndpoints(input *DeleteVpcEndpointsInput) (*DeleteVpcEndpointsOutput, error) {
+	req, out := c.DeleteVpcEndpointsRequest(input)
+	err := req.Send()
+	return out, err
+}
+
+const opDeleteVpcPeeringConnection = "DeleteVpcPeeringConnection"
+
+// DeleteVpcPeeringConnectionRequest generates a request for the DeleteVpcPeeringConnection operation.
+func (c *EC2) DeleteVpcPeeringConnectionRequest(input *DeleteVpcPeeringConnectionInput) (req *service.Request, output *DeleteVpcPeeringConnectionOutput) {
+	op := &service.Operation{
+		Name:       opDeleteVpcPeeringConnection,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteVpcPeeringConnectionInput{}
+	}
+
+	req = c.newRequest(op, input, output)
+	output = &DeleteVpcPeeringConnectionOutput{}
+	req.Data = output
+	return
+}
+
+// Deletes a VPC peering connection. Either the owner of the requester VPC or
+// the owner of the peer VPC can delete the VPC peering connection if it's in
+// the active state. The owner of the requester VPC can delete a VPC peering
+// connection in the pending-acceptance state.
+func (c *EC2) DeleteVpcPeeringConnection(input *DeleteVpcPeeringConnectionInput) (*DeleteVpcPeeringConnectionOutput, error) {
+	req, out := c.DeleteVpcPeeringConnectionRequest(input)
+	err := req.Send()
+	return out, err
+}
+
+const opDeleteVpnConnection = "DeleteVpnConnection"
+
+// DeleteVpnConnectionRequest generates a request for the DeleteVpnConnection operation.
+func (c *EC2) DeleteVpnConnectionRequest(input *DeleteVpnConnectionInput) (req *service.Request, output *DeleteVpnConnectionOutput) {
+	op := &service.Operation{
+		Name:       opDeleteVpnConnection,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteVpnConnectionInput{}
+	}
+
+	req = c.newRequest(op, input, output)
+	output = &DeleteVpnConnectionOutput{}
+	req.Data = output
+	return
+}
+
+// Deletes the specified VPN connection.
+//
+// If you're deleting the VPC and its associated components, we recommend that
+// you detach the virtual private gateway from the VPC and delete the VPC before
+// deleting the VPN connection. If you believe that the tunnel credentials for
+// your VPN connection have been compromised, you can delete the VPN connection
+// and create a new one that has new keys, without needing to delete the VPC
+// or virtual private gateway. If you create a new VPN connection, you must
+// reconfigure the customer gateway using the new configuration information
+// returned with the new VPN connection ID.
+func (c *EC2) DeleteVpnConnection(input *DeleteVpnConnectionInput) (*DeleteVpnConnectionOutput, error) {
+	req, out := c.DeleteVpnConnectionRequest(input)
+	err := req.Send()
+	return out, err
+}
+
+const opDeleteVpnConnectionRoute = "DeleteVpnConnectionRoute"
+
+// DeleteVpnConnectionRouteRequest generates a request for the DeleteVpnConnectionRoute operation.
+func (c *EC2) DeleteVpnConnectionRouteRequest(input *DeleteVpnConnectionRouteInput) (req *service.Request, output *DeleteVpnConnectionRouteOutput) {
+	op := &service.Operation{
+		Name:       opDeleteVpnConnectionRoute,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteVpnConnectionRouteInput{}
+	}
+
+	req = c.newRequest(op, input, output)
+	output = &DeleteVpnConnectionRouteOutput{}
+	req.Data = output
+	return
+}
+
+// Deletes the specified static route associated with a VPN connection between
+// an existing virtual private gateway and a VPN customer gateway. The static
+// route allows traffic to be routed from the virtual private gateway to the
+// VPN customer gateway.
+func (c *EC2) DeleteVpnConnectionRoute(input *DeleteVpnConnectionRouteInput) (*DeleteVpnConnectionRouteOutput, error) {
+	req, out := c.DeleteVpnConnectionRouteRequest(input)
+	err := req.Send()
+	return out, err
+}
+
+const opDeleteVpnGateway = "DeleteVpnGateway"
+
+// DeleteVpnGatewayRequest generates a request for the DeleteVpnGateway operation.
+func (c *EC2) DeleteVpnGatewayRequest(input *DeleteVpnGatewayInput) (req *service.Request, output *DeleteVpnGatewayOutput) {
+	op := &service.Operation{
+		Name:       opDeleteVpnGateway,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteVpnGatewayInput{}
+	}
+
+	req = c.newRequest(op, input, output)
+	output = &DeleteVpnGatewayOutput{}
+	req.Data = output
+	return
+}
+
+// Deletes the specified virtual private gateway. We recommend that before you
+// delete a virtual private gateway, you detach it from the VPC and delete the
+// VPN connection. Note that you don't need to delete the virtual private gateway
+// if you plan to delete and recreate the VPN connection between your VPC and
+// your network.
+func (c *EC2) DeleteVpnGateway(input *DeleteVpnGatewayInput) (*DeleteVpnGatewayOutput, error) {
+	req, out := c.DeleteVpnGatewayRequest(input)
+	err := req.Send()
+	return out, err
+}
+
 const opDeregisterImage = "DeregisterImage"
 
 // DeregisterImageRequest generates a request for the DeregisterImage operation.
-func (c *EC2) DeregisterImageRequest(input *DeregisterImageInput) (req *aws.Request, output *DeregisterImageOutput) {
-	op := &aws.Operation{
+func (c *EC2) DeregisterImageRequest(input *DeregisterImageInput) (req *service.Request, output *DeregisterImageOutput) {
+	op := &service.Operation{
 		Name:       opDeregisterImage,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2579,8 +2579,8 @@ func (c *EC2) DeregisterImage(input *DeregisterImageInput) (*DeregisterImageOutp
 const opDescribeAccountAttributes = "DescribeAccountAttributes"
 
 // DescribeAccountAttributesRequest generates a request for the DescribeAccountAttributes operation.
-func (c *EC2) DescribeAccountAttributesRequest(input *DescribeAccountAttributesInput) (req *aws.Request, output *DescribeAccountAttributesOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeAccountAttributesRequest(input *DescribeAccountAttributesInput) (req *service.Request, output *DescribeAccountAttributesOutput) {
+	op := &service.Operation{
 		Name:       opDescribeAccountAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2624,8 +2624,8 @@ func (c *EC2) DescribeAccountAttributes(input *DescribeAccountAttributesInput) (
 const opDescribeAddresses = "DescribeAddresses"
 
 // DescribeAddressesRequest generates a request for the DescribeAddresses operation.
-func (c *EC2) DescribeAddressesRequest(input *DescribeAddressesInput) (req *aws.Request, output *DescribeAddressesOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeAddressesRequest(input *DescribeAddressesInput) (req *service.Request, output *DescribeAddressesOutput) {
+	op := &service.Operation{
 		Name:       opDescribeAddresses,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2655,8 +2655,8 @@ func (c *EC2) DescribeAddresses(input *DescribeAddressesInput) (*DescribeAddress
 const opDescribeAvailabilityZones = "DescribeAvailabilityZones"
 
 // DescribeAvailabilityZonesRequest generates a request for the DescribeAvailabilityZones operation.
-func (c *EC2) DescribeAvailabilityZonesRequest(input *DescribeAvailabilityZonesInput) (req *aws.Request, output *DescribeAvailabilityZonesOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeAvailabilityZonesRequest(input *DescribeAvailabilityZonesInput) (req *service.Request, output *DescribeAvailabilityZonesOutput) {
+	op := &service.Operation{
 		Name:       opDescribeAvailabilityZones,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2688,8 +2688,8 @@ func (c *EC2) DescribeAvailabilityZones(input *DescribeAvailabilityZonesInput) (
 const opDescribeBundleTasks = "DescribeBundleTasks"
 
 // DescribeBundleTasksRequest generates a request for the DescribeBundleTasks operation.
-func (c *EC2) DescribeBundleTasksRequest(input *DescribeBundleTasksInput) (req *aws.Request, output *DescribeBundleTasksOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeBundleTasksRequest(input *DescribeBundleTasksInput) (req *service.Request, output *DescribeBundleTasksOutput) {
+	op := &service.Operation{
 		Name:       opDescribeBundleTasks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2720,8 +2720,8 @@ func (c *EC2) DescribeBundleTasks(input *DescribeBundleTasksInput) (*DescribeBun
 const opDescribeClassicLinkInstances = "DescribeClassicLinkInstances"
 
 // DescribeClassicLinkInstancesRequest generates a request for the DescribeClassicLinkInstances operation.
-func (c *EC2) DescribeClassicLinkInstancesRequest(input *DescribeClassicLinkInstancesInput) (req *aws.Request, output *DescribeClassicLinkInstancesOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeClassicLinkInstancesRequest(input *DescribeClassicLinkInstancesInput) (req *service.Request, output *DescribeClassicLinkInstancesOutput) {
+	op := &service.Operation{
 		Name:       opDescribeClassicLinkInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2750,8 +2750,8 @@ func (c *EC2) DescribeClassicLinkInstances(input *DescribeClassicLinkInstancesIn
 const opDescribeConversionTasks = "DescribeConversionTasks"
 
 // DescribeConversionTasksRequest generates a request for the DescribeConversionTasks operation.
-func (c *EC2) DescribeConversionTasksRequest(input *DescribeConversionTasksInput) (req *aws.Request, output *DescribeConversionTasksOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeConversionTasksRequest(input *DescribeConversionTasksInput) (req *service.Request, output *DescribeConversionTasksOutput) {
+	op := &service.Operation{
 		Name:       opDescribeConversionTasks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2780,8 +2780,8 @@ func (c *EC2) DescribeConversionTasks(input *DescribeConversionTasksInput) (*Des
 const opDescribeCustomerGateways = "DescribeCustomerGateways"
 
 // DescribeCustomerGatewaysRequest generates a request for the DescribeCustomerGateways operation.
-func (c *EC2) DescribeCustomerGatewaysRequest(input *DescribeCustomerGatewaysInput) (req *aws.Request, output *DescribeCustomerGatewaysOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeCustomerGatewaysRequest(input *DescribeCustomerGatewaysInput) (req *service.Request, output *DescribeCustomerGatewaysOutput) {
+	op := &service.Operation{
 		Name:       opDescribeCustomerGateways,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2808,22 +2808,22 @@ func (c *EC2) DescribeCustomerGateways(input *DescribeCustomerGatewaysInput) (*D
 	return out, err
 }
 
-const opDescribeDHCPOptions = "DescribeDhcpOptions"
+const opDescribeDhcpOptions = "DescribeDhcpOptions"
 
-// DescribeDHCPOptionsRequest generates a request for the DescribeDHCPOptions operation.
-func (c *EC2) DescribeDHCPOptionsRequest(input *DescribeDHCPOptionsInput) (req *aws.Request, output *DescribeDHCPOptionsOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeDHCPOptions,
+// DescribeDhcpOptionsRequest generates a request for the DescribeDhcpOptions operation.
+func (c *EC2) DescribeDhcpOptionsRequest(input *DescribeDhcpOptionsInput) (req *service.Request, output *DescribeDhcpOptionsOutput) {
+	op := &service.Operation{
+		Name:       opDescribeDhcpOptions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeDHCPOptionsInput{}
+		input = &DescribeDhcpOptionsInput{}
 	}
 
 	req = c.newRequest(op, input, output)
-	output = &DescribeDHCPOptionsOutput{}
+	output = &DescribeDhcpOptionsOutput{}
 	req.Data = output
 	return
 }
@@ -2832,8 +2832,8 @@ func (c *EC2) DescribeDHCPOptionsRequest(input *DescribeDHCPOptionsInput) (req *
 //
 // For more information about DHCP options sets, see DHCP Options Sets (http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_DHCP_Options.html)
 // in the Amazon Virtual Private Cloud User Guide.
-func (c *EC2) DescribeDHCPOptions(input *DescribeDHCPOptionsInput) (*DescribeDHCPOptionsOutput, error) {
-	req, out := c.DescribeDHCPOptionsRequest(input)
+func (c *EC2) DescribeDhcpOptions(input *DescribeDhcpOptionsInput) (*DescribeDhcpOptionsOutput, error) {
+	req, out := c.DescribeDhcpOptionsRequest(input)
 	err := req.Send()
 	return out, err
 }
@@ -2841,8 +2841,8 @@ func (c *EC2) DescribeDHCPOptions(input *DescribeDHCPOptionsInput) (*DescribeDHC
 const opDescribeExportTasks = "DescribeExportTasks"
 
 // DescribeExportTasksRequest generates a request for the DescribeExportTasks operation.
-func (c *EC2) DescribeExportTasksRequest(input *DescribeExportTasksInput) (req *aws.Request, output *DescribeExportTasksOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeExportTasksRequest(input *DescribeExportTasksInput) (req *service.Request, output *DescribeExportTasksOutput) {
+	op := &service.Operation{
 		Name:       opDescribeExportTasks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2868,8 +2868,8 @@ func (c *EC2) DescribeExportTasks(input *DescribeExportTasksInput) (*DescribeExp
 const opDescribeFlowLogs = "DescribeFlowLogs"
 
 // DescribeFlowLogsRequest generates a request for the DescribeFlowLogs operation.
-func (c *EC2) DescribeFlowLogsRequest(input *DescribeFlowLogsInput) (req *aws.Request, output *DescribeFlowLogsOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeFlowLogsRequest(input *DescribeFlowLogsInput) (req *service.Request, output *DescribeFlowLogsOutput) {
+	op := &service.Operation{
 		Name:       opDescribeFlowLogs,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2897,8 +2897,8 @@ func (c *EC2) DescribeFlowLogs(input *DescribeFlowLogsInput) (*DescribeFlowLogsO
 const opDescribeImageAttribute = "DescribeImageAttribute"
 
 // DescribeImageAttributeRequest generates a request for the DescribeImageAttribute operation.
-func (c *EC2) DescribeImageAttributeRequest(input *DescribeImageAttributeInput) (req *aws.Request, output *DescribeImageAttributeOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeImageAttributeRequest(input *DescribeImageAttributeInput) (req *service.Request, output *DescribeImageAttributeOutput) {
+	op := &service.Operation{
 		Name:       opDescribeImageAttribute,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2925,8 +2925,8 @@ func (c *EC2) DescribeImageAttribute(input *DescribeImageAttributeInput) (*Descr
 const opDescribeImages = "DescribeImages"
 
 // DescribeImagesRequest generates a request for the DescribeImages operation.
-func (c *EC2) DescribeImagesRequest(input *DescribeImagesInput) (req *aws.Request, output *DescribeImagesOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeImagesRequest(input *DescribeImagesInput) (req *service.Request, output *DescribeImagesOutput) {
+	op := &service.Operation{
 		Name:       opDescribeImages,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2958,8 +2958,8 @@ func (c *EC2) DescribeImages(input *DescribeImagesInput) (*DescribeImagesOutput,
 const opDescribeImportImageTasks = "DescribeImportImageTasks"
 
 // DescribeImportImageTasksRequest generates a request for the DescribeImportImageTasks operation.
-func (c *EC2) DescribeImportImageTasksRequest(input *DescribeImportImageTasksInput) (req *aws.Request, output *DescribeImportImageTasksOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeImportImageTasksRequest(input *DescribeImportImageTasksInput) (req *service.Request, output *DescribeImportImageTasksOutput) {
+	op := &service.Operation{
 		Name:       opDescribeImportImageTasks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2986,8 +2986,8 @@ func (c *EC2) DescribeImportImageTasks(input *DescribeImportImageTasksInput) (*D
 const opDescribeImportSnapshotTasks = "DescribeImportSnapshotTasks"
 
 // DescribeImportSnapshotTasksRequest generates a request for the DescribeImportSnapshotTasks operation.
-func (c *EC2) DescribeImportSnapshotTasksRequest(input *DescribeImportSnapshotTasksInput) (req *aws.Request, output *DescribeImportSnapshotTasksOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeImportSnapshotTasksRequest(input *DescribeImportSnapshotTasksInput) (req *service.Request, output *DescribeImportSnapshotTasksOutput) {
+	op := &service.Operation{
 		Name:       opDescribeImportSnapshotTasks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3013,8 +3013,8 @@ func (c *EC2) DescribeImportSnapshotTasks(input *DescribeImportSnapshotTasksInpu
 const opDescribeInstanceAttribute = "DescribeInstanceAttribute"
 
 // DescribeInstanceAttributeRequest generates a request for the DescribeInstanceAttribute operation.
-func (c *EC2) DescribeInstanceAttributeRequest(input *DescribeInstanceAttributeInput) (req *aws.Request, output *DescribeInstanceAttributeOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeInstanceAttributeRequest(input *DescribeInstanceAttributeInput) (req *service.Request, output *DescribeInstanceAttributeOutput) {
+	op := &service.Operation{
 		Name:       opDescribeInstanceAttribute,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3044,12 +3044,12 @@ func (c *EC2) DescribeInstanceAttribute(input *DescribeInstanceAttributeInput) (
 const opDescribeInstanceStatus = "DescribeInstanceStatus"
 
 // DescribeInstanceStatusRequest generates a request for the DescribeInstanceStatus operation.
-func (c *EC2) DescribeInstanceStatusRequest(input *DescribeInstanceStatusInput) (req *aws.Request, output *DescribeInstanceStatusOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeInstanceStatusRequest(input *DescribeInstanceStatusInput) (req *service.Request, output *DescribeInstanceStatusOutput) {
+	op := &service.Operation{
 		Name:       opDescribeInstanceStatus,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
+		Paginator: &service.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -3103,12 +3103,12 @@ func (c *EC2) DescribeInstanceStatusPages(input *DescribeInstanceStatusInput, fn
 const opDescribeInstances = "DescribeInstances"
 
 // DescribeInstancesRequest generates a request for the DescribeInstances operation.
-func (c *EC2) DescribeInstancesRequest(input *DescribeInstancesInput) (req *aws.Request, output *DescribeInstancesOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeInstancesRequest(input *DescribeInstancesInput) (req *service.Request, output *DescribeInstancesOutput) {
+	op := &service.Operation{
 		Name:       opDescribeInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
+		Paginator: &service.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -3152,8 +3152,8 @@ func (c *EC2) DescribeInstancesPages(input *DescribeInstancesInput, fn func(p *D
 const opDescribeInternetGateways = "DescribeInternetGateways"
 
 // DescribeInternetGatewaysRequest generates a request for the DescribeInternetGateways operation.
-func (c *EC2) DescribeInternetGatewaysRequest(input *DescribeInternetGatewaysInput) (req *aws.Request, output *DescribeInternetGatewaysOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeInternetGatewaysRequest(input *DescribeInternetGatewaysInput) (req *service.Request, output *DescribeInternetGatewaysOutput) {
+	op := &service.Operation{
 		Name:       opDescribeInternetGateways,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3179,8 +3179,8 @@ func (c *EC2) DescribeInternetGateways(input *DescribeInternetGatewaysInput) (*D
 const opDescribeKeyPairs = "DescribeKeyPairs"
 
 // DescribeKeyPairsRequest generates a request for the DescribeKeyPairs operation.
-func (c *EC2) DescribeKeyPairsRequest(input *DescribeKeyPairsInput) (req *aws.Request, output *DescribeKeyPairsOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeKeyPairsRequest(input *DescribeKeyPairsInput) (req *service.Request, output *DescribeKeyPairsOutput) {
+	op := &service.Operation{
 		Name:       opDescribeKeyPairs,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3209,8 +3209,8 @@ func (c *EC2) DescribeKeyPairs(input *DescribeKeyPairsInput) (*DescribeKeyPairsO
 const opDescribeMovingAddresses = "DescribeMovingAddresses"
 
 // DescribeMovingAddressesRequest generates a request for the DescribeMovingAddresses operation.
-func (c *EC2) DescribeMovingAddressesRequest(input *DescribeMovingAddressesInput) (req *aws.Request, output *DescribeMovingAddressesOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeMovingAddressesRequest(input *DescribeMovingAddressesInput) (req *service.Request, output *DescribeMovingAddressesOutput) {
+	op := &service.Operation{
 		Name:       opDescribeMovingAddresses,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3235,22 +3235,22 @@ func (c *EC2) DescribeMovingAddresses(input *DescribeMovingAddressesInput) (*Des
 	return out, err
 }
 
-const opDescribeNetworkACLs = "DescribeNetworkAcls"
+const opDescribeNetworkAcls = "DescribeNetworkAcls"
 
-// DescribeNetworkACLsRequest generates a request for the DescribeNetworkACLs operation.
-func (c *EC2) DescribeNetworkACLsRequest(input *DescribeNetworkACLsInput) (req *aws.Request, output *DescribeNetworkACLsOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeNetworkACLs,
+// DescribeNetworkAclsRequest generates a request for the DescribeNetworkAcls operation.
+func (c *EC2) DescribeNetworkAclsRequest(input *DescribeNetworkAclsInput) (req *service.Request, output *DescribeNetworkAclsOutput) {
+	op := &service.Operation{
+		Name:       opDescribeNetworkAcls,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeNetworkACLsInput{}
+		input = &DescribeNetworkAclsInput{}
 	}
 
 	req = c.newRequest(op, input, output)
-	output = &DescribeNetworkACLsOutput{}
+	output = &DescribeNetworkAclsOutput{}
 	req.Data = output
 	return
 }
@@ -3259,8 +3259,8 @@ func (c *EC2) DescribeNetworkACLsRequest(input *DescribeNetworkACLsInput) (req *
 //
 // For more information about network ACLs, see Network ACLs (http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_ACLs.html)
 // in the Amazon Virtual Private Cloud User Guide.
-func (c *EC2) DescribeNetworkACLs(input *DescribeNetworkACLsInput) (*DescribeNetworkACLsOutput, error) {
-	req, out := c.DescribeNetworkACLsRequest(input)
+func (c *EC2) DescribeNetworkAcls(input *DescribeNetworkAclsInput) (*DescribeNetworkAclsOutput, error) {
+	req, out := c.DescribeNetworkAclsRequest(input)
 	err := req.Send()
 	return out, err
 }
@@ -3268,8 +3268,8 @@ func (c *EC2) DescribeNetworkACLs(input *DescribeNetworkACLsInput) (*DescribeNet
 const opDescribeNetworkInterfaceAttribute = "DescribeNetworkInterfaceAttribute"
 
 // DescribeNetworkInterfaceAttributeRequest generates a request for the DescribeNetworkInterfaceAttribute operation.
-func (c *EC2) DescribeNetworkInterfaceAttributeRequest(input *DescribeNetworkInterfaceAttributeInput) (req *aws.Request, output *DescribeNetworkInterfaceAttributeOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeNetworkInterfaceAttributeRequest(input *DescribeNetworkInterfaceAttributeInput) (req *service.Request, output *DescribeNetworkInterfaceAttributeOutput) {
+	op := &service.Operation{
 		Name:       opDescribeNetworkInterfaceAttribute,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3296,8 +3296,8 @@ func (c *EC2) DescribeNetworkInterfaceAttribute(input *DescribeNetworkInterfaceA
 const opDescribeNetworkInterfaces = "DescribeNetworkInterfaces"
 
 // DescribeNetworkInterfacesRequest generates a request for the DescribeNetworkInterfaces operation.
-func (c *EC2) DescribeNetworkInterfacesRequest(input *DescribeNetworkInterfacesInput) (req *aws.Request, output *DescribeNetworkInterfacesOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeNetworkInterfacesRequest(input *DescribeNetworkInterfacesInput) (req *service.Request, output *DescribeNetworkInterfacesOutput) {
+	op := &service.Operation{
 		Name:       opDescribeNetworkInterfaces,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3323,8 +3323,8 @@ func (c *EC2) DescribeNetworkInterfaces(input *DescribeNetworkInterfacesInput) (
 const opDescribePlacementGroups = "DescribePlacementGroups"
 
 // DescribePlacementGroupsRequest generates a request for the DescribePlacementGroups operation.
-func (c *EC2) DescribePlacementGroupsRequest(input *DescribePlacementGroupsInput) (req *aws.Request, output *DescribePlacementGroupsOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribePlacementGroupsRequest(input *DescribePlacementGroupsInput) (req *service.Request, output *DescribePlacementGroupsOutput) {
+	op := &service.Operation{
 		Name:       opDescribePlacementGroups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3352,8 +3352,8 @@ func (c *EC2) DescribePlacementGroups(input *DescribePlacementGroupsInput) (*Des
 const opDescribePrefixLists = "DescribePrefixLists"
 
 // DescribePrefixListsRequest generates a request for the DescribePrefixLists operation.
-func (c *EC2) DescribePrefixListsRequest(input *DescribePrefixListsInput) (req *aws.Request, output *DescribePrefixListsOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribePrefixListsRequest(input *DescribePrefixListsInput) (req *service.Request, output *DescribePrefixListsOutput) {
+	op := &service.Operation{
 		Name:       opDescribePrefixLists,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3383,8 +3383,8 @@ func (c *EC2) DescribePrefixLists(input *DescribePrefixListsInput) (*DescribePre
 const opDescribeRegions = "DescribeRegions"
 
 // DescribeRegionsRequest generates a request for the DescribeRegions operation.
-func (c *EC2) DescribeRegionsRequest(input *DescribeRegionsInput) (req *aws.Request, output *DescribeRegionsOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeRegionsRequest(input *DescribeRegionsInput) (req *service.Request, output *DescribeRegionsOutput) {
+	op := &service.Operation{
 		Name:       opDescribeRegions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3413,8 +3413,8 @@ func (c *EC2) DescribeRegions(input *DescribeRegionsInput) (*DescribeRegionsOutp
 const opDescribeReservedInstances = "DescribeReservedInstances"
 
 // DescribeReservedInstancesRequest generates a request for the DescribeReservedInstances operation.
-func (c *EC2) DescribeReservedInstancesRequest(input *DescribeReservedInstancesInput) (req *aws.Request, output *DescribeReservedInstancesOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeReservedInstancesRequest(input *DescribeReservedInstancesInput) (req *service.Request, output *DescribeReservedInstancesOutput) {
+	op := &service.Operation{
 		Name:       opDescribeReservedInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3443,8 +3443,8 @@ func (c *EC2) DescribeReservedInstances(input *DescribeReservedInstancesInput) (
 const opDescribeReservedInstancesListings = "DescribeReservedInstancesListings"
 
 // DescribeReservedInstancesListingsRequest generates a request for the DescribeReservedInstancesListings operation.
-func (c *EC2) DescribeReservedInstancesListingsRequest(input *DescribeReservedInstancesListingsInput) (req *aws.Request, output *DescribeReservedInstancesListingsOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeReservedInstancesListingsRequest(input *DescribeReservedInstancesListingsInput) (req *service.Request, output *DescribeReservedInstancesListingsOutput) {
+	op := &service.Operation{
 		Name:       opDescribeReservedInstancesListings,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3491,12 +3491,12 @@ func (c *EC2) DescribeReservedInstancesListings(input *DescribeReservedInstances
 const opDescribeReservedInstancesModifications = "DescribeReservedInstancesModifications"
 
 // DescribeReservedInstancesModificationsRequest generates a request for the DescribeReservedInstancesModifications operation.
-func (c *EC2) DescribeReservedInstancesModificationsRequest(input *DescribeReservedInstancesModificationsInput) (req *aws.Request, output *DescribeReservedInstancesModificationsOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeReservedInstancesModificationsRequest(input *DescribeReservedInstancesModificationsInput) (req *service.Request, output *DescribeReservedInstancesModificationsOutput) {
+	op := &service.Operation{
 		Name:       opDescribeReservedInstancesModifications,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
+		Paginator: &service.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "",
@@ -3537,12 +3537,12 @@ func (c *EC2) DescribeReservedInstancesModificationsPages(input *DescribeReserve
 const opDescribeReservedInstancesOfferings = "DescribeReservedInstancesOfferings"
 
 // DescribeReservedInstancesOfferingsRequest generates a request for the DescribeReservedInstancesOfferings operation.
-func (c *EC2) DescribeReservedInstancesOfferingsRequest(input *DescribeReservedInstancesOfferingsInput) (req *aws.Request, output *DescribeReservedInstancesOfferingsOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeReservedInstancesOfferingsRequest(input *DescribeReservedInstancesOfferingsInput) (req *service.Request, output *DescribeReservedInstancesOfferingsOutput) {
+	op := &service.Operation{
 		Name:       opDescribeReservedInstancesOfferings,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
+		Paginator: &service.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -3584,8 +3584,8 @@ func (c *EC2) DescribeReservedInstancesOfferingsPages(input *DescribeReservedIns
 const opDescribeRouteTables = "DescribeRouteTables"
 
 // DescribeRouteTablesRequest generates a request for the DescribeRouteTables operation.
-func (c *EC2) DescribeRouteTablesRequest(input *DescribeRouteTablesInput) (req *aws.Request, output *DescribeRouteTablesOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeRouteTablesRequest(input *DescribeRouteTablesInput) (req *service.Request, output *DescribeRouteTablesOutput) {
+	op := &service.Operation{
 		Name:       opDescribeRouteTables,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3619,8 +3619,8 @@ func (c *EC2) DescribeRouteTables(input *DescribeRouteTablesInput) (*DescribeRou
 const opDescribeSecurityGroups = "DescribeSecurityGroups"
 
 // DescribeSecurityGroupsRequest generates a request for the DescribeSecurityGroups operation.
-func (c *EC2) DescribeSecurityGroupsRequest(input *DescribeSecurityGroupsInput) (req *aws.Request, output *DescribeSecurityGroupsOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeSecurityGroupsRequest(input *DescribeSecurityGroupsInput) (req *service.Request, output *DescribeSecurityGroupsOutput) {
+	op := &service.Operation{
 		Name:       opDescribeSecurityGroups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3653,8 +3653,8 @@ func (c *EC2) DescribeSecurityGroups(input *DescribeSecurityGroupsInput) (*Descr
 const opDescribeSnapshotAttribute = "DescribeSnapshotAttribute"
 
 // DescribeSnapshotAttributeRequest generates a request for the DescribeSnapshotAttribute operation.
-func (c *EC2) DescribeSnapshotAttributeRequest(input *DescribeSnapshotAttributeInput) (req *aws.Request, output *DescribeSnapshotAttributeOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeSnapshotAttributeRequest(input *DescribeSnapshotAttributeInput) (req *service.Request, output *DescribeSnapshotAttributeOutput) {
+	op := &service.Operation{
 		Name:       opDescribeSnapshotAttribute,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3684,12 +3684,12 @@ func (c *EC2) DescribeSnapshotAttribute(input *DescribeSnapshotAttributeInput) (
 const opDescribeSnapshots = "DescribeSnapshots"
 
 // DescribeSnapshotsRequest generates a request for the DescribeSnapshots operation.
-func (c *EC2) DescribeSnapshotsRequest(input *DescribeSnapshotsInput) (req *aws.Request, output *DescribeSnapshotsOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeSnapshotsRequest(input *DescribeSnapshotsInput) (req *service.Request, output *DescribeSnapshotsOutput) {
+	op := &service.Operation{
 		Name:       opDescribeSnapshots,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
+		Paginator: &service.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "",
@@ -3763,8 +3763,8 @@ func (c *EC2) DescribeSnapshotsPages(input *DescribeSnapshotsInput, fn func(p *D
 const opDescribeSpotDatafeedSubscription = "DescribeSpotDatafeedSubscription"
 
 // DescribeSpotDatafeedSubscriptionRequest generates a request for the DescribeSpotDatafeedSubscription operation.
-func (c *EC2) DescribeSpotDatafeedSubscriptionRequest(input *DescribeSpotDatafeedSubscriptionInput) (req *aws.Request, output *DescribeSpotDatafeedSubscriptionOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeSpotDatafeedSubscriptionRequest(input *DescribeSpotDatafeedSubscriptionInput) (req *service.Request, output *DescribeSpotDatafeedSubscriptionOutput) {
+	op := &service.Operation{
 		Name:       opDescribeSpotDatafeedSubscription,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3792,8 +3792,8 @@ func (c *EC2) DescribeSpotDatafeedSubscription(input *DescribeSpotDatafeedSubscr
 const opDescribeSpotFleetInstances = "DescribeSpotFleetInstances"
 
 // DescribeSpotFleetInstancesRequest generates a request for the DescribeSpotFleetInstances operation.
-func (c *EC2) DescribeSpotFleetInstancesRequest(input *DescribeSpotFleetInstancesInput) (req *aws.Request, output *DescribeSpotFleetInstancesOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeSpotFleetInstancesRequest(input *DescribeSpotFleetInstancesInput) (req *service.Request, output *DescribeSpotFleetInstancesOutput) {
+	op := &service.Operation{
 		Name:       opDescribeSpotFleetInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3819,8 +3819,8 @@ func (c *EC2) DescribeSpotFleetInstances(input *DescribeSpotFleetInstancesInput)
 const opDescribeSpotFleetRequestHistory = "DescribeSpotFleetRequestHistory"
 
 // DescribeSpotFleetRequestHistoryRequest generates a request for the DescribeSpotFleetRequestHistory operation.
-func (c *EC2) DescribeSpotFleetRequestHistoryRequest(input *DescribeSpotFleetRequestHistoryInput) (req *aws.Request, output *DescribeSpotFleetRequestHistoryOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeSpotFleetRequestHistoryRequest(input *DescribeSpotFleetRequestHistoryInput) (req *service.Request, output *DescribeSpotFleetRequestHistoryOutput) {
+	op := &service.Operation{
 		Name:       opDescribeSpotFleetRequestHistory,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3851,8 +3851,8 @@ func (c *EC2) DescribeSpotFleetRequestHistory(input *DescribeSpotFleetRequestHis
 const opDescribeSpotFleetRequests = "DescribeSpotFleetRequests"
 
 // DescribeSpotFleetRequestsRequest generates a request for the DescribeSpotFleetRequests operation.
-func (c *EC2) DescribeSpotFleetRequestsRequest(input *DescribeSpotFleetRequestsInput) (req *aws.Request, output *DescribeSpotFleetRequestsOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeSpotFleetRequestsRequest(input *DescribeSpotFleetRequestsInput) (req *service.Request, output *DescribeSpotFleetRequestsOutput) {
+	op := &service.Operation{
 		Name:       opDescribeSpotFleetRequests,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3878,8 +3878,8 @@ func (c *EC2) DescribeSpotFleetRequests(input *DescribeSpotFleetRequestsInput) (
 const opDescribeSpotInstanceRequests = "DescribeSpotInstanceRequests"
 
 // DescribeSpotInstanceRequestsRequest generates a request for the DescribeSpotInstanceRequests operation.
-func (c *EC2) DescribeSpotInstanceRequestsRequest(input *DescribeSpotInstanceRequestsInput) (req *aws.Request, output *DescribeSpotInstanceRequestsOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeSpotInstanceRequestsRequest(input *DescribeSpotInstanceRequestsInput) (req *service.Request, output *DescribeSpotInstanceRequestsOutput) {
+	op := &service.Operation{
 		Name:       opDescribeSpotInstanceRequests,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3916,12 +3916,12 @@ func (c *EC2) DescribeSpotInstanceRequests(input *DescribeSpotInstanceRequestsIn
 const opDescribeSpotPriceHistory = "DescribeSpotPriceHistory"
 
 // DescribeSpotPriceHistoryRequest generates a request for the DescribeSpotPriceHistory operation.
-func (c *EC2) DescribeSpotPriceHistoryRequest(input *DescribeSpotPriceHistoryInput) (req *aws.Request, output *DescribeSpotPriceHistoryOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeSpotPriceHistoryRequest(input *DescribeSpotPriceHistoryInput) (req *service.Request, output *DescribeSpotPriceHistoryOutput) {
+	op := &service.Operation{
 		Name:       opDescribeSpotPriceHistory,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
+		Paginator: &service.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -3964,8 +3964,8 @@ func (c *EC2) DescribeSpotPriceHistoryPages(input *DescribeSpotPriceHistoryInput
 const opDescribeSubnets = "DescribeSubnets"
 
 // DescribeSubnetsRequest generates a request for the DescribeSubnets operation.
-func (c *EC2) DescribeSubnetsRequest(input *DescribeSubnetsInput) (req *aws.Request, output *DescribeSubnetsOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeSubnetsRequest(input *DescribeSubnetsInput) (req *service.Request, output *DescribeSubnetsOutput) {
+	op := &service.Operation{
 		Name:       opDescribeSubnets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3994,8 +3994,8 @@ func (c *EC2) DescribeSubnets(input *DescribeSubnetsInput) (*DescribeSubnetsOutp
 const opDescribeTags = "DescribeTags"
 
 // DescribeTagsRequest generates a request for the DescribeTags operation.
-func (c *EC2) DescribeTagsRequest(input *DescribeTagsInput) (req *aws.Request, output *DescribeTagsOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeTagsRequest(input *DescribeTagsInput) (req *service.Request, output *DescribeTagsOutput) {
+	op := &service.Operation{
 		Name:       opDescribeTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4021,237 +4021,11 @@ func (c *EC2) DescribeTags(input *DescribeTagsInput) (*DescribeTagsOutput, error
 	return out, err
 }
 
-const opDescribeVPCAttribute = "DescribeVpcAttribute"
-
-// DescribeVPCAttributeRequest generates a request for the DescribeVPCAttribute operation.
-func (c *EC2) DescribeVPCAttributeRequest(input *DescribeVPCAttributeInput) (req *aws.Request, output *DescribeVPCAttributeOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeVPCAttribute,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DescribeVPCAttributeInput{}
-	}
-
-	req = c.newRequest(op, input, output)
-	output = &DescribeVPCAttributeOutput{}
-	req.Data = output
-	return
-}
-
-// Describes the specified attribute of the specified VPC. You can specify only
-// one attribute at a time.
-func (c *EC2) DescribeVPCAttribute(input *DescribeVPCAttributeInput) (*DescribeVPCAttributeOutput, error) {
-	req, out := c.DescribeVPCAttributeRequest(input)
-	err := req.Send()
-	return out, err
-}
-
-const opDescribeVPCClassicLink = "DescribeVpcClassicLink"
-
-// DescribeVPCClassicLinkRequest generates a request for the DescribeVPCClassicLink operation.
-func (c *EC2) DescribeVPCClassicLinkRequest(input *DescribeVPCClassicLinkInput) (req *aws.Request, output *DescribeVPCClassicLinkOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeVPCClassicLink,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DescribeVPCClassicLinkInput{}
-	}
-
-	req = c.newRequest(op, input, output)
-	output = &DescribeVPCClassicLinkOutput{}
-	req.Data = output
-	return
-}
-
-// Describes the ClassicLink status of one or more VPCs.
-func (c *EC2) DescribeVPCClassicLink(input *DescribeVPCClassicLinkInput) (*DescribeVPCClassicLinkOutput, error) {
-	req, out := c.DescribeVPCClassicLinkRequest(input)
-	err := req.Send()
-	return out, err
-}
-
-const opDescribeVPCEndpointServices = "DescribeVpcEndpointServices"
-
-// DescribeVPCEndpointServicesRequest generates a request for the DescribeVPCEndpointServices operation.
-func (c *EC2) DescribeVPCEndpointServicesRequest(input *DescribeVPCEndpointServicesInput) (req *aws.Request, output *DescribeVPCEndpointServicesOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeVPCEndpointServices,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DescribeVPCEndpointServicesInput{}
-	}
-
-	req = c.newRequest(op, input, output)
-	output = &DescribeVPCEndpointServicesOutput{}
-	req.Data = output
-	return
-}
-
-// Describes all supported AWS services that can be specified when creating
-// a VPC endpoint.
-func (c *EC2) DescribeVPCEndpointServices(input *DescribeVPCEndpointServicesInput) (*DescribeVPCEndpointServicesOutput, error) {
-	req, out := c.DescribeVPCEndpointServicesRequest(input)
-	err := req.Send()
-	return out, err
-}
-
-const opDescribeVPCEndpoints = "DescribeVpcEndpoints"
-
-// DescribeVPCEndpointsRequest generates a request for the DescribeVPCEndpoints operation.
-func (c *EC2) DescribeVPCEndpointsRequest(input *DescribeVPCEndpointsInput) (req *aws.Request, output *DescribeVPCEndpointsOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeVPCEndpoints,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DescribeVPCEndpointsInput{}
-	}
-
-	req = c.newRequest(op, input, output)
-	output = &DescribeVPCEndpointsOutput{}
-	req.Data = output
-	return
-}
-
-// Describes one or more of your VPC endpoints.
-func (c *EC2) DescribeVPCEndpoints(input *DescribeVPCEndpointsInput) (*DescribeVPCEndpointsOutput, error) {
-	req, out := c.DescribeVPCEndpointsRequest(input)
-	err := req.Send()
-	return out, err
-}
-
-const opDescribeVPCPeeringConnections = "DescribeVpcPeeringConnections"
-
-// DescribeVPCPeeringConnectionsRequest generates a request for the DescribeVPCPeeringConnections operation.
-func (c *EC2) DescribeVPCPeeringConnectionsRequest(input *DescribeVPCPeeringConnectionsInput) (req *aws.Request, output *DescribeVPCPeeringConnectionsOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeVPCPeeringConnections,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DescribeVPCPeeringConnectionsInput{}
-	}
-
-	req = c.newRequest(op, input, output)
-	output = &DescribeVPCPeeringConnectionsOutput{}
-	req.Data = output
-	return
-}
-
-// Describes one or more of your VPC peering connections.
-func (c *EC2) DescribeVPCPeeringConnections(input *DescribeVPCPeeringConnectionsInput) (*DescribeVPCPeeringConnectionsOutput, error) {
-	req, out := c.DescribeVPCPeeringConnectionsRequest(input)
-	err := req.Send()
-	return out, err
-}
-
-const opDescribeVPCs = "DescribeVpcs"
-
-// DescribeVPCsRequest generates a request for the DescribeVPCs operation.
-func (c *EC2) DescribeVPCsRequest(input *DescribeVPCsInput) (req *aws.Request, output *DescribeVPCsOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeVPCs,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DescribeVPCsInput{}
-	}
-
-	req = c.newRequest(op, input, output)
-	output = &DescribeVPCsOutput{}
-	req.Data = output
-	return
-}
-
-// Describes one or more of your VPCs.
-func (c *EC2) DescribeVPCs(input *DescribeVPCsInput) (*DescribeVPCsOutput, error) {
-	req, out := c.DescribeVPCsRequest(input)
-	err := req.Send()
-	return out, err
-}
-
-const opDescribeVPNConnections = "DescribeVpnConnections"
-
-// DescribeVPNConnectionsRequest generates a request for the DescribeVPNConnections operation.
-func (c *EC2) DescribeVPNConnectionsRequest(input *DescribeVPNConnectionsInput) (req *aws.Request, output *DescribeVPNConnectionsOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeVPNConnections,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DescribeVPNConnectionsInput{}
-	}
-
-	req = c.newRequest(op, input, output)
-	output = &DescribeVPNConnectionsOutput{}
-	req.Data = output
-	return
-}
-
-// Describes one or more of your VPN connections.
-//
-// For more information about VPN connections, see Adding a Hardware Virtual
-// Private Gateway to Your VPC (http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html)
-// in the Amazon Virtual Private Cloud User Guide.
-func (c *EC2) DescribeVPNConnections(input *DescribeVPNConnectionsInput) (*DescribeVPNConnectionsOutput, error) {
-	req, out := c.DescribeVPNConnectionsRequest(input)
-	err := req.Send()
-	return out, err
-}
-
-const opDescribeVPNGateways = "DescribeVpnGateways"
-
-// DescribeVPNGatewaysRequest generates a request for the DescribeVPNGateways operation.
-func (c *EC2) DescribeVPNGatewaysRequest(input *DescribeVPNGatewaysInput) (req *aws.Request, output *DescribeVPNGatewaysOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeVPNGateways,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DescribeVPNGatewaysInput{}
-	}
-
-	req = c.newRequest(op, input, output)
-	output = &DescribeVPNGatewaysOutput{}
-	req.Data = output
-	return
-}
-
-// Describes one or more of your virtual private gateways.
-//
-// For more information about virtual private gateways, see Adding an IPsec
-// Hardware VPN to Your VPC (http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html)
-// in the Amazon Virtual Private Cloud User Guide.
-func (c *EC2) DescribeVPNGateways(input *DescribeVPNGatewaysInput) (*DescribeVPNGatewaysOutput, error) {
-	req, out := c.DescribeVPNGatewaysRequest(input)
-	err := req.Send()
-	return out, err
-}
-
 const opDescribeVolumeAttribute = "DescribeVolumeAttribute"
 
 // DescribeVolumeAttributeRequest generates a request for the DescribeVolumeAttribute operation.
-func (c *EC2) DescribeVolumeAttributeRequest(input *DescribeVolumeAttributeInput) (req *aws.Request, output *DescribeVolumeAttributeOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeVolumeAttributeRequest(input *DescribeVolumeAttributeInput) (req *service.Request, output *DescribeVolumeAttributeOutput) {
+	op := &service.Operation{
 		Name:       opDescribeVolumeAttribute,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4281,12 +4055,12 @@ func (c *EC2) DescribeVolumeAttribute(input *DescribeVolumeAttributeInput) (*Des
 const opDescribeVolumeStatus = "DescribeVolumeStatus"
 
 // DescribeVolumeStatusRequest generates a request for the DescribeVolumeStatus operation.
-func (c *EC2) DescribeVolumeStatusRequest(input *DescribeVolumeStatusInput) (req *aws.Request, output *DescribeVolumeStatusOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeVolumeStatusRequest(input *DescribeVolumeStatusInput) (req *service.Request, output *DescribeVolumeStatusOutput) {
+	op := &service.Operation{
 		Name:       opDescribeVolumeStatus,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
+		Paginator: &service.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -4355,12 +4129,12 @@ func (c *EC2) DescribeVolumeStatusPages(input *DescribeVolumeStatusInput, fn fun
 const opDescribeVolumes = "DescribeVolumes"
 
 // DescribeVolumesRequest generates a request for the DescribeVolumes operation.
-func (c *EC2) DescribeVolumesRequest(input *DescribeVolumesInput) (req *aws.Request, output *DescribeVolumesOutput) {
-	op := &aws.Operation{
+func (c *EC2) DescribeVolumesRequest(input *DescribeVolumesInput) (req *service.Request, output *DescribeVolumesOutput) {
+	op := &service.Operation{
 		Name:       opDescribeVolumes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
+		Paginator: &service.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -4402,22 +4176,248 @@ func (c *EC2) DescribeVolumesPages(input *DescribeVolumesInput, fn func(p *Descr
 	})
 }
 
-const opDetachClassicLinkVPC = "DetachClassicLinkVpc"
+const opDescribeVpcAttribute = "DescribeVpcAttribute"
 
-// DetachClassicLinkVPCRequest generates a request for the DetachClassicLinkVPC operation.
-func (c *EC2) DetachClassicLinkVPCRequest(input *DetachClassicLinkVPCInput) (req *aws.Request, output *DetachClassicLinkVPCOutput) {
-	op := &aws.Operation{
-		Name:       opDetachClassicLinkVPC,
+// DescribeVpcAttributeRequest generates a request for the DescribeVpcAttribute operation.
+func (c *EC2) DescribeVpcAttributeRequest(input *DescribeVpcAttributeInput) (req *service.Request, output *DescribeVpcAttributeOutput) {
+	op := &service.Operation{
+		Name:       opDescribeVpcAttribute,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DetachClassicLinkVPCInput{}
+		input = &DescribeVpcAttributeInput{}
 	}
 
 	req = c.newRequest(op, input, output)
-	output = &DetachClassicLinkVPCOutput{}
+	output = &DescribeVpcAttributeOutput{}
+	req.Data = output
+	return
+}
+
+// Describes the specified attribute of the specified VPC. You can specify only
+// one attribute at a time.
+func (c *EC2) DescribeVpcAttribute(input *DescribeVpcAttributeInput) (*DescribeVpcAttributeOutput, error) {
+	req, out := c.DescribeVpcAttributeRequest(input)
+	err := req.Send()
+	return out, err
+}
+
+const opDescribeVpcClassicLink = "DescribeVpcClassicLink"
+
+// DescribeVpcClassicLinkRequest generates a request for the DescribeVpcClassicLink operation.
+func (c *EC2) DescribeVpcClassicLinkRequest(input *DescribeVpcClassicLinkInput) (req *service.Request, output *DescribeVpcClassicLinkOutput) {
+	op := &service.Operation{
+		Name:       opDescribeVpcClassicLink,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeVpcClassicLinkInput{}
+	}
+
+	req = c.newRequest(op, input, output)
+	output = &DescribeVpcClassicLinkOutput{}
+	req.Data = output
+	return
+}
+
+// Describes the ClassicLink status of one or more VPCs.
+func (c *EC2) DescribeVpcClassicLink(input *DescribeVpcClassicLinkInput) (*DescribeVpcClassicLinkOutput, error) {
+	req, out := c.DescribeVpcClassicLinkRequest(input)
+	err := req.Send()
+	return out, err
+}
+
+const opDescribeVpcEndpointServices = "DescribeVpcEndpointServices"
+
+// DescribeVpcEndpointServicesRequest generates a request for the DescribeVpcEndpointServices operation.
+func (c *EC2) DescribeVpcEndpointServicesRequest(input *DescribeVpcEndpointServicesInput) (req *service.Request, output *DescribeVpcEndpointServicesOutput) {
+	op := &service.Operation{
+		Name:       opDescribeVpcEndpointServices,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeVpcEndpointServicesInput{}
+	}
+
+	req = c.newRequest(op, input, output)
+	output = &DescribeVpcEndpointServicesOutput{}
+	req.Data = output
+	return
+}
+
+// Describes all supported AWS services that can be specified when creating
+// a VPC endpoint.
+func (c *EC2) DescribeVpcEndpointServices(input *DescribeVpcEndpointServicesInput) (*DescribeVpcEndpointServicesOutput, error) {
+	req, out := c.DescribeVpcEndpointServicesRequest(input)
+	err := req.Send()
+	return out, err
+}
+
+const opDescribeVpcEndpoints = "DescribeVpcEndpoints"
+
+// DescribeVpcEndpointsRequest generates a request for the DescribeVpcEndpoints operation.
+func (c *EC2) DescribeVpcEndpointsRequest(input *DescribeVpcEndpointsInput) (req *service.Request, output *DescribeVpcEndpointsOutput) {
+	op := &service.Operation{
+		Name:       opDescribeVpcEndpoints,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeVpcEndpointsInput{}
+	}
+
+	req = c.newRequest(op, input, output)
+	output = &DescribeVpcEndpointsOutput{}
+	req.Data = output
+	return
+}
+
+// Describes one or more of your VPC endpoints.
+func (c *EC2) DescribeVpcEndpoints(input *DescribeVpcEndpointsInput) (*DescribeVpcEndpointsOutput, error) {
+	req, out := c.DescribeVpcEndpointsRequest(input)
+	err := req.Send()
+	return out, err
+}
+
+const opDescribeVpcPeeringConnections = "DescribeVpcPeeringConnections"
+
+// DescribeVpcPeeringConnectionsRequest generates a request for the DescribeVpcPeeringConnections operation.
+func (c *EC2) DescribeVpcPeeringConnectionsRequest(input *DescribeVpcPeeringConnectionsInput) (req *service.Request, output *DescribeVpcPeeringConnectionsOutput) {
+	op := &service.Operation{
+		Name:       opDescribeVpcPeeringConnections,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeVpcPeeringConnectionsInput{}
+	}
+
+	req = c.newRequest(op, input, output)
+	output = &DescribeVpcPeeringConnectionsOutput{}
+	req.Data = output
+	return
+}
+
+// Describes one or more of your VPC peering connections.
+func (c *EC2) DescribeVpcPeeringConnections(input *DescribeVpcPeeringConnectionsInput) (*DescribeVpcPeeringConnectionsOutput, error) {
+	req, out := c.DescribeVpcPeeringConnectionsRequest(input)
+	err := req.Send()
+	return out, err
+}
+
+const opDescribeVpcs = "DescribeVpcs"
+
+// DescribeVpcsRequest generates a request for the DescribeVpcs operation.
+func (c *EC2) DescribeVpcsRequest(input *DescribeVpcsInput) (req *service.Request, output *DescribeVpcsOutput) {
+	op := &service.Operation{
+		Name:       opDescribeVpcs,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeVpcsInput{}
+	}
+
+	req = c.newRequest(op, input, output)
+	output = &DescribeVpcsOutput{}
+	req.Data = output
+	return
+}
+
+// Describes one or more of your VPCs.
+func (c *EC2) DescribeVpcs(input *DescribeVpcsInput) (*DescribeVpcsOutput, error) {
+	req, out := c.DescribeVpcsRequest(input)
+	err := req.Send()
+	return out, err
+}
+
+const opDescribeVpnConnections = "DescribeVpnConnections"
+
+// DescribeVpnConnectionsRequest generates a request for the DescribeVpnConnections operation.
+func (c *EC2) DescribeVpnConnectionsRequest(input *DescribeVpnConnectionsInput) (req *service.Request, output *DescribeVpnConnectionsOutput) {
+	op := &service.Operation{
+		Name:       opDescribeVpnConnections,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeVpnConnectionsInput{}
+	}
+
+	req = c.newRequest(op, input, output)
+	output = &DescribeVpnConnectionsOutput{}
+	req.Data = output
+	return
+}
+
+// Describes one or more of your VPN connections.
+//
+// For more information about VPN connections, see Adding a Hardware Virtual
+// Private Gateway to Your VPC (http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html)
+// in the Amazon Virtual Private Cloud User Guide.
+func (c *EC2) DescribeVpnConnections(input *DescribeVpnConnectionsInput) (*DescribeVpnConnectionsOutput, error) {
+	req, out := c.DescribeVpnConnectionsRequest(input)
+	err := req.Send()
+	return out, err
+}
+
+const opDescribeVpnGateways = "DescribeVpnGateways"
+
+// DescribeVpnGatewaysRequest generates a request for the DescribeVpnGateways operation.
+func (c *EC2) DescribeVpnGatewaysRequest(input *DescribeVpnGatewaysInput) (req *service.Request, output *DescribeVpnGatewaysOutput) {
+	op := &service.Operation{
+		Name:       opDescribeVpnGateways,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeVpnGatewaysInput{}
+	}
+
+	req = c.newRequest(op, input, output)
+	output = &DescribeVpnGatewaysOutput{}
+	req.Data = output
+	return
+}
+
+// Describes one or more of your virtual private gateways.
+//
+// For more information about virtual private gateways, see Adding an IPsec
+// Hardware VPN to Your VPC (http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html)
+// in the Amazon Virtual Private Cloud User Guide.
+func (c *EC2) DescribeVpnGateways(input *DescribeVpnGatewaysInput) (*DescribeVpnGatewaysOutput, error) {
+	req, out := c.DescribeVpnGatewaysRequest(input)
+	err := req.Send()
+	return out, err
+}
+
+const opDetachClassicLinkVpc = "DetachClassicLinkVpc"
+
+// DetachClassicLinkVpcRequest generates a request for the DetachClassicLinkVpc operation.
+func (c *EC2) DetachClassicLinkVpcRequest(input *DetachClassicLinkVpcInput) (req *service.Request, output *DetachClassicLinkVpcOutput) {
+	op := &service.Operation{
+		Name:       opDetachClassicLinkVpc,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DetachClassicLinkVpcInput{}
+	}
+
+	req = c.newRequest(op, input, output)
+	output = &DetachClassicLinkVpcOutput{}
 	req.Data = output
 	return
 }
@@ -4425,8 +4425,8 @@ func (c *EC2) DetachClassicLinkVPCRequest(input *DetachClassicLinkVPCInput) (req
 // Unlinks (detaches) a linked EC2-Classic instance from a VPC. After the instance
 // has been unlinked, the VPC security groups are no longer associated with
 // it. An instance is automatically unlinked from a VPC when it's stopped.
-func (c *EC2) DetachClassicLinkVPC(input *DetachClassicLinkVPCInput) (*DetachClassicLinkVPCOutput, error) {
-	req, out := c.DetachClassicLinkVPCRequest(input)
+func (c *EC2) DetachClassicLinkVpc(input *DetachClassicLinkVpcInput) (*DetachClassicLinkVpcOutput, error) {
+	req, out := c.DetachClassicLinkVpcRequest(input)
 	err := req.Send()
 	return out, err
 }
@@ -4434,8 +4434,8 @@ func (c *EC2) DetachClassicLinkVPC(input *DetachClassicLinkVPCInput) (*DetachCla
 const opDetachInternetGateway = "DetachInternetGateway"
 
 // DetachInternetGatewayRequest generates a request for the DetachInternetGateway operation.
-func (c *EC2) DetachInternetGatewayRequest(input *DetachInternetGatewayInput) (req *aws.Request, output *DetachInternetGatewayOutput) {
-	op := &aws.Operation{
+func (c *EC2) DetachInternetGatewayRequest(input *DetachInternetGatewayInput) (req *service.Request, output *DetachInternetGatewayOutput) {
+	op := &service.Operation{
 		Name:       opDetachInternetGateway,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4463,8 +4463,8 @@ func (c *EC2) DetachInternetGateway(input *DetachInternetGatewayInput) (*DetachI
 const opDetachNetworkInterface = "DetachNetworkInterface"
 
 // DetachNetworkInterfaceRequest generates a request for the DetachNetworkInterface operation.
-func (c *EC2) DetachNetworkInterfaceRequest(input *DetachNetworkInterfaceInput) (req *aws.Request, output *DetachNetworkInterfaceOutput) {
-	op := &aws.Operation{
+func (c *EC2) DetachNetworkInterfaceRequest(input *DetachNetworkInterfaceInput) (req *service.Request, output *DetachNetworkInterfaceOutput) {
+	op := &service.Operation{
 		Name:       opDetachNetworkInterface,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4487,45 +4487,11 @@ func (c *EC2) DetachNetworkInterface(input *DetachNetworkInterfaceInput) (*Detac
 	return out, err
 }
 
-const opDetachVPNGateway = "DetachVpnGateway"
-
-// DetachVPNGatewayRequest generates a request for the DetachVPNGateway operation.
-func (c *EC2) DetachVPNGatewayRequest(input *DetachVPNGatewayInput) (req *aws.Request, output *DetachVPNGatewayOutput) {
-	op := &aws.Operation{
-		Name:       opDetachVPNGateway,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DetachVPNGatewayInput{}
-	}
-
-	req = c.newRequest(op, input, output)
-	output = &DetachVPNGatewayOutput{}
-	req.Data = output
-	return
-}
-
-// Detaches a virtual private gateway from a VPC. You do this if you're planning
-// to turn off the VPC and not use it anymore. You can confirm a virtual private
-// gateway has been completely detached from a VPC by describing the virtual
-// private gateway (any attachments to the virtual private gateway are also
-// described).
-//
-// You must wait for the attachment's state to switch to detached before you
-// can delete the VPC or attach a different VPC to the virtual private gateway.
-func (c *EC2) DetachVPNGateway(input *DetachVPNGatewayInput) (*DetachVPNGatewayOutput, error) {
-	req, out := c.DetachVPNGatewayRequest(input)
-	err := req.Send()
-	return out, err
-}
-
 const opDetachVolume = "DetachVolume"
 
 // DetachVolumeRequest generates a request for the DetachVolume operation.
-func (c *EC2) DetachVolumeRequest(input *DetachVolumeInput) (req *aws.Request, output *VolumeAttachment) {
-	op := &aws.Operation{
+func (c *EC2) DetachVolumeRequest(input *DetachVolumeInput) (req *service.Request, output *VolumeAttachment) {
+	op := &service.Operation{
 		Name:       opDetachVolume,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4560,58 +4526,92 @@ func (c *EC2) DetachVolume(input *DetachVolumeInput) (*VolumeAttachment, error) 
 	return out, err
 }
 
-const opDisableVGWRoutePropagation = "DisableVgwRoutePropagation"
+const opDetachVpnGateway = "DetachVpnGateway"
 
-// DisableVGWRoutePropagationRequest generates a request for the DisableVGWRoutePropagation operation.
-func (c *EC2) DisableVGWRoutePropagationRequest(input *DisableVGWRoutePropagationInput) (req *aws.Request, output *DisableVGWRoutePropagationOutput) {
-	op := &aws.Operation{
-		Name:       opDisableVGWRoutePropagation,
+// DetachVpnGatewayRequest generates a request for the DetachVpnGateway operation.
+func (c *EC2) DetachVpnGatewayRequest(input *DetachVpnGatewayInput) (req *service.Request, output *DetachVpnGatewayOutput) {
+	op := &service.Operation{
+		Name:       opDetachVpnGateway,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DisableVGWRoutePropagationInput{}
+		input = &DetachVpnGatewayInput{}
 	}
 
 	req = c.newRequest(op, input, output)
-	output = &DisableVGWRoutePropagationOutput{}
+	output = &DetachVpnGatewayOutput{}
+	req.Data = output
+	return
+}
+
+// Detaches a virtual private gateway from a VPC. You do this if you're planning
+// to turn off the VPC and not use it anymore. You can confirm a virtual private
+// gateway has been completely detached from a VPC by describing the virtual
+// private gateway (any attachments to the virtual private gateway are also
+// described).
+//
+// You must wait for the attachment's state to switch to detached before you
+// can delete the VPC or attach a different VPC to the virtual private gateway.
+func (c *EC2) DetachVpnGateway(input *DetachVpnGatewayInput) (*DetachVpnGatewayOutput, error) {
+	req, out := c.DetachVpnGatewayRequest(input)
+	err := req.Send()
+	return out, err
+}
+
+const opDisableVgwRoutePropagation = "DisableVgwRoutePropagation"
+
+// DisableVgwRoutePropagationRequest generates a request for the DisableVgwRoutePropagation operation.
+func (c *EC2) DisableVgwRoutePropagationRequest(input *DisableVgwRoutePropagationInput) (req *service.Request, output *DisableVgwRoutePropagationOutput) {
+	op := &service.Operation{
+		Name:       opDisableVgwRoutePropagation,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DisableVgwRoutePropagationInput{}
+	}
+
+	req = c.newRequest(op, input, output)
+	output = &DisableVgwRoutePropagationOutput{}
 	req.Data = output
 	return
 }
 
 // Disables a virtual private gateway (VGW) from propagating routes to a specified
 // route table of a VPC.
-func (c *EC2) DisableVGWRoutePropagation(input *DisableVGWRoutePropagationInput) (*DisableVGWRoutePropagationOutput, error) {
-	req, out := c.DisableVGWRoutePropagationRequest(input)
+func (c *EC2) DisableVgwRoutePropagation(input *DisableVgwRoutePropagationInput) (*DisableVgwRoutePropagationOutput, error) {
+	req, out := c.DisableVgwRoutePropagationRequest(input)
 	err := req.Send()
 	return out, err
 }
 
-const opDisableVPCClassicLink = "DisableVpcClassicLink"
+const opDisableVpcClassicLink = "DisableVpcClassicLink"
 
-// DisableVPCClassicLinkRequest generates a request for the DisableVPCClassicLink operation.
-func (c *EC2) DisableVPCClassicLinkRequest(input *DisableVPCClassicLinkInput) (req *aws.Request, output *DisableVPCClassicLinkOutput) {
-	op := &aws.Operation{
-		Name:       opDisableVPCClassicLink,
+// DisableVpcClassicLinkRequest generates a request for the DisableVpcClassicLink operation.
+func (c *EC2) DisableVpcClassicLinkRequest(input *DisableVpcClassicLinkInput) (req *service.Request, output *DisableVpcClassicLinkOutput) {
+	op := &service.Operation{
+		Name:       opDisableVpcClassicLink,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DisableVPCClassicLinkInput{}
+		input = &DisableVpcClassicLinkInput{}
 	}
 
 	req = c.newRequest(op, input, output)
-	output = &DisableVPCClassicLinkOutput{}
+	output = &DisableVpcClassicLinkOutput{}
 	req.Data = output
 	return
 }
 
 // Disables ClassicLink for a VPC. You cannot disable ClassicLink for a VPC
 // that has EC2-Classic instances linked to it.
-func (c *EC2) DisableVPCClassicLink(input *DisableVPCClassicLinkInput) (*DisableVPCClassicLinkOutput, error) {
-	req, out := c.DisableVPCClassicLinkRequest(input)
+func (c *EC2) DisableVpcClassicLink(input *DisableVpcClassicLinkInput) (*DisableVpcClassicLinkOutput, error) {
+	req, out := c.DisableVpcClassicLinkRequest(input)
 	err := req.Send()
 	return out, err
 }
@@ -4619,8 +4619,8 @@ func (c *EC2) DisableVPCClassicLink(input *DisableVPCClassicLinkInput) (*Disable
 const opDisassociateAddress = "DisassociateAddress"
 
 // DisassociateAddressRequest generates a request for the DisassociateAddress operation.
-func (c *EC2) DisassociateAddressRequest(input *DisassociateAddressInput) (req *aws.Request, output *DisassociateAddressOutput) {
-	op := &aws.Operation{
+func (c *EC2) DisassociateAddressRequest(input *DisassociateAddressInput) (req *service.Request, output *DisassociateAddressOutput) {
+	op := &service.Operation{
 		Name:       opDisassociateAddress,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4654,8 +4654,8 @@ func (c *EC2) DisassociateAddress(input *DisassociateAddressInput) (*Disassociat
 const opDisassociateRouteTable = "DisassociateRouteTable"
 
 // DisassociateRouteTableRequest generates a request for the DisassociateRouteTable operation.
-func (c *EC2) DisassociateRouteTableRequest(input *DisassociateRouteTableInput) (req *aws.Request, output *DisassociateRouteTableOutput) {
-	op := &aws.Operation{
+func (c *EC2) DisassociateRouteTableRequest(input *DisassociateRouteTableInput) (req *service.Request, output *DisassociateRouteTableOutput) {
+	op := &service.Operation{
 		Name:       opDisassociateRouteTable,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4683,63 +4683,30 @@ func (c *EC2) DisassociateRouteTable(input *DisassociateRouteTableInput) (*Disas
 	return out, err
 }
 
-const opEnableVGWRoutePropagation = "EnableVgwRoutePropagation"
+const opEnableVgwRoutePropagation = "EnableVgwRoutePropagation"
 
-// EnableVGWRoutePropagationRequest generates a request for the EnableVGWRoutePropagation operation.
-func (c *EC2) EnableVGWRoutePropagationRequest(input *EnableVGWRoutePropagationInput) (req *aws.Request, output *EnableVGWRoutePropagationOutput) {
-	op := &aws.Operation{
-		Name:       opEnableVGWRoutePropagation,
+// EnableVgwRoutePropagationRequest generates a request for the EnableVgwRoutePropagation operation.
+func (c *EC2) EnableVgwRoutePropagationRequest(input *EnableVgwRoutePropagationInput) (req *service.Request, output *EnableVgwRoutePropagationOutput) {
+	op := &service.Operation{
+		Name:       opEnableVgwRoutePropagation,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &EnableVGWRoutePropagationInput{}
+		input = &EnableVgwRoutePropagationInput{}
 	}
 
 	req = c.newRequest(op, input, output)
-	output = &EnableVGWRoutePropagationOutput{}
+	output = &EnableVgwRoutePropagationOutput{}
 	req.Data = output
 	return
 }
 
 // Enables a virtual private gateway (VGW) to propagate routes to the specified
 // route table of a VPC.
-func (c *EC2) EnableVGWRoutePropagation(input *EnableVGWRoutePropagationInput) (*EnableVGWRoutePropagationOutput, error) {
-	req, out := c.EnableVGWRoutePropagationRequest(input)
-	err := req.Send()
-	return out, err
-}
-
-const opEnableVPCClassicLink = "EnableVpcClassicLink"
-
-// EnableVPCClassicLinkRequest generates a request for the EnableVPCClassicLink operation.
-func (c *EC2) EnableVPCClassicLinkRequest(input *EnableVPCClassicLinkInput) (req *aws.Request, output *EnableVPCClassicLinkOutput) {
-	op := &aws.Operation{
-		Name:       opEnableVPCClassicLink,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &EnableVPCClassicLinkInput{}
-	}
-
-	req = c.newRequest(op, input, output)
-	output = &EnableVPCClassicLinkOutput{}
-	req.Data = output
-	return
-}
-
-// Enables a VPC for ClassicLink. You can then link EC2-Classic instances to
-// your ClassicLink-enabled VPC to allow communication over private IP addresses.
-// You cannot enable your VPC for ClassicLink if any of your VPC's route tables
-// have existing routes for address ranges within the 10.0.0.0/8 IP address
-// range, excluding local routes for VPCs in the 10.0.0.0/16 and 10.1.0.0/16
-// IP address ranges. For more information, see ClassicLink (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html)
-// in the Amazon Elastic Compute Cloud User Guide.
-func (c *EC2) EnableVPCClassicLink(input *EnableVPCClassicLinkInput) (*EnableVPCClassicLinkOutput, error) {
-	req, out := c.EnableVPCClassicLinkRequest(input)
+func (c *EC2) EnableVgwRoutePropagation(input *EnableVgwRoutePropagationInput) (*EnableVgwRoutePropagationOutput, error) {
+	req, out := c.EnableVgwRoutePropagationRequest(input)
 	err := req.Send()
 	return out, err
 }
@@ -4747,8 +4714,8 @@ func (c *EC2) EnableVPCClassicLink(input *EnableVPCClassicLinkInput) (*EnableVPC
 const opEnableVolumeIO = "EnableVolumeIO"
 
 // EnableVolumeIORequest generates a request for the EnableVolumeIO operation.
-func (c *EC2) EnableVolumeIORequest(input *EnableVolumeIOInput) (req *aws.Request, output *EnableVolumeIOOutput) {
-	op := &aws.Operation{
+func (c *EC2) EnableVolumeIORequest(input *EnableVolumeIOInput) (req *service.Request, output *EnableVolumeIOOutput) {
+	op := &service.Operation{
 		Name:       opEnableVolumeIO,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4772,11 +4739,44 @@ func (c *EC2) EnableVolumeIO(input *EnableVolumeIOInput) (*EnableVolumeIOOutput,
 	return out, err
 }
 
+const opEnableVpcClassicLink = "EnableVpcClassicLink"
+
+// EnableVpcClassicLinkRequest generates a request for the EnableVpcClassicLink operation.
+func (c *EC2) EnableVpcClassicLinkRequest(input *EnableVpcClassicLinkInput) (req *service.Request, output *EnableVpcClassicLinkOutput) {
+	op := &service.Operation{
+		Name:       opEnableVpcClassicLink,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &EnableVpcClassicLinkInput{}
+	}
+
+	req = c.newRequest(op, input, output)
+	output = &EnableVpcClassicLinkOutput{}
+	req.Data = output
+	return
+}
+
+// Enables a VPC for ClassicLink. You can then link EC2-Classic instances to
+// your ClassicLink-enabled VPC to allow communication over private IP addresses.
+// You cannot enable your VPC for ClassicLink if any of your VPC's route tables
+// have existing routes for address ranges within the 10.0.0.0/8 IP address
+// range, excluding local routes for VPCs in the 10.0.0.0/16 and 10.1.0.0/16
+// IP address ranges. For more information, see ClassicLink (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html)
+// in the Amazon Elastic Compute Cloud User Guide.
+func (c *EC2) EnableVpcClassicLink(input *EnableVpcClassicLinkInput) (*EnableVpcClassicLinkOutput, error) {
+	req, out := c.EnableVpcClassicLinkRequest(input)
+	err := req.Send()
+	return out, err
+}
+
 const opGetConsoleOutput = "GetConsoleOutput"
 
 // GetConsoleOutputRequest generates a request for the GetConsoleOutput operation.
-func (c *EC2) GetConsoleOutputRequest(input *GetConsoleOutputInput) (req *aws.Request, output *GetConsoleOutputOutput) {
-	op := &aws.Operation{
+func (c *EC2) GetConsoleOutputRequest(input *GetConsoleOutputInput) (req *service.Request, output *GetConsoleOutputOutput) {
+	op := &service.Operation{
 		Name:       opGetConsoleOutput,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4819,8 +4819,8 @@ func (c *EC2) GetConsoleOutput(input *GetConsoleOutputInput) (*GetConsoleOutputO
 const opGetPasswordData = "GetPasswordData"
 
 // GetPasswordDataRequest generates a request for the GetPasswordData operation.
-func (c *EC2) GetPasswordDataRequest(input *GetPasswordDataInput) (req *aws.Request, output *GetPasswordDataOutput) {
-	op := &aws.Operation{
+func (c *EC2) GetPasswordDataRequest(input *GetPasswordDataInput) (req *service.Request, output *GetPasswordDataOutput) {
+	op := &service.Operation{
 		Name:       opGetPasswordData,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4859,8 +4859,8 @@ func (c *EC2) GetPasswordData(input *GetPasswordDataInput) (*GetPasswordDataOutp
 const opImportImage = "ImportImage"
 
 // ImportImageRequest generates a request for the ImportImage operation.
-func (c *EC2) ImportImageRequest(input *ImportImageInput) (req *aws.Request, output *ImportImageOutput) {
-	op := &aws.Operation{
+func (c *EC2) ImportImageRequest(input *ImportImageInput) (req *service.Request, output *ImportImageOutput) {
+	op := &service.Operation{
 		Name:       opImportImage,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4887,8 +4887,8 @@ func (c *EC2) ImportImage(input *ImportImageInput) (*ImportImageOutput, error) {
 const opImportInstance = "ImportInstance"
 
 // ImportInstanceRequest generates a request for the ImportInstance operation.
-func (c *EC2) ImportInstanceRequest(input *ImportInstanceInput) (req *aws.Request, output *ImportInstanceOutput) {
-	op := &aws.Operation{
+func (c *EC2) ImportInstanceRequest(input *ImportInstanceInput) (req *service.Request, output *ImportInstanceOutput) {
+	op := &service.Operation{
 		Name:       opImportInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4920,8 +4920,8 @@ func (c *EC2) ImportInstance(input *ImportInstanceInput) (*ImportInstanceOutput,
 const opImportKeyPair = "ImportKeyPair"
 
 // ImportKeyPairRequest generates a request for the ImportKeyPair operation.
-func (c *EC2) ImportKeyPairRequest(input *ImportKeyPairInput) (req *aws.Request, output *ImportKeyPairOutput) {
-	op := &aws.Operation{
+func (c *EC2) ImportKeyPairRequest(input *ImportKeyPairInput) (req *service.Request, output *ImportKeyPairOutput) {
+	op := &service.Operation{
 		Name:       opImportKeyPair,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4954,8 +4954,8 @@ func (c *EC2) ImportKeyPair(input *ImportKeyPairInput) (*ImportKeyPairOutput, er
 const opImportSnapshot = "ImportSnapshot"
 
 // ImportSnapshotRequest generates a request for the ImportSnapshot operation.
-func (c *EC2) ImportSnapshotRequest(input *ImportSnapshotInput) (req *aws.Request, output *ImportSnapshotOutput) {
-	op := &aws.Operation{
+func (c *EC2) ImportSnapshotRequest(input *ImportSnapshotInput) (req *service.Request, output *ImportSnapshotOutput) {
+	op := &service.Operation{
 		Name:       opImportSnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4981,8 +4981,8 @@ func (c *EC2) ImportSnapshot(input *ImportSnapshotInput) (*ImportSnapshotOutput,
 const opImportVolume = "ImportVolume"
 
 // ImportVolumeRequest generates a request for the ImportVolume operation.
-func (c *EC2) ImportVolumeRequest(input *ImportVolumeInput) (req *aws.Request, output *ImportVolumeOutput) {
-	op := &aws.Operation{
+func (c *EC2) ImportVolumeRequest(input *ImportVolumeInput) (req *service.Request, output *ImportVolumeOutput) {
+	op := &service.Operation{
 		Name:       opImportVolume,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5013,8 +5013,8 @@ func (c *EC2) ImportVolume(input *ImportVolumeInput) (*ImportVolumeOutput, error
 const opModifyImageAttribute = "ModifyImageAttribute"
 
 // ModifyImageAttributeRequest generates a request for the ModifyImageAttribute operation.
-func (c *EC2) ModifyImageAttributeRequest(input *ModifyImageAttributeInput) (req *aws.Request, output *ModifyImageAttributeOutput) {
-	op := &aws.Operation{
+func (c *EC2) ModifyImageAttributeRequest(input *ModifyImageAttributeInput) (req *service.Request, output *ModifyImageAttributeOutput) {
+	op := &service.Operation{
 		Name:       opModifyImageAttribute,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5044,8 +5044,8 @@ func (c *EC2) ModifyImageAttribute(input *ModifyImageAttributeInput) (*ModifyIma
 const opModifyInstanceAttribute = "ModifyInstanceAttribute"
 
 // ModifyInstanceAttributeRequest generates a request for the ModifyInstanceAttribute operation.
-func (c *EC2) ModifyInstanceAttributeRequest(input *ModifyInstanceAttributeInput) (req *aws.Request, output *ModifyInstanceAttributeOutput) {
-	op := &aws.Operation{
+func (c *EC2) ModifyInstanceAttributeRequest(input *ModifyInstanceAttributeInput) (req *service.Request, output *ModifyInstanceAttributeOutput) {
+	op := &service.Operation{
 		Name:       opModifyInstanceAttribute,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5076,8 +5076,8 @@ func (c *EC2) ModifyInstanceAttribute(input *ModifyInstanceAttributeInput) (*Mod
 const opModifyNetworkInterfaceAttribute = "ModifyNetworkInterfaceAttribute"
 
 // ModifyNetworkInterfaceAttributeRequest generates a request for the ModifyNetworkInterfaceAttribute operation.
-func (c *EC2) ModifyNetworkInterfaceAttributeRequest(input *ModifyNetworkInterfaceAttributeInput) (req *aws.Request, output *ModifyNetworkInterfaceAttributeOutput) {
-	op := &aws.Operation{
+func (c *EC2) ModifyNetworkInterfaceAttributeRequest(input *ModifyNetworkInterfaceAttributeInput) (req *service.Request, output *ModifyNetworkInterfaceAttributeOutput) {
+	op := &service.Operation{
 		Name:       opModifyNetworkInterfaceAttribute,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5104,8 +5104,8 @@ func (c *EC2) ModifyNetworkInterfaceAttribute(input *ModifyNetworkInterfaceAttri
 const opModifyReservedInstances = "ModifyReservedInstances"
 
 // ModifyReservedInstancesRequest generates a request for the ModifyReservedInstances operation.
-func (c *EC2) ModifyReservedInstancesRequest(input *ModifyReservedInstancesInput) (req *aws.Request, output *ModifyReservedInstancesOutput) {
-	op := &aws.Operation{
+func (c *EC2) ModifyReservedInstancesRequest(input *ModifyReservedInstancesInput) (req *service.Request, output *ModifyReservedInstancesOutput) {
+	op := &service.Operation{
 		Name:       opModifyReservedInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5137,8 +5137,8 @@ func (c *EC2) ModifyReservedInstances(input *ModifyReservedInstancesInput) (*Mod
 const opModifySnapshotAttribute = "ModifySnapshotAttribute"
 
 // ModifySnapshotAttributeRequest generates a request for the ModifySnapshotAttribute operation.
-func (c *EC2) ModifySnapshotAttributeRequest(input *ModifySnapshotAttributeInput) (req *aws.Request, output *ModifySnapshotAttributeOutput) {
-	op := &aws.Operation{
+func (c *EC2) ModifySnapshotAttributeRequest(input *ModifySnapshotAttributeInput) (req *service.Request, output *ModifySnapshotAttributeOutput) {
+	op := &service.Operation{
 		Name:       opModifySnapshotAttribute,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5174,8 +5174,8 @@ func (c *EC2) ModifySnapshotAttribute(input *ModifySnapshotAttributeInput) (*Mod
 const opModifySubnetAttribute = "ModifySubnetAttribute"
 
 // ModifySubnetAttributeRequest generates a request for the ModifySubnetAttribute operation.
-func (c *EC2) ModifySubnetAttributeRequest(input *ModifySubnetAttributeInput) (req *aws.Request, output *ModifySubnetAttributeOutput) {
-	op := &aws.Operation{
+func (c *EC2) ModifySubnetAttributeRequest(input *ModifySubnetAttributeInput) (req *service.Request, output *ModifySubnetAttributeOutput) {
+	op := &service.Operation{
 		Name:       opModifySubnetAttribute,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5198,67 +5198,11 @@ func (c *EC2) ModifySubnetAttribute(input *ModifySubnetAttributeInput) (*ModifyS
 	return out, err
 }
 
-const opModifyVPCAttribute = "ModifyVpcAttribute"
-
-// ModifyVPCAttributeRequest generates a request for the ModifyVPCAttribute operation.
-func (c *EC2) ModifyVPCAttributeRequest(input *ModifyVPCAttributeInput) (req *aws.Request, output *ModifyVPCAttributeOutput) {
-	op := &aws.Operation{
-		Name:       opModifyVPCAttribute,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &ModifyVPCAttributeInput{}
-	}
-
-	req = c.newRequest(op, input, output)
-	output = &ModifyVPCAttributeOutput{}
-	req.Data = output
-	return
-}
-
-// Modifies the specified attribute of the specified VPC.
-func (c *EC2) ModifyVPCAttribute(input *ModifyVPCAttributeInput) (*ModifyVPCAttributeOutput, error) {
-	req, out := c.ModifyVPCAttributeRequest(input)
-	err := req.Send()
-	return out, err
-}
-
-const opModifyVPCEndpoint = "ModifyVpcEndpoint"
-
-// ModifyVPCEndpointRequest generates a request for the ModifyVPCEndpoint operation.
-func (c *EC2) ModifyVPCEndpointRequest(input *ModifyVPCEndpointInput) (req *aws.Request, output *ModifyVPCEndpointOutput) {
-	op := &aws.Operation{
-		Name:       opModifyVPCEndpoint,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &ModifyVPCEndpointInput{}
-	}
-
-	req = c.newRequest(op, input, output)
-	output = &ModifyVPCEndpointOutput{}
-	req.Data = output
-	return
-}
-
-// Modifies attributes of a specified VPC endpoint. You can modify the policy
-// associated with the endpoint, and you can add and remove route tables associated
-// with the endpoint.
-func (c *EC2) ModifyVPCEndpoint(input *ModifyVPCEndpointInput) (*ModifyVPCEndpointOutput, error) {
-	req, out := c.ModifyVPCEndpointRequest(input)
-	err := req.Send()
-	return out, err
-}
-
 const opModifyVolumeAttribute = "ModifyVolumeAttribute"
 
 // ModifyVolumeAttributeRequest generates a request for the ModifyVolumeAttribute operation.
-func (c *EC2) ModifyVolumeAttributeRequest(input *ModifyVolumeAttributeInput) (req *aws.Request, output *ModifyVolumeAttributeOutput) {
-	op := &aws.Operation{
+func (c *EC2) ModifyVolumeAttributeRequest(input *ModifyVolumeAttributeInput) (req *service.Request, output *ModifyVolumeAttributeOutput) {
+	op := &service.Operation{
 		Name:       opModifyVolumeAttribute,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5290,11 +5234,67 @@ func (c *EC2) ModifyVolumeAttribute(input *ModifyVolumeAttributeInput) (*ModifyV
 	return out, err
 }
 
+const opModifyVpcAttribute = "ModifyVpcAttribute"
+
+// ModifyVpcAttributeRequest generates a request for the ModifyVpcAttribute operation.
+func (c *EC2) ModifyVpcAttributeRequest(input *ModifyVpcAttributeInput) (req *service.Request, output *ModifyVpcAttributeOutput) {
+	op := &service.Operation{
+		Name:       opModifyVpcAttribute,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ModifyVpcAttributeInput{}
+	}
+
+	req = c.newRequest(op, input, output)
+	output = &ModifyVpcAttributeOutput{}
+	req.Data = output
+	return
+}
+
+// Modifies the specified attribute of the specified VPC.
+func (c *EC2) ModifyVpcAttribute(input *ModifyVpcAttributeInput) (*ModifyVpcAttributeOutput, error) {
+	req, out := c.ModifyVpcAttributeRequest(input)
+	err := req.Send()
+	return out, err
+}
+
+const opModifyVpcEndpoint = "ModifyVpcEndpoint"
+
+// ModifyVpcEndpointRequest generates a request for the ModifyVpcEndpoint operation.
+func (c *EC2) ModifyVpcEndpointRequest(input *ModifyVpcEndpointInput) (req *service.Request, output *ModifyVpcEndpointOutput) {
+	op := &service.Operation{
+		Name:       opModifyVpcEndpoint,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ModifyVpcEndpointInput{}
+	}
+
+	req = c.newRequest(op, input, output)
+	output = &ModifyVpcEndpointOutput{}
+	req.Data = output
+	return
+}
+
+// Modifies attributes of a specified VPC endpoint. You can modify the policy
+// associated with the endpoint, and you can add and remove route tables associated
+// with the endpoint.
+func (c *EC2) ModifyVpcEndpoint(input *ModifyVpcEndpointInput) (*ModifyVpcEndpointOutput, error) {
+	req, out := c.ModifyVpcEndpointRequest(input)
+	err := req.Send()
+	return out, err
+}
+
 const opMonitorInstances = "MonitorInstances"
 
 // MonitorInstancesRequest generates a request for the MonitorInstances operation.
-func (c *EC2) MonitorInstancesRequest(input *MonitorInstancesInput) (req *aws.Request, output *MonitorInstancesOutput) {
-	op := &aws.Operation{
+func (c *EC2) MonitorInstancesRequest(input *MonitorInstancesInput) (req *service.Request, output *MonitorInstancesOutput) {
+	op := &service.Operation{
 		Name:       opMonitorInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5319,22 +5319,22 @@ func (c *EC2) MonitorInstances(input *MonitorInstancesInput) (*MonitorInstancesO
 	return out, err
 }
 
-const opMoveAddressToVPC = "MoveAddressToVpc"
+const opMoveAddressToVpc = "MoveAddressToVpc"
 
-// MoveAddressToVPCRequest generates a request for the MoveAddressToVPC operation.
-func (c *EC2) MoveAddressToVPCRequest(input *MoveAddressToVPCInput) (req *aws.Request, output *MoveAddressToVPCOutput) {
-	op := &aws.Operation{
-		Name:       opMoveAddressToVPC,
+// MoveAddressToVpcRequest generates a request for the MoveAddressToVpc operation.
+func (c *EC2) MoveAddressToVpcRequest(input *MoveAddressToVpcInput) (req *service.Request, output *MoveAddressToVpcOutput) {
+	op := &service.Operation{
+		Name:       opMoveAddressToVpc,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &MoveAddressToVPCInput{}
+		input = &MoveAddressToVpcInput{}
 	}
 
 	req = c.newRequest(op, input, output)
-	output = &MoveAddressToVPCOutput{}
+	output = &MoveAddressToVpcOutput{}
 	req.Data = output
 	return
 }
@@ -5346,8 +5346,8 @@ func (c *EC2) MoveAddressToVPCRequest(input *MoveAddressToVPCInput) (req *aws.Re
 // you move it back using the RestoreAddressToClassic request. You cannot move
 // an Elastic IP address that's allocated for use in the EC2-VPC platform to
 // the EC2-Classic platform.
-func (c *EC2) MoveAddressToVPC(input *MoveAddressToVPCInput) (*MoveAddressToVPCOutput, error) {
-	req, out := c.MoveAddressToVPCRequest(input)
+func (c *EC2) MoveAddressToVpc(input *MoveAddressToVpcInput) (*MoveAddressToVpcOutput, error) {
+	req, out := c.MoveAddressToVpcRequest(input)
 	err := req.Send()
 	return out, err
 }
@@ -5355,8 +5355,8 @@ func (c *EC2) MoveAddressToVPC(input *MoveAddressToVPCInput) (*MoveAddressToVPCO
 const opPurchaseReservedInstancesOffering = "PurchaseReservedInstancesOffering"
 
 // PurchaseReservedInstancesOfferingRequest generates a request for the PurchaseReservedInstancesOffering operation.
-func (c *EC2) PurchaseReservedInstancesOfferingRequest(input *PurchaseReservedInstancesOfferingInput) (req *aws.Request, output *PurchaseReservedInstancesOfferingOutput) {
-	op := &aws.Operation{
+func (c *EC2) PurchaseReservedInstancesOfferingRequest(input *PurchaseReservedInstancesOfferingInput) (req *service.Request, output *PurchaseReservedInstancesOfferingOutput) {
+	op := &service.Operation{
 		Name:       opPurchaseReservedInstancesOffering,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5393,8 +5393,8 @@ func (c *EC2) PurchaseReservedInstancesOffering(input *PurchaseReservedInstances
 const opRebootInstances = "RebootInstances"
 
 // RebootInstancesRequest generates a request for the RebootInstances operation.
-func (c *EC2) RebootInstancesRequest(input *RebootInstancesInput) (req *aws.Request, output *RebootInstancesOutput) {
-	op := &aws.Operation{
+func (c *EC2) RebootInstancesRequest(input *RebootInstancesInput) (req *service.Request, output *RebootInstancesOutput) {
+	op := &service.Operation{
 		Name:       opRebootInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5430,8 +5430,8 @@ func (c *EC2) RebootInstances(input *RebootInstancesInput) (*RebootInstancesOutp
 const opRegisterImage = "RegisterImage"
 
 // RegisterImageRequest generates a request for the RegisterImage operation.
-func (c *EC2) RegisterImageRequest(input *RegisterImageInput) (req *aws.Request, output *RegisterImageOutput) {
-	op := &aws.Operation{
+func (c *EC2) RegisterImageRequest(input *RegisterImageInput) (req *service.Request, output *RegisterImageOutput) {
+	op := &service.Operation{
 		Name:       opRegisterImage,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5448,8 +5448,10 @@ func (c *EC2) RegisterImageRequest(input *RegisterImageInput) (req *aws.Request,
 }
 
 // Registers an AMI. When you're creating an AMI, this is the final step you
-// must complete before you can launch an instance from the AMI. For more information
-// about creating AMIs, see Creating Your Own AMIs (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami.html)
+// must complete before you can launch an instance from the AMI. This step is
+// required if you're creating an instance store-backed Linux or Windows AMI.
+// For more information, see Creating an Instance Store-Backed Linux AMI (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-instance-store.html)
+// and Creating an Instance Store-Backed Windows AMI (http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/Creating_InstanceStoreBacked_WinAMI.html)
 // in the Amazon Elastic Compute Cloud User Guide.
 //
 // For Amazon EBS-backed instances, CreateImage creates and registers the AMI
@@ -5457,8 +5459,10 @@ func (c *EC2) RegisterImageRequest(input *RegisterImageInput) (req *aws.Request,
 //
 // You can also use RegisterImage to create an Amazon EBS-backed AMI from a
 // snapshot of a root device volume. For more information, see Launching an
-// Instance from a Snapshot (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_LaunchingInstanceFromSnapshot.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// Instance from a Backup (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-launch-snapshot.html)
+// in the Amazon Elastic Compute Cloud User Guide. Note that although you can
+// create a Windows AMI from a snapshot, you can't launch an instance from the
+// AMI - use the CreateImage command instead.
 //
 // If needed, you can deregister an AMI at any time. Any modifications you
 // make to an AMI backed by an instance store volume invalidates its registration.
@@ -5473,22 +5477,22 @@ func (c *EC2) RegisterImage(input *RegisterImageInput) (*RegisterImageOutput, er
 	return out, err
 }
 
-const opRejectVPCPeeringConnection = "RejectVpcPeeringConnection"
+const opRejectVpcPeeringConnection = "RejectVpcPeeringConnection"
 
-// RejectVPCPeeringConnectionRequest generates a request for the RejectVPCPeeringConnection operation.
-func (c *EC2) RejectVPCPeeringConnectionRequest(input *RejectVPCPeeringConnectionInput) (req *aws.Request, output *RejectVPCPeeringConnectionOutput) {
-	op := &aws.Operation{
-		Name:       opRejectVPCPeeringConnection,
+// RejectVpcPeeringConnectionRequest generates a request for the RejectVpcPeeringConnection operation.
+func (c *EC2) RejectVpcPeeringConnectionRequest(input *RejectVpcPeeringConnectionInput) (req *service.Request, output *RejectVpcPeeringConnectionOutput) {
+	op := &service.Operation{
+		Name:       opRejectVpcPeeringConnection,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &RejectVPCPeeringConnectionInput{}
+		input = &RejectVpcPeeringConnectionInput{}
 	}
 
 	req = c.newRequest(op, input, output)
-	output = &RejectVPCPeeringConnectionOutput{}
+	output = &RejectVpcPeeringConnectionOutput{}
 	req.Data = output
 	return
 }
@@ -5498,8 +5502,8 @@ func (c *EC2) RejectVPCPeeringConnectionRequest(input *RejectVPCPeeringConnectio
 // request to view your outstanding VPC peering connection requests. To delete
 // an active VPC peering connection, or to delete a VPC peering connection request
 // that you initiated, use DeleteVpcPeeringConnection.
-func (c *EC2) RejectVPCPeeringConnection(input *RejectVPCPeeringConnectionInput) (*RejectVPCPeeringConnectionOutput, error) {
-	req, out := c.RejectVPCPeeringConnectionRequest(input)
+func (c *EC2) RejectVpcPeeringConnection(input *RejectVpcPeeringConnectionInput) (*RejectVpcPeeringConnectionOutput, error) {
+	req, out := c.RejectVpcPeeringConnectionRequest(input)
 	err := req.Send()
 	return out, err
 }
@@ -5507,8 +5511,8 @@ func (c *EC2) RejectVPCPeeringConnection(input *RejectVPCPeeringConnectionInput)
 const opReleaseAddress = "ReleaseAddress"
 
 // ReleaseAddressRequest generates a request for the ReleaseAddress operation.
-func (c *EC2) ReleaseAddressRequest(input *ReleaseAddressInput) (req *aws.Request, output *ReleaseAddressOutput) {
-	op := &aws.Operation{
+func (c *EC2) ReleaseAddressRequest(input *ReleaseAddressInput) (req *service.Request, output *ReleaseAddressOutput) {
+	op := &service.Operation{
 		Name:       opReleaseAddress,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5545,22 +5549,22 @@ func (c *EC2) ReleaseAddress(input *ReleaseAddressInput) (*ReleaseAddressOutput,
 	return out, err
 }
 
-const opReplaceNetworkACLAssociation = "ReplaceNetworkAclAssociation"
+const opReplaceNetworkAclAssociation = "ReplaceNetworkAclAssociation"
 
-// ReplaceNetworkACLAssociationRequest generates a request for the ReplaceNetworkACLAssociation operation.
-func (c *EC2) ReplaceNetworkACLAssociationRequest(input *ReplaceNetworkACLAssociationInput) (req *aws.Request, output *ReplaceNetworkACLAssociationOutput) {
-	op := &aws.Operation{
-		Name:       opReplaceNetworkACLAssociation,
+// ReplaceNetworkAclAssociationRequest generates a request for the ReplaceNetworkAclAssociation operation.
+func (c *EC2) ReplaceNetworkAclAssociationRequest(input *ReplaceNetworkAclAssociationInput) (req *service.Request, output *ReplaceNetworkAclAssociationOutput) {
+	op := &service.Operation{
+		Name:       opReplaceNetworkAclAssociation,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &ReplaceNetworkACLAssociationInput{}
+		input = &ReplaceNetworkAclAssociationInput{}
 	}
 
 	req = c.newRequest(op, input, output)
-	output = &ReplaceNetworkACLAssociationOutput{}
+	output = &ReplaceNetworkAclAssociationOutput{}
 	req.Data = output
 	return
 }
@@ -5569,28 +5573,28 @@ func (c *EC2) ReplaceNetworkACLAssociationRequest(input *ReplaceNetworkACLAssoci
 // create a subnet, it's automatically associated with the default network ACL.
 // For more information about network ACLs, see Network ACLs (http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_ACLs.html)
 // in the Amazon Virtual Private Cloud User Guide.
-func (c *EC2) ReplaceNetworkACLAssociation(input *ReplaceNetworkACLAssociationInput) (*ReplaceNetworkACLAssociationOutput, error) {
-	req, out := c.ReplaceNetworkACLAssociationRequest(input)
+func (c *EC2) ReplaceNetworkAclAssociation(input *ReplaceNetworkAclAssociationInput) (*ReplaceNetworkAclAssociationOutput, error) {
+	req, out := c.ReplaceNetworkAclAssociationRequest(input)
 	err := req.Send()
 	return out, err
 }
 
-const opReplaceNetworkACLEntry = "ReplaceNetworkAclEntry"
+const opReplaceNetworkAclEntry = "ReplaceNetworkAclEntry"
 
-// ReplaceNetworkACLEntryRequest generates a request for the ReplaceNetworkACLEntry operation.
-func (c *EC2) ReplaceNetworkACLEntryRequest(input *ReplaceNetworkACLEntryInput) (req *aws.Request, output *ReplaceNetworkACLEntryOutput) {
-	op := &aws.Operation{
-		Name:       opReplaceNetworkACLEntry,
+// ReplaceNetworkAclEntryRequest generates a request for the ReplaceNetworkAclEntry operation.
+func (c *EC2) ReplaceNetworkAclEntryRequest(input *ReplaceNetworkAclEntryInput) (req *service.Request, output *ReplaceNetworkAclEntryOutput) {
+	op := &service.Operation{
+		Name:       opReplaceNetworkAclEntry,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &ReplaceNetworkACLEntryInput{}
+		input = &ReplaceNetworkAclEntryInput{}
 	}
 
 	req = c.newRequest(op, input, output)
-	output = &ReplaceNetworkACLEntryOutput{}
+	output = &ReplaceNetworkAclEntryOutput{}
 	req.Data = output
 	return
 }
@@ -5598,8 +5602,8 @@ func (c *EC2) ReplaceNetworkACLEntryRequest(input *ReplaceNetworkACLEntryInput) 
 // Replaces an entry (rule) in a network ACL. For more information about network
 // ACLs, see Network ACLs (http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_ACLs.html)
 // in the Amazon Virtual Private Cloud User Guide.
-func (c *EC2) ReplaceNetworkACLEntry(input *ReplaceNetworkACLEntryInput) (*ReplaceNetworkACLEntryOutput, error) {
-	req, out := c.ReplaceNetworkACLEntryRequest(input)
+func (c *EC2) ReplaceNetworkAclEntry(input *ReplaceNetworkAclEntryInput) (*ReplaceNetworkAclEntryOutput, error) {
+	req, out := c.ReplaceNetworkAclEntryRequest(input)
 	err := req.Send()
 	return out, err
 }
@@ -5607,8 +5611,8 @@ func (c *EC2) ReplaceNetworkACLEntry(input *ReplaceNetworkACLEntryInput) (*Repla
 const opReplaceRoute = "ReplaceRoute"
 
 // ReplaceRouteRequest generates a request for the ReplaceRoute operation.
-func (c *EC2) ReplaceRouteRequest(input *ReplaceRouteInput) (req *aws.Request, output *ReplaceRouteOutput) {
-	op := &aws.Operation{
+func (c *EC2) ReplaceRouteRequest(input *ReplaceRouteInput) (req *service.Request, output *ReplaceRouteOutput) {
+	op := &service.Operation{
 		Name:       opReplaceRoute,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5639,8 +5643,8 @@ func (c *EC2) ReplaceRoute(input *ReplaceRouteInput) (*ReplaceRouteOutput, error
 const opReplaceRouteTableAssociation = "ReplaceRouteTableAssociation"
 
 // ReplaceRouteTableAssociationRequest generates a request for the ReplaceRouteTableAssociation operation.
-func (c *EC2) ReplaceRouteTableAssociationRequest(input *ReplaceRouteTableAssociationInput) (req *aws.Request, output *ReplaceRouteTableAssociationOutput) {
-	op := &aws.Operation{
+func (c *EC2) ReplaceRouteTableAssociationRequest(input *ReplaceRouteTableAssociationInput) (req *service.Request, output *ReplaceRouteTableAssociationOutput) {
+	op := &service.Operation{
 		Name:       opReplaceRouteTableAssociation,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5674,8 +5678,8 @@ func (c *EC2) ReplaceRouteTableAssociation(input *ReplaceRouteTableAssociationIn
 const opReportInstanceStatus = "ReportInstanceStatus"
 
 // ReportInstanceStatusRequest generates a request for the ReportInstanceStatus operation.
-func (c *EC2) ReportInstanceStatusRequest(input *ReportInstanceStatusInput) (req *aws.Request, output *ReportInstanceStatusOutput) {
-	op := &aws.Operation{
+func (c *EC2) ReportInstanceStatusRequest(input *ReportInstanceStatusInput) (req *service.Request, output *ReportInstanceStatusOutput) {
+	op := &service.Operation{
 		Name:       opReportInstanceStatus,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5707,8 +5711,8 @@ func (c *EC2) ReportInstanceStatus(input *ReportInstanceStatusInput) (*ReportIns
 const opRequestSpotFleet = "RequestSpotFleet"
 
 // RequestSpotFleetRequest generates a request for the RequestSpotFleet operation.
-func (c *EC2) RequestSpotFleetRequest(input *RequestSpotFleetInput) (req *aws.Request, output *RequestSpotFleetOutput) {
-	op := &aws.Operation{
+func (c *EC2) RequestSpotFleetRequest(input *RequestSpotFleetInput) (req *service.Request, output *RequestSpotFleetOutput) {
+	op := &service.Operation{
 		Name:       opRequestSpotFleet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5737,8 +5741,8 @@ func (c *EC2) RequestSpotFleet(input *RequestSpotFleetInput) (*RequestSpotFleetO
 const opRequestSpotInstances = "RequestSpotInstances"
 
 // RequestSpotInstancesRequest generates a request for the RequestSpotInstances operation.
-func (c *EC2) RequestSpotInstancesRequest(input *RequestSpotInstancesInput) (req *aws.Request, output *RequestSpotInstancesOutput) {
-	op := &aws.Operation{
+func (c *EC2) RequestSpotInstancesRequest(input *RequestSpotInstancesInput) (req *service.Request, output *RequestSpotInstancesOutput) {
+	op := &service.Operation{
 		Name:       opRequestSpotInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5769,8 +5773,8 @@ func (c *EC2) RequestSpotInstances(input *RequestSpotInstancesInput) (*RequestSp
 const opResetImageAttribute = "ResetImageAttribute"
 
 // ResetImageAttributeRequest generates a request for the ResetImageAttribute operation.
-func (c *EC2) ResetImageAttributeRequest(input *ResetImageAttributeInput) (req *aws.Request, output *ResetImageAttributeOutput) {
-	op := &aws.Operation{
+func (c *EC2) ResetImageAttributeRequest(input *ResetImageAttributeInput) (req *service.Request, output *ResetImageAttributeOutput) {
+	op := &service.Operation{
 		Name:       opResetImageAttribute,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5798,8 +5802,8 @@ func (c *EC2) ResetImageAttribute(input *ResetImageAttributeInput) (*ResetImageA
 const opResetInstanceAttribute = "ResetInstanceAttribute"
 
 // ResetInstanceAttributeRequest generates a request for the ResetInstanceAttribute operation.
-func (c *EC2) ResetInstanceAttributeRequest(input *ResetInstanceAttributeInput) (req *aws.Request, output *ResetInstanceAttributeOutput) {
-	op := &aws.Operation{
+func (c *EC2) ResetInstanceAttributeRequest(input *ResetInstanceAttributeInput) (req *service.Request, output *ResetInstanceAttributeOutput) {
+	op := &service.Operation{
 		Name:       opResetInstanceAttribute,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5833,8 +5837,8 @@ func (c *EC2) ResetInstanceAttribute(input *ResetInstanceAttributeInput) (*Reset
 const opResetNetworkInterfaceAttribute = "ResetNetworkInterfaceAttribute"
 
 // ResetNetworkInterfaceAttributeRequest generates a request for the ResetNetworkInterfaceAttribute operation.
-func (c *EC2) ResetNetworkInterfaceAttributeRequest(input *ResetNetworkInterfaceAttributeInput) (req *aws.Request, output *ResetNetworkInterfaceAttributeOutput) {
-	op := &aws.Operation{
+func (c *EC2) ResetNetworkInterfaceAttributeRequest(input *ResetNetworkInterfaceAttributeInput) (req *service.Request, output *ResetNetworkInterfaceAttributeOutput) {
+	op := &service.Operation{
 		Name:       opResetNetworkInterfaceAttribute,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5861,8 +5865,8 @@ func (c *EC2) ResetNetworkInterfaceAttribute(input *ResetNetworkInterfaceAttribu
 const opResetSnapshotAttribute = "ResetSnapshotAttribute"
 
 // ResetSnapshotAttributeRequest generates a request for the ResetSnapshotAttribute operation.
-func (c *EC2) ResetSnapshotAttributeRequest(input *ResetSnapshotAttributeInput) (req *aws.Request, output *ResetSnapshotAttributeOutput) {
-	op := &aws.Operation{
+func (c *EC2) ResetSnapshotAttributeRequest(input *ResetSnapshotAttributeInput) (req *service.Request, output *ResetSnapshotAttributeOutput) {
+	op := &service.Operation{
 		Name:       opResetSnapshotAttribute,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5892,8 +5896,8 @@ func (c *EC2) ResetSnapshotAttribute(input *ResetSnapshotAttributeInput) (*Reset
 const opRestoreAddressToClassic = "RestoreAddressToClassic"
 
 // RestoreAddressToClassicRequest generates a request for the RestoreAddressToClassic operation.
-func (c *EC2) RestoreAddressToClassicRequest(input *RestoreAddressToClassicInput) (req *aws.Request, output *RestoreAddressToClassicOutput) {
-	op := &aws.Operation{
+func (c *EC2) RestoreAddressToClassicRequest(input *RestoreAddressToClassicInput) (req *service.Request, output *RestoreAddressToClassicOutput) {
+	op := &service.Operation{
 		Name:       opRestoreAddressToClassic,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5922,8 +5926,8 @@ func (c *EC2) RestoreAddressToClassic(input *RestoreAddressToClassicInput) (*Res
 const opRevokeSecurityGroupEgress = "RevokeSecurityGroupEgress"
 
 // RevokeSecurityGroupEgressRequest generates a request for the RevokeSecurityGroupEgress operation.
-func (c *EC2) RevokeSecurityGroupEgressRequest(input *RevokeSecurityGroupEgressInput) (req *aws.Request, output *RevokeSecurityGroupEgressOutput) {
-	op := &aws.Operation{
+func (c *EC2) RevokeSecurityGroupEgressRequest(input *RevokeSecurityGroupEgressInput) (req *service.Request, output *RevokeSecurityGroupEgressOutput) {
+	op := &service.Operation{
 		Name:       opRevokeSecurityGroupEgress,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5959,8 +5963,8 @@ func (c *EC2) RevokeSecurityGroupEgress(input *RevokeSecurityGroupEgressInput) (
 const opRevokeSecurityGroupIngress = "RevokeSecurityGroupIngress"
 
 // RevokeSecurityGroupIngressRequest generates a request for the RevokeSecurityGroupIngress operation.
-func (c *EC2) RevokeSecurityGroupIngressRequest(input *RevokeSecurityGroupIngressInput) (req *aws.Request, output *RevokeSecurityGroupIngressOutput) {
-	op := &aws.Operation{
+func (c *EC2) RevokeSecurityGroupIngressRequest(input *RevokeSecurityGroupIngressInput) (req *service.Request, output *RevokeSecurityGroupIngressOutput) {
+	op := &service.Operation{
 		Name:       opRevokeSecurityGroupIngress,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5996,8 +6000,8 @@ func (c *EC2) RevokeSecurityGroupIngress(input *RevokeSecurityGroupIngressInput)
 const opRunInstances = "RunInstances"
 
 // RunInstancesRequest generates a request for the RunInstances operation.
-func (c *EC2) RunInstancesRequest(input *RunInstancesInput) (req *aws.Request, output *Reservation) {
-	op := &aws.Operation{
+func (c *EC2) RunInstancesRequest(input *RunInstancesInput) (req *service.Request, output *Reservation) {
+	op := &service.Operation{
 		Name:       opRunInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6055,8 +6059,8 @@ func (c *EC2) RunInstances(input *RunInstancesInput) (*Reservation, error) {
 const opStartInstances = "StartInstances"
 
 // StartInstancesRequest generates a request for the StartInstances operation.
-func (c *EC2) StartInstancesRequest(input *StartInstancesInput) (req *aws.Request, output *StartInstancesOutput) {
-	op := &aws.Operation{
+func (c *EC2) StartInstancesRequest(input *StartInstancesInput) (req *service.Request, output *StartInstancesOutput) {
+	op := &service.Operation{
 		Name:       opStartInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6100,8 +6104,8 @@ func (c *EC2) StartInstances(input *StartInstancesInput) (*StartInstancesOutput,
 const opStopInstances = "StopInstances"
 
 // StopInstancesRequest generates a request for the StopInstances operation.
-func (c *EC2) StopInstancesRequest(input *StopInstancesInput) (req *aws.Request, output *StopInstancesOutput) {
-	op := &aws.Operation{
+func (c *EC2) StopInstancesRequest(input *StopInstancesInput) (req *service.Request, output *StopInstancesOutput) {
+	op := &service.Operation{
 		Name:       opStopInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6157,8 +6161,8 @@ func (c *EC2) StopInstances(input *StopInstancesInput) (*StopInstancesOutput, er
 const opTerminateInstances = "TerminateInstances"
 
 // TerminateInstancesRequest generates a request for the TerminateInstances operation.
-func (c *EC2) TerminateInstancesRequest(input *TerminateInstancesInput) (req *aws.Request, output *TerminateInstancesOutput) {
-	op := &aws.Operation{
+func (c *EC2) TerminateInstancesRequest(input *TerminateInstancesInput) (req *service.Request, output *TerminateInstancesOutput) {
+	op := &service.Operation{
 		Name:       opTerminateInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6201,29 +6205,29 @@ func (c *EC2) TerminateInstances(input *TerminateInstancesInput) (*TerminateInst
 	return out, err
 }
 
-const opUnassignPrivateIPAddresses = "UnassignPrivateIpAddresses"
+const opUnassignPrivateIpAddresses = "UnassignPrivateIpAddresses"
 
-// UnassignPrivateIPAddressesRequest generates a request for the UnassignPrivateIPAddresses operation.
-func (c *EC2) UnassignPrivateIPAddressesRequest(input *UnassignPrivateIPAddressesInput) (req *aws.Request, output *UnassignPrivateIPAddressesOutput) {
-	op := &aws.Operation{
-		Name:       opUnassignPrivateIPAddresses,
+// UnassignPrivateIpAddressesRequest generates a request for the UnassignPrivateIpAddresses operation.
+func (c *EC2) UnassignPrivateIpAddressesRequest(input *UnassignPrivateIpAddressesInput) (req *service.Request, output *UnassignPrivateIpAddressesOutput) {
+	op := &service.Operation{
+		Name:       opUnassignPrivateIpAddresses,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &UnassignPrivateIPAddressesInput{}
+		input = &UnassignPrivateIpAddressesInput{}
 	}
 
 	req = c.newRequest(op, input, output)
-	output = &UnassignPrivateIPAddressesOutput{}
+	output = &UnassignPrivateIpAddressesOutput{}
 	req.Data = output
 	return
 }
 
 // Unassigns one or more secondary private IP addresses from a network interface.
-func (c *EC2) UnassignPrivateIPAddresses(input *UnassignPrivateIPAddressesInput) (*UnassignPrivateIPAddressesOutput, error) {
-	req, out := c.UnassignPrivateIPAddressesRequest(input)
+func (c *EC2) UnassignPrivateIpAddresses(input *UnassignPrivateIpAddressesInput) (*UnassignPrivateIpAddressesOutput, error) {
+	req, out := c.UnassignPrivateIpAddressesRequest(input)
 	err := req.Send()
 	return out, err
 }
@@ -6231,8 +6235,8 @@ func (c *EC2) UnassignPrivateIPAddresses(input *UnassignPrivateIPAddressesInput)
 const opUnmonitorInstances = "UnmonitorInstances"
 
 // UnmonitorInstancesRequest generates a request for the UnmonitorInstances operation.
-func (c *EC2) UnmonitorInstancesRequest(input *UnmonitorInstancesInput) (req *aws.Request, output *UnmonitorInstancesOutput) {
-	op := &aws.Operation{
+func (c *EC2) UnmonitorInstancesRequest(input *UnmonitorInstancesInput) (req *service.Request, output *UnmonitorInstancesOutput) {
+	op := &service.Operation{
 		Name:       opUnmonitorInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6257,7 +6261,7 @@ func (c *EC2) UnmonitorInstances(input *UnmonitorInstancesInput) (*UnmonitorInst
 	return out, err
 }
 
-type AcceptVPCPeeringConnectionInput struct {
+type AcceptVpcPeeringConnectionInput struct {
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
 	// the required permissions, the error response is DryRunOperation. Otherwise,
@@ -6265,43 +6269,43 @@ type AcceptVPCPeeringConnectionInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the VPC peering connection.
-	VPCPeeringConnectionID *string `locationName:"vpcPeeringConnectionId" type:"string"`
+	VpcPeeringConnectionId *string `locationName:"vpcPeeringConnectionId" type:"string"`
 
-	metadataAcceptVPCPeeringConnectionInput `json:"-" xml:"-"`
+	metadataAcceptVpcPeeringConnectionInput `json:"-" xml:"-"`
 }
 
-type metadataAcceptVPCPeeringConnectionInput struct {
+type metadataAcceptVpcPeeringConnectionInput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s AcceptVPCPeeringConnectionInput) String() string {
-	return awsutil.StringValue(s)
+func (s AcceptVpcPeeringConnectionInput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s AcceptVPCPeeringConnectionInput) GoString() string {
+func (s AcceptVpcPeeringConnectionInput) GoString() string {
 	return s.String()
 }
 
-type AcceptVPCPeeringConnectionOutput struct {
+type AcceptVpcPeeringConnectionOutput struct {
 	// Information about the VPC peering connection.
-	VPCPeeringConnection *VPCPeeringConnection `locationName:"vpcPeeringConnection" type:"structure"`
+	VpcPeeringConnection *VpcPeeringConnection `locationName:"vpcPeeringConnection" type:"structure"`
 
-	metadataAcceptVPCPeeringConnectionOutput `json:"-" xml:"-"`
+	metadataAcceptVpcPeeringConnectionOutput `json:"-" xml:"-"`
 }
 
-type metadataAcceptVPCPeeringConnectionOutput struct {
+type metadataAcceptVpcPeeringConnectionOutput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s AcceptVPCPeeringConnectionOutput) String() string {
-	return awsutil.StringValue(s)
+func (s AcceptVpcPeeringConnectionOutput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s AcceptVPCPeeringConnectionOutput) GoString() string {
+func (s AcceptVpcPeeringConnectionOutput) GoString() string {
 	return s.String()
 }
 
@@ -6322,7 +6326,7 @@ type metadataAccountAttribute struct {
 
 // String returns the string representation
 func (s AccountAttribute) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -6344,7 +6348,7 @@ type metadataAccountAttributeValue struct {
 
 // String returns the string representation
 func (s AccountAttributeValue) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -6355,13 +6359,13 @@ func (s AccountAttributeValue) GoString() string {
 // Describes a running instance in a Spot fleet.
 type ActiveInstance struct {
 	// The ID of the instance.
-	InstanceID *string `locationName:"instanceId" type:"string"`
+	InstanceId *string `locationName:"instanceId" type:"string"`
 
 	// The instance type.
 	InstanceType *string `locationName:"instanceType" type:"string"`
 
 	// The ID of the Spot Instance request.
-	SpotInstanceRequestID *string `locationName:"spotInstanceRequestId" type:"string"`
+	SpotInstanceRequestId *string `locationName:"spotInstanceRequestId" type:"string"`
 
 	metadataActiveInstance `json:"-" xml:"-"`
 }
@@ -6372,7 +6376,7 @@ type metadataActiveInstance struct {
 
 // String returns the string representation
 func (s ActiveInstance) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -6383,30 +6387,30 @@ func (s ActiveInstance) GoString() string {
 // Describes an Elastic IP address.
 type Address struct {
 	// The ID representing the allocation of the address for use with EC2-VPC.
-	AllocationID *string `locationName:"allocationId" type:"string"`
+	AllocationId *string `locationName:"allocationId" type:"string"`
 
 	// The ID representing the association of the address with an instance in a
 	// VPC.
-	AssociationID *string `locationName:"associationId" type:"string"`
+	AssociationId *string `locationName:"associationId" type:"string"`
 
 	// Indicates whether this Elastic IP address is for use with instances in EC2-Classic
 	// (standard) or instances in a VPC (vpc).
-	Domain *string `locationName:"domain" type:"string"`
+	Domain *string `locationName:"domain" type:"string" enum:"DomainType"`
 
 	// The ID of the instance that the address is associated with (if any).
-	InstanceID *string `locationName:"instanceId" type:"string"`
+	InstanceId *string `locationName:"instanceId" type:"string"`
 
 	// The ID of the network interface.
-	NetworkInterfaceID *string `locationName:"networkInterfaceId" type:"string"`
+	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string"`
 
 	// The ID of the AWS account that owns the network interface.
-	NetworkInterfaceOwnerID *string `locationName:"networkInterfaceOwnerId" type:"string"`
+	NetworkInterfaceOwnerId *string `locationName:"networkInterfaceOwnerId" type:"string"`
 
 	// The private IP address associated with the Elastic IP address.
-	PrivateIPAddress *string `locationName:"privateIpAddress" type:"string"`
+	PrivateIpAddress *string `locationName:"privateIpAddress" type:"string"`
 
 	// The Elastic IP address.
-	PublicIP *string `locationName:"publicIp" type:"string"`
+	PublicIp *string `locationName:"publicIp" type:"string"`
 
 	metadataAddress `json:"-" xml:"-"`
 }
@@ -6417,7 +6421,7 @@ type metadataAddress struct {
 
 // String returns the string representation
 func (s Address) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -6429,7 +6433,7 @@ type AllocateAddressInput struct {
 	// Set to vpc to allocate the address for use with instances in a VPC.
 	//
 	// Default: The address is for use with instances in EC2-Classic.
-	Domain *string `type:"string"`
+	Domain *string `type:"string" enum:"DomainType"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -6446,7 +6450,7 @@ type metadataAllocateAddressInput struct {
 
 // String returns the string representation
 func (s AllocateAddressInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -6457,14 +6461,14 @@ func (s AllocateAddressInput) GoString() string {
 type AllocateAddressOutput struct {
 	// [EC2-VPC] The ID that AWS assigns to represent the allocation of the Elastic
 	// IP address for use with instances in a VPC.
-	AllocationID *string `locationName:"allocationId" type:"string"`
+	AllocationId *string `locationName:"allocationId" type:"string"`
 
 	// Indicates whether this Elastic IP address is for use with instances in EC2-Classic
 	// (standard) or instances in a VPC (vpc).
-	Domain *string `locationName:"domain" type:"string"`
+	Domain *string `locationName:"domain" type:"string" enum:"DomainType"`
 
 	// The Elastic IP address.
-	PublicIP *string `locationName:"publicIp" type:"string"`
+	PublicIp *string `locationName:"publicIp" type:"string"`
 
 	metadataAllocateAddressOutput `json:"-" xml:"-"`
 }
@@ -6475,7 +6479,7 @@ type metadataAllocateAddressOutput struct {
 
 // String returns the string representation
 func (s AllocateAddressOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -6483,13 +6487,13 @@ func (s AllocateAddressOutput) GoString() string {
 	return s.String()
 }
 
-type AssignPrivateIPAddressesInput struct {
+type AssignPrivateIpAddressesInput struct {
 	// Indicates whether to allow an IP address that is already assigned to another
 	// network interface or instance to be reassigned to the specified network interface.
 	AllowReassignment *bool `locationName:"allowReassignment" type:"boolean"`
 
 	// The ID of the network interface.
-	NetworkInterfaceID *string `locationName:"networkInterfaceId" type:"string" required:"true"`
+	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string" required:"true"`
 
 	// One or more IP addresses to be assigned as a secondary private IP address
 	// to the network interface. You can't specify this parameter when also specifying
@@ -6497,50 +6501,50 @@ type AssignPrivateIPAddressesInput struct {
 	//
 	// If you don't specify an IP address, Amazon EC2 automatically selects an
 	// IP address within the subnet range.
-	PrivateIPAddresses []*string `locationName:"privateIpAddress" locationNameList:"PrivateIpAddress" type:"list"`
+	PrivateIpAddresses []*string `locationName:"privateIpAddress" locationNameList:"PrivateIpAddress" type:"list"`
 
 	// The number of secondary IP addresses to assign to the network interface.
 	// You can't specify this parameter when also specifying private IP addresses.
-	SecondaryPrivateIPAddressCount *int64 `locationName:"secondaryPrivateIpAddressCount" type:"integer"`
+	SecondaryPrivateIpAddressCount *int64 `locationName:"secondaryPrivateIpAddressCount" type:"integer"`
 
-	metadataAssignPrivateIPAddressesInput `json:"-" xml:"-"`
+	metadataAssignPrivateIpAddressesInput `json:"-" xml:"-"`
 }
 
-type metadataAssignPrivateIPAddressesInput struct {
+type metadataAssignPrivateIpAddressesInput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s AssignPrivateIPAddressesInput) String() string {
-	return awsutil.StringValue(s)
+func (s AssignPrivateIpAddressesInput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s AssignPrivateIPAddressesInput) GoString() string {
+func (s AssignPrivateIpAddressesInput) GoString() string {
 	return s.String()
 }
 
-type AssignPrivateIPAddressesOutput struct {
-	metadataAssignPrivateIPAddressesOutput `json:"-" xml:"-"`
+type AssignPrivateIpAddressesOutput struct {
+	metadataAssignPrivateIpAddressesOutput `json:"-" xml:"-"`
 }
 
-type metadataAssignPrivateIPAddressesOutput struct {
+type metadataAssignPrivateIpAddressesOutput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s AssignPrivateIPAddressesOutput) String() string {
-	return awsutil.StringValue(s)
+func (s AssignPrivateIpAddressesOutput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s AssignPrivateIPAddressesOutput) GoString() string {
+func (s AssignPrivateIpAddressesOutput) GoString() string {
 	return s.String()
 }
 
 type AssociateAddressInput struct {
 	// [EC2-VPC] The allocation ID. This is required for EC2-VPC.
-	AllocationID *string `locationName:"AllocationId" type:"string"`
+	AllocationId *string `type:"string"`
 
 	// [EC2-VPC] Allows an Elastic IP address that is already associated with an
 	// instance or network interface to be re-associated with the specified instance
@@ -6559,19 +6563,19 @@ type AssociateAddressInput struct {
 	// can specify either the instance ID or the network interface ID, but not both.
 	// The operation fails if you specify an instance ID unless exactly one network
 	// interface is attached.
-	InstanceID *string `locationName:"InstanceId" type:"string"`
+	InstanceId *string `type:"string"`
 
 	// [EC2-VPC] The ID of the network interface. If the instance has more than
 	// one network interface, you must specify a network interface ID.
-	NetworkInterfaceID *string `locationName:"networkInterfaceId" type:"string"`
+	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string"`
 
 	// [EC2-VPC] The primary or secondary private IP address to associate with the
 	// Elastic IP address. If no private IP address is specified, the Elastic IP
 	// address is associated with the primary private IP address.
-	PrivateIPAddress *string `locationName:"privateIpAddress" type:"string"`
+	PrivateIpAddress *string `locationName:"privateIpAddress" type:"string"`
 
 	// The Elastic IP address. This is required for EC2-Classic.
-	PublicIP *string `locationName:"PublicIp" type:"string"`
+	PublicIp *string `type:"string"`
 
 	metadataAssociateAddressInput `json:"-" xml:"-"`
 }
@@ -6582,7 +6586,7 @@ type metadataAssociateAddressInput struct {
 
 // String returns the string representation
 func (s AssociateAddressInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -6593,7 +6597,7 @@ func (s AssociateAddressInput) GoString() string {
 type AssociateAddressOutput struct {
 	// [EC2-VPC] The ID that represents the association of the Elastic IP address
 	// with an instance.
-	AssociationID *string `locationName:"associationId" type:"string"`
+	AssociationId *string `locationName:"associationId" type:"string"`
 
 	metadataAssociateAddressOutput `json:"-" xml:"-"`
 }
@@ -6604,7 +6608,7 @@ type metadataAssociateAddressOutput struct {
 
 // String returns the string representation
 func (s AssociateAddressOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -6612,10 +6616,10 @@ func (s AssociateAddressOutput) GoString() string {
 	return s.String()
 }
 
-type AssociateDHCPOptionsInput struct {
+type AssociateDhcpOptionsInput struct {
 	// The ID of the DHCP options set, or default to associate no DHCP options with
 	// the VPC.
-	DHCPOptionsID *string `locationName:"DhcpOptionsId" type:"string" required:"true"`
+	DhcpOptionsId *string `type:"string" required:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -6624,40 +6628,40 @@ type AssociateDHCPOptionsInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the VPC.
-	VPCID *string `locationName:"VpcId" type:"string" required:"true"`
+	VpcId *string `type:"string" required:"true"`
 
-	metadataAssociateDHCPOptionsInput `json:"-" xml:"-"`
+	metadataAssociateDhcpOptionsInput `json:"-" xml:"-"`
 }
 
-type metadataAssociateDHCPOptionsInput struct {
+type metadataAssociateDhcpOptionsInput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s AssociateDHCPOptionsInput) String() string {
-	return awsutil.StringValue(s)
+func (s AssociateDhcpOptionsInput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s AssociateDHCPOptionsInput) GoString() string {
+func (s AssociateDhcpOptionsInput) GoString() string {
 	return s.String()
 }
 
-type AssociateDHCPOptionsOutput struct {
-	metadataAssociateDHCPOptionsOutput `json:"-" xml:"-"`
+type AssociateDhcpOptionsOutput struct {
+	metadataAssociateDhcpOptionsOutput `json:"-" xml:"-"`
 }
 
-type metadataAssociateDHCPOptionsOutput struct {
+type metadataAssociateDhcpOptionsOutput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s AssociateDHCPOptionsOutput) String() string {
-	return awsutil.StringValue(s)
+func (s AssociateDhcpOptionsOutput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s AssociateDHCPOptionsOutput) GoString() string {
+func (s AssociateDhcpOptionsOutput) GoString() string {
 	return s.String()
 }
 
@@ -6669,10 +6673,10 @@ type AssociateRouteTableInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the route table.
-	RouteTableID *string `locationName:"routeTableId" type:"string" required:"true"`
+	RouteTableId *string `locationName:"routeTableId" type:"string" required:"true"`
 
 	// The ID of the subnet.
-	SubnetID *string `locationName:"subnetId" type:"string" required:"true"`
+	SubnetId *string `locationName:"subnetId" type:"string" required:"true"`
 
 	metadataAssociateRouteTableInput `json:"-" xml:"-"`
 }
@@ -6683,7 +6687,7 @@ type metadataAssociateRouteTableInput struct {
 
 // String returns the string representation
 func (s AssociateRouteTableInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -6693,7 +6697,7 @@ func (s AssociateRouteTableInput) GoString() string {
 
 type AssociateRouteTableOutput struct {
 	// The route table association ID (needed to disassociate the route table).
-	AssociationID *string `locationName:"associationId" type:"string"`
+	AssociationId *string `locationName:"associationId" type:"string"`
 
 	metadataAssociateRouteTableOutput `json:"-" xml:"-"`
 }
@@ -6704,7 +6708,7 @@ type metadataAssociateRouteTableOutput struct {
 
 // String returns the string representation
 func (s AssociateRouteTableOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -6712,7 +6716,7 @@ func (s AssociateRouteTableOutput) GoString() string {
 	return s.String()
 }
 
-type AttachClassicLinkVPCInput struct {
+type AttachClassicLinkVpcInput struct {
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
 	// the required permissions, the error response is DryRunOperation. Otherwise,
@@ -6724,46 +6728,46 @@ type AttachClassicLinkVPCInput struct {
 	Groups []*string `locationName:"SecurityGroupId" locationNameList:"groupId" type:"list" required:"true"`
 
 	// The ID of an EC2-Classic instance to link to the ClassicLink-enabled VPC.
-	InstanceID *string `locationName:"instanceId" type:"string" required:"true"`
+	InstanceId *string `locationName:"instanceId" type:"string" required:"true"`
 
 	// The ID of a ClassicLink-enabled VPC.
-	VPCID *string `locationName:"vpcId" type:"string" required:"true"`
+	VpcId *string `locationName:"vpcId" type:"string" required:"true"`
 
-	metadataAttachClassicLinkVPCInput `json:"-" xml:"-"`
+	metadataAttachClassicLinkVpcInput `json:"-" xml:"-"`
 }
 
-type metadataAttachClassicLinkVPCInput struct {
+type metadataAttachClassicLinkVpcInput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s AttachClassicLinkVPCInput) String() string {
-	return awsutil.StringValue(s)
+func (s AttachClassicLinkVpcInput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s AttachClassicLinkVPCInput) GoString() string {
+func (s AttachClassicLinkVpcInput) GoString() string {
 	return s.String()
 }
 
-type AttachClassicLinkVPCOutput struct {
+type AttachClassicLinkVpcOutput struct {
 	// Returns true if the request succeeds; otherwise, it returns an error.
 	Return *bool `locationName:"return" type:"boolean"`
 
-	metadataAttachClassicLinkVPCOutput `json:"-" xml:"-"`
+	metadataAttachClassicLinkVpcOutput `json:"-" xml:"-"`
 }
 
-type metadataAttachClassicLinkVPCOutput struct {
+type metadataAttachClassicLinkVpcOutput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s AttachClassicLinkVPCOutput) String() string {
-	return awsutil.StringValue(s)
+func (s AttachClassicLinkVpcOutput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s AttachClassicLinkVPCOutput) GoString() string {
+func (s AttachClassicLinkVpcOutput) GoString() string {
 	return s.String()
 }
 
@@ -6775,10 +6779,10 @@ type AttachInternetGatewayInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the Internet gateway.
-	InternetGatewayID *string `locationName:"internetGatewayId" type:"string" required:"true"`
+	InternetGatewayId *string `locationName:"internetGatewayId" type:"string" required:"true"`
 
 	// The ID of the VPC.
-	VPCID *string `locationName:"vpcId" type:"string" required:"true"`
+	VpcId *string `locationName:"vpcId" type:"string" required:"true"`
 
 	metadataAttachInternetGatewayInput `json:"-" xml:"-"`
 }
@@ -6789,7 +6793,7 @@ type metadataAttachInternetGatewayInput struct {
 
 // String returns the string representation
 func (s AttachInternetGatewayInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -6807,7 +6811,7 @@ type metadataAttachInternetGatewayOutput struct {
 
 // String returns the string representation
 func (s AttachInternetGatewayOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -6826,10 +6830,10 @@ type AttachNetworkInterfaceInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the instance.
-	InstanceID *string `locationName:"instanceId" type:"string" required:"true"`
+	InstanceId *string `locationName:"instanceId" type:"string" required:"true"`
 
 	// The ID of the network interface.
-	NetworkInterfaceID *string `locationName:"networkInterfaceId" type:"string" required:"true"`
+	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string" required:"true"`
 
 	metadataAttachNetworkInterfaceInput `json:"-" xml:"-"`
 }
@@ -6840,7 +6844,7 @@ type metadataAttachNetworkInterfaceInput struct {
 
 // String returns the string representation
 func (s AttachNetworkInterfaceInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -6850,7 +6854,7 @@ func (s AttachNetworkInterfaceInput) GoString() string {
 
 type AttachNetworkInterfaceOutput struct {
 	// The ID of the network interface attachment.
-	AttachmentID *string `locationName:"attachmentId" type:"string"`
+	AttachmentId *string `locationName:"attachmentId" type:"string"`
 
 	metadataAttachNetworkInterfaceOutput `json:"-" xml:"-"`
 }
@@ -6861,62 +6865,11 @@ type metadataAttachNetworkInterfaceOutput struct {
 
 // String returns the string representation
 func (s AttachNetworkInterfaceOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
 func (s AttachNetworkInterfaceOutput) GoString() string {
-	return s.String()
-}
-
-type AttachVPNGatewayInput struct {
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the VPC.
-	VPCID *string `locationName:"VpcId" type:"string" required:"true"`
-
-	// The ID of the virtual private gateway.
-	VPNGatewayID *string `locationName:"VpnGatewayId" type:"string" required:"true"`
-
-	metadataAttachVPNGatewayInput `json:"-" xml:"-"`
-}
-
-type metadataAttachVPNGatewayInput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s AttachVPNGatewayInput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s AttachVPNGatewayInput) GoString() string {
-	return s.String()
-}
-
-type AttachVPNGatewayOutput struct {
-	// Information about the attachment.
-	VPCAttachment *VPCAttachment `locationName:"attachment" type:"structure"`
-
-	metadataAttachVPNGatewayOutput `json:"-" xml:"-"`
-}
-
-type metadataAttachVPNGatewayOutput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s AttachVPNGatewayOutput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s AttachVPNGatewayOutput) GoString() string {
 	return s.String()
 }
 
@@ -6931,11 +6884,11 @@ type AttachVolumeInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the instance.
-	InstanceID *string `locationName:"InstanceId" type:"string" required:"true"`
+	InstanceId *string `type:"string" required:"true"`
 
 	// The ID of the EBS volume. The volume and instance must be within the same
 	// Availability Zone.
-	VolumeID *string `locationName:"VolumeId" type:"string" required:"true"`
+	VolumeId *string `type:"string" required:"true"`
 
 	metadataAttachVolumeInput `json:"-" xml:"-"`
 }
@@ -6946,11 +6899,62 @@ type metadataAttachVolumeInput struct {
 
 // String returns the string representation
 func (s AttachVolumeInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
 func (s AttachVolumeInput) GoString() string {
+	return s.String()
+}
+
+type AttachVpnGatewayInput struct {
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have
+	// the required permissions, the error response is DryRunOperation. Otherwise,
+	// it is UnauthorizedOperation.
+	DryRun *bool `locationName:"dryRun" type:"boolean"`
+
+	// The ID of the VPC.
+	VpcId *string `type:"string" required:"true"`
+
+	// The ID of the virtual private gateway.
+	VpnGatewayId *string `type:"string" required:"true"`
+
+	metadataAttachVpnGatewayInput `json:"-" xml:"-"`
+}
+
+type metadataAttachVpnGatewayInput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s AttachVpnGatewayInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AttachVpnGatewayInput) GoString() string {
+	return s.String()
+}
+
+type AttachVpnGatewayOutput struct {
+	// Information about the attachment.
+	VpcAttachment *VpcAttachment `locationName:"attachment" type:"structure"`
+
+	metadataAttachVpnGatewayOutput `json:"-" xml:"-"`
+}
+
+type metadataAttachVpnGatewayOutput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s AttachVpnGatewayOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AttachVpnGatewayOutput) GoString() string {
 	return s.String()
 }
 
@@ -6968,7 +6972,7 @@ type metadataAttributeBooleanValue struct {
 
 // String returns the string representation
 func (s AttributeBooleanValue) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -6990,7 +6994,7 @@ type metadataAttributeValue struct {
 
 // String returns the string representation
 func (s AttributeValue) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7001,7 +7005,7 @@ func (s AttributeValue) GoString() string {
 type AuthorizeSecurityGroupEgressInput struct {
 	// The CIDR IP address range. You can't specify this parameter when specifying
 	// a source security group.
-	CIDRIP *string `locationName:"cidrIp" type:"string"`
+	CidrIp *string `locationName:"cidrIp" type:"string"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -7014,23 +7018,25 @@ type AuthorizeSecurityGroupEgressInput struct {
 	FromPort *int64 `locationName:"fromPort" type:"integer"`
 
 	// The ID of the security group.
-	GroupID *string `locationName:"groupId" type:"string" required:"true"`
+	GroupId *string `locationName:"groupId" type:"string" required:"true"`
 
 	// A set of IP permissions. You can't specify a destination security group and
 	// a CIDR IP address range.
-	IPPermissions []*IPPermission `locationName:"ipPermissions" locationNameList:"item" type:"list"`
+	IpPermissions []*IpPermission `locationName:"ipPermissions" locationNameList:"item" type:"list"`
 
 	// The IP protocol name (tcp, udp, icmp) or number (see Protocol Numbers (http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)).
 	// Use -1 to specify all.
-	IPProtocol *string `locationName:"ipProtocol" type:"string"`
+	IpProtocol *string `locationName:"ipProtocol" type:"string"`
 
-	// [EC2-Classic, default VPC] The name of the destination security group. You
-	// can't specify a destination security group and a CIDR IP address range.
+	// The name of a destination security group. To authorize outbound access to
+	// a destination security group, we recommend that you use a set of IP permissions
+	// instead.
 	SourceSecurityGroupName *string `locationName:"sourceSecurityGroupName" type:"string"`
 
-	// The ID of the destination security group. You can't specify a destination
-	// security group and a CIDR IP address range.
-	SourceSecurityGroupOwnerID *string `locationName:"sourceSecurityGroupOwnerId" type:"string"`
+	// The AWS account number for a destination security group. To authorize outbound
+	// access to a destination security group, we recommend that you use a set of
+	// IP permissions instead.
+	SourceSecurityGroupOwnerId *string `locationName:"sourceSecurityGroupOwnerId" type:"string"`
 
 	// The end of port range for the TCP and UDP protocols, or an ICMP code number.
 	// For the ICMP code number, use -1 to specify all ICMP codes for the ICMP type.
@@ -7045,7 +7051,7 @@ type metadataAuthorizeSecurityGroupEgressInput struct {
 
 // String returns the string representation
 func (s AuthorizeSecurityGroupEgressInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7063,7 +7069,7 @@ type metadataAuthorizeSecurityGroupEgressOutput struct {
 
 // String returns the string representation
 func (s AuthorizeSecurityGroupEgressOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7074,7 +7080,7 @@ func (s AuthorizeSecurityGroupEgressOutput) GoString() string {
 type AuthorizeSecurityGroupIngressInput struct {
 	// The CIDR IP address range. You can't specify this parameter when specifying
 	// a source security group.
-	CIDRIP *string `locationName:"CidrIp" type:"string"`
+	CidrIp *string `type:"string"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -7087,29 +7093,34 @@ type AuthorizeSecurityGroupIngressInput struct {
 	FromPort *int64 `type:"integer"`
 
 	// The ID of the security group. Required for a nondefault VPC.
-	GroupID *string `locationName:"GroupId" type:"string"`
+	GroupId *string `type:"string"`
 
 	// [EC2-Classic, default VPC] The name of the security group.
 	GroupName *string `type:"string"`
 
 	// A set of IP permissions. Can be used to specify multiple rules in a single
 	// command.
-	IPPermissions []*IPPermission `locationName:"IpPermissions" locationNameList:"item" type:"list"`
+	IpPermissions []*IpPermission `locationNameList:"item" type:"list"`
 
 	// The IP protocol name (tcp, udp, icmp) or number (see Protocol Numbers (http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)).
 	// (VPC only) Use -1 to specify all.
-	IPProtocol *string `locationName:"IpProtocol" type:"string"`
+	IpProtocol *string `type:"string"`
 
 	// [EC2-Classic, default VPC] The name of the source security group. You can't
 	// specify this parameter in combination with the following parameters: the
-	// CIDR IP address range, the start of the port range, and the end of the port
-	// range.
+	// CIDR IP address range, the start of the port range, the IP protocol, and
+	// the end of the port range. For EC2-VPC, the source security group must be
+	// in the same VPC.
 	SourceSecurityGroupName *string `type:"string"`
 
-	// The ID of the source security group. You can't specify this parameter in
-	// combination with the following parameters: the CIDR IP address range, the
-	// start of the port range, and the end of the port range.
-	SourceSecurityGroupOwnerID *string `locationName:"SourceSecurityGroupOwnerId" type:"string"`
+	// [EC2-Classic, default VPC] The AWS account number for the source security
+	// group. For EC2-VPC, the source security group must be in the same VPC. You
+	// can't specify this parameter in combination with the following parameters:
+	// the CIDR IP address range, the IP protocol, the start of the port range,
+	// and the end of the port range. Creates rules that grant full ICMP, UDP, and
+	// TCP access. To create a rule with a specific IP protocol and port range,
+	// use a set of IP permissions instead.
+	SourceSecurityGroupOwnerId *string `type:"string"`
 
 	// The end of port range for the TCP and UDP protocols, or an ICMP code number.
 	// For the ICMP code number, use -1 to specify all ICMP codes for the ICMP type.
@@ -7124,7 +7135,7 @@ type metadataAuthorizeSecurityGroupIngressInput struct {
 
 // String returns the string representation
 func (s AuthorizeSecurityGroupIngressInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7142,7 +7153,7 @@ type metadataAuthorizeSecurityGroupIngressOutput struct {
 
 // String returns the string representation
 func (s AuthorizeSecurityGroupIngressOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7159,7 +7170,7 @@ type AvailabilityZone struct {
 	RegionName *string `locationName:"regionName" type:"string"`
 
 	// The state of the Availability Zone (available | impaired | unavailable).
-	State *string `locationName:"zoneState" type:"string"`
+	State *string `locationName:"zoneState" type:"string" enum:"AvailabilityZoneState"`
 
 	// The name of the Availability Zone.
 	ZoneName *string `locationName:"zoneName" type:"string"`
@@ -7173,7 +7184,7 @@ type metadataAvailabilityZone struct {
 
 // String returns the string representation
 func (s AvailabilityZone) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7195,7 +7206,7 @@ type metadataAvailabilityZoneMessage struct {
 
 // String returns the string representation
 func (s AvailabilityZoneMessage) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7215,7 +7226,7 @@ type metadataBlobAttributeValue struct {
 
 // String returns the string representation
 func (s BlobAttributeValue) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7230,7 +7241,7 @@ type BlockDeviceMapping struct {
 
 	// Parameters used to automatically set up EBS volumes when the instance is
 	// launched.
-	EBS *EBSBlockDevice `locationName:"ebs" type:"structure"`
+	Ebs *EbsBlockDevice `locationName:"ebs" type:"structure"`
 
 	// Suppresses the specified device included in the block device mapping of the
 	// AMI.
@@ -7257,7 +7268,7 @@ type metadataBlockDeviceMapping struct {
 
 // String returns the string representation
 func (s BlockDeviceMapping) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7279,7 +7290,7 @@ type BundleInstanceInput struct {
 	// Default: None
 	//
 	// Required: Yes
-	InstanceID *string `locationName:"InstanceId" type:"string" required:"true"`
+	InstanceId *string `type:"string" required:"true"`
 
 	// The bucket in which to store the AMI. You can specify a bucket that you already
 	// own or a new bucket that Amazon EC2 creates on your behalf. If you specify
@@ -7295,7 +7306,7 @@ type metadataBundleInstanceInput struct {
 
 // String returns the string representation
 func (s BundleInstanceInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7316,7 +7327,7 @@ type metadataBundleInstanceOutput struct {
 
 // String returns the string representation
 func (s BundleInstanceOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7327,13 +7338,13 @@ func (s BundleInstanceOutput) GoString() string {
 // Describes a bundle task.
 type BundleTask struct {
 	// The ID of the bundle task.
-	BundleID *string `locationName:"bundleId" type:"string"`
+	BundleId *string `locationName:"bundleId" type:"string"`
 
 	// If the task fails, a description of the error.
 	BundleTaskError *BundleTaskError `locationName:"error" type:"structure"`
 
 	// The ID of the instance associated with this bundle task.
-	InstanceID *string `locationName:"instanceId" type:"string"`
+	InstanceId *string `locationName:"instanceId" type:"string"`
 
 	// The level of task completion, as a percent (for example, 20%).
 	Progress *string `locationName:"progress" type:"string"`
@@ -7342,7 +7353,7 @@ type BundleTask struct {
 	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"iso8601"`
 
 	// The state of the task.
-	State *string `locationName:"state" type:"string"`
+	State *string `locationName:"state" type:"string" enum:"BundleTaskState"`
 
 	// The Amazon S3 storage locations.
 	Storage *Storage `locationName:"storage" type:"structure"`
@@ -7359,7 +7370,7 @@ type metadataBundleTask struct {
 
 // String returns the string representation
 func (s BundleTask) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7384,7 +7395,7 @@ type metadataBundleTaskError struct {
 
 // String returns the string representation
 func (s BundleTaskError) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7394,7 +7405,7 @@ func (s BundleTaskError) GoString() string {
 
 type CancelBundleTaskInput struct {
 	// The ID of the bundle task.
-	BundleID *string `locationName:"BundleId" type:"string" required:"true"`
+	BundleId *string `type:"string" required:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -7411,7 +7422,7 @@ type metadataCancelBundleTaskInput struct {
 
 // String returns the string representation
 func (s CancelBundleTaskInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7432,7 +7443,7 @@ type metadataCancelBundleTaskOutput struct {
 
 // String returns the string representation
 func (s CancelBundleTaskOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7442,7 +7453,7 @@ func (s CancelBundleTaskOutput) GoString() string {
 
 type CancelConversionTaskInput struct {
 	// The ID of the conversion task.
-	ConversionTaskID *string `locationName:"conversionTaskId" type:"string" required:"true"`
+	ConversionTaskId *string `locationName:"conversionTaskId" type:"string" required:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -7462,7 +7473,7 @@ type metadataCancelConversionTaskInput struct {
 
 // String returns the string representation
 func (s CancelConversionTaskInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7480,7 +7491,7 @@ type metadataCancelConversionTaskOutput struct {
 
 // String returns the string representation
 func (s CancelConversionTaskOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7490,7 +7501,7 @@ func (s CancelConversionTaskOutput) GoString() string {
 
 type CancelExportTaskInput struct {
 	// The ID of the export task. This is the ID returned by CreateInstanceExportTask.
-	ExportTaskID *string `locationName:"exportTaskId" type:"string" required:"true"`
+	ExportTaskId *string `locationName:"exportTaskId" type:"string" required:"true"`
 
 	metadataCancelExportTaskInput `json:"-" xml:"-"`
 }
@@ -7501,7 +7512,7 @@ type metadataCancelExportTaskInput struct {
 
 // String returns the string representation
 func (s CancelExportTaskInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7519,7 +7530,7 @@ type metadataCancelExportTaskOutput struct {
 
 // String returns the string representation
 func (s CancelExportTaskOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7538,7 +7549,7 @@ type CancelImportTaskInput struct {
 	DryRun *bool `type:"boolean"`
 
 	// The ID of the import image or import snapshot task to be canceled.
-	ImportTaskID *string `locationName:"ImportTaskId" type:"string"`
+	ImportTaskId *string `type:"string"`
 
 	metadataCancelImportTaskInput `json:"-" xml:"-"`
 }
@@ -7549,7 +7560,7 @@ type metadataCancelImportTaskInput struct {
 
 // String returns the string representation
 func (s CancelImportTaskInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7559,7 +7570,7 @@ func (s CancelImportTaskInput) GoString() string {
 
 type CancelImportTaskOutput struct {
 	// The ID of the task being canceled.
-	ImportTaskID *string `locationName:"importTaskId" type:"string"`
+	ImportTaskId *string `locationName:"importTaskId" type:"string"`
 
 	// The current state of the task being canceled.
 	PreviousState *string `locationName:"previousState" type:"string"`
@@ -7576,7 +7587,7 @@ type metadataCancelImportTaskOutput struct {
 
 // String returns the string representation
 func (s CancelImportTaskOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7586,7 +7597,7 @@ func (s CancelImportTaskOutput) GoString() string {
 
 type CancelReservedInstancesListingInput struct {
 	// The ID of the Reserved Instance listing.
-	ReservedInstancesListingID *string `locationName:"reservedInstancesListingId" type:"string" required:"true"`
+	ReservedInstancesListingId *string `locationName:"reservedInstancesListingId" type:"string" required:"true"`
 
 	metadataCancelReservedInstancesListingInput `json:"-" xml:"-"`
 }
@@ -7597,7 +7608,7 @@ type metadataCancelReservedInstancesListingInput struct {
 
 // String returns the string representation
 func (s CancelReservedInstancesListingInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7618,7 +7629,7 @@ type metadataCancelReservedInstancesListingOutput struct {
 
 // String returns the string representation
 func (s CancelReservedInstancesListingOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7629,7 +7640,7 @@ func (s CancelReservedInstancesListingOutput) GoString() string {
 // Describes a Spot fleet error.
 type CancelSpotFleetRequestsError struct {
 	// The error code.
-	Code *string `locationName:"code" type:"string" required:"true"`
+	Code *string `locationName:"code" type:"string" required:"true" enum:"CancelBatchErrorCode"`
 
 	// The description for the error code.
 	Message *string `locationName:"message" type:"string" required:"true"`
@@ -7643,7 +7654,7 @@ type metadataCancelSpotFleetRequestsError struct {
 
 // String returns the string representation
 func (s CancelSpotFleetRequestsError) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7657,7 +7668,7 @@ type CancelSpotFleetRequestsErrorItem struct {
 	Error *CancelSpotFleetRequestsError `locationName:"error" type:"structure" required:"true"`
 
 	// The ID of the Spot fleet request.
-	SpotFleetRequestID *string `locationName:"spotFleetRequestId" type:"string" required:"true"`
+	SpotFleetRequestId *string `locationName:"spotFleetRequestId" type:"string" required:"true"`
 
 	metadataCancelSpotFleetRequestsErrorItem `json:"-" xml:"-"`
 }
@@ -7668,7 +7679,7 @@ type metadataCancelSpotFleetRequestsErrorItem struct {
 
 // String returns the string representation
 func (s CancelSpotFleetRequestsErrorItem) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7685,7 +7696,7 @@ type CancelSpotFleetRequestsInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The IDs of the Spot fleet requests.
-	SpotFleetRequestIDs []*string `locationName:"spotFleetRequestId" locationNameList:"item" type:"list" required:"true"`
+	SpotFleetRequestIds []*string `locationName:"spotFleetRequestId" locationNameList:"item" type:"list" required:"true"`
 
 	// Indicates whether to terminate instances for a Spot fleet request if it is
 	// canceled successfully.
@@ -7700,7 +7711,7 @@ type metadataCancelSpotFleetRequestsInput struct {
 
 // String returns the string representation
 func (s CancelSpotFleetRequestsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7725,7 +7736,7 @@ type metadataCancelSpotFleetRequestsOutput struct {
 
 // String returns the string representation
 func (s CancelSpotFleetRequestsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7736,13 +7747,13 @@ func (s CancelSpotFleetRequestsOutput) GoString() string {
 // Describes a Spot fleet request that was successfully canceled.
 type CancelSpotFleetRequestsSuccessItem struct {
 	// The current state of the Spot fleet request.
-	CurrentSpotFleetRequestState *string `locationName:"currentSpotFleetRequestState" type:"string" required:"true"`
+	CurrentSpotFleetRequestState *string `locationName:"currentSpotFleetRequestState" type:"string" required:"true" enum:"BatchState"`
 
 	// The previous state of the Spot fleet request.
-	PreviousSpotFleetRequestState *string `locationName:"previousSpotFleetRequestState" type:"string" required:"true"`
+	PreviousSpotFleetRequestState *string `locationName:"previousSpotFleetRequestState" type:"string" required:"true" enum:"BatchState"`
 
 	// The ID of the Spot fleet request.
-	SpotFleetRequestID *string `locationName:"spotFleetRequestId" type:"string" required:"true"`
+	SpotFleetRequestId *string `locationName:"spotFleetRequestId" type:"string" required:"true"`
 
 	metadataCancelSpotFleetRequestsSuccessItem `json:"-" xml:"-"`
 }
@@ -7753,7 +7764,7 @@ type metadataCancelSpotFleetRequestsSuccessItem struct {
 
 // String returns the string representation
 func (s CancelSpotFleetRequestsSuccessItem) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7770,7 +7781,7 @@ type CancelSpotInstanceRequestsInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// One or more Spot Instance request IDs.
-	SpotInstanceRequestIDs []*string `locationName:"SpotInstanceRequestId" locationNameList:"SpotInstanceRequestId" type:"list" required:"true"`
+	SpotInstanceRequestIds []*string `locationName:"SpotInstanceRequestId" locationNameList:"SpotInstanceRequestId" type:"list" required:"true"`
 
 	metadataCancelSpotInstanceRequestsInput `json:"-" xml:"-"`
 }
@@ -7781,7 +7792,7 @@ type metadataCancelSpotInstanceRequestsInput struct {
 
 // String returns the string representation
 func (s CancelSpotInstanceRequestsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7803,7 +7814,7 @@ type metadataCancelSpotInstanceRequestsOutput struct {
 
 // String returns the string representation
 func (s CancelSpotInstanceRequestsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7814,10 +7825,10 @@ func (s CancelSpotInstanceRequestsOutput) GoString() string {
 // Describes a request to cancel a Spot Instance.
 type CancelledSpotInstanceRequest struct {
 	// The ID of the Spot Instance request.
-	SpotInstanceRequestID *string `locationName:"spotInstanceRequestId" type:"string"`
+	SpotInstanceRequestId *string `locationName:"spotInstanceRequestId" type:"string"`
 
 	// The state of the Spot Instance request.
-	State *string `locationName:"state" type:"string"`
+	State *string `locationName:"state" type:"string" enum:"CancelSpotInstanceRequestState"`
 
 	metadataCancelledSpotInstanceRequest `json:"-" xml:"-"`
 }
@@ -7828,7 +7839,7 @@ type metadataCancelledSpotInstanceRequest struct {
 
 // String returns the string representation
 func (s CancelledSpotInstanceRequest) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7842,13 +7853,13 @@ type ClassicLinkInstance struct {
 	Groups []*GroupIdentifier `locationName:"groupSet" locationNameList:"item" type:"list"`
 
 	// The ID of the instance.
-	InstanceID *string `locationName:"instanceId" type:"string"`
+	InstanceId *string `locationName:"instanceId" type:"string"`
 
 	// Any tags assigned to the instance.
 	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The ID of the VPC.
-	VPCID *string `locationName:"vpcId" type:"string"`
+	VpcId *string `locationName:"vpcId" type:"string"`
 
 	metadataClassicLinkInstance `json:"-" xml:"-"`
 }
@@ -7859,7 +7870,7 @@ type metadataClassicLinkInstance struct {
 
 // String returns the string representation
 func (s ClassicLinkInstance) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7890,7 +7901,7 @@ type metadataClientData struct {
 
 // String returns the string representation
 func (s ClientData) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7906,7 +7917,7 @@ type ConfirmProductInstanceInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the instance.
-	InstanceID *string `locationName:"InstanceId" type:"string" required:"true"`
+	InstanceId *string `type:"string" required:"true"`
 
 	// The product code. This must be a product code that you own.
 	ProductCode *string `type:"string" required:"true"`
@@ -7920,7 +7931,7 @@ type metadataConfirmProductInstanceInput struct {
 
 // String returns the string representation
 func (s ConfirmProductInstanceInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7931,7 +7942,7 @@ func (s ConfirmProductInstanceInput) GoString() string {
 type ConfirmProductInstanceOutput struct {
 	// The AWS account ID of the instance owner. This is only present if the product
 	// code is attached to the instance.
-	OwnerID *string `locationName:"ownerId" type:"string"`
+	OwnerId *string `locationName:"ownerId" type:"string"`
 
 	// The return value of the request. Returns true if the specified product code
 	// is owned by the requester and associated with the specified instance.
@@ -7946,7 +7957,7 @@ type metadataConfirmProductInstanceOutput struct {
 
 // String returns the string representation
 func (s ConfirmProductInstanceOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -7957,7 +7968,7 @@ func (s ConfirmProductInstanceOutput) GoString() string {
 // Describes a conversion task.
 type ConversionTask struct {
 	// The ID of the conversion task.
-	ConversionTaskID *string `locationName:"conversionTaskId" type:"string" required:"true"`
+	ConversionTaskId *string `locationName:"conversionTaskId" type:"string" required:"true"`
 
 	// The time when the task expires. If the upload isn't complete before the expiration
 	// time, we automatically cancel the task.
@@ -7972,7 +7983,7 @@ type ConversionTask struct {
 	ImportVolume *ImportVolumeTaskDetails `locationName:"importVolume" type:"structure"`
 
 	// The state of the conversion task.
-	State *string `locationName:"state" type:"string" required:"true"`
+	State *string `locationName:"state" type:"string" required:"true" enum:"ConversionTaskState"`
 
 	// The status message related to the conversion task.
 	StatusMessage *string `locationName:"statusMessage" type:"string"`
@@ -7989,7 +8000,7 @@ type metadataConversionTask struct {
 
 // String returns the string representation
 func (s ConversionTask) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -8016,7 +8027,7 @@ type CopyImageInput struct {
 	Name *string `type:"string" required:"true"`
 
 	// The ID of the AMI to copy.
-	SourceImageID *string `locationName:"SourceImageId" type:"string" required:"true"`
+	SourceImageId *string `type:"string" required:"true"`
 
 	// The name of the region that contains the AMI to copy.
 	SourceRegion *string `type:"string" required:"true"`
@@ -8030,7 +8041,7 @@ type metadataCopyImageInput struct {
 
 // String returns the string representation
 func (s CopyImageInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -8040,7 +8051,7 @@ func (s CopyImageInput) GoString() string {
 
 type CopyImageOutput struct {
 	// The ID of the new AMI.
-	ImageID *string `locationName:"imageId" type:"string"`
+	ImageId *string `locationName:"imageId" type:"string"`
 
 	metadataCopyImageOutput `json:"-" xml:"-"`
 }
@@ -8051,7 +8062,7 @@ type metadataCopyImageOutput struct {
 
 // String returns the string representation
 func (s CopyImageOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -8083,20 +8094,20 @@ type CopySnapshotInput struct {
 	// no way to create an unencrypted snapshot copy from an encrypted snapshot;
 	// however, you can encrypt a copy of an unencrypted snapshot with this flag.
 	// The default CMK for EBS is used unless a non-default AWS Key Management Service
-	// (KMS) CMK is specified with KmsKeyId. For more information, see Amazon EBS
-	// Encryption (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html)
+	// (AWS KMS) CMK is specified with KmsKeyId. For more information, see Amazon
+	// EBS Encryption (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	Encrypted *bool `locationName:"encrypted" type:"boolean"`
 
-	// The full ARN of the AWS Key Management Service (KMS) CMK to use when creating
-	// the snapshot copy. This parameter is only required if you want to use a non-default
-	// CMK; if this parameter is not specified, the default CMK for EBS is used.
-	// The ARN contains the arn:aws:kms namespace, followed by the region of the
-	// CMK, the AWS account ID of the CMK owner, the key namespace, and then the
-	// CMK ID. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.
+	// The full ARN of the AWS Key Management Service (AWS KMS) CMK to use when
+	// creating the snapshot copy. This parameter is only required if you want to
+	// use a non-default CMK; if this parameter is not specified, the default CMK
+	// for EBS is used. The ARN contains the arn:aws:kms namespace, followed by
+	// the region of the CMK, the AWS account ID of the CMK owner, the key namespace,
+	// and then the CMK ID. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.
 	// The specified CMK must exist in the region that the snapshot is being copied
 	// to. If a KmsKeyId is specified, the Encrypted flag must also be set.
-	KMSKeyID *string `locationName:"kmsKeyId" type:"string"`
+	KmsKeyId *string `locationName:"kmsKeyId" type:"string"`
 
 	// The pre-signed URL that facilitates copying an encrypted snapshot. This parameter
 	// is only required when copying an encrypted snapshot with the Amazon EC2 Query
@@ -8110,13 +8121,13 @@ type CopySnapshotInput struct {
 	// in the Amazon Simple Storage Service API Reference. An invalid or improperly
 	// signed PresignedUrl will cause the copy operation to fail asynchronously,
 	// and the snapshot will move to an error state.
-	PresignedURL *string `locationName:"presignedUrl" type:"string"`
+	PresignedUrl *string `locationName:"presignedUrl" type:"string"`
 
 	// The ID of the region that contains the snapshot to be copied.
 	SourceRegion *string `type:"string" required:"true"`
 
 	// The ID of the EBS snapshot to copy.
-	SourceSnapshotID *string `locationName:"SourceSnapshotId" type:"string" required:"true"`
+	SourceSnapshotId *string `type:"string" required:"true"`
 
 	metadataCopySnapshotInput `json:"-" xml:"-"`
 }
@@ -8127,7 +8138,7 @@ type metadataCopySnapshotInput struct {
 
 // String returns the string representation
 func (s CopySnapshotInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -8137,7 +8148,7 @@ func (s CopySnapshotInput) GoString() string {
 
 type CopySnapshotOutput struct {
 	// The ID of the new snapshot.
-	SnapshotID *string `locationName:"snapshotId" type:"string"`
+	SnapshotId *string `locationName:"snapshotId" type:"string"`
 
 	metadataCopySnapshotOutput `json:"-" xml:"-"`
 }
@@ -8148,7 +8159,7 @@ type metadataCopySnapshotOutput struct {
 
 // String returns the string representation
 func (s CopySnapshotOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -8160,7 +8171,7 @@ type CreateCustomerGatewayInput struct {
 	// For devices that support BGP, the customer gateway's BGP ASN.
 	//
 	// Default: 65000
-	BGPASN *int64 `locationName:"BgpAsn" type:"integer" required:"true"`
+	BgpAsn *int64 `type:"integer" required:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -8170,10 +8181,10 @@ type CreateCustomerGatewayInput struct {
 
 	// The Internet-routable IP address for the customer gateway's outside interface.
 	// The address must be static.
-	PublicIP *string `locationName:"IpAddress" type:"string" required:"true"`
+	PublicIp *string `locationName:"IpAddress" type:"string" required:"true"`
 
 	// The type of VPN connection that this customer gateway supports (ipsec.1).
-	Type *string `type:"string" required:"true"`
+	Type *string `type:"string" required:"true" enum:"GatewayType"`
 
 	metadataCreateCustomerGatewayInput `json:"-" xml:"-"`
 }
@@ -8184,7 +8195,7 @@ type metadataCreateCustomerGatewayInput struct {
 
 // String returns the string representation
 func (s CreateCustomerGatewayInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -8205,7 +8216,7 @@ type metadataCreateCustomerGatewayOutput struct {
 
 // String returns the string representation
 func (s CreateCustomerGatewayOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -8213,9 +8224,9 @@ func (s CreateCustomerGatewayOutput) GoString() string {
 	return s.String()
 }
 
-type CreateDHCPOptionsInput struct {
+type CreateDhcpOptionsInput struct {
 	// A DHCP configuration option.
-	DHCPConfigurations []*NewDHCPConfiguration `locationName:"dhcpConfiguration" locationNameList:"item" type:"list" required:"true"`
+	DhcpConfigurations []*NewDhcpConfiguration `locationName:"dhcpConfiguration" locationNameList:"item" type:"list" required:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -8223,41 +8234,41 @@ type CreateDHCPOptionsInput struct {
 	// it is UnauthorizedOperation.
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
-	metadataCreateDHCPOptionsInput `json:"-" xml:"-"`
+	metadataCreateDhcpOptionsInput `json:"-" xml:"-"`
 }
 
-type metadataCreateDHCPOptionsInput struct {
+type metadataCreateDhcpOptionsInput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s CreateDHCPOptionsInput) String() string {
-	return awsutil.StringValue(s)
+func (s CreateDhcpOptionsInput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s CreateDHCPOptionsInput) GoString() string {
+func (s CreateDhcpOptionsInput) GoString() string {
 	return s.String()
 }
 
-type CreateDHCPOptionsOutput struct {
+type CreateDhcpOptionsOutput struct {
 	// A set of DHCP options.
-	DHCPOptions *DHCPOptions `locationName:"dhcpOptions" type:"structure"`
+	DhcpOptions *DhcpOptions `locationName:"dhcpOptions" type:"structure"`
 
-	metadataCreateDHCPOptionsOutput `json:"-" xml:"-"`
+	metadataCreateDhcpOptionsOutput `json:"-" xml:"-"`
 }
 
-type metadataCreateDHCPOptionsOutput struct {
+type metadataCreateDhcpOptionsOutput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s CreateDHCPOptionsOutput) String() string {
-	return awsutil.StringValue(s)
+func (s CreateDhcpOptionsOutput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s CreateDHCPOptionsOutput) GoString() string {
+func (s CreateDhcpOptionsOutput) GoString() string {
 	return s.String()
 }
 
@@ -8268,19 +8279,19 @@ type CreateFlowLogsInput struct {
 
 	// The ARN for the IAM role that's used to post flow logs to a CloudWatch Logs
 	// log group.
-	DeliverLogsPermissionARN *string `locationName:"DeliverLogsPermissionArn" type:"string" required:"true"`
+	DeliverLogsPermissionArn *string `type:"string" required:"true"`
 
 	// The name of the CloudWatch log group.
 	LogGroupName *string `type:"string" required:"true"`
 
 	// One or more subnet, network interface, or VPC IDs.
-	ResourceIDs []*string `locationName:"ResourceId" locationNameList:"item" type:"list" required:"true"`
+	ResourceIds []*string `locationName:"ResourceId" locationNameList:"item" type:"list" required:"true"`
 
 	// The type of resource on which to create the flow log.
-	ResourceType *string `type:"string" required:"true"`
+	ResourceType *string `type:"string" required:"true" enum:"FlowLogsResourceType"`
 
 	// The type of traffic to log.
-	TrafficType *string `type:"string" required:"true"`
+	TrafficType *string `type:"string" required:"true" enum:"TrafficType"`
 
 	metadataCreateFlowLogsInput `json:"-" xml:"-"`
 }
@@ -8291,7 +8302,7 @@ type metadataCreateFlowLogsInput struct {
 
 // String returns the string representation
 func (s CreateFlowLogsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -8305,7 +8316,7 @@ type CreateFlowLogsOutput struct {
 	ClientToken *string `locationName:"clientToken" type:"string"`
 
 	// The IDs of the flow logs.
-	FlowLogIDs []*string `locationName:"flowLogIdSet" locationNameList:"item" type:"list"`
+	FlowLogIds []*string `locationName:"flowLogIdSet" locationNameList:"item" type:"list"`
 
 	// Information about the flow logs that could not be created successfully.
 	Unsuccessful []*UnsuccessfulItem `locationName:"unsuccessful" locationNameList:"item" type:"list"`
@@ -8319,7 +8330,7 @@ type metadataCreateFlowLogsOutput struct {
 
 // String returns the string representation
 func (s CreateFlowLogsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -8341,7 +8352,7 @@ type CreateImageInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the instance.
-	InstanceID *string `locationName:"instanceId" type:"string" required:"true"`
+	InstanceId *string `locationName:"instanceId" type:"string" required:"true"`
 
 	// A name for the new image.
 	//
@@ -8366,7 +8377,7 @@ type metadataCreateImageInput struct {
 
 // String returns the string representation
 func (s CreateImageInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -8376,7 +8387,7 @@ func (s CreateImageInput) GoString() string {
 
 type CreateImageOutput struct {
 	// The ID of the new AMI.
-	ImageID *string `locationName:"imageId" type:"string"`
+	ImageId *string `locationName:"imageId" type:"string"`
 
 	metadataCreateImageOutput `json:"-" xml:"-"`
 }
@@ -8387,7 +8398,7 @@ type metadataCreateImageOutput struct {
 
 // String returns the string representation
 func (s CreateImageOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -8404,10 +8415,10 @@ type CreateInstanceExportTaskInput struct {
 	ExportToS3Task *ExportToS3TaskSpecification `locationName:"exportToS3" type:"structure"`
 
 	// The ID of the instance.
-	InstanceID *string `locationName:"instanceId" type:"string" required:"true"`
+	InstanceId *string `locationName:"instanceId" type:"string" required:"true"`
 
 	// The target virtualization environment.
-	TargetEnvironment *string `locationName:"targetEnvironment" type:"string"`
+	TargetEnvironment *string `locationName:"targetEnvironment" type:"string" enum:"ExportEnvironment"`
 
 	metadataCreateInstanceExportTaskInput `json:"-" xml:"-"`
 }
@@ -8418,7 +8429,7 @@ type metadataCreateInstanceExportTaskInput struct {
 
 // String returns the string representation
 func (s CreateInstanceExportTaskInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -8439,7 +8450,7 @@ type metadataCreateInstanceExportTaskOutput struct {
 
 // String returns the string representation
 func (s CreateInstanceExportTaskOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -8463,7 +8474,7 @@ type metadataCreateInternetGatewayInput struct {
 
 // String returns the string representation
 func (s CreateInternetGatewayInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -8484,7 +8495,7 @@ type metadataCreateInternetGatewayOutput struct {
 
 // String returns the string representation
 func (s CreateInternetGatewayOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -8513,7 +8524,7 @@ type metadataCreateKeyPairInput struct {
 
 // String returns the string representation
 func (s CreateKeyPairInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -8541,7 +8552,7 @@ type metadataCreateKeyPairOutput struct {
 
 // String returns the string representation
 func (s CreateKeyPairOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -8549,9 +8560,9 @@ func (s CreateKeyPairOutput) GoString() string {
 	return s.String()
 }
 
-type CreateNetworkACLEntryInput struct {
+type CreateNetworkAclEntryInput struct {
 	// The network range to allow or deny, in CIDR notation (for example 172.16.0.0/24).
-	CIDRBlock *string `locationName:"cidrBlock" type:"string" required:"true"`
+	CidrBlock *string `locationName:"cidrBlock" type:"string" required:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -8565,10 +8576,10 @@ type CreateNetworkACLEntryInput struct {
 
 	// ICMP protocol: The ICMP type and code. Required if specifying ICMP for the
 	// protocol.
-	ICMPTypeCode *ICMPTypeCode `locationName:"Icmp" type:"structure"`
+	IcmpTypeCode *IcmpTypeCode `locationName:"Icmp" type:"structure"`
 
 	// The ID of the network ACL.
-	NetworkACLID *string `locationName:"networkAclId" type:"string" required:"true"`
+	NetworkAclId *string `locationName:"networkAclId" type:"string" required:"true"`
 
 	// TCP or UDP protocols: The range of ports the rule applies to.
 	PortRange *PortRange `locationName:"portRange" type:"structure"`
@@ -8577,7 +8588,7 @@ type CreateNetworkACLEntryInput struct {
 	Protocol *string `locationName:"protocol" type:"string" required:"true"`
 
 	// Indicates whether to allow or deny the traffic that matches the rule.
-	RuleAction *string `locationName:"ruleAction" type:"string" required:"true"`
+	RuleAction *string `locationName:"ruleAction" type:"string" required:"true" enum:"RuleAction"`
 
 	// The rule number for the entry (for example, 100). ACL entries are processed
 	// in ascending order by rule number.
@@ -8585,42 +8596,42 @@ type CreateNetworkACLEntryInput struct {
 	// Constraints: Positive integer from 1 to 32766
 	RuleNumber *int64 `locationName:"ruleNumber" type:"integer" required:"true"`
 
-	metadataCreateNetworkACLEntryInput `json:"-" xml:"-"`
+	metadataCreateNetworkAclEntryInput `json:"-" xml:"-"`
 }
 
-type metadataCreateNetworkACLEntryInput struct {
+type metadataCreateNetworkAclEntryInput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s CreateNetworkACLEntryInput) String() string {
-	return awsutil.StringValue(s)
+func (s CreateNetworkAclEntryInput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s CreateNetworkACLEntryInput) GoString() string {
+func (s CreateNetworkAclEntryInput) GoString() string {
 	return s.String()
 }
 
-type CreateNetworkACLEntryOutput struct {
-	metadataCreateNetworkACLEntryOutput `json:"-" xml:"-"`
+type CreateNetworkAclEntryOutput struct {
+	metadataCreateNetworkAclEntryOutput `json:"-" xml:"-"`
 }
 
-type metadataCreateNetworkACLEntryOutput struct {
+type metadataCreateNetworkAclEntryOutput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s CreateNetworkACLEntryOutput) String() string {
-	return awsutil.StringValue(s)
+func (s CreateNetworkAclEntryOutput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s CreateNetworkACLEntryOutput) GoString() string {
+func (s CreateNetworkAclEntryOutput) GoString() string {
 	return s.String()
 }
 
-type CreateNetworkACLInput struct {
+type CreateNetworkAclInput struct {
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
 	// the required permissions, the error response is DryRunOperation. Otherwise,
@@ -8628,43 +8639,43 @@ type CreateNetworkACLInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the VPC.
-	VPCID *string `locationName:"vpcId" type:"string" required:"true"`
+	VpcId *string `locationName:"vpcId" type:"string" required:"true"`
 
-	metadataCreateNetworkACLInput `json:"-" xml:"-"`
+	metadataCreateNetworkAclInput `json:"-" xml:"-"`
 }
 
-type metadataCreateNetworkACLInput struct {
+type metadataCreateNetworkAclInput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s CreateNetworkACLInput) String() string {
-	return awsutil.StringValue(s)
+func (s CreateNetworkAclInput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s CreateNetworkACLInput) GoString() string {
+func (s CreateNetworkAclInput) GoString() string {
 	return s.String()
 }
 
-type CreateNetworkACLOutput struct {
+type CreateNetworkAclOutput struct {
 	// Information about the network ACL.
-	NetworkACL *NetworkACL `locationName:"networkAcl" type:"structure"`
+	NetworkAcl *NetworkAcl `locationName:"networkAcl" type:"structure"`
 
-	metadataCreateNetworkACLOutput `json:"-" xml:"-"`
+	metadataCreateNetworkAclOutput `json:"-" xml:"-"`
 }
 
-type metadataCreateNetworkACLOutput struct {
+type metadataCreateNetworkAclOutput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s CreateNetworkACLOutput) String() string {
-	return awsutil.StringValue(s)
+func (s CreateNetworkAclOutput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s CreateNetworkACLOutput) GoString() string {
+func (s CreateNetworkAclOutput) GoString() string {
 	return s.String()
 }
 
@@ -8685,10 +8696,10 @@ type CreateNetworkInterfaceInput struct {
 	// an IP address, Amazon EC2 selects one for you from the subnet range. If you
 	// specify an IP address, you cannot indicate any IP addresses specified in
 	// privateIpAddresses as primary (only one IP address can be designated as primary).
-	PrivateIPAddress *string `locationName:"privateIpAddress" type:"string"`
+	PrivateIpAddress *string `locationName:"privateIpAddress" type:"string"`
 
 	// One or more private IP addresses.
-	PrivateIPAddresses []*PrivateIPAddressSpecification `locationName:"privateIpAddresses" locationNameList:"item" type:"list"`
+	PrivateIpAddresses []*PrivateIpAddressSpecification `locationName:"privateIpAddresses" locationNameList:"item" type:"list"`
 
 	// The number of secondary private IP addresses to assign to a network interface.
 	// When you specify a number of secondary IP addresses, Amazon EC2 selects these
@@ -8699,10 +8710,10 @@ type CreateNetworkInterfaceInput struct {
 	// by instance type. For more information, see Private IP Addresses Per ENI
 	// Per Instance Type (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI)
 	// in the Amazon Elastic Compute Cloud User Guide.
-	SecondaryPrivateIPAddressCount *int64 `locationName:"secondaryPrivateIpAddressCount" type:"integer"`
+	SecondaryPrivateIpAddressCount *int64 `locationName:"secondaryPrivateIpAddressCount" type:"integer"`
 
 	// The ID of the subnet to associate with the network interface.
-	SubnetID *string `locationName:"subnetId" type:"string" required:"true"`
+	SubnetId *string `locationName:"subnetId" type:"string" required:"true"`
 
 	metadataCreateNetworkInterfaceInput `json:"-" xml:"-"`
 }
@@ -8713,7 +8724,7 @@ type metadataCreateNetworkInterfaceInput struct {
 
 // String returns the string representation
 func (s CreateNetworkInterfaceInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -8734,7 +8745,7 @@ type metadataCreateNetworkInterfaceOutput struct {
 
 // String returns the string representation
 func (s CreateNetworkInterfaceOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -8755,7 +8766,7 @@ type CreatePlacementGroupInput struct {
 	GroupName *string `locationName:"groupName" type:"string" required:"true"`
 
 	// The placement strategy.
-	Strategy *string `locationName:"strategy" type:"string" required:"true"`
+	Strategy *string `locationName:"strategy" type:"string" required:"true" enum:"PlacementStrategy"`
 
 	metadataCreatePlacementGroupInput `json:"-" xml:"-"`
 }
@@ -8766,7 +8777,7 @@ type metadataCreatePlacementGroupInput struct {
 
 // String returns the string representation
 func (s CreatePlacementGroupInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -8784,7 +8795,7 @@ type metadataCreatePlacementGroupOutput struct {
 
 // String returns the string representation
 func (s CreatePlacementGroupOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -8809,7 +8820,7 @@ type CreateReservedInstancesListingInput struct {
 	PriceSchedules []*PriceScheduleSpecification `locationName:"priceSchedules" locationNameList:"item" type:"list" required:"true"`
 
 	// The ID of the active Reserved Instance.
-	ReservedInstancesID *string `locationName:"reservedInstancesId" type:"string" required:"true"`
+	ReservedInstancesId *string `locationName:"reservedInstancesId" type:"string" required:"true"`
 
 	metadataCreateReservedInstancesListingInput `json:"-" xml:"-"`
 }
@@ -8820,7 +8831,7 @@ type metadataCreateReservedInstancesListingInput struct {
 
 // String returns the string representation
 func (s CreateReservedInstancesListingInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -8841,7 +8852,7 @@ type metadataCreateReservedInstancesListingOutput struct {
 
 // String returns the string representation
 func (s CreateReservedInstancesListingOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -8850,13 +8861,9 @@ func (s CreateReservedInstancesListingOutput) GoString() string {
 }
 
 type CreateRouteInput struct {
-	// Unique, case-sensitive identifier you provide to ensure the idempotency of
-	// the request. For more information, see How to Ensure Idempotency (http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-	ClientToken *string `locationName:"clientToken" type:"string"`
-
 	// The CIDR address block used for the destination match. Routing decisions
 	// are based on the most specific match.
-	DestinationCIDRBlock *string `locationName:"destinationCidrBlock" type:"string" required:"true"`
+	DestinationCidrBlock *string `locationName:"destinationCidrBlock" type:"string" required:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -8866,20 +8873,20 @@ type CreateRouteInput struct {
 
 	// The ID of an Internet gateway or virtual private gateway attached to your
 	// VPC.
-	GatewayID *string `locationName:"gatewayId" type:"string"`
+	GatewayId *string `locationName:"gatewayId" type:"string"`
 
 	// The ID of a NAT instance in your VPC. The operation fails if you specify
 	// an instance ID unless exactly one network interface is attached.
-	InstanceID *string `locationName:"instanceId" type:"string"`
+	InstanceId *string `locationName:"instanceId" type:"string"`
 
 	// The ID of a network interface.
-	NetworkInterfaceID *string `locationName:"networkInterfaceId" type:"string"`
+	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string"`
 
 	// The ID of the route table for the route.
-	RouteTableID *string `locationName:"routeTableId" type:"string" required:"true"`
+	RouteTableId *string `locationName:"routeTableId" type:"string" required:"true"`
 
 	// The ID of a VPC peering connection.
-	VPCPeeringConnectionID *string `locationName:"vpcPeeringConnectionId" type:"string"`
+	VpcPeeringConnectionId *string `locationName:"vpcPeeringConnectionId" type:"string"`
 
 	metadataCreateRouteInput `json:"-" xml:"-"`
 }
@@ -8890,7 +8897,7 @@ type metadataCreateRouteInput struct {
 
 // String returns the string representation
 func (s CreateRouteInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -8899,10 +8906,6 @@ func (s CreateRouteInput) GoString() string {
 }
 
 type CreateRouteOutput struct {
-	// Unique, case-sensitive identifier you provide to ensure the idempotency of
-	// the request.
-	ClientToken *string `locationName:"clientToken" type:"string"`
-
 	// Returns true if the request succeeds; otherwise, it returns an error.
 	Return *bool `locationName:"return" type:"boolean"`
 
@@ -8915,7 +8918,7 @@ type metadataCreateRouteOutput struct {
 
 // String returns the string representation
 func (s CreateRouteOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -8931,7 +8934,7 @@ type CreateRouteTableInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the VPC.
-	VPCID *string `locationName:"vpcId" type:"string" required:"true"`
+	VpcId *string `locationName:"vpcId" type:"string" required:"true"`
 
 	metadataCreateRouteTableInput `json:"-" xml:"-"`
 }
@@ -8942,7 +8945,7 @@ type metadataCreateRouteTableInput struct {
 
 // String returns the string representation
 func (s CreateRouteTableInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -8963,7 +8966,7 @@ type metadataCreateRouteTableOutput struct {
 
 // String returns the string representation
 func (s CreateRouteTableOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -8997,7 +9000,7 @@ type CreateSecurityGroupInput struct {
 	GroupName *string `type:"string" required:"true"`
 
 	// [EC2-VPC] The ID of the VPC. Required for EC2-VPC.
-	VPCID *string `locationName:"VpcId" type:"string"`
+	VpcId *string `type:"string"`
 
 	metadataCreateSecurityGroupInput `json:"-" xml:"-"`
 }
@@ -9008,7 +9011,7 @@ type metadataCreateSecurityGroupInput struct {
 
 // String returns the string representation
 func (s CreateSecurityGroupInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -9018,7 +9021,7 @@ func (s CreateSecurityGroupInput) GoString() string {
 
 type CreateSecurityGroupOutput struct {
 	// The ID of the security group.
-	GroupID *string `locationName:"groupId" type:"string"`
+	GroupId *string `locationName:"groupId" type:"string"`
 
 	metadataCreateSecurityGroupOutput `json:"-" xml:"-"`
 }
@@ -9029,7 +9032,7 @@ type metadataCreateSecurityGroupOutput struct {
 
 // String returns the string representation
 func (s CreateSecurityGroupOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -9048,7 +9051,7 @@ type CreateSnapshotInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the EBS volume.
-	VolumeID *string `locationName:"VolumeId" type:"string" required:"true"`
+	VolumeId *string `type:"string" required:"true"`
 
 	metadataCreateSnapshotInput `json:"-" xml:"-"`
 }
@@ -9059,7 +9062,7 @@ type metadataCreateSnapshotInput struct {
 
 // String returns the string representation
 func (s CreateSnapshotInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -9090,7 +9093,7 @@ type metadataCreateSpotDatafeedSubscriptionInput struct {
 
 // String returns the string representation
 func (s CreateSpotDatafeedSubscriptionInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -9112,7 +9115,7 @@ type metadataCreateSpotDatafeedSubscriptionOutput struct {
 
 // String returns the string representation
 func (s CreateSpotDatafeedSubscriptionOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -9127,7 +9130,7 @@ type CreateSubnetInput struct {
 	AvailabilityZone *string `type:"string"`
 
 	// The network range for the subnet, in CIDR notation. For example, 10.0.0.0/24.
-	CIDRBlock *string `locationName:"CidrBlock" type:"string" required:"true"`
+	CidrBlock *string `type:"string" required:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -9136,7 +9139,7 @@ type CreateSubnetInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the VPC.
-	VPCID *string `locationName:"VpcId" type:"string" required:"true"`
+	VpcId *string `type:"string" required:"true"`
 
 	metadataCreateSubnetInput `json:"-" xml:"-"`
 }
@@ -9147,7 +9150,7 @@ type metadataCreateSubnetInput struct {
 
 // String returns the string representation
 func (s CreateSubnetInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -9168,7 +9171,7 @@ type metadataCreateSubnetOutput struct {
 
 // String returns the string representation
 func (s CreateSubnetOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -9200,7 +9203,7 @@ type metadataCreateTagsInput struct {
 
 // String returns the string representation
 func (s CreateTagsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -9218,346 +9221,11 @@ type metadataCreateTagsOutput struct {
 
 // String returns the string representation
 func (s CreateTagsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
 func (s CreateTagsOutput) GoString() string {
-	return s.String()
-}
-
-type CreateVPCEndpointInput struct {
-	// Unique, case-sensitive identifier you provide to ensure the idempotency of
-	// the request. For more information, see How to Ensure Idempotency (http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-	ClientToken *string `type:"string"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// A policy to attach to the endpoint that controls access to the service. The
-	// policy must be in valid JSON format. If this parameter is not specified,
-	// we attach a default policy that allows full access to the service.
-	PolicyDocument *string `type:"string"`
-
-	// One or more route table IDs.
-	RouteTableIDs []*string `locationName:"RouteTableId" locationNameList:"item" type:"list"`
-
-	// The AWS service name, in the form com.amazonaws.<region>.<service>. To get
-	// a list of available services, use the DescribeVpcEndpointServices request.
-	ServiceName *string `type:"string" required:"true"`
-
-	// The ID of the VPC in which the endpoint will be used.
-	VPCID *string `locationName:"VpcId" type:"string" required:"true"`
-
-	metadataCreateVPCEndpointInput `json:"-" xml:"-"`
-}
-
-type metadataCreateVPCEndpointInput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateVPCEndpointInput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s CreateVPCEndpointInput) GoString() string {
-	return s.String()
-}
-
-type CreateVPCEndpointOutput struct {
-	// Unique, case-sensitive identifier you provide to ensure the idempotency of
-	// the request.
-	ClientToken *string `locationName:"clientToken" type:"string"`
-
-	// Information about the endpoint.
-	VPCEndpoint *VPCEndpoint `locationName:"vpcEndpoint" type:"structure"`
-
-	metadataCreateVPCEndpointOutput `json:"-" xml:"-"`
-}
-
-type metadataCreateVPCEndpointOutput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateVPCEndpointOutput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s CreateVPCEndpointOutput) GoString() string {
-	return s.String()
-}
-
-type CreateVPCInput struct {
-	// The network range for the VPC, in CIDR notation. For example, 10.0.0.0/16.
-	CIDRBlock *string `locationName:"CidrBlock" type:"string" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The supported tenancy options for instances launched into the VPC. A value
-	// of default means that instances can be launched with any tenancy; a value
-	// of dedicated means all instances launched into the VPC are launched as dedicated
-	// tenancy instances regardless of the tenancy assigned to the instance at launch.
-	// Dedicated tenancy instances run on single-tenant hardware.
-	//
-	// Default: default
-	InstanceTenancy *string `locationName:"instanceTenancy" type:"string"`
-
-	metadataCreateVPCInput `json:"-" xml:"-"`
-}
-
-type metadataCreateVPCInput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateVPCInput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s CreateVPCInput) GoString() string {
-	return s.String()
-}
-
-type CreateVPCOutput struct {
-	// Information about the VPC.
-	VPC *VPC `locationName:"vpc" type:"structure"`
-
-	metadataCreateVPCOutput `json:"-" xml:"-"`
-}
-
-type metadataCreateVPCOutput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateVPCOutput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s CreateVPCOutput) GoString() string {
-	return s.String()
-}
-
-type CreateVPCPeeringConnectionInput struct {
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The AWS account ID of the owner of the peer VPC.
-	//
-	// Default: Your AWS account ID
-	PeerOwnerID *string `locationName:"peerOwnerId" type:"string"`
-
-	// The ID of the VPC with which you are creating the VPC peering connection.
-	PeerVPCID *string `locationName:"peerVpcId" type:"string"`
-
-	// The ID of the requester VPC.
-	VPCID *string `locationName:"vpcId" type:"string"`
-
-	metadataCreateVPCPeeringConnectionInput `json:"-" xml:"-"`
-}
-
-type metadataCreateVPCPeeringConnectionInput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateVPCPeeringConnectionInput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s CreateVPCPeeringConnectionInput) GoString() string {
-	return s.String()
-}
-
-type CreateVPCPeeringConnectionOutput struct {
-	// Information about the VPC peering connection.
-	VPCPeeringConnection *VPCPeeringConnection `locationName:"vpcPeeringConnection" type:"structure"`
-
-	metadataCreateVPCPeeringConnectionOutput `json:"-" xml:"-"`
-}
-
-type metadataCreateVPCPeeringConnectionOutput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateVPCPeeringConnectionOutput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s CreateVPCPeeringConnectionOutput) GoString() string {
-	return s.String()
-}
-
-type CreateVPNConnectionInput struct {
-	// The ID of the customer gateway.
-	CustomerGatewayID *string `locationName:"CustomerGatewayId" type:"string" required:"true"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// Indicates whether the VPN connection requires static routes. If you are creating
-	// a VPN connection for a device that does not support BGP, you must specify
-	// true.
-	//
-	// Default: false
-	Options *VPNConnectionOptionsSpecification `locationName:"options" type:"structure"`
-
-	// The type of VPN connection (ipsec.1).
-	Type *string `type:"string" required:"true"`
-
-	// The ID of the virtual private gateway.
-	VPNGatewayID *string `locationName:"VpnGatewayId" type:"string" required:"true"`
-
-	metadataCreateVPNConnectionInput `json:"-" xml:"-"`
-}
-
-type metadataCreateVPNConnectionInput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateVPNConnectionInput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s CreateVPNConnectionInput) GoString() string {
-	return s.String()
-}
-
-type CreateVPNConnectionOutput struct {
-	// Information about the VPN connection.
-	VPNConnection *VPNConnection `locationName:"vpnConnection" type:"structure"`
-
-	metadataCreateVPNConnectionOutput `json:"-" xml:"-"`
-}
-
-type metadataCreateVPNConnectionOutput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateVPNConnectionOutput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s CreateVPNConnectionOutput) GoString() string {
-	return s.String()
-}
-
-type CreateVPNConnectionRouteInput struct {
-	// The CIDR block associated with the local subnet of the customer network.
-	DestinationCIDRBlock *string `locationName:"DestinationCidrBlock" type:"string" required:"true"`
-
-	// The ID of the VPN connection.
-	VPNConnectionID *string `locationName:"VpnConnectionId" type:"string" required:"true"`
-
-	metadataCreateVPNConnectionRouteInput `json:"-" xml:"-"`
-}
-
-type metadataCreateVPNConnectionRouteInput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateVPNConnectionRouteInput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s CreateVPNConnectionRouteInput) GoString() string {
-	return s.String()
-}
-
-type CreateVPNConnectionRouteOutput struct {
-	metadataCreateVPNConnectionRouteOutput `json:"-" xml:"-"`
-}
-
-type metadataCreateVPNConnectionRouteOutput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateVPNConnectionRouteOutput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s CreateVPNConnectionRouteOutput) GoString() string {
-	return s.String()
-}
-
-type CreateVPNGatewayInput struct {
-	// The Availability Zone for the virtual private gateway.
-	AvailabilityZone *string `type:"string"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The type of VPN connection this virtual private gateway supports.
-	Type *string `type:"string" required:"true"`
-
-	metadataCreateVPNGatewayInput `json:"-" xml:"-"`
-}
-
-type metadataCreateVPNGatewayInput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateVPNGatewayInput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s CreateVPNGatewayInput) GoString() string {
-	return s.String()
-}
-
-type CreateVPNGatewayOutput struct {
-	// Information about the virtual private gateway.
-	VPNGateway *VPNGateway `locationName:"vpnGateway" type:"structure"`
-
-	metadataCreateVPNGatewayOutput `json:"-" xml:"-"`
-}
-
-type metadataCreateVPNGatewayOutput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s CreateVPNGatewayOutput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s CreateVPNGatewayOutput) GoString() string {
 	return s.String()
 }
 
@@ -9586,16 +9254,16 @@ type CreateVolumeInput struct {
 	// IOPS/GiB.
 	//
 	// Constraint: Range is 100 to 20000 for Provisioned IOPS (SSD) volumes
-	IOPS *int64 `locationName:"Iops" type:"integer"`
+	Iops *int64 `type:"integer"`
 
-	// The full ARN of the AWS Key Management Service (KMS) Customer Master Key
-	// (CMK) to use when creating the encrypted volume. This parameter is only required
-	// if you want to use a non-default CMK; if this parameter is not specified,
+	// The full ARN of the AWS Key Management Service (AWS KMS) customer master
+	// key (CMK) to use when creating the encrypted volume. This parameter is only
+	// required if you want to use a non-default CMK; if this parameter is not specified,
 	// the default CMK for EBS is used. The ARN contains the arn:aws:kms namespace,
 	// followed by the region of the CMK, the AWS account ID of the CMK owner, the
 	// key namespace, and then the CMK ID. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.
 	// If a KmsKeyId is specified, the Encrypted flag must also be set.
-	KMSKeyID *string `locationName:"KmsKeyId" type:"string"`
+	KmsKeyId *string `type:"string"`
 
 	// The size of the volume, in GiBs.
 	//
@@ -9608,13 +9276,13 @@ type CreateVolumeInput struct {
 	Size *int64 `type:"integer"`
 
 	// The snapshot from which to create the volume.
-	SnapshotID *string `locationName:"SnapshotId" type:"string"`
+	SnapshotId *string `type:"string"`
 
 	// The volume type. This can be gp2 for General Purpose (SSD) volumes, io1 for
 	// Provisioned IOPS (SSD) volumes, or standard for Magnetic volumes.
 	//
 	// Default: standard
-	VolumeType *string `type:"string"`
+	VolumeType *string `type:"string" enum:"VolumeType"`
 
 	metadataCreateVolumeInput `json:"-" xml:"-"`
 }
@@ -9625,7 +9293,7 @@ type metadataCreateVolumeInput struct {
 
 // String returns the string representation
 func (s CreateVolumeInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -9638,11 +9306,11 @@ func (s CreateVolumeInput) GoString() string {
 type CreateVolumePermission struct {
 	// The specific group that is to be added or removed from a volume's list of
 	// create volume permissions.
-	Group *string `locationName:"group" type:"string"`
+	Group *string `locationName:"group" type:"string" enum:"PermissionGroup"`
 
 	// The specific AWS account ID that is to be added or removed from a volume's
 	// list of create volume permissions.
-	UserID *string `locationName:"userId" type:"string"`
+	UserId *string `locationName:"userId" type:"string"`
 
 	metadataCreateVolumePermission `json:"-" xml:"-"`
 }
@@ -9653,7 +9321,7 @@ type metadataCreateVolumePermission struct {
 
 // String returns the string representation
 func (s CreateVolumePermission) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -9680,7 +9348,7 @@ type metadataCreateVolumePermissionModifications struct {
 
 // String returns the string representation
 func (s CreateVolumePermissionModifications) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -9688,17 +9356,352 @@ func (s CreateVolumePermissionModifications) GoString() string {
 	return s.String()
 }
 
+type CreateVpcEndpointInput struct {
+	// Unique, case-sensitive identifier you provide to ensure the idempotency of
+	// the request. For more information, see How to Ensure Idempotency (http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+	ClientToken *string `type:"string"`
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have
+	// the required permissions, the error response is DryRunOperation. Otherwise,
+	// it is UnauthorizedOperation.
+	DryRun *bool `type:"boolean"`
+
+	// A policy to attach to the endpoint that controls access to the service. The
+	// policy must be in valid JSON format. If this parameter is not specified,
+	// we attach a default policy that allows full access to the service.
+	PolicyDocument *string `type:"string"`
+
+	// One or more route table IDs.
+	RouteTableIds []*string `locationName:"RouteTableId" locationNameList:"item" type:"list"`
+
+	// The AWS service name, in the form com.amazonaws.region.service. To get a
+	// list of available services, use the DescribeVpcEndpointServices request.
+	ServiceName *string `type:"string" required:"true"`
+
+	// The ID of the VPC in which the endpoint will be used.
+	VpcId *string `type:"string" required:"true"`
+
+	metadataCreateVpcEndpointInput `json:"-" xml:"-"`
+}
+
+type metadataCreateVpcEndpointInput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateVpcEndpointInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateVpcEndpointInput) GoString() string {
+	return s.String()
+}
+
+type CreateVpcEndpointOutput struct {
+	// Unique, case-sensitive identifier you provide to ensure the idempotency of
+	// the request.
+	ClientToken *string `locationName:"clientToken" type:"string"`
+
+	// Information about the endpoint.
+	VpcEndpoint *VpcEndpoint `locationName:"vpcEndpoint" type:"structure"`
+
+	metadataCreateVpcEndpointOutput `json:"-" xml:"-"`
+}
+
+type metadataCreateVpcEndpointOutput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateVpcEndpointOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateVpcEndpointOutput) GoString() string {
+	return s.String()
+}
+
+type CreateVpcInput struct {
+	// The network range for the VPC, in CIDR notation. For example, 10.0.0.0/16.
+	CidrBlock *string `type:"string" required:"true"`
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have
+	// the required permissions, the error response is DryRunOperation. Otherwise,
+	// it is UnauthorizedOperation.
+	DryRun *bool `locationName:"dryRun" type:"boolean"`
+
+	// The supported tenancy options for instances launched into the VPC. A value
+	// of default means that instances can be launched with any tenancy; a value
+	// of dedicated means all instances launched into the VPC are launched as dedicated
+	// tenancy instances regardless of the tenancy assigned to the instance at launch.
+	// Dedicated tenancy instances run on single-tenant hardware.
+	//
+	// Default: default
+	InstanceTenancy *string `locationName:"instanceTenancy" type:"string" enum:"Tenancy"`
+
+	metadataCreateVpcInput `json:"-" xml:"-"`
+}
+
+type metadataCreateVpcInput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateVpcInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateVpcInput) GoString() string {
+	return s.String()
+}
+
+type CreateVpcOutput struct {
+	// Information about the VPC.
+	Vpc *Vpc `locationName:"vpc" type:"structure"`
+
+	metadataCreateVpcOutput `json:"-" xml:"-"`
+}
+
+type metadataCreateVpcOutput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateVpcOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateVpcOutput) GoString() string {
+	return s.String()
+}
+
+type CreateVpcPeeringConnectionInput struct {
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have
+	// the required permissions, the error response is DryRunOperation. Otherwise,
+	// it is UnauthorizedOperation.
+	DryRun *bool `locationName:"dryRun" type:"boolean"`
+
+	// The AWS account ID of the owner of the peer VPC.
+	//
+	// Default: Your AWS account ID
+	PeerOwnerId *string `locationName:"peerOwnerId" type:"string"`
+
+	// The ID of the VPC with which you are creating the VPC peering connection.
+	PeerVpcId *string `locationName:"peerVpcId" type:"string"`
+
+	// The ID of the requester VPC.
+	VpcId *string `locationName:"vpcId" type:"string"`
+
+	metadataCreateVpcPeeringConnectionInput `json:"-" xml:"-"`
+}
+
+type metadataCreateVpcPeeringConnectionInput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateVpcPeeringConnectionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateVpcPeeringConnectionInput) GoString() string {
+	return s.String()
+}
+
+type CreateVpcPeeringConnectionOutput struct {
+	// Information about the VPC peering connection.
+	VpcPeeringConnection *VpcPeeringConnection `locationName:"vpcPeeringConnection" type:"structure"`
+
+	metadataCreateVpcPeeringConnectionOutput `json:"-" xml:"-"`
+}
+
+type metadataCreateVpcPeeringConnectionOutput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateVpcPeeringConnectionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateVpcPeeringConnectionOutput) GoString() string {
+	return s.String()
+}
+
+type CreateVpnConnectionInput struct {
+	// The ID of the customer gateway.
+	CustomerGatewayId *string `type:"string" required:"true"`
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have
+	// the required permissions, the error response is DryRunOperation. Otherwise,
+	// it is UnauthorizedOperation.
+	DryRun *bool `locationName:"dryRun" type:"boolean"`
+
+	// Indicates whether the VPN connection requires static routes. If you are creating
+	// a VPN connection for a device that does not support BGP, you must specify
+	// true.
+	//
+	// Default: false
+	Options *VpnConnectionOptionsSpecification `locationName:"options" type:"structure"`
+
+	// The type of VPN connection (ipsec.1).
+	Type *string `type:"string" required:"true"`
+
+	// The ID of the virtual private gateway.
+	VpnGatewayId *string `type:"string" required:"true"`
+
+	metadataCreateVpnConnectionInput `json:"-" xml:"-"`
+}
+
+type metadataCreateVpnConnectionInput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateVpnConnectionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateVpnConnectionInput) GoString() string {
+	return s.String()
+}
+
+type CreateVpnConnectionOutput struct {
+	// Information about the VPN connection.
+	VpnConnection *VpnConnection `locationName:"vpnConnection" type:"structure"`
+
+	metadataCreateVpnConnectionOutput `json:"-" xml:"-"`
+}
+
+type metadataCreateVpnConnectionOutput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateVpnConnectionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateVpnConnectionOutput) GoString() string {
+	return s.String()
+}
+
+type CreateVpnConnectionRouteInput struct {
+	// The CIDR block associated with the local subnet of the customer network.
+	DestinationCidrBlock *string `type:"string" required:"true"`
+
+	// The ID of the VPN connection.
+	VpnConnectionId *string `type:"string" required:"true"`
+
+	metadataCreateVpnConnectionRouteInput `json:"-" xml:"-"`
+}
+
+type metadataCreateVpnConnectionRouteInput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateVpnConnectionRouteInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateVpnConnectionRouteInput) GoString() string {
+	return s.String()
+}
+
+type CreateVpnConnectionRouteOutput struct {
+	metadataCreateVpnConnectionRouteOutput `json:"-" xml:"-"`
+}
+
+type metadataCreateVpnConnectionRouteOutput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateVpnConnectionRouteOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateVpnConnectionRouteOutput) GoString() string {
+	return s.String()
+}
+
+type CreateVpnGatewayInput struct {
+	// The Availability Zone for the virtual private gateway.
+	AvailabilityZone *string `type:"string"`
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have
+	// the required permissions, the error response is DryRunOperation. Otherwise,
+	// it is UnauthorizedOperation.
+	DryRun *bool `locationName:"dryRun" type:"boolean"`
+
+	// The type of VPN connection this virtual private gateway supports.
+	Type *string `type:"string" required:"true" enum:"GatewayType"`
+
+	metadataCreateVpnGatewayInput `json:"-" xml:"-"`
+}
+
+type metadataCreateVpnGatewayInput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateVpnGatewayInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateVpnGatewayInput) GoString() string {
+	return s.String()
+}
+
+type CreateVpnGatewayOutput struct {
+	// Information about the virtual private gateway.
+	VpnGateway *VpnGateway `locationName:"vpnGateway" type:"structure"`
+
+	metadataCreateVpnGatewayOutput `json:"-" xml:"-"`
+}
+
+type metadataCreateVpnGatewayOutput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateVpnGatewayOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateVpnGatewayOutput) GoString() string {
+	return s.String()
+}
+
 // Describes a customer gateway.
 type CustomerGateway struct {
 	// The customer gateway's Border Gateway Protocol (BGP) Autonomous System Number
 	// (ASN).
-	BGPASN *string `locationName:"bgpAsn" type:"string"`
+	BgpAsn *string `locationName:"bgpAsn" type:"string"`
 
 	// The ID of the customer gateway.
-	CustomerGatewayID *string `locationName:"customerGatewayId" type:"string"`
+	CustomerGatewayId *string `locationName:"customerGatewayId" type:"string"`
 
 	// The Internet-routable IP address of the customer gateway's outside interface.
-	IPAddress *string `locationName:"ipAddress" type:"string"`
+	IpAddress *string `locationName:"ipAddress" type:"string"`
 
 	// The current state of the customer gateway (pending | available | deleting
 	// | deleted).
@@ -9719,7 +9722,7 @@ type metadataCustomerGateway struct {
 
 // String returns the string representation
 func (s CustomerGateway) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -9727,62 +9730,9 @@ func (s CustomerGateway) GoString() string {
 	return s.String()
 }
 
-// Describes a DHCP configuration option.
-type DHCPConfiguration struct {
-	// The name of a DHCP option.
-	Key *string `locationName:"key" type:"string"`
-
-	// One or more values for the DHCP option.
-	Values []*AttributeValue `locationName:"valueSet" locationNameList:"item" type:"list"`
-
-	metadataDHCPConfiguration `json:"-" xml:"-"`
-}
-
-type metadataDHCPConfiguration struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s DHCPConfiguration) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s DHCPConfiguration) GoString() string {
-	return s.String()
-}
-
-// Describes a set of DHCP options.
-type DHCPOptions struct {
-	// One or more DHCP options in the set.
-	DHCPConfigurations []*DHCPConfiguration `locationName:"dhcpConfigurationSet" locationNameList:"item" type:"list"`
-
-	// The ID of the set of DHCP options.
-	DHCPOptionsID *string `locationName:"dhcpOptionsId" type:"string"`
-
-	// Any tags assigned to the DHCP options set.
-	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
-
-	metadataDHCPOptions `json:"-" xml:"-"`
-}
-
-type metadataDHCPOptions struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s DHCPOptions) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s DHCPOptions) GoString() string {
-	return s.String()
-}
-
 type DeleteCustomerGatewayInput struct {
 	// The ID of the customer gateway.
-	CustomerGatewayID *string `locationName:"CustomerGatewayId" type:"string" required:"true"`
+	CustomerGatewayId *string `type:"string" required:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -9799,7 +9749,7 @@ type metadataDeleteCustomerGatewayInput struct {
 
 // String returns the string representation
 func (s DeleteCustomerGatewayInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -9817,7 +9767,7 @@ type metadataDeleteCustomerGatewayOutput struct {
 
 // String returns the string representation
 func (s DeleteCustomerGatewayOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -9825,9 +9775,9 @@ func (s DeleteCustomerGatewayOutput) GoString() string {
 	return s.String()
 }
 
-type DeleteDHCPOptionsInput struct {
+type DeleteDhcpOptionsInput struct {
 	// The ID of the DHCP options set.
-	DHCPOptionsID *string `locationName:"DhcpOptionsId" type:"string" required:"true"`
+	DhcpOptionsId *string `type:"string" required:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -9835,44 +9785,44 @@ type DeleteDHCPOptionsInput struct {
 	// it is UnauthorizedOperation.
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
-	metadataDeleteDHCPOptionsInput `json:"-" xml:"-"`
+	metadataDeleteDhcpOptionsInput `json:"-" xml:"-"`
 }
 
-type metadataDeleteDHCPOptionsInput struct {
+type metadataDeleteDhcpOptionsInput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s DeleteDHCPOptionsInput) String() string {
-	return awsutil.StringValue(s)
+func (s DeleteDhcpOptionsInput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s DeleteDHCPOptionsInput) GoString() string {
+func (s DeleteDhcpOptionsInput) GoString() string {
 	return s.String()
 }
 
-type DeleteDHCPOptionsOutput struct {
-	metadataDeleteDHCPOptionsOutput `json:"-" xml:"-"`
+type DeleteDhcpOptionsOutput struct {
+	metadataDeleteDhcpOptionsOutput `json:"-" xml:"-"`
 }
 
-type metadataDeleteDHCPOptionsOutput struct {
+type metadataDeleteDhcpOptionsOutput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s DeleteDHCPOptionsOutput) String() string {
-	return awsutil.StringValue(s)
+func (s DeleteDhcpOptionsOutput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s DeleteDHCPOptionsOutput) GoString() string {
+func (s DeleteDhcpOptionsOutput) GoString() string {
 	return s.String()
 }
 
 type DeleteFlowLogsInput struct {
 	// One or more flow log IDs.
-	FlowLogIDs []*string `locationName:"FlowLogId" locationNameList:"item" type:"list" required:"true"`
+	FlowLogIds []*string `locationName:"FlowLogId" locationNameList:"item" type:"list" required:"true"`
 
 	metadataDeleteFlowLogsInput `json:"-" xml:"-"`
 }
@@ -9883,7 +9833,7 @@ type metadataDeleteFlowLogsInput struct {
 
 // String returns the string representation
 func (s DeleteFlowLogsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -9904,7 +9854,7 @@ type metadataDeleteFlowLogsOutput struct {
 
 // String returns the string representation
 func (s DeleteFlowLogsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -9920,7 +9870,7 @@ type DeleteInternetGatewayInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the Internet gateway.
-	InternetGatewayID *string `locationName:"internetGatewayId" type:"string" required:"true"`
+	InternetGatewayId *string `locationName:"internetGatewayId" type:"string" required:"true"`
 
 	metadataDeleteInternetGatewayInput `json:"-" xml:"-"`
 }
@@ -9931,7 +9881,7 @@ type metadataDeleteInternetGatewayInput struct {
 
 // String returns the string representation
 func (s DeleteInternetGatewayInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -9949,7 +9899,7 @@ type metadataDeleteInternetGatewayOutput struct {
 
 // String returns the string representation
 func (s DeleteInternetGatewayOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -9976,7 +9926,7 @@ type metadataDeleteKeyPairInput struct {
 
 // String returns the string representation
 func (s DeleteKeyPairInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -9994,7 +9944,7 @@ type metadataDeleteKeyPairOutput struct {
 
 // String returns the string representation
 func (s DeleteKeyPairOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -10002,7 +9952,7 @@ func (s DeleteKeyPairOutput) GoString() string {
 	return s.String()
 }
 
-type DeleteNetworkACLEntryInput struct {
+type DeleteNetworkAclEntryInput struct {
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
 	// the required permissions, the error response is DryRunOperation. Otherwise,
@@ -10013,47 +9963,47 @@ type DeleteNetworkACLEntryInput struct {
 	Egress *bool `locationName:"egress" type:"boolean" required:"true"`
 
 	// The ID of the network ACL.
-	NetworkACLID *string `locationName:"networkAclId" type:"string" required:"true"`
+	NetworkAclId *string `locationName:"networkAclId" type:"string" required:"true"`
 
 	// The rule number of the entry to delete.
 	RuleNumber *int64 `locationName:"ruleNumber" type:"integer" required:"true"`
 
-	metadataDeleteNetworkACLEntryInput `json:"-" xml:"-"`
+	metadataDeleteNetworkAclEntryInput `json:"-" xml:"-"`
 }
 
-type metadataDeleteNetworkACLEntryInput struct {
+type metadataDeleteNetworkAclEntryInput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s DeleteNetworkACLEntryInput) String() string {
-	return awsutil.StringValue(s)
+func (s DeleteNetworkAclEntryInput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s DeleteNetworkACLEntryInput) GoString() string {
+func (s DeleteNetworkAclEntryInput) GoString() string {
 	return s.String()
 }
 
-type DeleteNetworkACLEntryOutput struct {
-	metadataDeleteNetworkACLEntryOutput `json:"-" xml:"-"`
+type DeleteNetworkAclEntryOutput struct {
+	metadataDeleteNetworkAclEntryOutput `json:"-" xml:"-"`
 }
 
-type metadataDeleteNetworkACLEntryOutput struct {
+type metadataDeleteNetworkAclEntryOutput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s DeleteNetworkACLEntryOutput) String() string {
-	return awsutil.StringValue(s)
+func (s DeleteNetworkAclEntryOutput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s DeleteNetworkACLEntryOutput) GoString() string {
+func (s DeleteNetworkAclEntryOutput) GoString() string {
 	return s.String()
 }
 
-type DeleteNetworkACLInput struct {
+type DeleteNetworkAclInput struct {
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
 	// the required permissions, the error response is DryRunOperation. Otherwise,
@@ -10061,40 +10011,40 @@ type DeleteNetworkACLInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the network ACL.
-	NetworkACLID *string `locationName:"networkAclId" type:"string" required:"true"`
+	NetworkAclId *string `locationName:"networkAclId" type:"string" required:"true"`
 
-	metadataDeleteNetworkACLInput `json:"-" xml:"-"`
+	metadataDeleteNetworkAclInput `json:"-" xml:"-"`
 }
 
-type metadataDeleteNetworkACLInput struct {
+type metadataDeleteNetworkAclInput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s DeleteNetworkACLInput) String() string {
-	return awsutil.StringValue(s)
+func (s DeleteNetworkAclInput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s DeleteNetworkACLInput) GoString() string {
+func (s DeleteNetworkAclInput) GoString() string {
 	return s.String()
 }
 
-type DeleteNetworkACLOutput struct {
-	metadataDeleteNetworkACLOutput `json:"-" xml:"-"`
+type DeleteNetworkAclOutput struct {
+	metadataDeleteNetworkAclOutput `json:"-" xml:"-"`
 }
 
-type metadataDeleteNetworkACLOutput struct {
+type metadataDeleteNetworkAclOutput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s DeleteNetworkACLOutput) String() string {
-	return awsutil.StringValue(s)
+func (s DeleteNetworkAclOutput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s DeleteNetworkACLOutput) GoString() string {
+func (s DeleteNetworkAclOutput) GoString() string {
 	return s.String()
 }
 
@@ -10106,7 +10056,7 @@ type DeleteNetworkInterfaceInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the network interface.
-	NetworkInterfaceID *string `locationName:"networkInterfaceId" type:"string" required:"true"`
+	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string" required:"true"`
 
 	metadataDeleteNetworkInterfaceInput `json:"-" xml:"-"`
 }
@@ -10117,7 +10067,7 @@ type metadataDeleteNetworkInterfaceInput struct {
 
 // String returns the string representation
 func (s DeleteNetworkInterfaceInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -10135,7 +10085,7 @@ type metadataDeleteNetworkInterfaceOutput struct {
 
 // String returns the string representation
 func (s DeleteNetworkInterfaceOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -10162,7 +10112,7 @@ type metadataDeletePlacementGroupInput struct {
 
 // String returns the string representation
 func (s DeletePlacementGroupInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -10180,7 +10130,7 @@ type metadataDeletePlacementGroupOutput struct {
 
 // String returns the string representation
 func (s DeletePlacementGroupOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -10191,7 +10141,7 @@ func (s DeletePlacementGroupOutput) GoString() string {
 type DeleteRouteInput struct {
 	// The CIDR range for the route. The value you specify must match the CIDR for
 	// the route exactly.
-	DestinationCIDRBlock *string `locationName:"destinationCidrBlock" type:"string" required:"true"`
+	DestinationCidrBlock *string `locationName:"destinationCidrBlock" type:"string" required:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -10200,7 +10150,7 @@ type DeleteRouteInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the route table.
-	RouteTableID *string `locationName:"routeTableId" type:"string" required:"true"`
+	RouteTableId *string `locationName:"routeTableId" type:"string" required:"true"`
 
 	metadataDeleteRouteInput `json:"-" xml:"-"`
 }
@@ -10211,7 +10161,7 @@ type metadataDeleteRouteInput struct {
 
 // String returns the string representation
 func (s DeleteRouteInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -10229,7 +10179,7 @@ type metadataDeleteRouteOutput struct {
 
 // String returns the string representation
 func (s DeleteRouteOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -10245,7 +10195,7 @@ type DeleteRouteTableInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the route table.
-	RouteTableID *string `locationName:"routeTableId" type:"string" required:"true"`
+	RouteTableId *string `locationName:"routeTableId" type:"string" required:"true"`
 
 	metadataDeleteRouteTableInput `json:"-" xml:"-"`
 }
@@ -10256,7 +10206,7 @@ type metadataDeleteRouteTableInput struct {
 
 // String returns the string representation
 func (s DeleteRouteTableInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -10274,7 +10224,7 @@ type metadataDeleteRouteTableOutput struct {
 
 // String returns the string representation
 func (s DeleteRouteTableOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -10290,7 +10240,7 @@ type DeleteSecurityGroupInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the security group. Required for a nondefault VPC.
-	GroupID *string `locationName:"GroupId" type:"string"`
+	GroupId *string `type:"string"`
 
 	// [EC2-Classic, default VPC] The name of the security group. You can specify
 	// either the security group name or the security group ID.
@@ -10305,7 +10255,7 @@ type metadataDeleteSecurityGroupInput struct {
 
 // String returns the string representation
 func (s DeleteSecurityGroupInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -10323,7 +10273,7 @@ type metadataDeleteSecurityGroupOutput struct {
 
 // String returns the string representation
 func (s DeleteSecurityGroupOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -10339,7 +10289,7 @@ type DeleteSnapshotInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the EBS snapshot.
-	SnapshotID *string `locationName:"SnapshotId" type:"string" required:"true"`
+	SnapshotId *string `type:"string" required:"true"`
 
 	metadataDeleteSnapshotInput `json:"-" xml:"-"`
 }
@@ -10350,7 +10300,7 @@ type metadataDeleteSnapshotInput struct {
 
 // String returns the string representation
 func (s DeleteSnapshotInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -10368,7 +10318,7 @@ type metadataDeleteSnapshotOutput struct {
 
 // String returns the string representation
 func (s DeleteSnapshotOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -10393,7 +10343,7 @@ type metadataDeleteSpotDatafeedSubscriptionInput struct {
 
 // String returns the string representation
 func (s DeleteSpotDatafeedSubscriptionInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -10411,7 +10361,7 @@ type metadataDeleteSpotDatafeedSubscriptionOutput struct {
 
 // String returns the string representation
 func (s DeleteSpotDatafeedSubscriptionOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -10427,7 +10377,7 @@ type DeleteSubnetInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the subnet.
-	SubnetID *string `locationName:"SubnetId" type:"string" required:"true"`
+	SubnetId *string `type:"string" required:"true"`
 
 	metadataDeleteSubnetInput `json:"-" xml:"-"`
 }
@@ -10438,7 +10388,7 @@ type metadataDeleteSubnetInput struct {
 
 // String returns the string representation
 func (s DeleteSubnetInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -10456,7 +10406,7 @@ type metadataDeleteSubnetOutput struct {
 
 // String returns the string representation
 func (s DeleteSubnetOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -10489,7 +10439,7 @@ type metadataDeleteTagsInput struct {
 
 // String returns the string representation
 func (s DeleteTagsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -10507,284 +10457,11 @@ type metadataDeleteTagsOutput struct {
 
 // String returns the string representation
 func (s DeleteTagsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
 func (s DeleteTagsOutput) GoString() string {
-	return s.String()
-}
-
-type DeleteVPCEndpointsInput struct {
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// One or more endpoint IDs.
-	VPCEndpointIDs []*string `locationName:"VpcEndpointId" locationNameList:"item" type:"list" required:"true"`
-
-	metadataDeleteVPCEndpointsInput `json:"-" xml:"-"`
-}
-
-type metadataDeleteVPCEndpointsInput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteVPCEndpointsInput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s DeleteVPCEndpointsInput) GoString() string {
-	return s.String()
-}
-
-type DeleteVPCEndpointsOutput struct {
-	// Information about the endpoints that were not successfully deleted.
-	Unsuccessful []*UnsuccessfulItem `locationName:"unsuccessful" locationNameList:"item" type:"list"`
-
-	metadataDeleteVPCEndpointsOutput `json:"-" xml:"-"`
-}
-
-type metadataDeleteVPCEndpointsOutput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteVPCEndpointsOutput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s DeleteVPCEndpointsOutput) GoString() string {
-	return s.String()
-}
-
-type DeleteVPCInput struct {
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the VPC.
-	VPCID *string `locationName:"VpcId" type:"string" required:"true"`
-
-	metadataDeleteVPCInput `json:"-" xml:"-"`
-}
-
-type metadataDeleteVPCInput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteVPCInput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s DeleteVPCInput) GoString() string {
-	return s.String()
-}
-
-type DeleteVPCOutput struct {
-	metadataDeleteVPCOutput `json:"-" xml:"-"`
-}
-
-type metadataDeleteVPCOutput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteVPCOutput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s DeleteVPCOutput) GoString() string {
-	return s.String()
-}
-
-type DeleteVPCPeeringConnectionInput struct {
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the VPC peering connection.
-	VPCPeeringConnectionID *string `locationName:"vpcPeeringConnectionId" type:"string" required:"true"`
-
-	metadataDeleteVPCPeeringConnectionInput `json:"-" xml:"-"`
-}
-
-type metadataDeleteVPCPeeringConnectionInput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteVPCPeeringConnectionInput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s DeleteVPCPeeringConnectionInput) GoString() string {
-	return s.String()
-}
-
-type DeleteVPCPeeringConnectionOutput struct {
-	// Returns true if the request succeeds; otherwise, it returns an error.
-	Return *bool `locationName:"return" type:"boolean"`
-
-	metadataDeleteVPCPeeringConnectionOutput `json:"-" xml:"-"`
-}
-
-type metadataDeleteVPCPeeringConnectionOutput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteVPCPeeringConnectionOutput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s DeleteVPCPeeringConnectionOutput) GoString() string {
-	return s.String()
-}
-
-type DeleteVPNConnectionInput struct {
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the VPN connection.
-	VPNConnectionID *string `locationName:"VpnConnectionId" type:"string" required:"true"`
-
-	metadataDeleteVPNConnectionInput `json:"-" xml:"-"`
-}
-
-type metadataDeleteVPNConnectionInput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteVPNConnectionInput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s DeleteVPNConnectionInput) GoString() string {
-	return s.String()
-}
-
-type DeleteVPNConnectionOutput struct {
-	metadataDeleteVPNConnectionOutput `json:"-" xml:"-"`
-}
-
-type metadataDeleteVPNConnectionOutput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteVPNConnectionOutput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s DeleteVPNConnectionOutput) GoString() string {
-	return s.String()
-}
-
-type DeleteVPNConnectionRouteInput struct {
-	// The CIDR block associated with the local subnet of the customer network.
-	DestinationCIDRBlock *string `locationName:"DestinationCidrBlock" type:"string" required:"true"`
-
-	// The ID of the VPN connection.
-	VPNConnectionID *string `locationName:"VpnConnectionId" type:"string" required:"true"`
-
-	metadataDeleteVPNConnectionRouteInput `json:"-" xml:"-"`
-}
-
-type metadataDeleteVPNConnectionRouteInput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteVPNConnectionRouteInput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s DeleteVPNConnectionRouteInput) GoString() string {
-	return s.String()
-}
-
-type DeleteVPNConnectionRouteOutput struct {
-	metadataDeleteVPNConnectionRouteOutput `json:"-" xml:"-"`
-}
-
-type metadataDeleteVPNConnectionRouteOutput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteVPNConnectionRouteOutput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s DeleteVPNConnectionRouteOutput) GoString() string {
-	return s.String()
-}
-
-type DeleteVPNGatewayInput struct {
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the virtual private gateway.
-	VPNGatewayID *string `locationName:"VpnGatewayId" type:"string" required:"true"`
-
-	metadataDeleteVPNGatewayInput `json:"-" xml:"-"`
-}
-
-type metadataDeleteVPNGatewayInput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteVPNGatewayInput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s DeleteVPNGatewayInput) GoString() string {
-	return s.String()
-}
-
-type DeleteVPNGatewayOutput struct {
-	metadataDeleteVPNGatewayOutput `json:"-" xml:"-"`
-}
-
-type metadataDeleteVPNGatewayOutput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s DeleteVPNGatewayOutput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s DeleteVPNGatewayOutput) GoString() string {
 	return s.String()
 }
 
@@ -10796,7 +10473,7 @@ type DeleteVolumeInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the volume.
-	VolumeID *string `locationName:"VolumeId" type:"string" required:"true"`
+	VolumeId *string `type:"string" required:"true"`
 
 	metadataDeleteVolumeInput `json:"-" xml:"-"`
 }
@@ -10807,7 +10484,7 @@ type metadataDeleteVolumeInput struct {
 
 // String returns the string representation
 func (s DeleteVolumeInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -10825,11 +10502,284 @@ type metadataDeleteVolumeOutput struct {
 
 // String returns the string representation
 func (s DeleteVolumeOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
 func (s DeleteVolumeOutput) GoString() string {
+	return s.String()
+}
+
+type DeleteVpcEndpointsInput struct {
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have
+	// the required permissions, the error response is DryRunOperation. Otherwise,
+	// it is UnauthorizedOperation.
+	DryRun *bool `type:"boolean"`
+
+	// One or more endpoint IDs.
+	VpcEndpointIds []*string `locationName:"VpcEndpointId" locationNameList:"item" type:"list" required:"true"`
+
+	metadataDeleteVpcEndpointsInput `json:"-" xml:"-"`
+}
+
+type metadataDeleteVpcEndpointsInput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DeleteVpcEndpointsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteVpcEndpointsInput) GoString() string {
+	return s.String()
+}
+
+type DeleteVpcEndpointsOutput struct {
+	// Information about the endpoints that were not successfully deleted.
+	Unsuccessful []*UnsuccessfulItem `locationName:"unsuccessful" locationNameList:"item" type:"list"`
+
+	metadataDeleteVpcEndpointsOutput `json:"-" xml:"-"`
+}
+
+type metadataDeleteVpcEndpointsOutput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DeleteVpcEndpointsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteVpcEndpointsOutput) GoString() string {
+	return s.String()
+}
+
+type DeleteVpcInput struct {
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have
+	// the required permissions, the error response is DryRunOperation. Otherwise,
+	// it is UnauthorizedOperation.
+	DryRun *bool `locationName:"dryRun" type:"boolean"`
+
+	// The ID of the VPC.
+	VpcId *string `type:"string" required:"true"`
+
+	metadataDeleteVpcInput `json:"-" xml:"-"`
+}
+
+type metadataDeleteVpcInput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DeleteVpcInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteVpcInput) GoString() string {
+	return s.String()
+}
+
+type DeleteVpcOutput struct {
+	metadataDeleteVpcOutput `json:"-" xml:"-"`
+}
+
+type metadataDeleteVpcOutput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DeleteVpcOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteVpcOutput) GoString() string {
+	return s.String()
+}
+
+type DeleteVpcPeeringConnectionInput struct {
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have
+	// the required permissions, the error response is DryRunOperation. Otherwise,
+	// it is UnauthorizedOperation.
+	DryRun *bool `locationName:"dryRun" type:"boolean"`
+
+	// The ID of the VPC peering connection.
+	VpcPeeringConnectionId *string `locationName:"vpcPeeringConnectionId" type:"string" required:"true"`
+
+	metadataDeleteVpcPeeringConnectionInput `json:"-" xml:"-"`
+}
+
+type metadataDeleteVpcPeeringConnectionInput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DeleteVpcPeeringConnectionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteVpcPeeringConnectionInput) GoString() string {
+	return s.String()
+}
+
+type DeleteVpcPeeringConnectionOutput struct {
+	// Returns true if the request succeeds; otherwise, it returns an error.
+	Return *bool `locationName:"return" type:"boolean"`
+
+	metadataDeleteVpcPeeringConnectionOutput `json:"-" xml:"-"`
+}
+
+type metadataDeleteVpcPeeringConnectionOutput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DeleteVpcPeeringConnectionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteVpcPeeringConnectionOutput) GoString() string {
+	return s.String()
+}
+
+type DeleteVpnConnectionInput struct {
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have
+	// the required permissions, the error response is DryRunOperation. Otherwise,
+	// it is UnauthorizedOperation.
+	DryRun *bool `locationName:"dryRun" type:"boolean"`
+
+	// The ID of the VPN connection.
+	VpnConnectionId *string `type:"string" required:"true"`
+
+	metadataDeleteVpnConnectionInput `json:"-" xml:"-"`
+}
+
+type metadataDeleteVpnConnectionInput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DeleteVpnConnectionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteVpnConnectionInput) GoString() string {
+	return s.String()
+}
+
+type DeleteVpnConnectionOutput struct {
+	metadataDeleteVpnConnectionOutput `json:"-" xml:"-"`
+}
+
+type metadataDeleteVpnConnectionOutput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DeleteVpnConnectionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteVpnConnectionOutput) GoString() string {
+	return s.String()
+}
+
+type DeleteVpnConnectionRouteInput struct {
+	// The CIDR block associated with the local subnet of the customer network.
+	DestinationCidrBlock *string `type:"string" required:"true"`
+
+	// The ID of the VPN connection.
+	VpnConnectionId *string `type:"string" required:"true"`
+
+	metadataDeleteVpnConnectionRouteInput `json:"-" xml:"-"`
+}
+
+type metadataDeleteVpnConnectionRouteInput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DeleteVpnConnectionRouteInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteVpnConnectionRouteInput) GoString() string {
+	return s.String()
+}
+
+type DeleteVpnConnectionRouteOutput struct {
+	metadataDeleteVpnConnectionRouteOutput `json:"-" xml:"-"`
+}
+
+type metadataDeleteVpnConnectionRouteOutput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DeleteVpnConnectionRouteOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteVpnConnectionRouteOutput) GoString() string {
+	return s.String()
+}
+
+type DeleteVpnGatewayInput struct {
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have
+	// the required permissions, the error response is DryRunOperation. Otherwise,
+	// it is UnauthorizedOperation.
+	DryRun *bool `locationName:"dryRun" type:"boolean"`
+
+	// The ID of the virtual private gateway.
+	VpnGatewayId *string `type:"string" required:"true"`
+
+	metadataDeleteVpnGatewayInput `json:"-" xml:"-"`
+}
+
+type metadataDeleteVpnGatewayInput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DeleteVpnGatewayInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteVpnGatewayInput) GoString() string {
+	return s.String()
+}
+
+type DeleteVpnGatewayOutput struct {
+	metadataDeleteVpnGatewayOutput `json:"-" xml:"-"`
+}
+
+type metadataDeleteVpnGatewayOutput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DeleteVpnGatewayOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteVpnGatewayOutput) GoString() string {
 	return s.String()
 }
 
@@ -10841,7 +10791,7 @@ type DeregisterImageInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the AMI.
-	ImageID *string `locationName:"ImageId" type:"string" required:"true"`
+	ImageId *string `type:"string" required:"true"`
 
 	metadataDeregisterImageInput `json:"-" xml:"-"`
 }
@@ -10852,7 +10802,7 @@ type metadataDeregisterImageInput struct {
 
 // String returns the string representation
 func (s DeregisterImageInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -10870,7 +10820,7 @@ type metadataDeregisterImageOutput struct {
 
 // String returns the string representation
 func (s DeregisterImageOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -10897,7 +10847,7 @@ type metadataDescribeAccountAttributesInput struct {
 
 // String returns the string representation
 func (s DescribeAccountAttributesInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -10918,7 +10868,7 @@ type metadataDescribeAccountAttributesOutput struct {
 
 // String returns the string representation
 func (s DescribeAccountAttributesOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -10930,7 +10880,7 @@ type DescribeAddressesInput struct {
 	// [EC2-VPC] One or more allocation IDs.
 	//
 	// Default: Describes all your Elastic IP addresses.
-	AllocationIDs []*string `locationName:"AllocationId" locationNameList:"AllocationId" type:"list"`
+	AllocationIds []*string `locationName:"AllocationId" locationNameList:"AllocationId" type:"list"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -10964,7 +10914,7 @@ type DescribeAddressesInput struct {
 	// [EC2-Classic] One or more Elastic IP addresses.
 	//
 	// Default: Describes all your Elastic IP addresses.
-	PublicIPs []*string `locationName:"PublicIp" locationNameList:"PublicIp" type:"list"`
+	PublicIps []*string `locationName:"PublicIp" locationNameList:"PublicIp" type:"list"`
 
 	metadataDescribeAddressesInput `json:"-" xml:"-"`
 }
@@ -10975,7 +10925,7 @@ type metadataDescribeAddressesInput struct {
 
 // String returns the string representation
 func (s DescribeAddressesInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -10996,7 +10946,7 @@ type metadataDescribeAddressesOutput struct {
 
 // String returns the string representation
 func (s DescribeAddressesOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -11035,7 +10985,7 @@ type metadataDescribeAvailabilityZonesInput struct {
 
 // String returns the string representation
 func (s DescribeAvailabilityZonesInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -11056,7 +11006,7 @@ type metadataDescribeAvailabilityZonesOutput struct {
 
 // String returns the string representation
 func (s DescribeAvailabilityZonesOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -11068,7 +11018,7 @@ type DescribeBundleTasksInput struct {
 	// One or more bundle task IDs.
 	//
 	// Default: Describes all your bundle tasks.
-	BundleIDs []*string `locationName:"BundleId" locationNameList:"BundleId" type:"list"`
+	BundleIds []*string `locationName:"BundleId" locationNameList:"BundleId" type:"list"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -11110,7 +11060,7 @@ type metadataDescribeBundleTasksInput struct {
 
 // String returns the string representation
 func (s DescribeBundleTasksInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -11131,7 +11081,7 @@ type metadataDescribeBundleTasksOutput struct {
 
 // String returns the string representation
 func (s DescribeBundleTasksOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -11168,7 +11118,7 @@ type DescribeClassicLinkInstancesInput struct {
 	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// One or more instance IDs. Must be instances linked to a VPC through ClassicLink.
-	InstanceIDs []*string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list"`
+	InstanceIds []*string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list"`
 
 	// The maximum number of results to return for the request in a single page.
 	// The remaining results of the initial request can be seen by sending another
@@ -11192,7 +11142,7 @@ type metadataDescribeClassicLinkInstancesInput struct {
 
 // String returns the string representation
 func (s DescribeClassicLinkInstancesInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -11217,7 +11167,7 @@ type metadataDescribeClassicLinkInstancesOutput struct {
 
 // String returns the string representation
 func (s DescribeClassicLinkInstancesOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -11227,7 +11177,7 @@ func (s DescribeClassicLinkInstancesOutput) GoString() string {
 
 type DescribeConversionTasksInput struct {
 	// One or more conversion task IDs.
-	ConversionTaskIDs []*string `locationName:"conversionTaskId" locationNameList:"item" type:"list"`
+	ConversionTaskIds []*string `locationName:"conversionTaskId" locationNameList:"item" type:"list"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -11247,7 +11197,7 @@ type metadataDescribeConversionTasksInput struct {
 
 // String returns the string representation
 func (s DescribeConversionTasksInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -11268,7 +11218,7 @@ type metadataDescribeConversionTasksOutput struct {
 
 // String returns the string representation
 func (s DescribeConversionTasksOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -11280,7 +11230,7 @@ type DescribeCustomerGatewaysInput struct {
 	// One or more customer gateway IDs.
 	//
 	// Default: Describes all your customer gateways.
-	CustomerGatewayIDs []*string `locationName:"CustomerGatewayId" locationNameList:"CustomerGatewayId" type:"list"`
+	CustomerGatewayIds []*string `locationName:"CustomerGatewayId" locationNameList:"CustomerGatewayId" type:"list"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -11326,7 +11276,7 @@ type metadataDescribeCustomerGatewaysInput struct {
 
 // String returns the string representation
 func (s DescribeCustomerGatewaysInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -11347,7 +11297,7 @@ type metadataDescribeCustomerGatewaysOutput struct {
 
 // String returns the string representation
 func (s DescribeCustomerGatewaysOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -11355,11 +11305,11 @@ func (s DescribeCustomerGatewaysOutput) GoString() string {
 	return s.String()
 }
 
-type DescribeDHCPOptionsInput struct {
+type DescribeDhcpOptionsInput struct {
 	// The IDs of one or more DHCP options sets.
 	//
 	// Default: Describes all your DHCP options sets.
-	DHCPOptionsIDs []*string `locationName:"DhcpOptionsId" locationNameList:"DhcpOptionsId" type:"list"`
+	DhcpOptionsIds []*string `locationName:"DhcpOptionsId" locationNameList:"DhcpOptionsId" type:"list"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -11388,47 +11338,47 @@ type DescribeDHCPOptionsInput struct {
 	// independent of the tag-key filter.
 	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
-	metadataDescribeDHCPOptionsInput `json:"-" xml:"-"`
+	metadataDescribeDhcpOptionsInput `json:"-" xml:"-"`
 }
 
-type metadataDescribeDHCPOptionsInput struct {
+type metadataDescribeDhcpOptionsInput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s DescribeDHCPOptionsInput) String() string {
-	return awsutil.StringValue(s)
+func (s DescribeDhcpOptionsInput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s DescribeDHCPOptionsInput) GoString() string {
+func (s DescribeDhcpOptionsInput) GoString() string {
 	return s.String()
 }
 
-type DescribeDHCPOptionsOutput struct {
+type DescribeDhcpOptionsOutput struct {
 	// Information about one or more DHCP options sets.
-	DHCPOptions []*DHCPOptions `locationName:"dhcpOptionsSet" locationNameList:"item" type:"list"`
+	DhcpOptions []*DhcpOptions `locationName:"dhcpOptionsSet" locationNameList:"item" type:"list"`
 
-	metadataDescribeDHCPOptionsOutput `json:"-" xml:"-"`
+	metadataDescribeDhcpOptionsOutput `json:"-" xml:"-"`
 }
 
-type metadataDescribeDHCPOptionsOutput struct {
+type metadataDescribeDhcpOptionsOutput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s DescribeDHCPOptionsOutput) String() string {
-	return awsutil.StringValue(s)
+func (s DescribeDhcpOptionsOutput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s DescribeDHCPOptionsOutput) GoString() string {
+func (s DescribeDhcpOptionsOutput) GoString() string {
 	return s.String()
 }
 
 type DescribeExportTasksInput struct {
 	// One or more export task IDs.
-	ExportTaskIDs []*string `locationName:"exportTaskId" locationNameList:"ExportTaskId" type:"list"`
+	ExportTaskIds []*string `locationName:"exportTaskId" locationNameList:"ExportTaskId" type:"list"`
 
 	metadataDescribeExportTasksInput `json:"-" xml:"-"`
 }
@@ -11439,7 +11389,7 @@ type metadataDescribeExportTasksInput struct {
 
 // String returns the string representation
 func (s DescribeExportTasksInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -11460,7 +11410,7 @@ type metadataDescribeExportTasksOutput struct {
 
 // String returns the string representation
 func (s DescribeExportTasksOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -11483,7 +11433,7 @@ type DescribeFlowLogsInput struct {
 	Filter []*Filter `locationNameList:"Filter" type:"list"`
 
 	// One or more flow log IDs.
-	FlowLogIDs []*string `locationName:"FlowLogId" locationNameList:"item" type:"list"`
+	FlowLogIds []*string `locationName:"FlowLogId" locationNameList:"item" type:"list"`
 
 	// The maximum number of results to return for the request in a single page.
 	// The remaining results can be seen by sending another request with the returned
@@ -11504,7 +11454,7 @@ type metadataDescribeFlowLogsInput struct {
 
 // String returns the string representation
 func (s DescribeFlowLogsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -11529,7 +11479,7 @@ type metadataDescribeFlowLogsOutput struct {
 
 // String returns the string representation
 func (s DescribeFlowLogsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -11543,7 +11493,7 @@ type DescribeImageAttributeInput struct {
 	// Note: Depending on your account privileges, the blockDeviceMapping attribute
 	// may return a Client.AuthFailure error. If this happens, use DescribeImages
 	// to get information about the block device mapping for the AMI.
-	Attribute *string `type:"string" required:"true"`
+	Attribute *string `type:"string" required:"true" enum:"ImageAttributeName"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -11552,7 +11502,7 @@ type DescribeImageAttributeInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the AMI.
-	ImageID *string `locationName:"ImageId" type:"string" required:"true"`
+	ImageId *string `type:"string" required:"true"`
 
 	metadataDescribeImageAttributeInput `json:"-" xml:"-"`
 }
@@ -11563,7 +11513,7 @@ type metadataDescribeImageAttributeInput struct {
 
 // String returns the string representation
 func (s DescribeImageAttributeInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -11580,10 +11530,10 @@ type DescribeImageAttributeOutput struct {
 	Description *AttributeValue `locationName:"description" type:"structure"`
 
 	// The ID of the AMI.
-	ImageID *string `locationName:"imageId" type:"string"`
+	ImageId *string `locationName:"imageId" type:"string"`
 
 	// The kernel ID.
-	KernelID *AttributeValue `locationName:"kernel" type:"structure"`
+	KernelId *AttributeValue `locationName:"kernel" type:"structure"`
 
 	// One or more launch permissions.
 	LaunchPermissions []*LaunchPermission `locationName:"launchPermission" locationNameList:"item" type:"list"`
@@ -11592,10 +11542,10 @@ type DescribeImageAttributeOutput struct {
 	ProductCodes []*ProductCode `locationName:"productCodes" locationNameList:"item" type:"list"`
 
 	// The RAM disk ID.
-	RAMDiskID *AttributeValue `locationName:"ramdisk" type:"structure"`
+	RamdiskId *AttributeValue `locationName:"ramdisk" type:"structure"`
 
 	// The value to use for a resource attribute.
-	SRIOVNetSupport *AttributeValue `locationName:"sriovNetSupport" type:"structure"`
+	SriovNetSupport *AttributeValue `locationName:"sriovNetSupport" type:"structure"`
 
 	metadataDescribeImageAttributeOutput `json:"-" xml:"-"`
 }
@@ -11606,7 +11556,7 @@ type metadataDescribeImageAttributeOutput struct {
 
 // String returns the string representation
 func (s DescribeImageAttributeOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -11700,7 +11650,7 @@ type DescribeImagesInput struct {
 	// One or more image IDs.
 	//
 	// Default: Describes all images available to you.
-	ImageIDs []*string `locationName:"ImageId" locationNameList:"ImageId" type:"list"`
+	ImageIds []*string `locationName:"ImageId" locationNameList:"ImageId" type:"list"`
 
 	// Filters the images by the owner. Specify an AWS account ID, amazon (owner
 	// is Amazon), aws-marketplace (owner is AWS Marketplace), self (owner is the
@@ -11717,7 +11667,7 @@ type metadataDescribeImagesInput struct {
 
 // String returns the string representation
 func (s DescribeImagesInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -11738,7 +11688,7 @@ type metadataDescribeImagesOutput struct {
 
 // String returns the string representation
 func (s DescribeImagesOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -11757,7 +11707,7 @@ type DescribeImportImageTasksInput struct {
 	Filters []*Filter `locationNameList:"Filter" type:"list"`
 
 	// A list of import image task IDs.
-	ImportTaskIDs []*string `locationName:"ImportTaskId" locationNameList:"ImportTaskId" type:"list"`
+	ImportTaskIds []*string `locationName:"ImportTaskId" locationNameList:"ImportTaskId" type:"list"`
 
 	// The maximum number of results to return in a single request.
 	MaxResults *int64 `type:"integer"`
@@ -11774,7 +11724,7 @@ type metadataDescribeImportImageTasksInput struct {
 
 // String returns the string representation
 func (s DescribeImportImageTasksInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -11800,7 +11750,7 @@ type metadataDescribeImportImageTasksOutput struct {
 
 // String returns the string representation
 func (s DescribeImportImageTasksOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -11819,7 +11769,7 @@ type DescribeImportSnapshotTasksInput struct {
 	Filters []*Filter `locationNameList:"Filter" type:"list"`
 
 	// A list of import snapshot task IDs.
-	ImportTaskIDs []*string `locationName:"ImportTaskId" locationNameList:"ImportTaskId" type:"list"`
+	ImportTaskIds []*string `locationName:"ImportTaskId" locationNameList:"ImportTaskId" type:"list"`
 
 	// The maximum number of results to return in a single request.
 	MaxResults *int64 `type:"integer"`
@@ -11836,7 +11786,7 @@ type metadataDescribeImportSnapshotTasksInput struct {
 
 // String returns the string representation
 func (s DescribeImportSnapshotTasksInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -11862,7 +11812,7 @@ type metadataDescribeImportSnapshotTasksOutput struct {
 
 // String returns the string representation
 func (s DescribeImportSnapshotTasksOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -11872,7 +11822,7 @@ func (s DescribeImportSnapshotTasksOutput) GoString() string {
 
 type DescribeInstanceAttributeInput struct {
 	// The instance attribute.
-	Attribute *string `locationName:"attribute" type:"string" required:"true"`
+	Attribute *string `locationName:"attribute" type:"string" required:"true" enum:"InstanceAttributeName"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -11881,7 +11831,7 @@ type DescribeInstanceAttributeInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the instance.
-	InstanceID *string `locationName:"instanceId" type:"string" required:"true"`
+	InstanceId *string `locationName:"instanceId" type:"string" required:"true"`
 
 	metadataDescribeInstanceAttributeInput `json:"-" xml:"-"`
 }
@@ -11892,7 +11842,7 @@ type metadataDescribeInstanceAttributeInput struct {
 
 // String returns the string representation
 func (s DescribeInstanceAttributeInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -11907,16 +11857,16 @@ type DescribeInstanceAttributeOutput struct {
 
 	// If the value is true, you can't terminate the instance through the Amazon
 	// EC2 console, CLI, or API; otherwise, you can.
-	DisableAPITermination *AttributeBooleanValue `locationName:"disableApiTermination" type:"structure"`
+	DisableApiTermination *AttributeBooleanValue `locationName:"disableApiTermination" type:"structure"`
 
 	// Indicates whether the instance is optimized for EBS I/O.
-	EBSOptimized *AttributeBooleanValue `locationName:"ebsOptimized" type:"structure"`
+	EbsOptimized *AttributeBooleanValue `locationName:"ebsOptimized" type:"structure"`
 
 	// The security groups associated with the instance.
 	Groups []*GroupIdentifier `locationName:"groupSet" locationNameList:"item" type:"list"`
 
 	// The ID of the instance.
-	InstanceID *string `locationName:"instanceId" type:"string"`
+	InstanceId *string `locationName:"instanceId" type:"string"`
 
 	// Indicates whether an instance stops or terminates when you initiate shutdown
 	// from the instance (using the operating system command for system shutdown).
@@ -11926,24 +11876,24 @@ type DescribeInstanceAttributeOutput struct {
 	InstanceType *AttributeValue `locationName:"instanceType" type:"structure"`
 
 	// The kernel ID.
-	KernelID *AttributeValue `locationName:"kernel" type:"structure"`
+	KernelId *AttributeValue `locationName:"kernel" type:"structure"`
 
 	// A list of product codes.
 	ProductCodes []*ProductCode `locationName:"productCodes" locationNameList:"item" type:"list"`
 
 	// The RAM disk ID.
-	RAMDiskID *AttributeValue `locationName:"ramdisk" type:"structure"`
+	RamdiskId *AttributeValue `locationName:"ramdisk" type:"structure"`
 
 	// The name of the root device (for example, /dev/sda1 or /dev/xvda).
 	RootDeviceName *AttributeValue `locationName:"rootDeviceName" type:"structure"`
-
-	// The value to use for a resource attribute.
-	SRIOVNetSupport *AttributeValue `locationName:"sriovNetSupport" type:"structure"`
 
 	// Indicates whether source/destination checking is enabled. A value of true
 	// means checking is enabled, and false means checking is disabled. This value
 	// must be false for a NAT instance to perform NAT.
 	SourceDestCheck *AttributeBooleanValue `locationName:"sourceDestCheck" type:"structure"`
+
+	// The value to use for a resource attribute.
+	SriovNetSupport *AttributeValue `locationName:"sriovNetSupport" type:"structure"`
 
 	// The Base64-encoded MIME user data.
 	UserData *AttributeValue `locationName:"userData" type:"structure"`
@@ -11957,7 +11907,7 @@ type metadataDescribeInstanceAttributeOutput struct {
 
 // String returns the string representation
 func (s DescribeInstanceAttributeOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -12020,7 +11970,7 @@ type DescribeInstanceStatusInput struct {
 	// Default: Describes all your instances.
 	//
 	// Constraints: Maximum 100 explicitly specified instance IDs.
-	InstanceIDs []*string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list"`
+	InstanceIds []*string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list"`
 
 	// The maximum number of results to return for the request in a single page.
 	// The remaining results of the initial request can be seen by sending another
@@ -12042,7 +11992,7 @@ type metadataDescribeInstanceStatusInput struct {
 
 // String returns the string representation
 func (s DescribeInstanceStatusInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -12067,7 +12017,7 @@ type metadataDescribeInstanceStatusOutput struct {
 
 // String returns the string representation
 func (s DescribeInstanceStatusOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -12310,7 +12260,7 @@ type DescribeInstancesInput struct {
 	// One or more instance IDs.
 	//
 	// Default: Describes all your instances.
-	InstanceIDs []*string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list"`
+	InstanceIds []*string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list"`
 
 	// The maximum number of results to return for the request in a single page.
 	// The remaining results of the initial request can be seen by sending another
@@ -12332,7 +12282,7 @@ type metadataDescribeInstancesInput struct {
 
 // String returns the string representation
 func (s DescribeInstancesInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -12357,7 +12307,7 @@ type metadataDescribeInstancesOutput struct {
 
 // String returns the string representation
 func (s DescribeInstancesOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -12397,7 +12347,7 @@ type DescribeInternetGatewaysInput struct {
 	// One or more Internet gateway IDs.
 	//
 	// Default: Describes all your Internet gateways.
-	InternetGatewayIDs []*string `locationName:"internetGatewayId" locationNameList:"item" type:"list"`
+	InternetGatewayIds []*string `locationName:"internetGatewayId" locationNameList:"item" type:"list"`
 
 	metadataDescribeInternetGatewaysInput `json:"-" xml:"-"`
 }
@@ -12408,7 +12358,7 @@ type metadataDescribeInternetGatewaysInput struct {
 
 // String returns the string representation
 func (s DescribeInternetGatewaysInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -12429,7 +12379,7 @@ type metadataDescribeInternetGatewaysOutput struct {
 
 // String returns the string representation
 func (s DescribeInternetGatewaysOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -12465,7 +12415,7 @@ type metadataDescribeKeyPairsInput struct {
 
 // String returns the string representation
 func (s DescribeKeyPairsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -12486,7 +12436,7 @@ type metadataDescribeKeyPairsOutput struct {
 
 // String returns the string representation
 func (s DescribeKeyPairsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -12518,7 +12468,7 @@ type DescribeMovingAddressesInput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// One or more Elastic IP addresses.
-	PublicIPs []*string `locationName:"publicIp" locationNameList:"item" type:"list"`
+	PublicIps []*string `locationName:"publicIp" locationNameList:"item" type:"list"`
 
 	metadataDescribeMovingAddressesInput `json:"-" xml:"-"`
 }
@@ -12529,7 +12479,7 @@ type metadataDescribeMovingAddressesInput struct {
 
 // String returns the string representation
 func (s DescribeMovingAddressesInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -12554,7 +12504,7 @@ type metadataDescribeMovingAddressesOutput struct {
 
 // String returns the string representation
 func (s DescribeMovingAddressesOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -12562,7 +12512,7 @@ func (s DescribeMovingAddressesOutput) GoString() string {
 	return s.String()
 }
 
-type DescribeNetworkACLsInput struct {
+type DescribeNetworkAclsInput struct {
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
 	// the required permissions, the error response is DryRunOperation. Otherwise,
@@ -12621,49 +12571,49 @@ type DescribeNetworkACLsInput struct {
 	// One or more network ACL IDs.
 	//
 	// Default: Describes all your network ACLs.
-	NetworkACLIDs []*string `locationName:"NetworkAclId" locationNameList:"item" type:"list"`
+	NetworkAclIds []*string `locationName:"NetworkAclId" locationNameList:"item" type:"list"`
 
-	metadataDescribeNetworkACLsInput `json:"-" xml:"-"`
+	metadataDescribeNetworkAclsInput `json:"-" xml:"-"`
 }
 
-type metadataDescribeNetworkACLsInput struct {
+type metadataDescribeNetworkAclsInput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s DescribeNetworkACLsInput) String() string {
-	return awsutil.StringValue(s)
+func (s DescribeNetworkAclsInput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s DescribeNetworkACLsInput) GoString() string {
+func (s DescribeNetworkAclsInput) GoString() string {
 	return s.String()
 }
 
-type DescribeNetworkACLsOutput struct {
+type DescribeNetworkAclsOutput struct {
 	// Information about one or more network ACLs.
-	NetworkACLs []*NetworkACL `locationName:"networkAclSet" locationNameList:"item" type:"list"`
+	NetworkAcls []*NetworkAcl `locationName:"networkAclSet" locationNameList:"item" type:"list"`
 
-	metadataDescribeNetworkACLsOutput `json:"-" xml:"-"`
+	metadataDescribeNetworkAclsOutput `json:"-" xml:"-"`
 }
 
-type metadataDescribeNetworkACLsOutput struct {
+type metadataDescribeNetworkAclsOutput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s DescribeNetworkACLsOutput) String() string {
-	return awsutil.StringValue(s)
+func (s DescribeNetworkAclsOutput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s DescribeNetworkACLsOutput) GoString() string {
+func (s DescribeNetworkAclsOutput) GoString() string {
 	return s.String()
 }
 
 type DescribeNetworkInterfaceAttributeInput struct {
 	// The attribute of the network interface.
-	Attribute *string `locationName:"attribute" type:"string"`
+	Attribute *string `locationName:"attribute" type:"string" enum:"NetworkInterfaceAttribute"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -12672,7 +12622,7 @@ type DescribeNetworkInterfaceAttributeInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the network interface.
-	NetworkInterfaceID *string `locationName:"networkInterfaceId" type:"string" required:"true"`
+	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string" required:"true"`
 
 	metadataDescribeNetworkInterfaceAttributeInput `json:"-" xml:"-"`
 }
@@ -12683,7 +12633,7 @@ type metadataDescribeNetworkInterfaceAttributeInput struct {
 
 // String returns the string representation
 func (s DescribeNetworkInterfaceAttributeInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -12702,7 +12652,7 @@ type DescribeNetworkInterfaceAttributeOutput struct {
 	Groups []*GroupIdentifier `locationName:"groupSet" locationNameList:"item" type:"list"`
 
 	// The ID of the network interface.
-	NetworkInterfaceID *string `locationName:"networkInterfaceId" type:"string"`
+	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string"`
 
 	// Indicates whether source/destination checking is enabled.
 	SourceDestCheck *AttributeBooleanValue `locationName:"sourceDestCheck" type:"structure"`
@@ -12716,7 +12666,7 @@ type metadataDescribeNetworkInterfaceAttributeOutput struct {
 
 // String returns the string representation
 func (s DescribeNetworkInterfaceAttributeOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -12835,7 +12785,7 @@ type DescribeNetworkInterfacesInput struct {
 	// One or more network interface IDs.
 	//
 	// Default: Describes all your network interfaces.
-	NetworkInterfaceIDs []*string `locationName:"NetworkInterfaceId" locationNameList:"item" type:"list"`
+	NetworkInterfaceIds []*string `locationName:"NetworkInterfaceId" locationNameList:"item" type:"list"`
 
 	metadataDescribeNetworkInterfacesInput `json:"-" xml:"-"`
 }
@@ -12846,7 +12796,7 @@ type metadataDescribeNetworkInterfacesInput struct {
 
 // String returns the string representation
 func (s DescribeNetworkInterfacesInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -12867,7 +12817,7 @@ type metadataDescribeNetworkInterfacesOutput struct {
 
 // String returns the string representation
 func (s DescribeNetworkInterfacesOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -12906,7 +12856,7 @@ type metadataDescribePlacementGroupsInput struct {
 
 // String returns the string representation
 func (s DescribePlacementGroupsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -12927,7 +12877,7 @@ type metadataDescribePlacementGroupsOutput struct {
 
 // String returns the string representation
 func (s DescribePlacementGroupsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -12962,7 +12912,7 @@ type DescribePrefixListsInput struct {
 	NextToken *string `type:"string"`
 
 	// One or more prefix list IDs.
-	PrefixListIDs []*string `locationName:"PrefixListId" locationNameList:"item" type:"list"`
+	PrefixListIds []*string `locationName:"PrefixListId" locationNameList:"item" type:"list"`
 
 	metadataDescribePrefixListsInput `json:"-" xml:"-"`
 }
@@ -12973,7 +12923,7 @@ type metadataDescribePrefixListsInput struct {
 
 // String returns the string representation
 func (s DescribePrefixListsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -12998,7 +12948,7 @@ type metadataDescribePrefixListsOutput struct {
 
 // String returns the string representation
 func (s DescribePrefixListsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -13032,7 +12982,7 @@ type metadataDescribeRegionsInput struct {
 
 // String returns the string representation
 func (s DescribeRegionsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -13053,7 +13003,7 @@ type metadataDescribeRegionsOutput struct {
 
 // String returns the string representation
 func (s DescribeRegionsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -13121,13 +13071,13 @@ type DescribeReservedInstancesInput struct {
 	// The Reserved Instance offering type. If you are using tools that predate
 	// the 2011-11-01 API version, you only have access to the Medium Utilization
 	// Reserved Instance offering type.
-	OfferingType *string `locationName:"offeringType" type:"string"`
+	OfferingType *string `locationName:"offeringType" type:"string" enum:"OfferingTypeValues"`
 
 	// One or more Reserved Instance IDs.
 	//
 	// Default: Describes all your Reserved Instances, or only those otherwise
 	// specified.
-	ReservedInstancesIDs []*string `locationName:"ReservedInstancesId" locationNameList:"ReservedInstancesId" type:"list"`
+	ReservedInstancesIds []*string `locationName:"ReservedInstancesId" locationNameList:"ReservedInstancesId" type:"list"`
 
 	metadataDescribeReservedInstancesInput `json:"-" xml:"-"`
 }
@@ -13138,7 +13088,7 @@ type metadataDescribeReservedInstancesInput struct {
 
 // String returns the string representation
 func (s DescribeReservedInstancesInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -13160,10 +13110,10 @@ type DescribeReservedInstancesListingsInput struct {
 	Filters []*Filter `locationName:"filters" locationNameList:"Filter" type:"list"`
 
 	// One or more Reserved Instance IDs.
-	ReservedInstancesID *string `locationName:"reservedInstancesId" type:"string"`
+	ReservedInstancesId *string `locationName:"reservedInstancesId" type:"string"`
 
 	// One or more Reserved Instance Listing IDs.
-	ReservedInstancesListingID *string `locationName:"reservedInstancesListingId" type:"string"`
+	ReservedInstancesListingId *string `locationName:"reservedInstancesListingId" type:"string"`
 
 	metadataDescribeReservedInstancesListingsInput `json:"-" xml:"-"`
 }
@@ -13174,7 +13124,7 @@ type metadataDescribeReservedInstancesListingsInput struct {
 
 // String returns the string representation
 func (s DescribeReservedInstancesListingsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -13195,7 +13145,7 @@ type metadataDescribeReservedInstancesListingsOutput struct {
 
 // String returns the string representation
 func (s DescribeReservedInstancesListingsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -13244,7 +13194,7 @@ type DescribeReservedInstancesModificationsInput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// IDs for the submitted modification request.
-	ReservedInstancesModificationIDs []*string `locationName:"ReservedInstancesModificationId" locationNameList:"ReservedInstancesModificationId" type:"list"`
+	ReservedInstancesModificationIds []*string `locationName:"ReservedInstancesModificationId" locationNameList:"ReservedInstancesModificationId" type:"list"`
 
 	metadataDescribeReservedInstancesModificationsInput `json:"-" xml:"-"`
 }
@@ -13255,7 +13205,7 @@ type metadataDescribeReservedInstancesModificationsInput struct {
 
 // String returns the string representation
 func (s DescribeReservedInstancesModificationsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -13280,7 +13230,7 @@ type metadataDescribeReservedInstancesModificationsOutput struct {
 
 // String returns the string representation
 func (s DescribeReservedInstancesModificationsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -13340,12 +13290,12 @@ type DescribeReservedInstancesOfferingsInput struct {
 	// VPC.
 	//
 	// Default: default
-	InstanceTenancy *string `locationName:"instanceTenancy" type:"string"`
+	InstanceTenancy *string `locationName:"instanceTenancy" type:"string" enum:"Tenancy"`
 
 	// The instance type on which the Reserved Instance can be used. For more information,
 	// see Instance Types (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
-	InstanceType *string `type:"string"`
+	InstanceType *string `type:"string" enum:"InstanceType"`
 
 	// The maximum duration (in seconds) to filter when searching for offerings.
 	//
@@ -13375,14 +13325,14 @@ type DescribeReservedInstancesOfferingsInput struct {
 	// The Reserved Instance offering type. If you are using tools that predate
 	// the 2011-11-01 API version, you only have access to the Medium Utilization
 	// Reserved Instance offering type.
-	OfferingType *string `locationName:"offeringType" type:"string"`
+	OfferingType *string `locationName:"offeringType" type:"string" enum:"OfferingTypeValues"`
 
 	// The Reserved Instance product platform description. Instances that include
 	// (Amazon VPC) in the description are for use with Amazon VPC.
-	ProductDescription *string `type:"string"`
+	ProductDescription *string `type:"string" enum:"RIProductDescription"`
 
 	// One or more Reserved Instances offering IDs.
-	ReservedInstancesOfferingIDs []*string `locationName:"ReservedInstancesOfferingId" type:"list"`
+	ReservedInstancesOfferingIds []*string `locationName:"ReservedInstancesOfferingId" type:"list"`
 
 	metadataDescribeReservedInstancesOfferingsInput `json:"-" xml:"-"`
 }
@@ -13393,7 +13343,7 @@ type metadataDescribeReservedInstancesOfferingsInput struct {
 
 // String returns the string representation
 func (s DescribeReservedInstancesOfferingsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -13418,7 +13368,7 @@ type metadataDescribeReservedInstancesOfferingsOutput struct {
 
 // String returns the string representation
 func (s DescribeReservedInstancesOfferingsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -13439,7 +13389,7 @@ type metadataDescribeReservedInstancesOutput struct {
 
 // String returns the string representation
 func (s DescribeReservedInstancesOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -13512,7 +13462,7 @@ type DescribeRouteTablesInput struct {
 	// One or more route table IDs.
 	//
 	// Default: Describes all your route tables.
-	RouteTableIDs []*string `locationName:"RouteTableId" locationNameList:"item" type:"list"`
+	RouteTableIds []*string `locationName:"RouteTableId" locationNameList:"item" type:"list"`
 
 	metadataDescribeRouteTablesInput `json:"-" xml:"-"`
 }
@@ -13523,7 +13473,7 @@ type metadataDescribeRouteTablesInput struct {
 
 // String returns the string representation
 func (s DescribeRouteTablesInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -13544,7 +13494,7 @@ type metadataDescribeRouteTablesOutput struct {
 
 // String returns the string representation
 func (s DescribeRouteTablesOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -13603,7 +13553,7 @@ type DescribeSecurityGroupsInput struct {
 	// VPC.
 	//
 	// Default: Describes all your security groups.
-	GroupIDs []*string `locationName:"GroupId" locationNameList:"groupId" type:"list"`
+	GroupIds []*string `locationName:"GroupId" locationNameList:"groupId" type:"list"`
 
 	// [EC2-Classic and default VPC only] One or more security group names. You
 	// can specify either the security group name or the security group ID. For
@@ -13622,7 +13572,7 @@ type metadataDescribeSecurityGroupsInput struct {
 
 // String returns the string representation
 func (s DescribeSecurityGroupsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -13643,7 +13593,7 @@ type metadataDescribeSecurityGroupsOutput struct {
 
 // String returns the string representation
 func (s DescribeSecurityGroupsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -13653,7 +13603,7 @@ func (s DescribeSecurityGroupsOutput) GoString() string {
 
 type DescribeSnapshotAttributeInput struct {
 	// The snapshot attribute you would like to view.
-	Attribute *string `type:"string" required:"true"`
+	Attribute *string `type:"string" required:"true" enum:"SnapshotAttributeName"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -13662,7 +13612,7 @@ type DescribeSnapshotAttributeInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the EBS snapshot.
-	SnapshotID *string `locationName:"SnapshotId" type:"string" required:"true"`
+	SnapshotId *string `type:"string" required:"true"`
 
 	metadataDescribeSnapshotAttributeInput `json:"-" xml:"-"`
 }
@@ -13673,7 +13623,7 @@ type metadataDescribeSnapshotAttributeInput struct {
 
 // String returns the string representation
 func (s DescribeSnapshotAttributeInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -13689,7 +13639,7 @@ type DescribeSnapshotAttributeOutput struct {
 	ProductCodes []*ProductCode `locationName:"productCodes" locationNameList:"item" type:"list"`
 
 	// The ID of the EBS snapshot.
-	SnapshotID *string `locationName:"snapshotId" type:"string"`
+	SnapshotId *string `locationName:"snapshotId" type:"string"`
 
 	metadataDescribeSnapshotAttributeOutput `json:"-" xml:"-"`
 }
@@ -13700,7 +13650,7 @@ type metadataDescribeSnapshotAttributeOutput struct {
 
 // String returns the string representation
 func (s DescribeSnapshotAttributeOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -13770,15 +13720,15 @@ type DescribeSnapshotsInput struct {
 
 	// Returns the snapshots owned by the specified owner. Multiple owners can be
 	// specified.
-	OwnerIDs []*string `locationName:"Owner" locationNameList:"Owner" type:"list"`
+	OwnerIds []*string `locationName:"Owner" locationNameList:"Owner" type:"list"`
 
 	// One or more AWS accounts IDs that can create volumes from the snapshot.
-	RestorableByUserIDs []*string `locationName:"RestorableBy" type:"list"`
+	RestorableByUserIds []*string `locationName:"RestorableBy" type:"list"`
 
 	// One or more snapshot IDs.
 	//
 	// Default: Describes snapshots for which you have launch permissions.
-	SnapshotIDs []*string `locationName:"SnapshotId" locationNameList:"SnapshotId" type:"list"`
+	SnapshotIds []*string `locationName:"SnapshotId" locationNameList:"SnapshotId" type:"list"`
 
 	metadataDescribeSnapshotsInput `json:"-" xml:"-"`
 }
@@ -13789,7 +13739,7 @@ type metadataDescribeSnapshotsInput struct {
 
 // String returns the string representation
 func (s DescribeSnapshotsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -13816,7 +13766,7 @@ type metadataDescribeSnapshotsOutput struct {
 
 // String returns the string representation
 func (s DescribeSnapshotsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -13841,7 +13791,7 @@ type metadataDescribeSpotDatafeedSubscriptionInput struct {
 
 // String returns the string representation
 func (s DescribeSpotDatafeedSubscriptionInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -13863,7 +13813,7 @@ type metadataDescribeSpotDatafeedSubscriptionOutput struct {
 
 // String returns the string representation
 func (s DescribeSpotDatafeedSubscriptionOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -13888,7 +13838,7 @@ type DescribeSpotFleetInstancesInput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// The ID of the Spot fleet request.
-	SpotFleetRequestID *string `locationName:"spotFleetRequestId" type:"string" required:"true"`
+	SpotFleetRequestId *string `locationName:"spotFleetRequestId" type:"string" required:"true"`
 
 	metadataDescribeSpotFleetInstancesInput `json:"-" xml:"-"`
 }
@@ -13899,7 +13849,7 @@ type metadataDescribeSpotFleetInstancesInput struct {
 
 // String returns the string representation
 func (s DescribeSpotFleetInstancesInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -13918,7 +13868,7 @@ type DescribeSpotFleetInstancesOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// The ID of the Spot fleet request.
-	SpotFleetRequestID *string `locationName:"spotFleetRequestId" type:"string" required:"true"`
+	SpotFleetRequestId *string `locationName:"spotFleetRequestId" type:"string" required:"true"`
 
 	metadataDescribeSpotFleetInstancesOutput `json:"-" xml:"-"`
 }
@@ -13929,7 +13879,7 @@ type metadataDescribeSpotFleetInstancesOutput struct {
 
 // String returns the string representation
 func (s DescribeSpotFleetInstancesOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -13946,7 +13896,7 @@ type DescribeSpotFleetRequestHistoryInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The type of events to describe. By default, all events are described.
-	EventType *string `locationName:"eventType" type:"string"`
+	EventType *string `locationName:"eventType" type:"string" enum:"EventType"`
 
 	// The maximum number of results to return in a single call. Specify a value
 	// between 1 and 1000. The default value is 1000. To retrieve the remaining
@@ -13957,7 +13907,7 @@ type DescribeSpotFleetRequestHistoryInput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// The ID of the Spot fleet request.
-	SpotFleetRequestID *string `locationName:"spotFleetRequestId" type:"string" required:"true"`
+	SpotFleetRequestId *string `locationName:"spotFleetRequestId" type:"string" required:"true"`
 
 	// The starting date and time for the events, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
 	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"iso8601" required:"true"`
@@ -13971,7 +13921,7 @@ type metadataDescribeSpotFleetRequestHistoryInput struct {
 
 // String returns the string representation
 func (s DescribeSpotFleetRequestHistoryInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -13995,7 +13945,7 @@ type DescribeSpotFleetRequestHistoryOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// The ID of the Spot fleet request.
-	SpotFleetRequestID *string `locationName:"spotFleetRequestId" type:"string" required:"true"`
+	SpotFleetRequestId *string `locationName:"spotFleetRequestId" type:"string" required:"true"`
 
 	// The starting date and time for the events, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
 	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"iso8601" required:"true"`
@@ -14009,7 +13959,7 @@ type metadataDescribeSpotFleetRequestHistoryOutput struct {
 
 // String returns the string representation
 func (s DescribeSpotFleetRequestHistoryOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -14034,7 +13984,7 @@ type DescribeSpotFleetRequestsInput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// The IDs of the Spot fleet requests.
-	SpotFleetRequestIDs []*string `locationName:"spotFleetRequestId" locationNameList:"item" type:"list"`
+	SpotFleetRequestIds []*string `locationName:"spotFleetRequestId" locationNameList:"item" type:"list"`
 
 	metadataDescribeSpotFleetRequestsInput `json:"-" xml:"-"`
 }
@@ -14045,7 +13995,7 @@ type metadataDescribeSpotFleetRequestsInput struct {
 
 // String returns the string representation
 func (s DescribeSpotFleetRequestsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -14071,7 +14021,7 @@ type metadataDescribeSpotFleetRequestsOutput struct {
 
 // String returns the string representation
 func (s DescribeSpotFleetRequestsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -14198,7 +14148,7 @@ type DescribeSpotInstanceRequestsInput struct {
 	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// One or more Spot Instance request IDs.
-	SpotInstanceRequestIDs []*string `locationName:"SpotInstanceRequestId" locationNameList:"SpotInstanceRequestId" type:"list"`
+	SpotInstanceRequestIds []*string `locationName:"SpotInstanceRequestId" locationNameList:"SpotInstanceRequestId" type:"list"`
 
 	metadataDescribeSpotInstanceRequestsInput `json:"-" xml:"-"`
 }
@@ -14209,7 +14159,7 @@ type metadataDescribeSpotInstanceRequestsInput struct {
 
 // String returns the string representation
 func (s DescribeSpotInstanceRequestsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -14231,7 +14181,7 @@ type metadataDescribeSpotInstanceRequestsOutput struct {
 
 // String returns the string representation
 func (s DescribeSpotInstanceRequestsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -14299,7 +14249,7 @@ type metadataDescribeSpotPriceHistoryInput struct {
 
 // String returns the string representation
 func (s DescribeSpotPriceHistoryInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -14325,7 +14275,7 @@ type metadataDescribeSpotPriceHistoryOutput struct {
 
 // String returns the string representation
 func (s DescribeSpotPriceHistoryOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -14377,7 +14327,7 @@ type DescribeSubnetsInput struct {
 	// One or more subnet IDs.
 	//
 	// Default: Describes all your subnets.
-	SubnetIDs []*string `locationName:"SubnetId" locationNameList:"SubnetId" type:"list"`
+	SubnetIds []*string `locationName:"SubnetId" locationNameList:"SubnetId" type:"list"`
 
 	metadataDescribeSubnetsInput `json:"-" xml:"-"`
 }
@@ -14388,7 +14338,7 @@ type metadataDescribeSubnetsInput struct {
 
 // String returns the string representation
 func (s DescribeSubnetsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -14409,7 +14359,7 @@ type metadataDescribeSubnetsOutput struct {
 
 // String returns the string representation
 func (s DescribeSubnetsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -14457,7 +14407,7 @@ type metadataDescribeTagsInput struct {
 
 // String returns the string representation
 func (s DescribeTagsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -14482,7 +14432,7 @@ type metadataDescribeTagsOutput struct {
 
 // String returns the string representation
 func (s DescribeTagsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -14490,609 +14440,9 @@ func (s DescribeTagsOutput) GoString() string {
 	return s.String()
 }
 
-type DescribeVPCAttributeInput struct {
-	// The VPC attribute.
-	Attribute *string `type:"string"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the VPC.
-	VPCID *string `locationName:"VpcId" type:"string" required:"true"`
-
-	metadataDescribeVPCAttributeInput `json:"-" xml:"-"`
-}
-
-type metadataDescribeVPCAttributeInput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeVPCAttributeInput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s DescribeVPCAttributeInput) GoString() string {
-	return s.String()
-}
-
-type DescribeVPCAttributeOutput struct {
-	// Indicates whether the instances launched in the VPC get DNS hostnames. If
-	// this attribute is true, instances in the VPC get DNS hostnames; otherwise,
-	// they do not.
-	EnableDNSHostnames *AttributeBooleanValue `locationName:"enableDnsHostnames" type:"structure"`
-
-	// Indicates whether DNS resolution is enabled for the VPC. If this attribute
-	// is true, the Amazon DNS server resolves DNS hostnames for your instances
-	// to their corresponding IP addresses; otherwise, it does not.
-	EnableDNSSupport *AttributeBooleanValue `locationName:"enableDnsSupport" type:"structure"`
-
-	// The ID of the VPC.
-	VPCID *string `locationName:"vpcId" type:"string"`
-
-	metadataDescribeVPCAttributeOutput `json:"-" xml:"-"`
-}
-
-type metadataDescribeVPCAttributeOutput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeVPCAttributeOutput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s DescribeVPCAttributeOutput) GoString() string {
-	return s.String()
-}
-
-type DescribeVPCClassicLinkInput struct {
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// One or more filters.
-	//
-	//   is-classic-link-enabled - Whether the VPC is enabled for ClassicLink (true
-	// | false).
-	//
-	//   tag:key=value - The key/value combination of a tag assigned to the resource.
-	//
-	//   tag-key - The key of a tag assigned to the resource. This filter is independent
-	// of the tag-value filter. For example, if you use both the filter "tag-key=Purpose"
-	// and the filter "tag-value=X", you get any resources assigned both the tag
-	// key Purpose (regardless of what the tag's value is), and the tag value X
-	// (regardless of what the tag's key is). If you want to list only resources
-	// where Purpose is X, see the tag:key=value filter.
-	//
-	//   tag-value - The value of a tag assigned to the resource. This filter is
-	// independent of the tag-key filter.
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// One or more VPCs for which you want to describe the ClassicLink status.
-	VPCIDs []*string `locationName:"VpcId" locationNameList:"VpcId" type:"list"`
-
-	metadataDescribeVPCClassicLinkInput `json:"-" xml:"-"`
-}
-
-type metadataDescribeVPCClassicLinkInput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeVPCClassicLinkInput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s DescribeVPCClassicLinkInput) GoString() string {
-	return s.String()
-}
-
-type DescribeVPCClassicLinkOutput struct {
-	// The ClassicLink status of one or more VPCs.
-	VPCs []*VPCClassicLink `locationName:"vpcSet" locationNameList:"item" type:"list"`
-
-	metadataDescribeVPCClassicLinkOutput `json:"-" xml:"-"`
-}
-
-type metadataDescribeVPCClassicLinkOutput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeVPCClassicLinkOutput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s DescribeVPCClassicLinkOutput) GoString() string {
-	return s.String()
-}
-
-type DescribeVPCEndpointServicesInput struct {
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// The maximum number of items to return for this request. The request returns
-	// a token that you can specify in a subsequent call to get the next set of
-	// results.
-	//
-	// Constraint: If the value is greater than 1000, we return only 1000 items.
-	MaxResults *int64 `type:"integer"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a prior call.)
-	NextToken *string `type:"string"`
-
-	metadataDescribeVPCEndpointServicesInput `json:"-" xml:"-"`
-}
-
-type metadataDescribeVPCEndpointServicesInput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeVPCEndpointServicesInput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s DescribeVPCEndpointServicesInput) GoString() string {
-	return s.String()
-}
-
-type DescribeVPCEndpointServicesOutput struct {
-	// The token to use when requesting the next set of items. If there are no additional
-	// items to return, the string is empty.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// A list of supported AWS services.
-	ServiceNames []*string `locationName:"serviceNameSet" locationNameList:"item" type:"list"`
-
-	metadataDescribeVPCEndpointServicesOutput `json:"-" xml:"-"`
-}
-
-type metadataDescribeVPCEndpointServicesOutput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeVPCEndpointServicesOutput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s DescribeVPCEndpointServicesOutput) GoString() string {
-	return s.String()
-}
-
-type DescribeVPCEndpointsInput struct {
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// One or more filters.
-	//
-	//   service-name: The name of the AWS service.
-	//
-	//   vpc-id: The ID of the VPC in which the endpoint resides.
-	//
-	//   vpc-endpoint-id: The ID of the endpoint.
-	//
-	//   vpc-endpoint-state: The state of the endpoint. (pending | available |
-	// deleting | deleted)
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// The maximum number of items to return for this request. The request returns
-	// a token that you can specify in a subsequent call to get the next set of
-	// results.
-	//
-	// Constraint: If the value is greater than 1000, we return only 1000 items.
-	MaxResults *int64 `type:"integer"`
-
-	// The token for the next set of items to return. (You received this token from
-	// a prior call.)
-	NextToken *string `type:"string"`
-
-	// One or more endpoint IDs.
-	VPCEndpointIDs []*string `locationName:"VpcEndpointId" locationNameList:"item" type:"list"`
-
-	metadataDescribeVPCEndpointsInput `json:"-" xml:"-"`
-}
-
-type metadataDescribeVPCEndpointsInput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeVPCEndpointsInput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s DescribeVPCEndpointsInput) GoString() string {
-	return s.String()
-}
-
-type DescribeVPCEndpointsOutput struct {
-	// The token to use when requesting the next set of items. If there are no additional
-	// items to return, the string is empty.
-	NextToken *string `locationName:"nextToken" type:"string"`
-
-	// Information about the endpoints.
-	VPCEndpoints []*VPCEndpoint `locationName:"vpcEndpointSet" locationNameList:"item" type:"list"`
-
-	metadataDescribeVPCEndpointsOutput `json:"-" xml:"-"`
-}
-
-type metadataDescribeVPCEndpointsOutput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeVPCEndpointsOutput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s DescribeVPCEndpointsOutput) GoString() string {
-	return s.String()
-}
-
-type DescribeVPCPeeringConnectionsInput struct {
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// One or more filters.
-	//
-	//   accepter-vpc-info.cidr-block - The CIDR block of the peer VPC.
-	//
-	//   accepter-vpc-info.owner-id - The AWS account ID of the owner of the peer
-	// VPC.
-	//
-	//   accepter-vpc-info.vpc-id - The ID of the peer VPC.
-	//
-	//   expiration-time - The expiration date and time for the VPC peering connection.
-	//
-	//   requester-vpc-info.cidr-block - The CIDR block of the requester's VPC.
-	//
-	//   requester-vpc-info.owner-id - The AWS account ID of the owner of the requester
-	// VPC.
-	//
-	//   requester-vpc-info.vpc-id - The ID of the requester VPC.
-	//
-	//   status-code - The status of the VPC peering connection (pending-acceptance
-	// | failed | expired | provisioning | active | deleted | rejected).
-	//
-	//   status-message - A message that provides more information about the status
-	// of the VPC peering connection, if applicable.
-	//
-	//   tag:key=value - The key/value combination of a tag assigned to the resource.
-	//
-	//   tag-key - The key of a tag assigned to the resource. This filter is independent
-	// of the tag-value filter. For example, if you use both the filter "tag-key=Purpose"
-	// and the filter "tag-value=X", you get any resources assigned both the tag
-	// key Purpose (regardless of what the tag's value is), and the tag value X
-	// (regardless of what the tag's key is). If you want to list only resources
-	// where Purpose is X, see the tag:key=value filter.
-	//
-	//   tag-value - The value of a tag assigned to the resource. This filter is
-	// independent of the tag-key filter.
-	//
-	//   vpc-peering-connection-id - The ID of the VPC peering connection.
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// One or more VPC peering connection IDs.
-	//
-	// Default: Describes all your VPC peering connections.
-	VPCPeeringConnectionIDs []*string `locationName:"VpcPeeringConnectionId" locationNameList:"item" type:"list"`
-
-	metadataDescribeVPCPeeringConnectionsInput `json:"-" xml:"-"`
-}
-
-type metadataDescribeVPCPeeringConnectionsInput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeVPCPeeringConnectionsInput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s DescribeVPCPeeringConnectionsInput) GoString() string {
-	return s.String()
-}
-
-type DescribeVPCPeeringConnectionsOutput struct {
-	// Information about the VPC peering connections.
-	VPCPeeringConnections []*VPCPeeringConnection `locationName:"vpcPeeringConnectionSet" locationNameList:"item" type:"list"`
-
-	metadataDescribeVPCPeeringConnectionsOutput `json:"-" xml:"-"`
-}
-
-type metadataDescribeVPCPeeringConnectionsOutput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeVPCPeeringConnectionsOutput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s DescribeVPCPeeringConnectionsOutput) GoString() string {
-	return s.String()
-}
-
-type DescribeVPCsInput struct {
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// One or more filters.
-	//
-	//   cidr - The CIDR block of the VPC. The CIDR block you specify must exactly
-	// match the VPC's CIDR block for information to be returned for the VPC. Must
-	// contain the slash followed by one or two digits (for example, /28).
-	//
-	//   dhcp-options-id - The ID of a set of DHCP options.
-	//
-	//   isDefault - Indicates whether the VPC is the default VPC.
-	//
-	//   state - The state of the VPC (pending | available).
-	//
-	//   tag:key=value - The key/value combination of a tag assigned to the resource.
-	//
-	//   tag-key - The key of a tag assigned to the resource. This filter is independent
-	// of the tag-value filter. For example, if you use both the filter "tag-key=Purpose"
-	// and the filter "tag-value=X", you get any resources assigned both the tag
-	// key Purpose (regardless of what the tag's value is), and the tag value X
-	// (regardless of what the tag's key is). If you want to list only resources
-	// where Purpose is X, see the tag:key=value filter.
-	//
-	//   tag-value - The value of a tag assigned to the resource. This filter is
-	// independent of the tag-key filter.
-	//
-	//   vpc-id - The ID of the VPC.
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// One or more VPC IDs.
-	//
-	// Default: Describes all your VPCs.
-	VPCIDs []*string `locationName:"VpcId" locationNameList:"VpcId" type:"list"`
-
-	metadataDescribeVPCsInput `json:"-" xml:"-"`
-}
-
-type metadataDescribeVPCsInput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeVPCsInput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s DescribeVPCsInput) GoString() string {
-	return s.String()
-}
-
-type DescribeVPCsOutput struct {
-	// Information about one or more VPCs.
-	VPCs []*VPC `locationName:"vpcSet" locationNameList:"item" type:"list"`
-
-	metadataDescribeVPCsOutput `json:"-" xml:"-"`
-}
-
-type metadataDescribeVPCsOutput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeVPCsOutput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s DescribeVPCsOutput) GoString() string {
-	return s.String()
-}
-
-type DescribeVPNConnectionsInput struct {
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// One or more filters.
-	//
-	//   customer-gateway-configuration - The configuration information for the
-	// customer gateway.
-	//
-	//   customer-gateway-id - The ID of a customer gateway associated with the
-	// VPN connection.
-	//
-	//   state - The state of the VPN connection (pending | available | deleting
-	// | deleted).
-	//
-	//   option.static-routes-only - Indicates whether the connection has static
-	// routes only. Used for devices that do not support Border Gateway Protocol
-	// (BGP).
-	//
-	//   route.destination-cidr-block - The destination CIDR block. This corresponds
-	// to the subnet used in a customer data center.
-	//
-	//   bgp-asn - The BGP Autonomous System Number (ASN) associated with a BGP
-	// device.
-	//
-	//   tag:key=value - The key/value combination of a tag assigned to the resource.
-	//
-	//   tag-key - The key of a tag assigned to the resource. This filter is independent
-	// of the tag-value filter. For example, if you use both the filter "tag-key=Purpose"
-	// and the filter "tag-value=X", you get any resources assigned both the tag
-	// key Purpose (regardless of what the tag's value is), and the tag value X
-	// (regardless of what the tag's key is). If you want to list only resources
-	// where Purpose is X, see the tag:key=value filter.
-	//
-	//   tag-value - The value of a tag assigned to the resource. This filter is
-	// independent of the tag-key filter.
-	//
-	//   type - The type of VPN connection. Currently the only supported type is
-	// ipsec.1.
-	//
-	//   vpn-connection-id - The ID of the VPN connection.
-	//
-	//   vpn-gateway-id - The ID of a virtual private gateway associated with the
-	// VPN connection.
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// One or more VPN connection IDs.
-	//
-	// Default: Describes your VPN connections.
-	VPNConnectionIDs []*string `locationName:"VpnConnectionId" locationNameList:"VpnConnectionId" type:"list"`
-
-	metadataDescribeVPNConnectionsInput `json:"-" xml:"-"`
-}
-
-type metadataDescribeVPNConnectionsInput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeVPNConnectionsInput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s DescribeVPNConnectionsInput) GoString() string {
-	return s.String()
-}
-
-type DescribeVPNConnectionsOutput struct {
-	// Information about one or more VPN connections.
-	VPNConnections []*VPNConnection `locationName:"vpnConnectionSet" locationNameList:"item" type:"list"`
-
-	metadataDescribeVPNConnectionsOutput `json:"-" xml:"-"`
-}
-
-type metadataDescribeVPNConnectionsOutput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeVPNConnectionsOutput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s DescribeVPNConnectionsOutput) GoString() string {
-	return s.String()
-}
-
-type DescribeVPNGatewaysInput struct {
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// One or more filters.
-	//
-	//   attachment.state - The current state of the attachment between the gateway
-	// and the VPC (attaching | attached | detaching | detached).
-	//
-	//   attachment.vpc-id - The ID of an attached VPC.
-	//
-	//   availability-zone - The Availability Zone for the virtual private gateway.
-	//
-	//   state - The state of the virtual private gateway (pending | available
-	// | deleting | deleted).
-	//
-	//   tag:key=value - The key/value combination of a tag assigned to the resource.
-	//
-	//   tag-key - The key of a tag assigned to the resource. This filter is independent
-	// of the tag-value filter. For example, if you use both the filter "tag-key=Purpose"
-	// and the filter "tag-value=X", you get any resources assigned both the tag
-	// key Purpose (regardless of what the tag's value is), and the tag value X
-	// (regardless of what the tag's key is). If you want to list only resources
-	// where Purpose is X, see the tag:key=value filter.
-	//
-	//   tag-value - The value of a tag assigned to the resource. This filter is
-	// independent of the tag-key filter.
-	//
-	//   type - The type of virtual private gateway. Currently the only supported
-	// type is ipsec.1.
-	//
-	//   vpn-gateway-id - The ID of the virtual private gateway.
-	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
-
-	// One or more virtual private gateway IDs.
-	//
-	// Default: Describes all your virtual private gateways.
-	VPNGatewayIDs []*string `locationName:"VpnGatewayId" locationNameList:"VpnGatewayId" type:"list"`
-
-	metadataDescribeVPNGatewaysInput `json:"-" xml:"-"`
-}
-
-type metadataDescribeVPNGatewaysInput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeVPNGatewaysInput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s DescribeVPNGatewaysInput) GoString() string {
-	return s.String()
-}
-
-type DescribeVPNGatewaysOutput struct {
-	// Information about one or more virtual private gateways.
-	VPNGateways []*VPNGateway `locationName:"vpnGatewaySet" locationNameList:"item" type:"list"`
-
-	metadataDescribeVPNGatewaysOutput `json:"-" xml:"-"`
-}
-
-type metadataDescribeVPNGatewaysOutput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeVPNGatewaysOutput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s DescribeVPNGatewaysOutput) GoString() string {
-	return s.String()
-}
-
 type DescribeVolumeAttributeInput struct {
 	// The instance attribute.
-	Attribute *string `type:"string"`
+	Attribute *string `type:"string" enum:"VolumeAttributeName"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -15101,7 +14451,7 @@ type DescribeVolumeAttributeInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the volume.
-	VolumeID *string `locationName:"VolumeId" type:"string" required:"true"`
+	VolumeId *string `type:"string" required:"true"`
 
 	metadataDescribeVolumeAttributeInput `json:"-" xml:"-"`
 }
@@ -15112,7 +14462,7 @@ type metadataDescribeVolumeAttributeInput struct {
 
 // String returns the string representation
 func (s DescribeVolumeAttributeInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -15128,7 +14478,7 @@ type DescribeVolumeAttributeOutput struct {
 	ProductCodes []*ProductCode `locationName:"productCodes" locationNameList:"item" type:"list"`
 
 	// The ID of the volume.
-	VolumeID *string `locationName:"volumeId" type:"string"`
+	VolumeId *string `locationName:"volumeId" type:"string"`
 
 	metadataDescribeVolumeAttributeOutput `json:"-" xml:"-"`
 }
@@ -15139,7 +14489,7 @@ type metadataDescribeVolumeAttributeOutput struct {
 
 // String returns the string representation
 func (s DescribeVolumeAttributeOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -15206,7 +14556,7 @@ type DescribeVolumeStatusInput struct {
 	// One or more volume IDs.
 	//
 	// Default: Describes all your volumes.
-	VolumeIDs []*string `locationName:"VolumeId" locationNameList:"VolumeId" type:"list"`
+	VolumeIds []*string `locationName:"VolumeId" locationNameList:"VolumeId" type:"list"`
 
 	metadataDescribeVolumeStatusInput `json:"-" xml:"-"`
 }
@@ -15217,7 +14567,7 @@ type metadataDescribeVolumeStatusInput struct {
 
 // String returns the string representation
 func (s DescribeVolumeStatusInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -15242,7 +14592,7 @@ type metadataDescribeVolumeStatusOutput struct {
 
 // String returns the string representation
 func (s DescribeVolumeStatusOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -15323,7 +14673,7 @@ type DescribeVolumesInput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// One or more volume IDs.
-	VolumeIDs []*string `locationName:"VolumeId" locationNameList:"VolumeId" type:"list"`
+	VolumeIds []*string `locationName:"VolumeId" locationNameList:"VolumeId" type:"list"`
 
 	metadataDescribeVolumesInput `json:"-" xml:"-"`
 }
@@ -15334,7 +14684,7 @@ type metadataDescribeVolumesInput struct {
 
 // String returns the string representation
 func (s DescribeVolumesInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -15361,7 +14711,7 @@ type metadataDescribeVolumesOutput struct {
 
 // String returns the string representation
 func (s DescribeVolumesOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -15369,7 +14719,607 @@ func (s DescribeVolumesOutput) GoString() string {
 	return s.String()
 }
 
-type DetachClassicLinkVPCInput struct {
+type DescribeVpcAttributeInput struct {
+	// The VPC attribute.
+	Attribute *string `type:"string" enum:"VpcAttributeName"`
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have
+	// the required permissions, the error response is DryRunOperation. Otherwise,
+	// it is UnauthorizedOperation.
+	DryRun *bool `locationName:"dryRun" type:"boolean"`
+
+	// The ID of the VPC.
+	VpcId *string `type:"string" required:"true"`
+
+	metadataDescribeVpcAttributeInput `json:"-" xml:"-"`
+}
+
+type metadataDescribeVpcAttributeInput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DescribeVpcAttributeInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeVpcAttributeInput) GoString() string {
+	return s.String()
+}
+
+type DescribeVpcAttributeOutput struct {
+	// Indicates whether the instances launched in the VPC get DNS hostnames. If
+	// this attribute is true, instances in the VPC get DNS hostnames; otherwise,
+	// they do not.
+	EnableDnsHostnames *AttributeBooleanValue `locationName:"enableDnsHostnames" type:"structure"`
+
+	// Indicates whether DNS resolution is enabled for the VPC. If this attribute
+	// is true, the Amazon DNS server resolves DNS hostnames for your instances
+	// to their corresponding IP addresses; otherwise, it does not.
+	EnableDnsSupport *AttributeBooleanValue `locationName:"enableDnsSupport" type:"structure"`
+
+	// The ID of the VPC.
+	VpcId *string `locationName:"vpcId" type:"string"`
+
+	metadataDescribeVpcAttributeOutput `json:"-" xml:"-"`
+}
+
+type metadataDescribeVpcAttributeOutput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DescribeVpcAttributeOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeVpcAttributeOutput) GoString() string {
+	return s.String()
+}
+
+type DescribeVpcClassicLinkInput struct {
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have
+	// the required permissions, the error response is DryRunOperation. Otherwise,
+	// it is UnauthorizedOperation.
+	DryRun *bool `locationName:"dryRun" type:"boolean"`
+
+	// One or more filters.
+	//
+	//   is-classic-link-enabled - Whether the VPC is enabled for ClassicLink (true
+	// | false).
+	//
+	//   tag:key=value - The key/value combination of a tag assigned to the resource.
+	//
+	//   tag-key - The key of a tag assigned to the resource. This filter is independent
+	// of the tag-value filter. For example, if you use both the filter "tag-key=Purpose"
+	// and the filter "tag-value=X", you get any resources assigned both the tag
+	// key Purpose (regardless of what the tag's value is), and the tag value X
+	// (regardless of what the tag's key is). If you want to list only resources
+	// where Purpose is X, see the tag:key=value filter.
+	//
+	//   tag-value - The value of a tag assigned to the resource. This filter is
+	// independent of the tag-key filter.
+	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+
+	// One or more VPCs for which you want to describe the ClassicLink status.
+	VpcIds []*string `locationName:"VpcId" locationNameList:"VpcId" type:"list"`
+
+	metadataDescribeVpcClassicLinkInput `json:"-" xml:"-"`
+}
+
+type metadataDescribeVpcClassicLinkInput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DescribeVpcClassicLinkInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeVpcClassicLinkInput) GoString() string {
+	return s.String()
+}
+
+type DescribeVpcClassicLinkOutput struct {
+	// The ClassicLink status of one or more VPCs.
+	Vpcs []*VpcClassicLink `locationName:"vpcSet" locationNameList:"item" type:"list"`
+
+	metadataDescribeVpcClassicLinkOutput `json:"-" xml:"-"`
+}
+
+type metadataDescribeVpcClassicLinkOutput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DescribeVpcClassicLinkOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeVpcClassicLinkOutput) GoString() string {
+	return s.String()
+}
+
+type DescribeVpcEndpointServicesInput struct {
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have
+	// the required permissions, the error response is DryRunOperation. Otherwise,
+	// it is UnauthorizedOperation.
+	DryRun *bool `type:"boolean"`
+
+	// The maximum number of items to return for this request. The request returns
+	// a token that you can specify in a subsequent call to get the next set of
+	// results.
+	//
+	// Constraint: If the value is greater than 1000, we return only 1000 items.
+	MaxResults *int64 `type:"integer"`
+
+	// The token for the next set of items to return. (You received this token from
+	// a prior call.)
+	NextToken *string `type:"string"`
+
+	metadataDescribeVpcEndpointServicesInput `json:"-" xml:"-"`
+}
+
+type metadataDescribeVpcEndpointServicesInput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DescribeVpcEndpointServicesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeVpcEndpointServicesInput) GoString() string {
+	return s.String()
+}
+
+type DescribeVpcEndpointServicesOutput struct {
+	// The token to use when requesting the next set of items. If there are no additional
+	// items to return, the string is empty.
+	NextToken *string `locationName:"nextToken" type:"string"`
+
+	// A list of supported AWS services.
+	ServiceNames []*string `locationName:"serviceNameSet" locationNameList:"item" type:"list"`
+
+	metadataDescribeVpcEndpointServicesOutput `json:"-" xml:"-"`
+}
+
+type metadataDescribeVpcEndpointServicesOutput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DescribeVpcEndpointServicesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeVpcEndpointServicesOutput) GoString() string {
+	return s.String()
+}
+
+type DescribeVpcEndpointsInput struct {
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have
+	// the required permissions, the error response is DryRunOperation. Otherwise,
+	// it is UnauthorizedOperation.
+	DryRun *bool `type:"boolean"`
+
+	// One or more filters.
+	//
+	//   service-name: The name of the AWS service.
+	//
+	//   vpc-id: The ID of the VPC in which the endpoint resides.
+	//
+	//   vpc-endpoint-id: The ID of the endpoint.
+	//
+	//   vpc-endpoint-state: The state of the endpoint. (pending | available |
+	// deleting | deleted)
+	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+
+	// The maximum number of items to return for this request. The request returns
+	// a token that you can specify in a subsequent call to get the next set of
+	// results.
+	//
+	// Constraint: If the value is greater than 1000, we return only 1000 items.
+	MaxResults *int64 `type:"integer"`
+
+	// The token for the next set of items to return. (You received this token from
+	// a prior call.)
+	NextToken *string `type:"string"`
+
+	// One or more endpoint IDs.
+	VpcEndpointIds []*string `locationName:"VpcEndpointId" locationNameList:"item" type:"list"`
+
+	metadataDescribeVpcEndpointsInput `json:"-" xml:"-"`
+}
+
+type metadataDescribeVpcEndpointsInput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DescribeVpcEndpointsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeVpcEndpointsInput) GoString() string {
+	return s.String()
+}
+
+type DescribeVpcEndpointsOutput struct {
+	// The token to use when requesting the next set of items. If there are no additional
+	// items to return, the string is empty.
+	NextToken *string `locationName:"nextToken" type:"string"`
+
+	// Information about the endpoints.
+	VpcEndpoints []*VpcEndpoint `locationName:"vpcEndpointSet" locationNameList:"item" type:"list"`
+
+	metadataDescribeVpcEndpointsOutput `json:"-" xml:"-"`
+}
+
+type metadataDescribeVpcEndpointsOutput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DescribeVpcEndpointsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeVpcEndpointsOutput) GoString() string {
+	return s.String()
+}
+
+type DescribeVpcPeeringConnectionsInput struct {
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have
+	// the required permissions, the error response is DryRunOperation. Otherwise,
+	// it is UnauthorizedOperation.
+	DryRun *bool `locationName:"dryRun" type:"boolean"`
+
+	// One or more filters.
+	//
+	//   accepter-vpc-info.cidr-block - The CIDR block of the peer VPC.
+	//
+	//   accepter-vpc-info.owner-id - The AWS account ID of the owner of the peer
+	// VPC.
+	//
+	//   accepter-vpc-info.vpc-id - The ID of the peer VPC.
+	//
+	//   expiration-time - The expiration date and time for the VPC peering connection.
+	//
+	//   requester-vpc-info.cidr-block - The CIDR block of the requester's VPC.
+	//
+	//   requester-vpc-info.owner-id - The AWS account ID of the owner of the requester
+	// VPC.
+	//
+	//   requester-vpc-info.vpc-id - The ID of the requester VPC.
+	//
+	//   status-code - The status of the VPC peering connection (pending-acceptance
+	// | failed | expired | provisioning | active | deleted | rejected).
+	//
+	//   status-message - A message that provides more information about the status
+	// of the VPC peering connection, if applicable.
+	//
+	//   tag:key=value - The key/value combination of a tag assigned to the resource.
+	//
+	//   tag-key - The key of a tag assigned to the resource. This filter is independent
+	// of the tag-value filter. For example, if you use both the filter "tag-key=Purpose"
+	// and the filter "tag-value=X", you get any resources assigned both the tag
+	// key Purpose (regardless of what the tag's value is), and the tag value X
+	// (regardless of what the tag's key is). If you want to list only resources
+	// where Purpose is X, see the tag:key=value filter.
+	//
+	//   tag-value - The value of a tag assigned to the resource. This filter is
+	// independent of the tag-key filter.
+	//
+	//   vpc-peering-connection-id - The ID of the VPC peering connection.
+	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+
+	// One or more VPC peering connection IDs.
+	//
+	// Default: Describes all your VPC peering connections.
+	VpcPeeringConnectionIds []*string `locationName:"VpcPeeringConnectionId" locationNameList:"item" type:"list"`
+
+	metadataDescribeVpcPeeringConnectionsInput `json:"-" xml:"-"`
+}
+
+type metadataDescribeVpcPeeringConnectionsInput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DescribeVpcPeeringConnectionsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeVpcPeeringConnectionsInput) GoString() string {
+	return s.String()
+}
+
+type DescribeVpcPeeringConnectionsOutput struct {
+	// Information about the VPC peering connections.
+	VpcPeeringConnections []*VpcPeeringConnection `locationName:"vpcPeeringConnectionSet" locationNameList:"item" type:"list"`
+
+	metadataDescribeVpcPeeringConnectionsOutput `json:"-" xml:"-"`
+}
+
+type metadataDescribeVpcPeeringConnectionsOutput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DescribeVpcPeeringConnectionsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeVpcPeeringConnectionsOutput) GoString() string {
+	return s.String()
+}
+
+type DescribeVpcsInput struct {
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have
+	// the required permissions, the error response is DryRunOperation. Otherwise,
+	// it is UnauthorizedOperation.
+	DryRun *bool `locationName:"dryRun" type:"boolean"`
+
+	// One or more filters.
+	//
+	//   cidr - The CIDR block of the VPC. The CIDR block you specify must exactly
+	// match the VPC's CIDR block for information to be returned for the VPC. Must
+	// contain the slash followed by one or two digits (for example, /28).
+	//
+	//   dhcp-options-id - The ID of a set of DHCP options.
+	//
+	//   isDefault - Indicates whether the VPC is the default VPC.
+	//
+	//   state - The state of the VPC (pending | available).
+	//
+	//   tag:key=value - The key/value combination of a tag assigned to the resource.
+	//
+	//   tag-key - The key of a tag assigned to the resource. This filter is independent
+	// of the tag-value filter. For example, if you use both the filter "tag-key=Purpose"
+	// and the filter "tag-value=X", you get any resources assigned both the tag
+	// key Purpose (regardless of what the tag's value is), and the tag value X
+	// (regardless of what the tag's key is). If you want to list only resources
+	// where Purpose is X, see the tag:key=value filter.
+	//
+	//   tag-value - The value of a tag assigned to the resource. This filter is
+	// independent of the tag-key filter.
+	//
+	//   vpc-id - The ID of the VPC.
+	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+
+	// One or more VPC IDs.
+	//
+	// Default: Describes all your VPCs.
+	VpcIds []*string `locationName:"VpcId" locationNameList:"VpcId" type:"list"`
+
+	metadataDescribeVpcsInput `json:"-" xml:"-"`
+}
+
+type metadataDescribeVpcsInput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DescribeVpcsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeVpcsInput) GoString() string {
+	return s.String()
+}
+
+type DescribeVpcsOutput struct {
+	// Information about one or more VPCs.
+	Vpcs []*Vpc `locationName:"vpcSet" locationNameList:"item" type:"list"`
+
+	metadataDescribeVpcsOutput `json:"-" xml:"-"`
+}
+
+type metadataDescribeVpcsOutput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DescribeVpcsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeVpcsOutput) GoString() string {
+	return s.String()
+}
+
+type DescribeVpnConnectionsInput struct {
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have
+	// the required permissions, the error response is DryRunOperation. Otherwise,
+	// it is UnauthorizedOperation.
+	DryRun *bool `locationName:"dryRun" type:"boolean"`
+
+	// One or more filters.
+	//
+	//   customer-gateway-configuration - The configuration information for the
+	// customer gateway.
+	//
+	//   customer-gateway-id - The ID of a customer gateway associated with the
+	// VPN connection.
+	//
+	//   state - The state of the VPN connection (pending | available | deleting
+	// | deleted).
+	//
+	//   option.static-routes-only - Indicates whether the connection has static
+	// routes only. Used for devices that do not support Border Gateway Protocol
+	// (BGP).
+	//
+	//   route.destination-cidr-block - The destination CIDR block. This corresponds
+	// to the subnet used in a customer data center.
+	//
+	//   bgp-asn - The BGP Autonomous System Number (ASN) associated with a BGP
+	// device.
+	//
+	//   tag:key=value - The key/value combination of a tag assigned to the resource.
+	//
+	//   tag-key - The key of a tag assigned to the resource. This filter is independent
+	// of the tag-value filter. For example, if you use both the filter "tag-key=Purpose"
+	// and the filter "tag-value=X", you get any resources assigned both the tag
+	// key Purpose (regardless of what the tag's value is), and the tag value X
+	// (regardless of what the tag's key is). If you want to list only resources
+	// where Purpose is X, see the tag:key=value filter.
+	//
+	//   tag-value - The value of a tag assigned to the resource. This filter is
+	// independent of the tag-key filter.
+	//
+	//   type - The type of VPN connection. Currently the only supported type is
+	// ipsec.1.
+	//
+	//   vpn-connection-id - The ID of the VPN connection.
+	//
+	//   vpn-gateway-id - The ID of a virtual private gateway associated with the
+	// VPN connection.
+	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+
+	// One or more VPN connection IDs.
+	//
+	// Default: Describes your VPN connections.
+	VpnConnectionIds []*string `locationName:"VpnConnectionId" locationNameList:"VpnConnectionId" type:"list"`
+
+	metadataDescribeVpnConnectionsInput `json:"-" xml:"-"`
+}
+
+type metadataDescribeVpnConnectionsInput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DescribeVpnConnectionsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeVpnConnectionsInput) GoString() string {
+	return s.String()
+}
+
+type DescribeVpnConnectionsOutput struct {
+	// Information about one or more VPN connections.
+	VpnConnections []*VpnConnection `locationName:"vpnConnectionSet" locationNameList:"item" type:"list"`
+
+	metadataDescribeVpnConnectionsOutput `json:"-" xml:"-"`
+}
+
+type metadataDescribeVpnConnectionsOutput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DescribeVpnConnectionsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeVpnConnectionsOutput) GoString() string {
+	return s.String()
+}
+
+type DescribeVpnGatewaysInput struct {
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have
+	// the required permissions, the error response is DryRunOperation. Otherwise,
+	// it is UnauthorizedOperation.
+	DryRun *bool `locationName:"dryRun" type:"boolean"`
+
+	// One or more filters.
+	//
+	//   attachment.state - The current state of the attachment between the gateway
+	// and the VPC (attaching | attached | detaching | detached).
+	//
+	//   attachment.vpc-id - The ID of an attached VPC.
+	//
+	//   availability-zone - The Availability Zone for the virtual private gateway.
+	//
+	//   state - The state of the virtual private gateway (pending | available
+	// | deleting | deleted).
+	//
+	//   tag:key=value - The key/value combination of a tag assigned to the resource.
+	//
+	//   tag-key - The key of a tag assigned to the resource. This filter is independent
+	// of the tag-value filter. For example, if you use both the filter "tag-key=Purpose"
+	// and the filter "tag-value=X", you get any resources assigned both the tag
+	// key Purpose (regardless of what the tag's value is), and the tag value X
+	// (regardless of what the tag's key is). If you want to list only resources
+	// where Purpose is X, see the tag:key=value filter.
+	//
+	//   tag-value - The value of a tag assigned to the resource. This filter is
+	// independent of the tag-key filter.
+	//
+	//   type - The type of virtual private gateway. Currently the only supported
+	// type is ipsec.1.
+	//
+	//   vpn-gateway-id - The ID of the virtual private gateway.
+	Filters []*Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+
+	// One or more virtual private gateway IDs.
+	//
+	// Default: Describes all your virtual private gateways.
+	VpnGatewayIds []*string `locationName:"VpnGatewayId" locationNameList:"VpnGatewayId" type:"list"`
+
+	metadataDescribeVpnGatewaysInput `json:"-" xml:"-"`
+}
+
+type metadataDescribeVpnGatewaysInput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DescribeVpnGatewaysInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeVpnGatewaysInput) GoString() string {
+	return s.String()
+}
+
+type DescribeVpnGatewaysOutput struct {
+	// Information about one or more virtual private gateways.
+	VpnGateways []*VpnGateway `locationName:"vpnGatewaySet" locationNameList:"item" type:"list"`
+
+	metadataDescribeVpnGatewaysOutput `json:"-" xml:"-"`
+}
+
+type metadataDescribeVpnGatewaysOutput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DescribeVpnGatewaysOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeVpnGatewaysOutput) GoString() string {
+	return s.String()
+}
+
+type DetachClassicLinkVpcInput struct {
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
 	// the required permissions, the error response is DryRunOperation. Otherwise,
@@ -15377,46 +15327,46 @@ type DetachClassicLinkVPCInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the instance to unlink from the VPC.
-	InstanceID *string `locationName:"instanceId" type:"string" required:"true"`
+	InstanceId *string `locationName:"instanceId" type:"string" required:"true"`
 
 	// The ID of the VPC to which the instance is linked.
-	VPCID *string `locationName:"vpcId" type:"string" required:"true"`
+	VpcId *string `locationName:"vpcId" type:"string" required:"true"`
 
-	metadataDetachClassicLinkVPCInput `json:"-" xml:"-"`
+	metadataDetachClassicLinkVpcInput `json:"-" xml:"-"`
 }
 
-type metadataDetachClassicLinkVPCInput struct {
+type metadataDetachClassicLinkVpcInput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s DetachClassicLinkVPCInput) String() string {
-	return awsutil.StringValue(s)
+func (s DetachClassicLinkVpcInput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s DetachClassicLinkVPCInput) GoString() string {
+func (s DetachClassicLinkVpcInput) GoString() string {
 	return s.String()
 }
 
-type DetachClassicLinkVPCOutput struct {
+type DetachClassicLinkVpcOutput struct {
 	// Returns true if the request succeeds; otherwise, it returns an error.
 	Return *bool `locationName:"return" type:"boolean"`
 
-	metadataDetachClassicLinkVPCOutput `json:"-" xml:"-"`
+	metadataDetachClassicLinkVpcOutput `json:"-" xml:"-"`
 }
 
-type metadataDetachClassicLinkVPCOutput struct {
+type metadataDetachClassicLinkVpcOutput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s DetachClassicLinkVPCOutput) String() string {
-	return awsutil.StringValue(s)
+func (s DetachClassicLinkVpcOutput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s DetachClassicLinkVPCOutput) GoString() string {
+func (s DetachClassicLinkVpcOutput) GoString() string {
 	return s.String()
 }
 
@@ -15428,10 +15378,10 @@ type DetachInternetGatewayInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the Internet gateway.
-	InternetGatewayID *string `locationName:"internetGatewayId" type:"string" required:"true"`
+	InternetGatewayId *string `locationName:"internetGatewayId" type:"string" required:"true"`
 
 	// The ID of the VPC.
-	VPCID *string `locationName:"vpcId" type:"string" required:"true"`
+	VpcId *string `locationName:"vpcId" type:"string" required:"true"`
 
 	metadataDetachInternetGatewayInput `json:"-" xml:"-"`
 }
@@ -15442,7 +15392,7 @@ type metadataDetachInternetGatewayInput struct {
 
 // String returns the string representation
 func (s DetachInternetGatewayInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -15460,7 +15410,7 @@ type metadataDetachInternetGatewayOutput struct {
 
 // String returns the string representation
 func (s DetachInternetGatewayOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -15470,7 +15420,7 @@ func (s DetachInternetGatewayOutput) GoString() string {
 
 type DetachNetworkInterfaceInput struct {
 	// The ID of the attachment.
-	AttachmentID *string `locationName:"attachmentId" type:"string" required:"true"`
+	AttachmentId *string `locationName:"attachmentId" type:"string" required:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -15490,7 +15440,7 @@ type metadataDetachNetworkInterfaceInput struct {
 
 // String returns the string representation
 func (s DetachNetworkInterfaceInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -15508,59 +15458,11 @@ type metadataDetachNetworkInterfaceOutput struct {
 
 // String returns the string representation
 func (s DetachNetworkInterfaceOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
 func (s DetachNetworkInterfaceOutput) GoString() string {
-	return s.String()
-}
-
-type DetachVPNGatewayInput struct {
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the VPC.
-	VPCID *string `locationName:"VpcId" type:"string" required:"true"`
-
-	// The ID of the virtual private gateway.
-	VPNGatewayID *string `locationName:"VpnGatewayId" type:"string" required:"true"`
-
-	metadataDetachVPNGatewayInput `json:"-" xml:"-"`
-}
-
-type metadataDetachVPNGatewayInput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s DetachVPNGatewayInput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s DetachVPNGatewayInput) GoString() string {
-	return s.String()
-}
-
-type DetachVPNGatewayOutput struct {
-	metadataDetachVPNGatewayOutput `json:"-" xml:"-"`
-}
-
-type metadataDetachVPNGatewayOutput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s DetachVPNGatewayOutput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s DetachVPNGatewayOutput) GoString() string {
 	return s.String()
 }
 
@@ -15584,10 +15486,10 @@ type DetachVolumeInput struct {
 	Force *bool `type:"boolean"`
 
 	// The ID of the instance.
-	InstanceID *string `locationName:"InstanceId" type:"string"`
+	InstanceId *string `type:"string"`
 
 	// The ID of the volume.
-	VolumeID *string `locationName:"VolumeId" type:"string" required:"true"`
+	VolumeId *string `type:"string" required:"true"`
 
 	metadataDetachVolumeInput `json:"-" xml:"-"`
 }
@@ -15598,7 +15500,7 @@ type metadataDetachVolumeInput struct {
 
 // String returns the string representation
 func (s DetachVolumeInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -15606,49 +15508,7 @@ func (s DetachVolumeInput) GoString() string {
 	return s.String()
 }
 
-type DisableVGWRoutePropagationInput struct {
-	// The ID of the virtual private gateway.
-	GatewayID *string `locationName:"GatewayId" type:"string" required:"true"`
-
-	// The ID of the route table.
-	RouteTableID *string `locationName:"RouteTableId" type:"string" required:"true"`
-
-	metadataDisableVGWRoutePropagationInput `json:"-" xml:"-"`
-}
-
-type metadataDisableVGWRoutePropagationInput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisableVGWRoutePropagationInput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s DisableVGWRoutePropagationInput) GoString() string {
-	return s.String()
-}
-
-type DisableVGWRoutePropagationOutput struct {
-	metadataDisableVGWRoutePropagationOutput `json:"-" xml:"-"`
-}
-
-type metadataDisableVGWRoutePropagationOutput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s DisableVGWRoutePropagationOutput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s DisableVGWRoutePropagationOutput) GoString() string {
-	return s.String()
-}
-
-type DisableVPCClassicLinkInput struct {
+type DetachVpnGatewayInput struct {
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
 	// the required permissions, the error response is DryRunOperation. Otherwise,
@@ -15656,49 +15516,192 @@ type DisableVPCClassicLinkInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the VPC.
-	VPCID *string `locationName:"vpcId" type:"string" required:"true"`
+	VpcId *string `type:"string" required:"true"`
 
-	metadataDisableVPCClassicLinkInput `json:"-" xml:"-"`
+	// The ID of the virtual private gateway.
+	VpnGatewayId *string `type:"string" required:"true"`
+
+	metadataDetachVpnGatewayInput `json:"-" xml:"-"`
 }
 
-type metadataDisableVPCClassicLinkInput struct {
+type metadataDetachVpnGatewayInput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s DisableVPCClassicLinkInput) String() string {
-	return awsutil.StringValue(s)
+func (s DetachVpnGatewayInput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s DisableVPCClassicLinkInput) GoString() string {
+func (s DetachVpnGatewayInput) GoString() string {
 	return s.String()
 }
 
-type DisableVPCClassicLinkOutput struct {
-	// Returns true if the request succeeds; otherwise, it returns an error.
-	Return *bool `locationName:"return" type:"boolean"`
-
-	metadataDisableVPCClassicLinkOutput `json:"-" xml:"-"`
+type DetachVpnGatewayOutput struct {
+	metadataDetachVpnGatewayOutput `json:"-" xml:"-"`
 }
 
-type metadataDisableVPCClassicLinkOutput struct {
+type metadataDetachVpnGatewayOutput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s DisableVPCClassicLinkOutput) String() string {
-	return awsutil.StringValue(s)
+func (s DetachVpnGatewayOutput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s DisableVPCClassicLinkOutput) GoString() string {
+func (s DetachVpnGatewayOutput) GoString() string {
+	return s.String()
+}
+
+// Describes a DHCP configuration option.
+type DhcpConfiguration struct {
+	// The name of a DHCP option.
+	Key *string `locationName:"key" type:"string"`
+
+	// One or more values for the DHCP option.
+	Values []*AttributeValue `locationName:"valueSet" locationNameList:"item" type:"list"`
+
+	metadataDhcpConfiguration `json:"-" xml:"-"`
+}
+
+type metadataDhcpConfiguration struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DhcpConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DhcpConfiguration) GoString() string {
+	return s.String()
+}
+
+// Describes a set of DHCP options.
+type DhcpOptions struct {
+	// One or more DHCP options in the set.
+	DhcpConfigurations []*DhcpConfiguration `locationName:"dhcpConfigurationSet" locationNameList:"item" type:"list"`
+
+	// The ID of the set of DHCP options.
+	DhcpOptionsId *string `locationName:"dhcpOptionsId" type:"string"`
+
+	// Any tags assigned to the DHCP options set.
+	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
+
+	metadataDhcpOptions `json:"-" xml:"-"`
+}
+
+type metadataDhcpOptions struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DhcpOptions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DhcpOptions) GoString() string {
+	return s.String()
+}
+
+type DisableVgwRoutePropagationInput struct {
+	// The ID of the virtual private gateway.
+	GatewayId *string `type:"string" required:"true"`
+
+	// The ID of the route table.
+	RouteTableId *string `type:"string" required:"true"`
+
+	metadataDisableVgwRoutePropagationInput `json:"-" xml:"-"`
+}
+
+type metadataDisableVgwRoutePropagationInput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DisableVgwRoutePropagationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DisableVgwRoutePropagationInput) GoString() string {
+	return s.String()
+}
+
+type DisableVgwRoutePropagationOutput struct {
+	metadataDisableVgwRoutePropagationOutput `json:"-" xml:"-"`
+}
+
+type metadataDisableVgwRoutePropagationOutput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DisableVgwRoutePropagationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DisableVgwRoutePropagationOutput) GoString() string {
+	return s.String()
+}
+
+type DisableVpcClassicLinkInput struct {
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have
+	// the required permissions, the error response is DryRunOperation. Otherwise,
+	// it is UnauthorizedOperation.
+	DryRun *bool `locationName:"dryRun" type:"boolean"`
+
+	// The ID of the VPC.
+	VpcId *string `locationName:"vpcId" type:"string" required:"true"`
+
+	metadataDisableVpcClassicLinkInput `json:"-" xml:"-"`
+}
+
+type metadataDisableVpcClassicLinkInput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DisableVpcClassicLinkInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DisableVpcClassicLinkInput) GoString() string {
+	return s.String()
+}
+
+type DisableVpcClassicLinkOutput struct {
+	// Returns true if the request succeeds; otherwise, it returns an error.
+	Return *bool `locationName:"return" type:"boolean"`
+
+	metadataDisableVpcClassicLinkOutput `json:"-" xml:"-"`
+}
+
+type metadataDisableVpcClassicLinkOutput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s DisableVpcClassicLinkOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DisableVpcClassicLinkOutput) GoString() string {
 	return s.String()
 }
 
 type DisassociateAddressInput struct {
 	// [EC2-VPC] The association ID. Required for EC2-VPC.
-	AssociationID *string `locationName:"AssociationId" type:"string"`
+	AssociationId *string `type:"string"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -15707,7 +15710,7 @@ type DisassociateAddressInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// [EC2-Classic] The Elastic IP address. Required for EC2-Classic.
-	PublicIP *string `locationName:"PublicIp" type:"string"`
+	PublicIp *string `type:"string"`
 
 	metadataDisassociateAddressInput `json:"-" xml:"-"`
 }
@@ -15718,7 +15721,7 @@ type metadataDisassociateAddressInput struct {
 
 // String returns the string representation
 func (s DisassociateAddressInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -15736,7 +15739,7 @@ type metadataDisassociateAddressOutput struct {
 
 // String returns the string representation
 func (s DisassociateAddressOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -15747,7 +15750,7 @@ func (s DisassociateAddressOutput) GoString() string {
 type DisassociateRouteTableInput struct {
 	// The association ID representing the current association between the route
 	// table and subnet.
-	AssociationID *string `locationName:"associationId" type:"string" required:"true"`
+	AssociationId *string `locationName:"associationId" type:"string" required:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -15764,7 +15767,7 @@ type metadataDisassociateRouteTableInput struct {
 
 // String returns the string representation
 func (s DisassociateRouteTableInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -15782,7 +15785,7 @@ type metadataDisassociateRouteTableOutput struct {
 
 // String returns the string representation
 func (s DisassociateRouteTableOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -15810,7 +15813,7 @@ type metadataDiskImage struct {
 
 // String returns the string representation
 func (s DiskImage) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -15824,14 +15827,14 @@ type DiskImageDescription struct {
 	Checksum *string `locationName:"checksum" type:"string"`
 
 	// The disk image format.
-	Format *string `locationName:"format" type:"string" required:"true"`
+	Format *string `locationName:"format" type:"string" required:"true" enum:"DiskImageFormat"`
 
 	// A presigned URL for the import manifest stored in Amazon S3. For information
 	// about creating a presigned URL for an Amazon S3 object, read the "Query String
 	// Request Authentication Alternative" section of the Authenticating REST Requests
 	// (http://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html)
 	// topic in the Amazon Simple Storage Service Developer Guide.
-	ImportManifestURL *string `locationName:"importManifestUrl" type:"string" required:"true"`
+	ImportManifestUrl *string `locationName:"importManifestUrl" type:"string" required:"true"`
 
 	// The size of the disk image, in GiB.
 	Size *int64 `locationName:"size" type:"long" required:"true"`
@@ -15845,7 +15848,7 @@ type metadataDiskImageDescription struct {
 
 // String returns the string representation
 func (s DiskImageDescription) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -15859,14 +15862,14 @@ type DiskImageDetail struct {
 	Bytes *int64 `locationName:"bytes" type:"long" required:"true"`
 
 	// The disk image format.
-	Format *string `locationName:"format" type:"string" required:"true"`
+	Format *string `locationName:"format" type:"string" required:"true" enum:"DiskImageFormat"`
 
 	// A presigned URL for the import manifest stored in Amazon S3 and presented
 	// here as an Amazon S3 presigned URL. For information about creating a presigned
 	// URL for an Amazon S3 object, read the "Query String Request Authentication
 	// Alternative" section of the Authenticating REST Requests (http://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html)
 	// topic in the Amazon Simple Storage Service Developer Guide.
-	ImportManifestURL *string `locationName:"importManifestUrl" type:"string" required:"true"`
+	ImportManifestUrl *string `locationName:"importManifestUrl" type:"string" required:"true"`
 
 	metadataDiskImageDetail `json:"-" xml:"-"`
 }
@@ -15877,7 +15880,7 @@ type metadataDiskImageDetail struct {
 
 // String returns the string representation
 func (s DiskImageDetail) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -15888,7 +15891,7 @@ func (s DiskImageDetail) GoString() string {
 // Describes a disk image volume.
 type DiskImageVolumeDescription struct {
 	// The volume identifier.
-	ID *string `locationName:"id" type:"string" required:"true"`
+	Id *string `locationName:"id" type:"string" required:"true"`
 
 	// The size of the volume, in GiB.
 	Size *int64 `locationName:"size" type:"long"`
@@ -15902,7 +15905,7 @@ type metadataDiskImageVolumeDescription struct {
 
 // String returns the string representation
 func (s DiskImageVolumeDescription) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -15911,7 +15914,7 @@ func (s DiskImageVolumeDescription) GoString() string {
 }
 
 // Describes a block device for an EBS volume.
-type EBSBlockDevice struct {
+type EbsBlockDevice struct {
 	// Indicates whether the EBS volume is deleted on instance termination.
 	DeleteOnTermination *bool `locationName:"deleteOnTermination" type:"boolean"`
 
@@ -15932,10 +15935,10 @@ type EBSBlockDevice struct {
 	//
 	// Condition: This parameter is required for requests to create io1 volumes;
 	// it is not used in requests to create standard or gp2 volumes.
-	IOPS *int64 `locationName:"iops" type:"integer"`
+	Iops *int64 `locationName:"iops" type:"integer"`
 
 	// The ID of the snapshot.
-	SnapshotID *string `locationName:"snapshotId" type:"string"`
+	SnapshotId *string `locationName:"snapshotId" type:"string"`
 
 	// The size of the volume, in GiB.
 	//
@@ -15951,27 +15954,27 @@ type EBSBlockDevice struct {
 	// IOPS (SSD) volumes, and standard for Magnetic volumes.
 	//
 	// Default: standard
-	VolumeType *string `locationName:"volumeType" type:"string"`
+	VolumeType *string `locationName:"volumeType" type:"string" enum:"VolumeType"`
 
-	metadataEBSBlockDevice `json:"-" xml:"-"`
+	metadataEbsBlockDevice `json:"-" xml:"-"`
 }
 
-type metadataEBSBlockDevice struct {
+type metadataEbsBlockDevice struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s EBSBlockDevice) String() string {
-	return awsutil.StringValue(s)
+func (s EbsBlockDevice) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s EBSBlockDevice) GoString() string {
+func (s EbsBlockDevice) GoString() string {
 	return s.String()
 }
 
 // Describes a parameter used to set up an EBS volume in a block device mapping.
-type EBSInstanceBlockDevice struct {
+type EbsInstanceBlockDevice struct {
 	// The time stamp when the attachment initiated.
 	AttachTime *time.Time `locationName:"attachTime" type:"timestamp" timestampFormat:"iso8601"`
 
@@ -15979,139 +15982,91 @@ type EBSInstanceBlockDevice struct {
 	DeleteOnTermination *bool `locationName:"deleteOnTermination" type:"boolean"`
 
 	// The attachment state.
-	Status *string `locationName:"status" type:"string"`
+	Status *string `locationName:"status" type:"string" enum:"AttachmentStatus"`
 
 	// The ID of the EBS volume.
-	VolumeID *string `locationName:"volumeId" type:"string"`
+	VolumeId *string `locationName:"volumeId" type:"string"`
 
-	metadataEBSInstanceBlockDevice `json:"-" xml:"-"`
+	metadataEbsInstanceBlockDevice `json:"-" xml:"-"`
 }
 
-type metadataEBSInstanceBlockDevice struct {
+type metadataEbsInstanceBlockDevice struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s EBSInstanceBlockDevice) String() string {
-	return awsutil.StringValue(s)
+func (s EbsInstanceBlockDevice) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s EBSInstanceBlockDevice) GoString() string {
+func (s EbsInstanceBlockDevice) GoString() string {
 	return s.String()
 }
 
-type EBSInstanceBlockDeviceSpecification struct {
+type EbsInstanceBlockDeviceSpecification struct {
 	// Indicates whether the volume is deleted on instance termination.
 	DeleteOnTermination *bool `locationName:"deleteOnTermination" type:"boolean"`
 
 	// The ID of the EBS volume.
-	VolumeID *string `locationName:"volumeId" type:"string"`
+	VolumeId *string `locationName:"volumeId" type:"string"`
 
-	metadataEBSInstanceBlockDeviceSpecification `json:"-" xml:"-"`
+	metadataEbsInstanceBlockDeviceSpecification `json:"-" xml:"-"`
 }
 
-type metadataEBSInstanceBlockDeviceSpecification struct {
+type metadataEbsInstanceBlockDeviceSpecification struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s EBSInstanceBlockDeviceSpecification) String() string {
-	return awsutil.StringValue(s)
+func (s EbsInstanceBlockDeviceSpecification) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s EBSInstanceBlockDeviceSpecification) GoString() string {
+func (s EbsInstanceBlockDeviceSpecification) GoString() string {
 	return s.String()
 }
 
-type EnableVGWRoutePropagationInput struct {
+type EnableVgwRoutePropagationInput struct {
 	// The ID of the virtual private gateway.
-	GatewayID *string `locationName:"GatewayId" type:"string" required:"true"`
+	GatewayId *string `type:"string" required:"true"`
 
 	// The ID of the route table.
-	RouteTableID *string `locationName:"RouteTableId" type:"string" required:"true"`
+	RouteTableId *string `type:"string" required:"true"`
 
-	metadataEnableVGWRoutePropagationInput `json:"-" xml:"-"`
+	metadataEnableVgwRoutePropagationInput `json:"-" xml:"-"`
 }
 
-type metadataEnableVGWRoutePropagationInput struct {
+type metadataEnableVgwRoutePropagationInput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s EnableVGWRoutePropagationInput) String() string {
-	return awsutil.StringValue(s)
+func (s EnableVgwRoutePropagationInput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s EnableVGWRoutePropagationInput) GoString() string {
+func (s EnableVgwRoutePropagationInput) GoString() string {
 	return s.String()
 }
 
-type EnableVGWRoutePropagationOutput struct {
-	metadataEnableVGWRoutePropagationOutput `json:"-" xml:"-"`
+type EnableVgwRoutePropagationOutput struct {
+	metadataEnableVgwRoutePropagationOutput `json:"-" xml:"-"`
 }
 
-type metadataEnableVGWRoutePropagationOutput struct {
+type metadataEnableVgwRoutePropagationOutput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s EnableVGWRoutePropagationOutput) String() string {
-	return awsutil.StringValue(s)
+func (s EnableVgwRoutePropagationOutput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s EnableVGWRoutePropagationOutput) GoString() string {
-	return s.String()
-}
-
-type EnableVPCClassicLinkInput struct {
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `locationName:"dryRun" type:"boolean"`
-
-	// The ID of the VPC.
-	VPCID *string `locationName:"vpcId" type:"string" required:"true"`
-
-	metadataEnableVPCClassicLinkInput `json:"-" xml:"-"`
-}
-
-type metadataEnableVPCClassicLinkInput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s EnableVPCClassicLinkInput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s EnableVPCClassicLinkInput) GoString() string {
-	return s.String()
-}
-
-type EnableVPCClassicLinkOutput struct {
-	// Returns true if the request succeeds; otherwise, it returns an error.
-	Return *bool `locationName:"return" type:"boolean"`
-
-	metadataEnableVPCClassicLinkOutput `json:"-" xml:"-"`
-}
-
-type metadataEnableVPCClassicLinkOutput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s EnableVPCClassicLinkOutput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s EnableVPCClassicLinkOutput) GoString() string {
+func (s EnableVgwRoutePropagationOutput) GoString() string {
 	return s.String()
 }
 
@@ -16123,7 +16078,7 @@ type EnableVolumeIOInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the volume.
-	VolumeID *string `locationName:"volumeId" type:"string" required:"true"`
+	VolumeId *string `locationName:"volumeId" type:"string" required:"true"`
 
 	metadataEnableVolumeIOInput `json:"-" xml:"-"`
 }
@@ -16134,7 +16089,7 @@ type metadataEnableVolumeIOInput struct {
 
 // String returns the string representation
 func (s EnableVolumeIOInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -16152,11 +16107,59 @@ type metadataEnableVolumeIOOutput struct {
 
 // String returns the string representation
 func (s EnableVolumeIOOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
 func (s EnableVolumeIOOutput) GoString() string {
+	return s.String()
+}
+
+type EnableVpcClassicLinkInput struct {
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have
+	// the required permissions, the error response is DryRunOperation. Otherwise,
+	// it is UnauthorizedOperation.
+	DryRun *bool `locationName:"dryRun" type:"boolean"`
+
+	// The ID of the VPC.
+	VpcId *string `locationName:"vpcId" type:"string" required:"true"`
+
+	metadataEnableVpcClassicLinkInput `json:"-" xml:"-"`
+}
+
+type metadataEnableVpcClassicLinkInput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s EnableVpcClassicLinkInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s EnableVpcClassicLinkInput) GoString() string {
+	return s.String()
+}
+
+type EnableVpcClassicLinkOutput struct {
+	// Returns true if the request succeeds; otherwise, it returns an error.
+	Return *bool `locationName:"return" type:"boolean"`
+
+	metadataEnableVpcClassicLinkOutput `json:"-" xml:"-"`
+}
+
+type metadataEnableVpcClassicLinkOutput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s EnableVpcClassicLinkOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s EnableVpcClassicLinkOutput) GoString() string {
 	return s.String()
 }
 
@@ -16173,8 +16176,10 @@ type EventInformation struct {
 	// either to launch or terminate an instance.
 	//
 	//   spotFleetRequestConfigurationInvalid - The configuration is not valid.
-	// For more information, see the description.   spotInstanceCountLimitExceeded
-	// - You've reached the limit on the number of Spot Instances that you can launch.
+	// For more information, see the description.
+	//
+	//   spotInstanceCountLimitExceeded - You've reached the limit on the number
+	// of Spot Instances that you can launch.
 	//
 	//   The following are the fleetRequestChange events.
 	//
@@ -16210,7 +16215,7 @@ type EventInformation struct {
 
 	// The ID of the instance. This information is available only for instanceChange
 	// events.
-	InstanceID *string `locationName:"instanceId" type:"string"`
+	InstanceId *string `locationName:"instanceId" type:"string"`
 
 	metadataEventInformation `json:"-" xml:"-"`
 }
@@ -16221,7 +16226,7 @@ type metadataEventInformation struct {
 
 // String returns the string representation
 func (s EventInformation) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -16235,7 +16240,7 @@ type ExportTask struct {
 	Description *string `locationName:"description" type:"string"`
 
 	// The ID of the export task.
-	ExportTaskID *string `locationName:"exportTaskId" type:"string"`
+	ExportTaskId *string `locationName:"exportTaskId" type:"string"`
 
 	// Information about the export task.
 	ExportToS3Task *ExportToS3Task `locationName:"exportToS3" type:"structure"`
@@ -16244,7 +16249,7 @@ type ExportTask struct {
 	InstanceExportDetails *InstanceExportDetails `locationName:"instanceExport" type:"structure"`
 
 	// The state of the export task.
-	State *string `locationName:"state" type:"string"`
+	State *string `locationName:"state" type:"string" enum:"ExportTaskState"`
 
 	// The status message related to the export task.
 	StatusMessage *string `locationName:"statusMessage" type:"string"`
@@ -16258,7 +16263,7 @@ type metadataExportTask struct {
 
 // String returns the string representation
 func (s ExportTask) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -16270,10 +16275,10 @@ func (s ExportTask) GoString() string {
 type ExportToS3Task struct {
 	// The container format used to combine disk images with metadata (such as OVF).
 	// If absent, only the disk image is exported.
-	ContainerFormat *string `locationName:"containerFormat" type:"string"`
+	ContainerFormat *string `locationName:"containerFormat" type:"string" enum:"ContainerFormat"`
 
 	// The format for the exported image.
-	DiskImageFormat *string `locationName:"diskImageFormat" type:"string"`
+	DiskImageFormat *string `locationName:"diskImageFormat" type:"string" enum:"DiskImageFormat"`
 
 	// The S3 bucket for the destination image. The destination bucket must exist
 	// and grant WRITE and READ_ACP permissions to the AWS account vm-import-export@amazon.com.
@@ -16291,7 +16296,7 @@ type metadataExportToS3Task struct {
 
 // String returns the string representation
 func (s ExportToS3Task) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -16303,10 +16308,10 @@ func (s ExportToS3Task) GoString() string {
 type ExportToS3TaskSpecification struct {
 	// The container format used to combine disk images with metadata (such as OVF).
 	// If absent, only the disk image is exported.
-	ContainerFormat *string `locationName:"containerFormat" type:"string"`
+	ContainerFormat *string `locationName:"containerFormat" type:"string" enum:"ContainerFormat"`
 
 	// The format for the exported image.
-	DiskImageFormat *string `locationName:"diskImageFormat" type:"string"`
+	DiskImageFormat *string `locationName:"diskImageFormat" type:"string" enum:"DiskImageFormat"`
 
 	// The S3 bucket for the destination image. The destination bucket must exist
 	// and grant WRITE and READ_ACP permissions to the AWS account vm-import-export@amazon.com.
@@ -16325,7 +16330,7 @@ type metadataExportToS3TaskSpecification struct {
 
 // String returns the string representation
 func (s ExportToS3TaskSpecification) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -16352,7 +16357,7 @@ type metadataFilter struct {
 
 // String returns the string representation
 func (s Filter) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -16373,13 +16378,13 @@ type FlowLog struct {
 	DeliverLogsErrorMessage *string `locationName:"deliverLogsErrorMessage" type:"string"`
 
 	// The ARN of the IAM role that posts logs to CloudWatch Logs.
-	DeliverLogsPermissionARN *string `locationName:"deliverLogsPermissionArn" type:"string"`
+	DeliverLogsPermissionArn *string `locationName:"deliverLogsPermissionArn" type:"string"`
 
 	// The status of the logs delivery (SUCCESS | FAILED).
 	DeliverLogsStatus *string `locationName:"deliverLogsStatus" type:"string"`
 
 	// The flow log ID.
-	FlowLogID *string `locationName:"flowLogId" type:"string"`
+	FlowLogId *string `locationName:"flowLogId" type:"string"`
 
 	// The status of the flow log (ACTIVE).
 	FlowLogStatus *string `locationName:"flowLogStatus" type:"string"`
@@ -16388,10 +16393,10 @@ type FlowLog struct {
 	LogGroupName *string `locationName:"logGroupName" type:"string"`
 
 	// The ID of the resource on which the flow log was created.
-	ResourceID *string `locationName:"resourceId" type:"string"`
+	ResourceId *string `locationName:"resourceId" type:"string"`
 
 	// The type of traffic captured for the flow log.
-	TrafficType *string `locationName:"trafficType" type:"string"`
+	TrafficType *string `locationName:"trafficType" type:"string" enum:"TrafficType"`
 
 	metadataFlowLog `json:"-" xml:"-"`
 }
@@ -16402,7 +16407,7 @@ type metadataFlowLog struct {
 
 // String returns the string representation
 func (s FlowLog) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -16418,7 +16423,7 @@ type GetConsoleOutputInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the instance.
-	InstanceID *string `locationName:"InstanceId" type:"string" required:"true"`
+	InstanceId *string `type:"string" required:"true"`
 
 	metadataGetConsoleOutputInput `json:"-" xml:"-"`
 }
@@ -16429,7 +16434,7 @@ type metadataGetConsoleOutputInput struct {
 
 // String returns the string representation
 func (s GetConsoleOutputInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -16439,7 +16444,7 @@ func (s GetConsoleOutputInput) GoString() string {
 
 type GetConsoleOutputOutput struct {
 	// The ID of the instance.
-	InstanceID *string `locationName:"instanceId" type:"string"`
+	InstanceId *string `locationName:"instanceId" type:"string"`
 
 	// The console output, Base64 encoded.
 	Output *string `locationName:"output" type:"string"`
@@ -16456,7 +16461,7 @@ type metadataGetConsoleOutputOutput struct {
 
 // String returns the string representation
 func (s GetConsoleOutputOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -16472,7 +16477,7 @@ type GetPasswordDataInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the Windows instance.
-	InstanceID *string `locationName:"InstanceId" type:"string" required:"true"`
+	InstanceId *string `type:"string" required:"true"`
 
 	metadataGetPasswordDataInput `json:"-" xml:"-"`
 }
@@ -16483,7 +16488,7 @@ type metadataGetPasswordDataInput struct {
 
 // String returns the string representation
 func (s GetPasswordDataInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -16493,7 +16498,7 @@ func (s GetPasswordDataInput) GoString() string {
 
 type GetPasswordDataOutput struct {
 	// The ID of the Windows instance.
-	InstanceID *string `locationName:"instanceId" type:"string"`
+	InstanceId *string `locationName:"instanceId" type:"string"`
 
 	// The password of the instance.
 	PasswordData *string `locationName:"passwordData" type:"string"`
@@ -16510,7 +16515,7 @@ type metadataGetPasswordDataOutput struct {
 
 // String returns the string representation
 func (s GetPasswordDataOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -16521,7 +16526,7 @@ func (s GetPasswordDataOutput) GoString() string {
 // Describes a security group.
 type GroupIdentifier struct {
 	// The ID of the security group.
-	GroupID *string `locationName:"groupId" type:"string"`
+	GroupId *string `locationName:"groupId" type:"string"`
 
 	// The name of the security group.
 	GroupName *string `locationName:"groupName" type:"string"`
@@ -16535,7 +16540,7 @@ type metadataGroupIdentifier struct {
 
 // String returns the string representation
 func (s GroupIdentifier) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -16556,7 +16561,7 @@ type HistoryRecord struct {
 	// of the Spot fleet request.
 	//
 	//   instanceChange - Indicates that an instance was launched or terminated.
-	EventType *string `locationName:"eventType" type:"string" required:"true"`
+	EventType *string `locationName:"eventType" type:"string" required:"true" enum:"EventType"`
 
 	// The date and time of the event, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
 	Timestamp *time.Time `locationName:"timestamp" type:"timestamp" timestampFormat:"iso8601" required:"true"`
@@ -16570,7 +16575,7 @@ type metadataHistoryRecord struct {
 
 // String returns the string representation
 func (s HistoryRecord) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -16579,156 +16584,84 @@ func (s HistoryRecord) GoString() string {
 }
 
 // Describes an IAM instance profile.
-type IAMInstanceProfile struct {
+type IamInstanceProfile struct {
 	// The Amazon Resource Name (ARN) of the instance profile.
-	ARN *string `locationName:"arn" type:"string"`
+	Arn *string `locationName:"arn" type:"string"`
 
 	// The ID of the instance profile.
-	ID *string `locationName:"id" type:"string"`
+	Id *string `locationName:"id" type:"string"`
 
-	metadataIAMInstanceProfile `json:"-" xml:"-"`
+	metadataIamInstanceProfile `json:"-" xml:"-"`
 }
 
-type metadataIAMInstanceProfile struct {
+type metadataIamInstanceProfile struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s IAMInstanceProfile) String() string {
-	return awsutil.StringValue(s)
+func (s IamInstanceProfile) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s IAMInstanceProfile) GoString() string {
+func (s IamInstanceProfile) GoString() string {
 	return s.String()
 }
 
 // Describes an IAM instance profile.
-type IAMInstanceProfileSpecification struct {
+type IamInstanceProfileSpecification struct {
 	// The Amazon Resource Name (ARN) of the instance profile.
-	ARN *string `locationName:"arn" type:"string"`
+	Arn *string `locationName:"arn" type:"string"`
 
 	// The name of the instance profile.
 	Name *string `locationName:"name" type:"string"`
 
-	metadataIAMInstanceProfileSpecification `json:"-" xml:"-"`
+	metadataIamInstanceProfileSpecification `json:"-" xml:"-"`
 }
 
-type metadataIAMInstanceProfileSpecification struct {
+type metadataIamInstanceProfileSpecification struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s IAMInstanceProfileSpecification) String() string {
-	return awsutil.StringValue(s)
+func (s IamInstanceProfileSpecification) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s IAMInstanceProfileSpecification) GoString() string {
+func (s IamInstanceProfileSpecification) GoString() string {
 	return s.String()
 }
 
 // Describes the ICMP type and code.
-type ICMPTypeCode struct {
+type IcmpTypeCode struct {
 	// The ICMP type. A value of -1 means all types.
 	Code *int64 `locationName:"code" type:"integer"`
 
 	// The ICMP code. A value of -1 means all codes for the specified ICMP type.
 	Type *int64 `locationName:"type" type:"integer"`
 
-	metadataICMPTypeCode `json:"-" xml:"-"`
+	metadataIcmpTypeCode `json:"-" xml:"-"`
 }
 
-type metadataICMPTypeCode struct {
+type metadataIcmpTypeCode struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s ICMPTypeCode) String() string {
-	return awsutil.StringValue(s)
+func (s IcmpTypeCode) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s ICMPTypeCode) GoString() string {
-	return s.String()
-}
-
-// Describes a security group rule.
-type IPPermission struct {
-	// The start of port range for the TCP and UDP protocols, or an ICMP type number.
-	// A value of -1 indicates all ICMP types.
-	FromPort *int64 `locationName:"fromPort" type:"integer"`
-
-	// The protocol.
-	//
-	// When you call DescribeSecurityGroups, the protocol value returned is the
-	// number. Exception: For TCP, UDP, and ICMP, the value returned is the name
-	// (for example, tcp, udp, or icmp). For a list of protocol numbers, see Protocol
-	// Numbers (http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml).
-	// (VPC only) When you call AuthorizeSecurityGroupIngress, you can use -1 to
-	// specify all.
-	IPProtocol *string `locationName:"ipProtocol" type:"string"`
-
-	// One or more IP ranges.
-	IPRanges []*IPRange `locationName:"ipRanges" locationNameList:"item" type:"list"`
-
-	// (Valid for AuthorizeSecurityGroupEgress, RevokeSecurityGroupEgress and DescribeSecurityGroups
-	// only) One or more prefix list IDs for an AWS service. In an AuthorizeSecurityGroupEgress
-	// request, this is the AWS service that you want to access through a VPC endpoint
-	// from instances associated with the security group.
-	PrefixListIDs []*PrefixListID `locationName:"prefixListIds" locationNameList:"item" type:"list"`
-
-	// The end of port range for the TCP and UDP protocols, or an ICMP code. A value
-	// of -1 indicates all ICMP codes for the specified ICMP type.
-	ToPort *int64 `locationName:"toPort" type:"integer"`
-
-	// One or more security group and AWS account ID pairs.
-	UserIDGroupPairs []*UserIDGroupPair `locationName:"groups" locationNameList:"item" type:"list"`
-
-	metadataIPPermission `json:"-" xml:"-"`
-}
-
-type metadataIPPermission struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s IPPermission) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s IPPermission) GoString() string {
-	return s.String()
-}
-
-// Describes an IP range.
-type IPRange struct {
-	// The CIDR range. You can either specify a CIDR range or a source security
-	// group, not both.
-	CIDRIP *string `locationName:"cidrIp" type:"string"`
-
-	metadataIPRange `json:"-" xml:"-"`
-}
-
-type metadataIPRange struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s IPRange) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s IPRange) GoString() string {
+func (s IcmpTypeCode) GoString() string {
 	return s.String()
 }
 
 // Describes an image.
 type Image struct {
 	// The architecture of the image.
-	Architecture *string `locationName:"architecture" type:"string"`
+	Architecture *string `locationName:"architecture" type:"string" enum:"ArchitectureValues"`
 
 	// Any block device mapping entries.
 	BlockDeviceMappings []*BlockDeviceMapping `locationName:"blockDeviceMapping" locationNameList:"item" type:"list"`
@@ -16740,10 +16673,10 @@ type Image struct {
 	Description *string `locationName:"description" type:"string"`
 
 	// The hypervisor type of the image.
-	Hypervisor *string `locationName:"hypervisor" type:"string"`
+	Hypervisor *string `locationName:"hypervisor" type:"string" enum:"HypervisorType"`
 
 	// The ID of the AMI.
-	ImageID *string `locationName:"imageId" type:"string"`
+	ImageId *string `locationName:"imageId" type:"string"`
 
 	// The location of the AMI.
 	ImageLocation *string `locationName:"imageLocation" type:"string"`
@@ -16753,20 +16686,20 @@ type Image struct {
 	ImageOwnerAlias *string `locationName:"imageOwnerAlias" type:"string"`
 
 	// The type of image.
-	ImageType *string `locationName:"imageType" type:"string"`
+	ImageType *string `locationName:"imageType" type:"string" enum:"ImageTypeValues"`
 
 	// The kernel associated with the image, if any. Only applicable for machine
 	// images.
-	KernelID *string `locationName:"kernelId" type:"string"`
+	KernelId *string `locationName:"kernelId" type:"string"`
 
 	// The name of the AMI that was provided during image creation.
 	Name *string `locationName:"name" type:"string"`
 
 	// The AWS account ID of the image owner.
-	OwnerID *string `locationName:"imageOwnerId" type:"string"`
+	OwnerId *string `locationName:"imageOwnerId" type:"string"`
 
 	// The value is Windows for Windows AMIs; otherwise blank.
-	Platform *string `locationName:"platform" type:"string"`
+	Platform *string `locationName:"platform" type:"string" enum:"PlatformValues"`
 
 	// Any product codes associated with the AMI.
 	ProductCodes []*ProductCode `locationName:"productCodes" locationNameList:"item" type:"list"`
@@ -16778,21 +16711,21 @@ type Image struct {
 
 	// The RAM disk associated with the image, if any. Only applicable for machine
 	// images.
-	RAMDiskID *string `locationName:"ramdiskId" type:"string"`
+	RamdiskId *string `locationName:"ramdiskId" type:"string"`
 
 	// The device name of the root device (for example, /dev/sda1 or /dev/xvda).
 	RootDeviceName *string `locationName:"rootDeviceName" type:"string"`
 
 	// The type of root device used by the AMI. The AMI can use an EBS volume or
 	// an instance store volume.
-	RootDeviceType *string `locationName:"rootDeviceType" type:"string"`
+	RootDeviceType *string `locationName:"rootDeviceType" type:"string" enum:"DeviceType"`
 
 	// Specifies whether enhanced networking is enabled.
-	SRIOVNetSupport *string `locationName:"sriovNetSupport" type:"string"`
+	SriovNetSupport *string `locationName:"sriovNetSupport" type:"string"`
 
 	// The current state of the AMI. If the state is available, the image is successfully
 	// registered and can be used to launch an instance.
-	State *string `locationName:"imageState" type:"string"`
+	State *string `locationName:"imageState" type:"string" enum:"ImageState"`
 
 	// The reason for the state change.
 	StateReason *StateReason `locationName:"stateReason" type:"structure"`
@@ -16801,7 +16734,7 @@ type Image struct {
 	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The type of virtualization of the AMI.
-	VirtualizationType *string `locationName:"virtualizationType" type:"string"`
+	VirtualizationType *string `locationName:"virtualizationType" type:"string" enum:"VirtualizationType"`
 
 	metadataImage `json:"-" xml:"-"`
 }
@@ -16812,7 +16745,7 @@ type metadataImage struct {
 
 // String returns the string representation
 func (s Image) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -16834,11 +16767,11 @@ type ImageDiskContainer struct {
 	Format *string `type:"string"`
 
 	// The ID of the EBS snapshot to be used for importing the snapshot.
-	SnapshotID *string `locationName:"SnapshotId" type:"string"`
+	SnapshotId *string `type:"string"`
 
 	// The URL to the Amazon S3-based disk image being imported. The URL can either
 	// be a https URL (https://..) or an Amazon S3 URL (s3://..)
-	URL *string `locationName:"Url" type:"string"`
+	Url *string `type:"string"`
 
 	// The S3 bucket for the disk image.
 	UserBucket *UserBucket `type:"structure"`
@@ -16852,7 +16785,7 @@ type metadataImageDiskContainer struct {
 
 // String returns the string representation
 func (s ImageDiskContainer) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -16916,7 +16849,7 @@ type metadataImportImageInput struct {
 
 // String returns the string representation
 func (s ImportImageInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -16935,10 +16868,10 @@ type ImportImageOutput struct {
 	Hypervisor *string `locationName:"hypervisor" type:"string"`
 
 	// The ID of the Amazon Machine Image (AMI) created by the import task.
-	ImageID *string `locationName:"imageId" type:"string"`
+	ImageId *string `locationName:"imageId" type:"string"`
 
 	// The task ID of the import image task.
-	ImportTaskID *string `locationName:"importTaskId" type:"string"`
+	ImportTaskId *string `locationName:"importTaskId" type:"string"`
 
 	// The license type of the virtual machine.
 	LicenseType *string `locationName:"licenseType" type:"string"`
@@ -16967,7 +16900,7 @@ type metadataImportImageOutput struct {
 
 // String returns the string representation
 func (s ImportImageOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -16991,10 +16924,10 @@ type ImportImageTask struct {
 	Hypervisor *string `locationName:"hypervisor" type:"string"`
 
 	// The ID of the Amazon Machine Image (AMI) of the imported virtual machine.
-	ImageID *string `locationName:"imageId" type:"string"`
+	ImageId *string `locationName:"imageId" type:"string"`
 
 	// The ID of the import image task.
-	ImportTaskID *string `locationName:"importTaskId" type:"string"`
+	ImportTaskId *string `locationName:"importTaskId" type:"string"`
 
 	// The license type of the virtual machine.
 	LicenseType *string `locationName:"licenseType" type:"string"`
@@ -17023,7 +16956,7 @@ type metadataImportImageTask struct {
 
 // String returns the string representation
 func (s ImportImageTask) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -17048,7 +16981,7 @@ type ImportInstanceInput struct {
 	LaunchSpecification *ImportInstanceLaunchSpecification `locationName:"launchSpecification" type:"structure"`
 
 	// The instance operating system.
-	Platform *string `locationName:"platform" type:"string" required:"true"`
+	Platform *string `locationName:"platform" type:"string" required:"true" enum:"PlatformValues"`
 
 	metadataImportInstanceInput `json:"-" xml:"-"`
 }
@@ -17059,7 +16992,7 @@ type metadataImportInstanceInput struct {
 
 // String returns the string representation
 func (s ImportInstanceInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -17073,22 +17006,22 @@ type ImportInstanceLaunchSpecification struct {
 	AdditionalInfo *string `locationName:"additionalInfo" type:"string"`
 
 	// The architecture of the instance.
-	Architecture *string `locationName:"architecture" type:"string"`
+	Architecture *string `locationName:"architecture" type:"string" enum:"ArchitectureValues"`
 
 	// One or more security group IDs.
-	GroupIDs []*string `locationName:"GroupId" locationNameList:"SecurityGroupId" type:"list"`
+	GroupIds []*string `locationName:"GroupId" locationNameList:"SecurityGroupId" type:"list"`
 
 	// One or more security group names.
 	GroupNames []*string `locationName:"GroupName" locationNameList:"SecurityGroup" type:"list"`
 
 	// Indicates whether an instance stops or terminates when you initiate shutdown
 	// from the instance (using the operating system command for system shutdown).
-	InstanceInitiatedShutdownBehavior *string `locationName:"instanceInitiatedShutdownBehavior" type:"string"`
+	InstanceInitiatedShutdownBehavior *string `locationName:"instanceInitiatedShutdownBehavior" type:"string" enum:"ShutdownBehavior"`
 
 	// The instance type. For more information about the instance types that you
 	// can import, see Before You Get Started (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/VMImportPrerequisites.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
-	InstanceType *string `locationName:"instanceType" type:"string"`
+	InstanceType *string `locationName:"instanceType" type:"string" enum:"InstanceType"`
 
 	// Indicates whether monitoring is enabled.
 	Monitoring *bool `locationName:"monitoring" type:"boolean"`
@@ -17097,10 +17030,10 @@ type ImportInstanceLaunchSpecification struct {
 	Placement *Placement `locationName:"placement" type:"structure"`
 
 	// [EC2-VPC] An available IP address from the IP address range of the subnet.
-	PrivateIPAddress *string `locationName:"privateIpAddress" type:"string"`
+	PrivateIpAddress *string `locationName:"privateIpAddress" type:"string"`
 
 	// [EC2-VPC] The ID of the subnet in which to launch the instance.
-	SubnetID *string `locationName:"subnetId" type:"string"`
+	SubnetId *string `locationName:"subnetId" type:"string"`
 
 	// The Base64-encoded MIME user data to be made available to the instance.
 	UserData *UserData `locationName:"userData" type:"structure"`
@@ -17114,7 +17047,7 @@ type metadataImportInstanceLaunchSpecification struct {
 
 // String returns the string representation
 func (s ImportInstanceLaunchSpecification) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -17135,7 +17068,7 @@ type metadataImportInstanceOutput struct {
 
 // String returns the string representation
 func (s ImportInstanceOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -17149,10 +17082,10 @@ type ImportInstanceTaskDetails struct {
 	Description *string `locationName:"description" type:"string"`
 
 	// The ID of the instance.
-	InstanceID *string `locationName:"instanceId" type:"string"`
+	InstanceId *string `locationName:"instanceId" type:"string"`
 
 	// The instance operating system.
-	Platform *string `locationName:"platform" type:"string"`
+	Platform *string `locationName:"platform" type:"string" enum:"PlatformValues"`
 
 	// One or more volumes.
 	Volumes []*ImportInstanceVolumeDetailItem `locationName:"volumes" locationNameList:"item" type:"list" required:"true"`
@@ -17166,7 +17099,7 @@ type metadataImportInstanceTaskDetails struct {
 
 // String returns the string representation
 func (s ImportInstanceTaskDetails) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -17206,7 +17139,7 @@ type metadataImportInstanceVolumeDetailItem struct {
 
 // String returns the string representation
 func (s ImportInstanceVolumeDetailItem) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -17237,7 +17170,7 @@ type metadataImportKeyPairInput struct {
 
 // String returns the string representation
 func (s ImportKeyPairInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -17261,7 +17194,7 @@ type metadataImportKeyPairOutput struct {
 
 // String returns the string representation
 func (s ImportKeyPairOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -17300,7 +17233,7 @@ type metadataImportSnapshotInput struct {
 
 // String returns the string representation
 func (s ImportSnapshotInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -17313,7 +17246,7 @@ type ImportSnapshotOutput struct {
 	Description *string `locationName:"description" type:"string"`
 
 	// The ID of the import snapshot task.
-	ImportTaskID *string `locationName:"importTaskId" type:"string"`
+	ImportTaskId *string `locationName:"importTaskId" type:"string"`
 
 	// Information about the import snapshot task.
 	SnapshotTaskDetail *SnapshotTaskDetail `locationName:"snapshotTaskDetail" type:"structure"`
@@ -17327,7 +17260,7 @@ type metadataImportSnapshotOutput struct {
 
 // String returns the string representation
 func (s ImportSnapshotOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -17341,7 +17274,7 @@ type ImportSnapshotTask struct {
 	Description *string `locationName:"description" type:"string"`
 
 	// The ID of the import snapshot task.
-	ImportTaskID *string `locationName:"importTaskId" type:"string"`
+	ImportTaskId *string `locationName:"importTaskId" type:"string"`
 
 	// Describes an import snapshot task.
 	SnapshotTaskDetail *SnapshotTaskDetail `locationName:"snapshotTaskDetail" type:"structure"`
@@ -17355,7 +17288,7 @@ type metadataImportSnapshotTask struct {
 
 // String returns the string representation
 func (s ImportSnapshotTask) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -17391,7 +17324,7 @@ type metadataImportVolumeInput struct {
 
 // String returns the string representation
 func (s ImportVolumeInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -17412,7 +17345,7 @@ type metadataImportVolumeOutput struct {
 
 // String returns the string representation
 func (s ImportVolumeOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -17446,7 +17379,7 @@ type metadataImportVolumeTaskDetails struct {
 
 // String returns the string representation
 func (s ImportVolumeTaskDetails) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -17458,10 +17391,10 @@ func (s ImportVolumeTaskDetails) GoString() string {
 type Instance struct {
 	// The AMI launch index, which can be used to find this instance in the launch
 	// group.
-	AMILaunchIndex *int64 `locationName:"amiLaunchIndex" type:"integer"`
+	AmiLaunchIndex *int64 `locationName:"amiLaunchIndex" type:"integer"`
 
 	// The architecture of the image.
-	Architecture *string `locationName:"architecture" type:"string"`
+	Architecture *string `locationName:"architecture" type:"string" enum:"ArchitectureValues"`
 
 	// Any block device mapping entries for the instance.
 	BlockDeviceMappings []*InstanceBlockDeviceMapping `locationName:"blockDeviceMapping" locationNameList:"item" type:"list"`
@@ -17474,28 +17407,28 @@ type Instance struct {
 	// stack to provide optimal I/O performance. This optimization isn't available
 	// with all instance types. Additional usage charges apply when using an EBS
 	// Optimized instance.
-	EBSOptimized *bool `locationName:"ebsOptimized" type:"boolean"`
+	EbsOptimized *bool `locationName:"ebsOptimized" type:"boolean"`
 
 	// The hypervisor type of the instance.
-	Hypervisor *string `locationName:"hypervisor" type:"string"`
+	Hypervisor *string `locationName:"hypervisor" type:"string" enum:"HypervisorType"`
 
 	// The IAM instance profile associated with the instance.
-	IAMInstanceProfile *IAMInstanceProfile `locationName:"iamInstanceProfile" type:"structure"`
+	IamInstanceProfile *IamInstanceProfile `locationName:"iamInstanceProfile" type:"structure"`
 
 	// The ID of the AMI used to launch the instance.
-	ImageID *string `locationName:"imageId" type:"string"`
+	ImageId *string `locationName:"imageId" type:"string"`
 
 	// The ID of the instance.
-	InstanceID *string `locationName:"instanceId" type:"string"`
+	InstanceId *string `locationName:"instanceId" type:"string"`
 
 	// Indicates whether this is a Spot Instance.
-	InstanceLifecycle *string `locationName:"instanceLifecycle" type:"string"`
+	InstanceLifecycle *string `locationName:"instanceLifecycle" type:"string" enum:"InstanceLifecycleType"`
 
 	// The instance type.
-	InstanceType *string `locationName:"instanceType" type:"string"`
+	InstanceType *string `locationName:"instanceType" type:"string" enum:"InstanceType"`
 
 	// The kernel associated with this instance.
-	KernelID *string `locationName:"kernelId" type:"string"`
+	KernelId *string `locationName:"kernelId" type:"string"`
 
 	// The name of the key pair, if this instance was launched with an associated
 	// key pair.
@@ -17514,38 +17447,35 @@ type Instance struct {
 	Placement *Placement `locationName:"placement" type:"structure"`
 
 	// The value is Windows for Windows instances; otherwise blank.
-	Platform *string `locationName:"platform" type:"string"`
+	Platform *string `locationName:"platform" type:"string" enum:"PlatformValues"`
 
 	// The private DNS name assigned to the instance. This DNS name can only be
 	// used inside the Amazon EC2 network. This name is not available until the
 	// instance enters the running state.
-	PrivateDNSName *string `locationName:"privateDnsName" type:"string"`
+	PrivateDnsName *string `locationName:"privateDnsName" type:"string"`
 
 	// The private IP address assigned to the instance.
-	PrivateIPAddress *string `locationName:"privateIpAddress" type:"string"`
+	PrivateIpAddress *string `locationName:"privateIpAddress" type:"string"`
 
 	// The product codes attached to this instance.
 	ProductCodes []*ProductCode `locationName:"productCodes" locationNameList:"item" type:"list"`
 
 	// The public DNS name assigned to the instance. This name is not available
 	// until the instance enters the running state.
-	PublicDNSName *string `locationName:"dnsName" type:"string"`
+	PublicDnsName *string `locationName:"dnsName" type:"string"`
 
 	// The public IP address assigned to the instance.
-	PublicIPAddress *string `locationName:"ipAddress" type:"string"`
+	PublicIpAddress *string `locationName:"ipAddress" type:"string"`
 
 	// The RAM disk associated with this instance.
-	RAMDiskID *string `locationName:"ramdiskId" type:"string"`
+	RamdiskId *string `locationName:"ramdiskId" type:"string"`
 
 	// The root device name (for example, /dev/sda1 or /dev/xvda).
 	RootDeviceName *string `locationName:"rootDeviceName" type:"string"`
 
 	// The root device type used by the AMI. The AMI can use an EBS volume or an
 	// instance store volume.
-	RootDeviceType *string `locationName:"rootDeviceType" type:"string"`
-
-	// Specifies whether enhanced networking is enabled.
-	SRIOVNetSupport *string `locationName:"sriovNetSupport" type:"string"`
+	RootDeviceType *string `locationName:"rootDeviceType" type:"string" enum:"DeviceType"`
 
 	// One or more security groups for the instance.
 	SecurityGroups []*GroupIdentifier `locationName:"groupSet" locationNameList:"item" type:"list"`
@@ -17559,7 +17489,10 @@ type Instance struct {
 	SourceDestCheck *bool `locationName:"sourceDestCheck" type:"boolean"`
 
 	// The ID of the Spot Instance request.
-	SpotInstanceRequestID *string `locationName:"spotInstanceRequestId" type:"string"`
+	SpotInstanceRequestId *string `locationName:"spotInstanceRequestId" type:"string"`
+
+	// Specifies whether enhanced networking is enabled.
+	SriovNetSupport *string `locationName:"sriovNetSupport" type:"string"`
 
 	// The current state of the instance.
 	State *InstanceState `locationName:"instanceState" type:"structure"`
@@ -17571,16 +17504,16 @@ type Instance struct {
 	StateTransitionReason *string `locationName:"reason" type:"string"`
 
 	// The ID of the subnet in which the instance is running.
-	SubnetID *string `locationName:"subnetId" type:"string"`
+	SubnetId *string `locationName:"subnetId" type:"string"`
 
 	// Any tags assigned to the instance.
 	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
-	// The ID of the VPC in which the instance is running.
-	VPCID *string `locationName:"vpcId" type:"string"`
-
 	// The virtualization type of the instance.
-	VirtualizationType *string `locationName:"virtualizationType" type:"string"`
+	VirtualizationType *string `locationName:"virtualizationType" type:"string" enum:"VirtualizationType"`
+
+	// The ID of the VPC in which the instance is running.
+	VpcId *string `locationName:"vpcId" type:"string"`
 
 	metadataInstance `json:"-" xml:"-"`
 }
@@ -17591,7 +17524,7 @@ type metadataInstance struct {
 
 // String returns the string representation
 func (s Instance) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -17606,7 +17539,7 @@ type InstanceBlockDeviceMapping struct {
 
 	// Parameters used to automatically set up EBS volumes when the instance is
 	// launched.
-	EBS *EBSInstanceBlockDevice `locationName:"ebs" type:"structure"`
+	Ebs *EbsInstanceBlockDevice `locationName:"ebs" type:"structure"`
 
 	metadataInstanceBlockDeviceMapping `json:"-" xml:"-"`
 }
@@ -17617,7 +17550,7 @@ type metadataInstanceBlockDeviceMapping struct {
 
 // String returns the string representation
 func (s InstanceBlockDeviceMapping) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -17632,7 +17565,7 @@ type InstanceBlockDeviceMappingSpecification struct {
 
 	// Parameters used to automatically set up EBS volumes when the instance is
 	// launched.
-	EBS *EBSInstanceBlockDeviceSpecification `locationName:"ebs" type:"structure"`
+	Ebs *EbsInstanceBlockDeviceSpecification `locationName:"ebs" type:"structure"`
 
 	// suppress the specified device included in the block device mapping.
 	NoDevice *string `locationName:"noDevice" type:"string"`
@@ -17649,7 +17582,7 @@ type metadataInstanceBlockDeviceMappingSpecification struct {
 
 // String returns the string representation
 func (s InstanceBlockDeviceMappingSpecification) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -17663,7 +17596,7 @@ type InstanceCount struct {
 	InstanceCount *int64 `locationName:"instanceCount" type:"integer"`
 
 	// The states of the listed Reserved Instances.
-	State *string `locationName:"state" type:"string"`
+	State *string `locationName:"state" type:"string" enum:"ListingState"`
 
 	metadataInstanceCount `json:"-" xml:"-"`
 }
@@ -17674,7 +17607,7 @@ type metadataInstanceCount struct {
 
 // String returns the string representation
 func (s InstanceCount) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -17685,10 +17618,10 @@ func (s InstanceCount) GoString() string {
 // Describes an instance to export.
 type InstanceExportDetails struct {
 	// The ID of the resource being exported.
-	InstanceID *string `locationName:"instanceId" type:"string"`
+	InstanceId *string `locationName:"instanceId" type:"string"`
 
 	// The target virtualization environment.
-	TargetEnvironment *string `locationName:"targetEnvironment" type:"string"`
+	TargetEnvironment *string `locationName:"targetEnvironment" type:"string" enum:"ExportEnvironment"`
 
 	metadataInstanceExportDetails `json:"-" xml:"-"`
 }
@@ -17699,7 +17632,7 @@ type metadataInstanceExportDetails struct {
 
 // String returns the string representation
 func (s InstanceExportDetails) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -17710,7 +17643,7 @@ func (s InstanceExportDetails) GoString() string {
 // Describes the monitoring information of the instance.
 type InstanceMonitoring struct {
 	// The ID of the instance.
-	InstanceID *string `locationName:"instanceId" type:"string"`
+	InstanceId *string `locationName:"instanceId" type:"string"`
 
 	// The monitoring information.
 	Monitoring *Monitoring `locationName:"monitoring" type:"structure"`
@@ -17724,7 +17657,7 @@ type metadataInstanceMonitoring struct {
 
 // String returns the string representation
 func (s InstanceMonitoring) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -17748,34 +17681,34 @@ type InstanceNetworkInterface struct {
 	Groups []*GroupIdentifier `locationName:"groupSet" locationNameList:"item" type:"list"`
 
 	// The MAC address.
-	MACAddress *string `locationName:"macAddress" type:"string"`
+	MacAddress *string `locationName:"macAddress" type:"string"`
 
 	// The ID of the network interface.
-	NetworkInterfaceID *string `locationName:"networkInterfaceId" type:"string"`
+	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string"`
 
 	// The ID of the AWS account that created the network interface.
-	OwnerID *string `locationName:"ownerId" type:"string"`
+	OwnerId *string `locationName:"ownerId" type:"string"`
 
 	// The private DNS name.
-	PrivateDNSName *string `locationName:"privateDnsName" type:"string"`
+	PrivateDnsName *string `locationName:"privateDnsName" type:"string"`
 
 	// The IP address of the network interface within the subnet.
-	PrivateIPAddress *string `locationName:"privateIpAddress" type:"string"`
+	PrivateIpAddress *string `locationName:"privateIpAddress" type:"string"`
 
 	// The private IP addresses associated with the network interface.
-	PrivateIPAddresses []*InstancePrivateIPAddress `locationName:"privateIpAddressesSet" locationNameList:"item" type:"list"`
+	PrivateIpAddresses []*InstancePrivateIpAddress `locationName:"privateIpAddressesSet" locationNameList:"item" type:"list"`
 
 	// Indicates whether to validate network traffic to or from this network interface.
 	SourceDestCheck *bool `locationName:"sourceDestCheck" type:"boolean"`
 
 	// The status of the network interface.
-	Status *string `locationName:"status" type:"string"`
+	Status *string `locationName:"status" type:"string" enum:"NetworkInterfaceStatus"`
 
 	// The ID of the subnet.
-	SubnetID *string `locationName:"subnetId" type:"string"`
+	SubnetId *string `locationName:"subnetId" type:"string"`
 
 	// The ID of the VPC.
-	VPCID *string `locationName:"vpcId" type:"string"`
+	VpcId *string `locationName:"vpcId" type:"string"`
 
 	metadataInstanceNetworkInterface `json:"-" xml:"-"`
 }
@@ -17786,7 +17719,7 @@ type metadataInstanceNetworkInterface struct {
 
 // String returns the string representation
 func (s InstanceNetworkInterface) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -17797,13 +17730,13 @@ func (s InstanceNetworkInterface) GoString() string {
 // Describes association information for an Elastic IP address.
 type InstanceNetworkInterfaceAssociation struct {
 	// The ID of the owner of the Elastic IP address.
-	IPOwnerID *string `locationName:"ipOwnerId" type:"string"`
+	IpOwnerId *string `locationName:"ipOwnerId" type:"string"`
 
 	// The public DNS name.
-	PublicDNSName *string `locationName:"publicDnsName" type:"string"`
+	PublicDnsName *string `locationName:"publicDnsName" type:"string"`
 
 	// The public IP address or Elastic IP address bound to the network interface.
-	PublicIP *string `locationName:"publicIp" type:"string"`
+	PublicIp *string `locationName:"publicIp" type:"string"`
 
 	metadataInstanceNetworkInterfaceAssociation `json:"-" xml:"-"`
 }
@@ -17814,7 +17747,7 @@ type metadataInstanceNetworkInterfaceAssociation struct {
 
 // String returns the string representation
 func (s InstanceNetworkInterfaceAssociation) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -17828,7 +17761,7 @@ type InstanceNetworkInterfaceAttachment struct {
 	AttachTime *time.Time `locationName:"attachTime" type:"timestamp" timestampFormat:"iso8601"`
 
 	// The ID of the network interface attachment.
-	AttachmentID *string `locationName:"attachmentId" type:"string"`
+	AttachmentId *string `locationName:"attachmentId" type:"string"`
 
 	// Indicates whether the network interface is deleted when the instance is terminated.
 	DeleteOnTermination *bool `locationName:"deleteOnTermination" type:"boolean"`
@@ -17837,7 +17770,7 @@ type InstanceNetworkInterfaceAttachment struct {
 	DeviceIndex *int64 `locationName:"deviceIndex" type:"integer"`
 
 	// The attachment state.
-	Status *string `locationName:"status" type:"string"`
+	Status *string `locationName:"status" type:"string" enum:"AttachmentStatus"`
 
 	metadataInstanceNetworkInterfaceAttachment `json:"-" xml:"-"`
 }
@@ -17848,7 +17781,7 @@ type metadataInstanceNetworkInterfaceAttachment struct {
 
 // String returns the string representation
 func (s InstanceNetworkInterfaceAttachment) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -17863,7 +17796,7 @@ type InstanceNetworkInterfaceSpecification struct {
 	// for eth0, and can only be assigned to a new network interface, not an existing
 	// one. You cannot specify more than one network interface in the request. If
 	// launching into a default subnet, the default value is true.
-	AssociatePublicIPAddress *bool `locationName:"associatePublicIpAddress" type:"boolean"`
+	AssociatePublicIpAddress *bool `locationName:"associatePublicIpAddress" type:"boolean"`
 
 	// If set to true, the interface is deleted when the instance is terminated.
 	// You can specify true only if creating a new network interface when launching
@@ -17884,24 +17817,24 @@ type InstanceNetworkInterfaceSpecification struct {
 	Groups []*string `locationName:"SecurityGroupId" locationNameList:"SecurityGroupId" type:"list"`
 
 	// The ID of the network interface.
-	NetworkInterfaceID *string `locationName:"networkInterfaceId" type:"string"`
+	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string"`
 
 	// The private IP address of the network interface. Applies only if creating
 	// a network interface when launching an instance.
-	PrivateIPAddress *string `locationName:"privateIpAddress" type:"string"`
+	PrivateIpAddress *string `locationName:"privateIpAddress" type:"string"`
 
 	// One or more private IP addresses to assign to the network interface. Only
 	// one private IP address can be designated as primary.
-	PrivateIPAddresses []*PrivateIPAddressSpecification `locationName:"privateIpAddressesSet" queryName:"PrivateIpAddresses" locationNameList:"item" type:"list"`
+	PrivateIpAddresses []*PrivateIpAddressSpecification `locationName:"privateIpAddressesSet" queryName:"PrivateIpAddresses" locationNameList:"item" type:"list"`
 
 	// The number of secondary private IP addresses. You can't specify this option
 	// and specify more than one private IP address using the private IP addresses
 	// option.
-	SecondaryPrivateIPAddressCount *int64 `locationName:"secondaryPrivateIpAddressCount" type:"integer"`
+	SecondaryPrivateIpAddressCount *int64 `locationName:"secondaryPrivateIpAddressCount" type:"integer"`
 
 	// The ID of the subnet associated with the network string. Applies only if
 	// creating a network interface when launching an instance.
-	SubnetID *string `locationName:"subnetId" type:"string"`
+	SubnetId *string `locationName:"subnetId" type:"string"`
 
 	metadataInstanceNetworkInterfaceSpecification `json:"-" xml:"-"`
 }
@@ -17912,7 +17845,7 @@ type metadataInstanceNetworkInterfaceSpecification struct {
 
 // String returns the string representation
 func (s InstanceNetworkInterfaceSpecification) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -17921,7 +17854,7 @@ func (s InstanceNetworkInterfaceSpecification) GoString() string {
 }
 
 // Describes a private IP address.
-type InstancePrivateIPAddress struct {
+type InstancePrivateIpAddress struct {
 	// The association information for an Elastic IP address for the network interface.
 	Association *InstanceNetworkInterfaceAssociation `locationName:"association" type:"structure"`
 
@@ -17930,25 +17863,25 @@ type InstancePrivateIPAddress struct {
 	Primary *bool `locationName:"primary" type:"boolean"`
 
 	// The private DNS name.
-	PrivateDNSName *string `locationName:"privateDnsName" type:"string"`
+	PrivateDnsName *string `locationName:"privateDnsName" type:"string"`
 
 	// The private IP address of the network interface.
-	PrivateIPAddress *string `locationName:"privateIpAddress" type:"string"`
+	PrivateIpAddress *string `locationName:"privateIpAddress" type:"string"`
 
-	metadataInstancePrivateIPAddress `json:"-" xml:"-"`
+	metadataInstancePrivateIpAddress `json:"-" xml:"-"`
 }
 
-type metadataInstancePrivateIPAddress struct {
+type metadataInstancePrivateIpAddress struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s InstancePrivateIPAddress) String() string {
-	return awsutil.StringValue(s)
+func (s InstancePrivateIpAddress) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s InstancePrivateIPAddress) GoString() string {
+func (s InstancePrivateIpAddress) GoString() string {
 	return s.String()
 }
 
@@ -17971,7 +17904,7 @@ type InstanceState struct {
 	Code *int64 `locationName:"code" type:"integer"`
 
 	// The current state of the instance.
-	Name *string `locationName:"name" type:"string"`
+	Name *string `locationName:"name" type:"string" enum:"InstanceStateName"`
 
 	metadataInstanceState `json:"-" xml:"-"`
 }
@@ -17982,7 +17915,7 @@ type metadataInstanceState struct {
 
 // String returns the string representation
 func (s InstanceState) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -17996,7 +17929,7 @@ type InstanceStateChange struct {
 	CurrentState *InstanceState `locationName:"currentState" type:"structure"`
 
 	// The ID of the instance.
-	InstanceID *string `locationName:"instanceId" type:"string"`
+	InstanceId *string `locationName:"instanceId" type:"string"`
 
 	// The previous state of the instance.
 	PreviousState *InstanceState `locationName:"previousState" type:"structure"`
@@ -18010,7 +17943,7 @@ type metadataInstanceStateChange struct {
 
 // String returns the string representation
 func (s InstanceStateChange) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -18027,7 +17960,7 @@ type InstanceStatus struct {
 	Events []*InstanceStatusEvent `locationName:"eventsSet" locationNameList:"item" type:"list"`
 
 	// The ID of the instance.
-	InstanceID *string `locationName:"instanceId" type:"string"`
+	InstanceId *string `locationName:"instanceId" type:"string"`
 
 	// The intended state of the instance. DescribeInstanceStatus requires that
 	// an instance be in the running state.
@@ -18051,7 +17984,7 @@ type metadataInstanceStatus struct {
 
 // String returns the string representation
 func (s InstanceStatus) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -18066,10 +17999,10 @@ type InstanceStatusDetails struct {
 	ImpairedSince *time.Time `locationName:"impairedSince" type:"timestamp" timestampFormat:"iso8601"`
 
 	// The type of instance status.
-	Name *string `locationName:"name" type:"string"`
+	Name *string `locationName:"name" type:"string" enum:"StatusName"`
 
 	// The status.
-	Status *string `locationName:"status" type:"string"`
+	Status *string `locationName:"status" type:"string" enum:"StatusType"`
 
 	metadataInstanceStatusDetails `json:"-" xml:"-"`
 }
@@ -18080,7 +18013,7 @@ type metadataInstanceStatusDetails struct {
 
 // String returns the string representation
 func (s InstanceStatusDetails) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -18091,7 +18024,7 @@ func (s InstanceStatusDetails) GoString() string {
 // Describes a scheduled event for an instance.
 type InstanceStatusEvent struct {
 	// The event code.
-	Code *string `locationName:"code" type:"string"`
+	Code *string `locationName:"code" type:"string" enum:"EventCode"`
 
 	// A description of the event.
 	//
@@ -18115,7 +18048,7 @@ type metadataInstanceStatusEvent struct {
 
 // String returns the string representation
 func (s InstanceStatusEvent) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -18129,7 +18062,7 @@ type InstanceStatusSummary struct {
 	Details []*InstanceStatusDetails `locationName:"details" locationNameList:"item" type:"list"`
 
 	// The status.
-	Status *string `locationName:"status" type:"string"`
+	Status *string `locationName:"status" type:"string" enum:"SummaryStatus"`
 
 	metadataInstanceStatusSummary `json:"-" xml:"-"`
 }
@@ -18140,7 +18073,7 @@ type metadataInstanceStatusSummary struct {
 
 // String returns the string representation
 func (s InstanceStatusSummary) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -18154,7 +18087,7 @@ type InternetGateway struct {
 	Attachments []*InternetGatewayAttachment `locationName:"attachmentSet" locationNameList:"item" type:"list"`
 
 	// The ID of the Internet gateway.
-	InternetGatewayID *string `locationName:"internetGatewayId" type:"string"`
+	InternetGatewayId *string `locationName:"internetGatewayId" type:"string"`
 
 	// Any tags assigned to the Internet gateway.
 	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
@@ -18168,7 +18101,7 @@ type metadataInternetGateway struct {
 
 // String returns the string representation
 func (s InternetGateway) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -18179,10 +18112,10 @@ func (s InternetGateway) GoString() string {
 // Describes the attachment of a VPC to an Internet gateway.
 type InternetGatewayAttachment struct {
 	// The current state of the attachment.
-	State *string `locationName:"state" type:"string"`
+	State *string `locationName:"state" type:"string" enum:"AttachmentStatus"`
 
 	// The ID of the VPC.
-	VPCID *string `locationName:"vpcId" type:"string"`
+	VpcId *string `locationName:"vpcId" type:"string"`
 
 	metadataInternetGatewayAttachment `json:"-" xml:"-"`
 }
@@ -18193,11 +18126,83 @@ type metadataInternetGatewayAttachment struct {
 
 // String returns the string representation
 func (s InternetGatewayAttachment) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
 func (s InternetGatewayAttachment) GoString() string {
+	return s.String()
+}
+
+// Describes a security group rule.
+type IpPermission struct {
+	// The start of port range for the TCP and UDP protocols, or an ICMP type number.
+	// A value of -1 indicates all ICMP types.
+	FromPort *int64 `locationName:"fromPort" type:"integer"`
+
+	// The protocol.
+	//
+	// When you call DescribeSecurityGroups, the protocol value returned is the
+	// number. Exception: For TCP, UDP, and ICMP, the value returned is the name
+	// (for example, tcp, udp, or icmp). For a list of protocol numbers, see Protocol
+	// Numbers (http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml).
+	// (VPC only) When you call AuthorizeSecurityGroupIngress, you can use -1 to
+	// specify all.
+	IpProtocol *string `locationName:"ipProtocol" type:"string"`
+
+	// One or more IP ranges.
+	IpRanges []*IpRange `locationName:"ipRanges" locationNameList:"item" type:"list"`
+
+	// (Valid for AuthorizeSecurityGroupEgress, RevokeSecurityGroupEgress and DescribeSecurityGroups
+	// only) One or more prefix list IDs for an AWS service. In an AuthorizeSecurityGroupEgress
+	// request, this is the AWS service that you want to access through a VPC endpoint
+	// from instances associated with the security group.
+	PrefixListIds []*PrefixListId `locationName:"prefixListIds" locationNameList:"item" type:"list"`
+
+	// The end of port range for the TCP and UDP protocols, or an ICMP code. A value
+	// of -1 indicates all ICMP codes for the specified ICMP type.
+	ToPort *int64 `locationName:"toPort" type:"integer"`
+
+	// One or more security group and AWS account ID pairs.
+	UserIdGroupPairs []*UserIdGroupPair `locationName:"groups" locationNameList:"item" type:"list"`
+
+	metadataIpPermission `json:"-" xml:"-"`
+}
+
+type metadataIpPermission struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s IpPermission) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s IpPermission) GoString() string {
+	return s.String()
+}
+
+// Describes an IP range.
+type IpRange struct {
+	// The CIDR range. You can either specify a CIDR range or a source security
+	// group, not both.
+	CidrIp *string `locationName:"cidrIp" type:"string"`
+
+	metadataIpRange `json:"-" xml:"-"`
+}
+
+type metadataIpRange struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s IpRange) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s IpRange) GoString() string {
 	return s.String()
 }
 
@@ -18221,7 +18226,7 @@ type metadataKeyPairInfo struct {
 
 // String returns the string representation
 func (s KeyPairInfo) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -18232,10 +18237,10 @@ func (s KeyPairInfo) GoString() string {
 // Describes a launch permission.
 type LaunchPermission struct {
 	// The name of the group.
-	Group *string `locationName:"group" type:"string"`
+	Group *string `locationName:"group" type:"string" enum:"PermissionGroup"`
 
 	// The AWS account ID.
-	UserID *string `locationName:"userId" type:"string"`
+	UserId *string `locationName:"userId" type:"string"`
 
 	metadataLaunchPermission `json:"-" xml:"-"`
 }
@@ -18246,7 +18251,7 @@ type metadataLaunchPermission struct {
 
 // String returns the string representation
 func (s LaunchPermission) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -18272,7 +18277,7 @@ type metadataLaunchPermissionModifications struct {
 
 // String returns the string representation
 func (s LaunchPermissionModifications) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -18295,19 +18300,19 @@ type LaunchSpecification struct {
 	// Optimized instance.
 	//
 	// Default: false
-	EBSOptimized *bool `locationName:"ebsOptimized" type:"boolean"`
+	EbsOptimized *bool `locationName:"ebsOptimized" type:"boolean"`
 
 	// The IAM instance profile.
-	IAMInstanceProfile *IAMInstanceProfileSpecification `locationName:"iamInstanceProfile" type:"structure"`
+	IamInstanceProfile *IamInstanceProfileSpecification `locationName:"iamInstanceProfile" type:"structure"`
 
 	// The ID of the AMI.
-	ImageID *string `locationName:"imageId" type:"string"`
+	ImageId *string `locationName:"imageId" type:"string"`
 
 	// The instance type.
-	InstanceType *string `locationName:"instanceType" type:"string"`
+	InstanceType *string `locationName:"instanceType" type:"string" enum:"InstanceType"`
 
 	// The ID of the kernel.
-	KernelID *string `locationName:"kernelId" type:"string"`
+	KernelId *string `locationName:"kernelId" type:"string"`
 
 	// The name of the key pair.
 	KeyName *string `locationName:"keyName" type:"string"`
@@ -18322,7 +18327,7 @@ type LaunchSpecification struct {
 	Placement *SpotPlacement `locationName:"placement" type:"structure"`
 
 	// The ID of the RAM disk.
-	RAMDiskID *string `locationName:"ramdiskId" type:"string"`
+	RamdiskId *string `locationName:"ramdiskId" type:"string"`
 
 	// One or more security groups. To request an instance in a nondefault VPC,
 	// you must specify the ID of the security group. To request an instance in
@@ -18331,7 +18336,7 @@ type LaunchSpecification struct {
 	SecurityGroups []*GroupIdentifier `locationName:"groupSet" locationNameList:"item" type:"list"`
 
 	// The ID of the subnet in which to launch the instance.
-	SubnetID *string `locationName:"subnetId" type:"string"`
+	SubnetId *string `locationName:"subnetId" type:"string"`
 
 	// The Base64-encoded MIME user data to make available to the instances.
 	UserData *string `locationName:"userData" type:"string"`
@@ -18345,7 +18350,7 @@ type metadataLaunchSpecification struct {
 
 // String returns the string representation
 func (s LaunchSpecification) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -18367,7 +18372,7 @@ type ModifyImageAttributeInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the AMI.
-	ImageID *string `locationName:"ImageId" type:"string" required:"true"`
+	ImageId *string `type:"string" required:"true"`
 
 	// A launch permission modification.
 	LaunchPermission *LaunchPermissionModifications `type:"structure"`
@@ -18385,7 +18390,7 @@ type ModifyImageAttributeInput struct {
 
 	// One or more AWS account IDs. This is only valid when modifying the launchPermission
 	// attribute.
-	UserIDs []*string `locationName:"UserId" locationNameList:"UserId" type:"list"`
+	UserIds []*string `locationName:"UserId" locationNameList:"UserId" type:"list"`
 
 	// The value of the attribute being modified. This is only valid when modifying
 	// the description attribute.
@@ -18400,7 +18405,7 @@ type metadataModifyImageAttributeInput struct {
 
 // String returns the string representation
 func (s ModifyImageAttributeInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -18418,7 +18423,7 @@ type metadataModifyImageAttributeOutput struct {
 
 // String returns the string representation
 func (s ModifyImageAttributeOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -18428,7 +18433,7 @@ func (s ModifyImageAttributeOutput) GoString() string {
 
 type ModifyInstanceAttributeInput struct {
 	// The name of the attribute.
-	Attribute *string `locationName:"attribute" type:"string"`
+	Attribute *string `locationName:"attribute" type:"string" enum:"InstanceAttributeName"`
 
 	// Modifies the DeleteOnTermination attribute for volumes that are currently
 	// attached. The volume must be owned by the caller. If no value is specified
@@ -18443,7 +18448,7 @@ type ModifyInstanceAttributeInput struct {
 
 	// If the value is true, you can't terminate the instance using the Amazon EC2
 	// console, CLI, or API; otherwise, you can.
-	DisableAPITermination *AttributeBooleanValue `locationName:"disableApiTermination" type:"structure"`
+	DisableApiTermination *AttributeBooleanValue `locationName:"disableApiTermination" type:"structure"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -18456,7 +18461,7 @@ type ModifyInstanceAttributeInput struct {
 	// stack to provide optimal EBS I/O performance. This optimization isn't available
 	// with all instance types. Additional usage charges apply when using an EBS
 	// Optimized instance.
-	EBSOptimized *AttributeBooleanValue `locationName:"ebsOptimized" type:"structure"`
+	EbsOptimized *AttributeBooleanValue `locationName:"ebsOptimized" type:"structure"`
 
 	// [EC2-VPC] Changes the security groups of the instance. You must specify at
 	// least one security group, even if it's just the default security group for
@@ -18464,7 +18469,7 @@ type ModifyInstanceAttributeInput struct {
 	Groups []*string `locationName:"GroupId" locationNameList:"groupId" type:"list"`
 
 	// The ID of the instance.
-	InstanceID *string `locationName:"instanceId" type:"string" required:"true"`
+	InstanceId *string `locationName:"instanceId" type:"string" required:"true"`
 
 	// Specifies whether an instance stops or terminates when you initiate shutdown
 	// from the instance (using the operating system command for system shutdown).
@@ -18483,7 +18488,12 @@ type ModifyInstanceAttributeInput struct {
 	// Changes the instance's RAM disk to the specified value. We recommend that
 	// you use PV-GRUB instead of kernels and RAM disks. For more information, see
 	// PV-GRUB (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html).
-	RAMDisk *AttributeValue `locationName:"ramdisk" type:"structure"`
+	Ramdisk *AttributeValue `locationName:"ramdisk" type:"structure"`
+
+	// Specifies whether source/destination checking is enabled. A value of true
+	// means that checking is enabled, and false means checking is disabled. This
+	// value must be false for a NAT instance to perform NAT.
+	SourceDestCheck *AttributeBooleanValue `type:"structure"`
 
 	// Set to simple to enable enhanced networking for the instance.
 	//
@@ -18491,12 +18501,7 @@ type ModifyInstanceAttributeInput struct {
 	//
 	// This option is supported only for HVM instances. Specifying this option
 	// with a PV instance can make it unreachable.
-	SRIOVNetSupport *AttributeValue `locationName:"sriovNetSupport" type:"structure"`
-
-	// Specifies whether source/destination checking is enabled. A value of true
-	// means that checking is enabled, and false means checking is disabled. This
-	// value must be false for a NAT instance to perform NAT.
-	SourceDestCheck *AttributeBooleanValue `type:"structure"`
+	SriovNetSupport *AttributeValue `locationName:"sriovNetSupport" type:"structure"`
 
 	// Changes the instance's user data to the specified value.
 	UserData *BlobAttributeValue `locationName:"userData" type:"structure"`
@@ -18514,7 +18519,7 @@ type metadataModifyInstanceAttributeInput struct {
 
 // String returns the string representation
 func (s ModifyInstanceAttributeInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -18532,7 +18537,7 @@ type metadataModifyInstanceAttributeOutput struct {
 
 // String returns the string representation
 func (s ModifyInstanceAttributeOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -18561,7 +18566,7 @@ type ModifyNetworkInterfaceAttributeInput struct {
 	Groups []*string `locationName:"SecurityGroupId" locationNameList:"SecurityGroupId" type:"list"`
 
 	// The ID of the network interface.
-	NetworkInterfaceID *string `locationName:"networkInterfaceId" type:"string" required:"true"`
+	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string" required:"true"`
 
 	// Indicates whether source/destination checking is enabled. A value of true
 	// means checking is enabled, and false means checking is disabled. This value
@@ -18579,7 +18584,7 @@ type metadataModifyNetworkInterfaceAttributeInput struct {
 
 // String returns the string representation
 func (s ModifyNetworkInterfaceAttributeInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -18597,7 +18602,7 @@ type metadataModifyNetworkInterfaceAttributeOutput struct {
 
 // String returns the string representation
 func (s ModifyNetworkInterfaceAttributeOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -18611,7 +18616,7 @@ type ModifyReservedInstancesInput struct {
 	ClientToken *string `locationName:"clientToken" type:"string"`
 
 	// The IDs of the Reserved Instances to modify.
-	ReservedInstancesIDs []*string `locationName:"ReservedInstancesId" locationNameList:"ReservedInstancesId" type:"list" required:"true"`
+	ReservedInstancesIds []*string `locationName:"ReservedInstancesId" locationNameList:"ReservedInstancesId" type:"list" required:"true"`
 
 	// The configuration settings for the Reserved Instances to modify.
 	TargetConfigurations []*ReservedInstancesConfiguration `locationName:"ReservedInstancesConfigurationSetItemType" locationNameList:"item" type:"list" required:"true"`
@@ -18625,7 +18630,7 @@ type metadataModifyReservedInstancesInput struct {
 
 // String returns the string representation
 func (s ModifyReservedInstancesInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -18635,7 +18640,7 @@ func (s ModifyReservedInstancesInput) GoString() string {
 
 type ModifyReservedInstancesOutput struct {
 	// The ID for the modification.
-	ReservedInstancesModificationID *string `locationName:"reservedInstancesModificationId" type:"string"`
+	ReservedInstancesModificationId *string `locationName:"reservedInstancesModificationId" type:"string"`
 
 	metadataModifyReservedInstancesOutput `json:"-" xml:"-"`
 }
@@ -18646,7 +18651,7 @@ type metadataModifyReservedInstancesOutput struct {
 
 // String returns the string representation
 func (s ModifyReservedInstancesOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -18656,7 +18661,9 @@ func (s ModifyReservedInstancesOutput) GoString() string {
 
 type ModifySnapshotAttributeInput struct {
 	// The snapshot attribute to modify.
-	Attribute *string `type:"string"`
+	//
+	//  Only volume creation permissions may be modified at the customer level.
+	Attribute *string `type:"string" enum:"SnapshotAttributeName"`
 
 	// A JSON representation of the snapshot attribute modification.
 	CreateVolumePermission *CreateVolumePermissionModifications `type:"structure"`
@@ -18674,10 +18681,10 @@ type ModifySnapshotAttributeInput struct {
 	OperationType *string `type:"string"`
 
 	// The ID of the snapshot.
-	SnapshotID *string `locationName:"SnapshotId" type:"string" required:"true"`
+	SnapshotId *string `type:"string" required:"true"`
 
 	// The account ID to modify for the snapshot.
-	UserIDs []*string `locationName:"UserId" locationNameList:"UserId" type:"list"`
+	UserIds []*string `locationName:"UserId" locationNameList:"UserId" type:"list"`
 
 	metadataModifySnapshotAttributeInput `json:"-" xml:"-"`
 }
@@ -18688,7 +18695,7 @@ type metadataModifySnapshotAttributeInput struct {
 
 // String returns the string representation
 func (s ModifySnapshotAttributeInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -18706,7 +18713,7 @@ type metadataModifySnapshotAttributeOutput struct {
 
 // String returns the string representation
 func (s ModifySnapshotAttributeOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -18717,10 +18724,10 @@ func (s ModifySnapshotAttributeOutput) GoString() string {
 type ModifySubnetAttributeInput struct {
 	// Specify true to indicate that instances launched into the specified subnet
 	// should be assigned public IP address.
-	MapPublicIPOnLaunch *AttributeBooleanValue `locationName:"MapPublicIpOnLaunch" type:"structure"`
+	MapPublicIpOnLaunch *AttributeBooleanValue `type:"structure"`
 
 	// The ID of the subnet.
-	SubnetID *string `locationName:"subnetId" type:"string" required:"true"`
+	SubnetId *string `locationName:"subnetId" type:"string" required:"true"`
 
 	metadataModifySubnetAttributeInput `json:"-" xml:"-"`
 }
@@ -18731,7 +18738,7 @@ type metadataModifySubnetAttributeInput struct {
 
 // String returns the string representation
 func (s ModifySubnetAttributeInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -18749,125 +18756,11 @@ type metadataModifySubnetAttributeOutput struct {
 
 // String returns the string representation
 func (s ModifySubnetAttributeOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
 func (s ModifySubnetAttributeOutput) GoString() string {
-	return s.String()
-}
-
-type ModifyVPCAttributeInput struct {
-	// Indicates whether the instances launched in the VPC get DNS hostnames. If
-	// enabled, instances in the VPC get DNS hostnames; otherwise, they do not.
-	//
-	// You can only enable DNS hostnames if you also enable DNS support.
-	EnableDNSHostnames *AttributeBooleanValue `locationName:"EnableDnsHostnames" type:"structure"`
-
-	// Indicates whether the DNS resolution is supported for the VPC. If enabled,
-	// queries to the Amazon provided DNS server at the 169.254.169.253 IP address,
-	// or the reserved IP address at the base of the VPC network range "plus two"
-	// will succeed. If disabled, the Amazon provided DNS service in the VPC that
-	// resolves public DNS hostnames to IP addresses is not enabled.
-	EnableDNSSupport *AttributeBooleanValue `locationName:"EnableDnsSupport" type:"structure"`
-
-	// The ID of the VPC.
-	VPCID *string `locationName:"vpcId" type:"string" required:"true"`
-
-	metadataModifyVPCAttributeInput `json:"-" xml:"-"`
-}
-
-type metadataModifyVPCAttributeInput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyVPCAttributeInput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s ModifyVPCAttributeInput) GoString() string {
-	return s.String()
-}
-
-type ModifyVPCAttributeOutput struct {
-	metadataModifyVPCAttributeOutput `json:"-" xml:"-"`
-}
-
-type metadataModifyVPCAttributeOutput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyVPCAttributeOutput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s ModifyVPCAttributeOutput) GoString() string {
-	return s.String()
-}
-
-type ModifyVPCEndpointInput struct {
-	// One or more route tables IDs to associate with the endpoint.
-	AddRouteTableIDs []*string `locationName:"AddRouteTableId" locationNameList:"item" type:"list"`
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have
-	// the required permissions, the error response is DryRunOperation. Otherwise,
-	// it is UnauthorizedOperation.
-	DryRun *bool `type:"boolean"`
-
-	// A policy document to attach to the endpoint. The policy must be in valid
-	// JSON format.
-	PolicyDocument *string `type:"string"`
-
-	// One or more route table IDs to disassociate from the endpoint.
-	RemoveRouteTableIDs []*string `locationName:"RemoveRouteTableId" locationNameList:"item" type:"list"`
-
-	// Specify true to reset the policy document to the default policy. The default
-	// policy allows access to the service.
-	ResetPolicy *bool `type:"boolean"`
-
-	// The ID of the endpoint.
-	VPCEndpointID *string `locationName:"VpcEndpointId" type:"string" required:"true"`
-
-	metadataModifyVPCEndpointInput `json:"-" xml:"-"`
-}
-
-type metadataModifyVPCEndpointInput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyVPCEndpointInput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s ModifyVPCEndpointInput) GoString() string {
-	return s.String()
-}
-
-type ModifyVPCEndpointOutput struct {
-	// Returns true if the request succeeds; otherwise, it returns an error.
-	Return *bool `locationName:"return" type:"boolean"`
-
-	metadataModifyVPCEndpointOutput `json:"-" xml:"-"`
-}
-
-type metadataModifyVPCEndpointOutput struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyVPCEndpointOutput) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s ModifyVPCEndpointOutput) GoString() string {
 	return s.String()
 }
 
@@ -18882,7 +18775,7 @@ type ModifyVolumeAttributeInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the volume.
-	VolumeID *string `locationName:"VolumeId" type:"string" required:"true"`
+	VolumeId *string `type:"string" required:"true"`
 
 	metadataModifyVolumeAttributeInput `json:"-" xml:"-"`
 }
@@ -18893,7 +18786,7 @@ type metadataModifyVolumeAttributeInput struct {
 
 // String returns the string representation
 func (s ModifyVolumeAttributeInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -18911,11 +18804,125 @@ type metadataModifyVolumeAttributeOutput struct {
 
 // String returns the string representation
 func (s ModifyVolumeAttributeOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
 func (s ModifyVolumeAttributeOutput) GoString() string {
+	return s.String()
+}
+
+type ModifyVpcAttributeInput struct {
+	// Indicates whether the instances launched in the VPC get DNS hostnames. If
+	// enabled, instances in the VPC get DNS hostnames; otherwise, they do not.
+	//
+	// You can only enable DNS hostnames if you also enable DNS support.
+	EnableDnsHostnames *AttributeBooleanValue `type:"structure"`
+
+	// Indicates whether the DNS resolution is supported for the VPC. If enabled,
+	// queries to the Amazon provided DNS server at the 169.254.169.253 IP address,
+	// or the reserved IP address at the base of the VPC network range "plus two"
+	// will succeed. If disabled, the Amazon provided DNS service in the VPC that
+	// resolves public DNS hostnames to IP addresses is not enabled.
+	EnableDnsSupport *AttributeBooleanValue `type:"structure"`
+
+	// The ID of the VPC.
+	VpcId *string `locationName:"vpcId" type:"string" required:"true"`
+
+	metadataModifyVpcAttributeInput `json:"-" xml:"-"`
+}
+
+type metadataModifyVpcAttributeInput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s ModifyVpcAttributeInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ModifyVpcAttributeInput) GoString() string {
+	return s.String()
+}
+
+type ModifyVpcAttributeOutput struct {
+	metadataModifyVpcAttributeOutput `json:"-" xml:"-"`
+}
+
+type metadataModifyVpcAttributeOutput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s ModifyVpcAttributeOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ModifyVpcAttributeOutput) GoString() string {
+	return s.String()
+}
+
+type ModifyVpcEndpointInput struct {
+	// One or more route tables IDs to associate with the endpoint.
+	AddRouteTableIds []*string `locationName:"AddRouteTableId" locationNameList:"item" type:"list"`
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have
+	// the required permissions, the error response is DryRunOperation. Otherwise,
+	// it is UnauthorizedOperation.
+	DryRun *bool `type:"boolean"`
+
+	// A policy document to attach to the endpoint. The policy must be in valid
+	// JSON format.
+	PolicyDocument *string `type:"string"`
+
+	// One or more route table IDs to disassociate from the endpoint.
+	RemoveRouteTableIds []*string `locationName:"RemoveRouteTableId" locationNameList:"item" type:"list"`
+
+	// Specify true to reset the policy document to the default policy. The default
+	// policy allows access to the service.
+	ResetPolicy *bool `type:"boolean"`
+
+	// The ID of the endpoint.
+	VpcEndpointId *string `type:"string" required:"true"`
+
+	metadataModifyVpcEndpointInput `json:"-" xml:"-"`
+}
+
+type metadataModifyVpcEndpointInput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s ModifyVpcEndpointInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ModifyVpcEndpointInput) GoString() string {
+	return s.String()
+}
+
+type ModifyVpcEndpointOutput struct {
+	// Returns true if the request succeeds; otherwise, it returns an error.
+	Return *bool `locationName:"return" type:"boolean"`
+
+	metadataModifyVpcEndpointOutput `json:"-" xml:"-"`
+}
+
+type metadataModifyVpcEndpointOutput struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s ModifyVpcEndpointOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ModifyVpcEndpointOutput) GoString() string {
 	return s.String()
 }
 
@@ -18927,7 +18934,7 @@ type MonitorInstancesInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// One or more instance IDs.
-	InstanceIDs []*string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list" required:"true"`
+	InstanceIds []*string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list" required:"true"`
 
 	metadataMonitorInstancesInput `json:"-" xml:"-"`
 }
@@ -18938,7 +18945,7 @@ type metadataMonitorInstancesInput struct {
 
 // String returns the string representation
 func (s MonitorInstancesInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -18959,7 +18966,7 @@ type metadataMonitorInstancesOutput struct {
 
 // String returns the string representation
 func (s MonitorInstancesOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -18970,7 +18977,7 @@ func (s MonitorInstancesOutput) GoString() string {
 // Describes the monitoring for the instance.
 type Monitoring struct {
 	// Indicates whether monitoring is enabled for the instance.
-	State *string `locationName:"state" type:"string"`
+	State *string `locationName:"state" type:"string" enum:"MonitoringState"`
 
 	metadataMonitoring `json:"-" xml:"-"`
 }
@@ -18981,7 +18988,7 @@ type metadataMonitoring struct {
 
 // String returns the string representation
 func (s Monitoring) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -18989,7 +18996,7 @@ func (s Monitoring) GoString() string {
 	return s.String()
 }
 
-type MoveAddressToVPCInput struct {
+type MoveAddressToVpcInput struct {
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
 	// the required permissions, the error response is DryRunOperation. Otherwise,
@@ -18997,46 +19004,46 @@ type MoveAddressToVPCInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The Elastic IP address.
-	PublicIP *string `locationName:"publicIp" type:"string" required:"true"`
+	PublicIp *string `locationName:"publicIp" type:"string" required:"true"`
 
-	metadataMoveAddressToVPCInput `json:"-" xml:"-"`
+	metadataMoveAddressToVpcInput `json:"-" xml:"-"`
 }
 
-type metadataMoveAddressToVPCInput struct {
+type metadataMoveAddressToVpcInput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s MoveAddressToVPCInput) String() string {
-	return awsutil.StringValue(s)
+func (s MoveAddressToVpcInput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s MoveAddressToVPCInput) GoString() string {
+func (s MoveAddressToVpcInput) GoString() string {
 	return s.String()
 }
 
-type MoveAddressToVPCOutput struct {
+type MoveAddressToVpcOutput struct {
 	// The allocation ID for the Elastic IP address.
-	AllocationID *string `locationName:"allocationId" type:"string"`
+	AllocationId *string `locationName:"allocationId" type:"string"`
 
 	// The status of the move of the IP address.
-	Status *string `locationName:"status" type:"string"`
+	Status *string `locationName:"status" type:"string" enum:"Status"`
 
-	metadataMoveAddressToVPCOutput `json:"-" xml:"-"`
+	metadataMoveAddressToVpcOutput `json:"-" xml:"-"`
 }
 
-type metadataMoveAddressToVPCOutput struct {
+type metadataMoveAddressToVpcOutput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s MoveAddressToVPCOutput) String() string {
-	return awsutil.StringValue(s)
+func (s MoveAddressToVpcOutput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s MoveAddressToVPCOutput) GoString() string {
+func (s MoveAddressToVpcOutput) GoString() string {
 	return s.String()
 }
 
@@ -19044,10 +19051,10 @@ func (s MoveAddressToVPCOutput) GoString() string {
 type MovingAddressStatus struct {
 	// The status of the Elastic IP address that's being moved to the EC2-VPC platform,
 	// or restored to the EC2-Classic platform.
-	MoveStatus *string `locationName:"moveStatus" type:"string"`
+	MoveStatus *string `locationName:"moveStatus" type:"string" enum:"MoveStatus"`
 
 	// The Elastic IP address.
-	PublicIP *string `locationName:"publicIp" type:"string"`
+	PublicIp *string `locationName:"publicIp" type:"string"`
 
 	metadataMovingAddressStatus `json:"-" xml:"-"`
 }
@@ -19058,7 +19065,7 @@ type metadataMovingAddressStatus struct {
 
 // String returns the string representation
 func (s MovingAddressStatus) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -19067,81 +19074,81 @@ func (s MovingAddressStatus) GoString() string {
 }
 
 // Describes a network ACL.
-type NetworkACL struct {
+type NetworkAcl struct {
 	// Any associations between the network ACL and one or more subnets
-	Associations []*NetworkACLAssociation `locationName:"associationSet" locationNameList:"item" type:"list"`
+	Associations []*NetworkAclAssociation `locationName:"associationSet" locationNameList:"item" type:"list"`
 
 	// One or more entries (rules) in the network ACL.
-	Entries []*NetworkACLEntry `locationName:"entrySet" locationNameList:"item" type:"list"`
+	Entries []*NetworkAclEntry `locationName:"entrySet" locationNameList:"item" type:"list"`
 
 	// Indicates whether this is the default network ACL for the VPC.
 	IsDefault *bool `locationName:"default" type:"boolean"`
 
 	// The ID of the network ACL.
-	NetworkACLID *string `locationName:"networkAclId" type:"string"`
+	NetworkAclId *string `locationName:"networkAclId" type:"string"`
 
 	// Any tags assigned to the network ACL.
 	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The ID of the VPC for the network ACL.
-	VPCID *string `locationName:"vpcId" type:"string"`
+	VpcId *string `locationName:"vpcId" type:"string"`
 
-	metadataNetworkACL `json:"-" xml:"-"`
+	metadataNetworkAcl `json:"-" xml:"-"`
 }
 
-type metadataNetworkACL struct {
+type metadataNetworkAcl struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s NetworkACL) String() string {
-	return awsutil.StringValue(s)
+func (s NetworkAcl) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s NetworkACL) GoString() string {
+func (s NetworkAcl) GoString() string {
 	return s.String()
 }
 
 // Describes an association between a network ACL and a subnet.
-type NetworkACLAssociation struct {
+type NetworkAclAssociation struct {
 	// The ID of the association between a network ACL and a subnet.
-	NetworkACLAssociationID *string `locationName:"networkAclAssociationId" type:"string"`
+	NetworkAclAssociationId *string `locationName:"networkAclAssociationId" type:"string"`
 
 	// The ID of the network ACL.
-	NetworkACLID *string `locationName:"networkAclId" type:"string"`
+	NetworkAclId *string `locationName:"networkAclId" type:"string"`
 
 	// The ID of the subnet.
-	SubnetID *string `locationName:"subnetId" type:"string"`
+	SubnetId *string `locationName:"subnetId" type:"string"`
 
-	metadataNetworkACLAssociation `json:"-" xml:"-"`
+	metadataNetworkAclAssociation `json:"-" xml:"-"`
 }
 
-type metadataNetworkACLAssociation struct {
+type metadataNetworkAclAssociation struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s NetworkACLAssociation) String() string {
-	return awsutil.StringValue(s)
+func (s NetworkAclAssociation) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s NetworkACLAssociation) GoString() string {
+func (s NetworkAclAssociation) GoString() string {
 	return s.String()
 }
 
 // Describes an entry in a network ACL.
-type NetworkACLEntry struct {
+type NetworkAclEntry struct {
 	// The network range to allow or deny, in CIDR notation.
-	CIDRBlock *string `locationName:"cidrBlock" type:"string"`
+	CidrBlock *string `locationName:"cidrBlock" type:"string"`
 
 	// Indicates whether the rule is an egress rule (applied to traffic leaving
 	// the subnet).
 	Egress *bool `locationName:"egress" type:"boolean"`
 
 	// ICMP protocol: The ICMP type and code.
-	ICMPTypeCode *ICMPTypeCode `locationName:"icmpTypeCode" type:"structure"`
+	IcmpTypeCode *IcmpTypeCode `locationName:"icmpTypeCode" type:"structure"`
 
 	// TCP or UDP protocols: The range of ports the rule applies to.
 	PortRange *PortRange `locationName:"portRange" type:"structure"`
@@ -19150,26 +19157,26 @@ type NetworkACLEntry struct {
 	Protocol *string `locationName:"protocol" type:"string"`
 
 	// Indicates whether to allow or deny the traffic that matches the rule.
-	RuleAction *string `locationName:"ruleAction" type:"string"`
+	RuleAction *string `locationName:"ruleAction" type:"string" enum:"RuleAction"`
 
 	// The rule number for the entry. ACL entries are processed in ascending order
 	// by rule number.
 	RuleNumber *int64 `locationName:"ruleNumber" type:"integer"`
 
-	metadataNetworkACLEntry `json:"-" xml:"-"`
+	metadataNetworkAclEntry `json:"-" xml:"-"`
 }
 
-type metadataNetworkACLEntry struct {
+type metadataNetworkAclEntry struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s NetworkACLEntry) String() string {
-	return awsutil.StringValue(s)
+func (s NetworkAclEntry) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s NetworkACLEntry) GoString() string {
+func (s NetworkAclEntry) GoString() string {
 	return s.String()
 }
 
@@ -19192,26 +19199,26 @@ type NetworkInterface struct {
 	Groups []*GroupIdentifier `locationName:"groupSet" locationNameList:"item" type:"list"`
 
 	// The MAC address.
-	MACAddress *string `locationName:"macAddress" type:"string"`
+	MacAddress *string `locationName:"macAddress" type:"string"`
 
 	// The ID of the network interface.
-	NetworkInterfaceID *string `locationName:"networkInterfaceId" type:"string"`
+	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string"`
 
 	// The AWS account ID of the owner of the network interface.
-	OwnerID *string `locationName:"ownerId" type:"string"`
+	OwnerId *string `locationName:"ownerId" type:"string"`
 
 	// The private DNS name.
-	PrivateDNSName *string `locationName:"privateDnsName" type:"string"`
+	PrivateDnsName *string `locationName:"privateDnsName" type:"string"`
 
 	// The IP address of the network interface within the subnet.
-	PrivateIPAddress *string `locationName:"privateIpAddress" type:"string"`
+	PrivateIpAddress *string `locationName:"privateIpAddress" type:"string"`
 
 	// The private IP addresses associated with the network interface.
-	PrivateIPAddresses []*NetworkInterfacePrivateIPAddress `locationName:"privateIpAddressesSet" locationNameList:"item" type:"list"`
+	PrivateIpAddresses []*NetworkInterfacePrivateIpAddress `locationName:"privateIpAddressesSet" locationNameList:"item" type:"list"`
 
 	// The ID of the entity that launched the instance on your behalf (for example,
 	// AWS Management Console or Auto Scaling).
-	RequesterID *string `locationName:"requesterId" type:"string"`
+	RequesterId *string `locationName:"requesterId" type:"string"`
 
 	// Indicates whether the network interface is being managed by AWS.
 	RequesterManaged *bool `locationName:"requesterManaged" type:"boolean"`
@@ -19220,16 +19227,16 @@ type NetworkInterface struct {
 	SourceDestCheck *bool `locationName:"sourceDestCheck" type:"boolean"`
 
 	// The status of the network interface.
-	Status *string `locationName:"status" type:"string"`
+	Status *string `locationName:"status" type:"string" enum:"NetworkInterfaceStatus"`
 
 	// The ID of the subnet.
-	SubnetID *string `locationName:"subnetId" type:"string"`
+	SubnetId *string `locationName:"subnetId" type:"string"`
 
 	// Any tags assigned to the network interface.
 	TagSet []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The ID of the VPC.
-	VPCID *string `locationName:"vpcId" type:"string"`
+	VpcId *string `locationName:"vpcId" type:"string"`
 
 	metadataNetworkInterface `json:"-" xml:"-"`
 }
@@ -19240,7 +19247,7 @@ type metadataNetworkInterface struct {
 
 // String returns the string representation
 func (s NetworkInterface) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -19251,19 +19258,19 @@ func (s NetworkInterface) GoString() string {
 // Describes association information for an Elastic IP address.
 type NetworkInterfaceAssociation struct {
 	// The allocation ID.
-	AllocationID *string `locationName:"allocationId" type:"string"`
+	AllocationId *string `locationName:"allocationId" type:"string"`
 
 	// The association ID.
-	AssociationID *string `locationName:"associationId" type:"string"`
+	AssociationId *string `locationName:"associationId" type:"string"`
 
 	// The ID of the Elastic IP address owner.
-	IPOwnerID *string `locationName:"ipOwnerId" type:"string"`
+	IpOwnerId *string `locationName:"ipOwnerId" type:"string"`
 
 	// The public DNS name.
-	PublicDNSName *string `locationName:"publicDnsName" type:"string"`
+	PublicDnsName *string `locationName:"publicDnsName" type:"string"`
 
 	// The address of the Elastic IP address bound to the network interface.
-	PublicIP *string `locationName:"publicIp" type:"string"`
+	PublicIp *string `locationName:"publicIp" type:"string"`
 
 	metadataNetworkInterfaceAssociation `json:"-" xml:"-"`
 }
@@ -19274,7 +19281,7 @@ type metadataNetworkInterfaceAssociation struct {
 
 // String returns the string representation
 func (s NetworkInterfaceAssociation) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -19288,7 +19295,7 @@ type NetworkInterfaceAttachment struct {
 	AttachTime *time.Time `locationName:"attachTime" type:"timestamp" timestampFormat:"iso8601"`
 
 	// The ID of the network interface attachment.
-	AttachmentID *string `locationName:"attachmentId" type:"string"`
+	AttachmentId *string `locationName:"attachmentId" type:"string"`
 
 	// Indicates whether the network interface is deleted when the instance is terminated.
 	DeleteOnTermination *bool `locationName:"deleteOnTermination" type:"boolean"`
@@ -19297,13 +19304,13 @@ type NetworkInterfaceAttachment struct {
 	DeviceIndex *int64 `locationName:"deviceIndex" type:"integer"`
 
 	// The ID of the instance.
-	InstanceID *string `locationName:"instanceId" type:"string"`
+	InstanceId *string `locationName:"instanceId" type:"string"`
 
 	// The AWS account ID of the owner of the instance.
-	InstanceOwnerID *string `locationName:"instanceOwnerId" type:"string"`
+	InstanceOwnerId *string `locationName:"instanceOwnerId" type:"string"`
 
 	// The attachment state.
-	Status *string `locationName:"status" type:"string"`
+	Status *string `locationName:"status" type:"string" enum:"AttachmentStatus"`
 
 	metadataNetworkInterfaceAttachment `json:"-" xml:"-"`
 }
@@ -19314,7 +19321,7 @@ type metadataNetworkInterfaceAttachment struct {
 
 // String returns the string representation
 func (s NetworkInterfaceAttachment) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -19325,7 +19332,7 @@ func (s NetworkInterfaceAttachment) GoString() string {
 // Describes an attachment change.
 type NetworkInterfaceAttachmentChanges struct {
 	// The ID of the network interface attachment.
-	AttachmentID *string `locationName:"attachmentId" type:"string"`
+	AttachmentId *string `locationName:"attachmentId" type:"string"`
 
 	// Indicates whether the network interface is deleted when the instance is terminated.
 	DeleteOnTermination *bool `locationName:"deleteOnTermination" type:"boolean"`
@@ -19339,7 +19346,7 @@ type metadataNetworkInterfaceAttachmentChanges struct {
 
 // String returns the string representation
 func (s NetworkInterfaceAttachmentChanges) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -19348,7 +19355,7 @@ func (s NetworkInterfaceAttachmentChanges) GoString() string {
 }
 
 // Describes the private IP address of a network interface.
-type NetworkInterfacePrivateIPAddress struct {
+type NetworkInterfacePrivateIpAddress struct {
 	// The association information for an Elastic IP address associated with the
 	// network interface.
 	Association *NetworkInterfaceAssociation `locationName:"association" type:"structure"`
@@ -19358,47 +19365,47 @@ type NetworkInterfacePrivateIPAddress struct {
 	Primary *bool `locationName:"primary" type:"boolean"`
 
 	// The private DNS name.
-	PrivateDNSName *string `locationName:"privateDnsName" type:"string"`
+	PrivateDnsName *string `locationName:"privateDnsName" type:"string"`
 
 	// The private IP address.
-	PrivateIPAddress *string `locationName:"privateIpAddress" type:"string"`
+	PrivateIpAddress *string `locationName:"privateIpAddress" type:"string"`
 
-	metadataNetworkInterfacePrivateIPAddress `json:"-" xml:"-"`
+	metadataNetworkInterfacePrivateIpAddress `json:"-" xml:"-"`
 }
 
-type metadataNetworkInterfacePrivateIPAddress struct {
+type metadataNetworkInterfacePrivateIpAddress struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s NetworkInterfacePrivateIPAddress) String() string {
-	return awsutil.StringValue(s)
+func (s NetworkInterfacePrivateIpAddress) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s NetworkInterfacePrivateIPAddress) GoString() string {
+func (s NetworkInterfacePrivateIpAddress) GoString() string {
 	return s.String()
 }
 
-type NewDHCPConfiguration struct {
+type NewDhcpConfiguration struct {
 	Key *string `locationName:"key" type:"string"`
 
 	Values []*string `locationName:"Value" locationNameList:"item" type:"list"`
 
-	metadataNewDHCPConfiguration `json:"-" xml:"-"`
+	metadataNewDhcpConfiguration `json:"-" xml:"-"`
 }
 
-type metadataNewDHCPConfiguration struct {
+type metadataNewDhcpConfiguration struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s NewDHCPConfiguration) String() string {
-	return awsutil.StringValue(s)
+func (s NewDhcpConfiguration) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s NewDHCPConfiguration) GoString() string {
+func (s NewDhcpConfiguration) GoString() string {
 	return s.String()
 }
 
@@ -19412,7 +19419,7 @@ type Placement struct {
 
 	// The tenancy of the instance (if the instance is running in a VPC). An instance
 	// with a tenancy of dedicated runs on single-tenant hardware.
-	Tenancy *string `locationName:"tenancy" type:"string"`
+	Tenancy *string `locationName:"tenancy" type:"string" enum:"Tenancy"`
 
 	metadataPlacement `json:"-" xml:"-"`
 }
@@ -19423,7 +19430,7 @@ type metadataPlacement struct {
 
 // String returns the string representation
 func (s Placement) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -19437,10 +19444,10 @@ type PlacementGroup struct {
 	GroupName *string `locationName:"groupName" type:"string"`
 
 	// The state of the placement group.
-	State *string `locationName:"state" type:"string"`
+	State *string `locationName:"state" type:"string" enum:"PlacementGroupState"`
 
 	// The placement strategy.
-	Strategy *string `locationName:"strategy" type:"string"`
+	Strategy *string `locationName:"strategy" type:"string" enum:"PlacementStrategy"`
 
 	metadataPlacementGroup `json:"-" xml:"-"`
 }
@@ -19451,7 +19458,7 @@ type metadataPlacementGroup struct {
 
 // String returns the string representation
 func (s PlacementGroup) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -19476,7 +19483,7 @@ type metadataPortRange struct {
 
 // String returns the string representation
 func (s PortRange) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -19487,10 +19494,10 @@ func (s PortRange) GoString() string {
 // Describes prefixes for AWS services.
 type PrefixList struct {
 	// The IP address range of the AWS service.
-	CIDRs []*string `locationName:"cidrSet" locationNameList:"item" type:"list"`
+	Cidrs []*string `locationName:"cidrSet" locationNameList:"item" type:"list"`
 
 	// The ID of the prefix.
-	PrefixListID *string `locationName:"prefixListId" type:"string"`
+	PrefixListId *string `locationName:"prefixListId" type:"string"`
 
 	// The name of the prefix.
 	PrefixListName *string `locationName:"prefixListName" type:"string"`
@@ -19504,7 +19511,7 @@ type metadataPrefixList struct {
 
 // String returns the string representation
 func (s PrefixList) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -19513,24 +19520,24 @@ func (s PrefixList) GoString() string {
 }
 
 // The ID of the prefix.
-type PrefixListID struct {
+type PrefixListId struct {
 	// The ID of the prefix.
-	PrefixListID *string `locationName:"prefixListId" type:"string"`
+	PrefixListId *string `locationName:"prefixListId" type:"string"`
 
-	metadataPrefixListID `json:"-" xml:"-"`
+	metadataPrefixListId `json:"-" xml:"-"`
 }
 
-type metadataPrefixListID struct {
+type metadataPrefixListId struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s PrefixListID) String() string {
-	return awsutil.StringValue(s)
+func (s PrefixListId) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s PrefixListID) GoString() string {
+func (s PrefixListId) GoString() string {
 	return s.String()
 }
 
@@ -19550,7 +19557,7 @@ type PriceSchedule struct {
 
 	// The currency for transacting the Reserved Instance resale. At this time,
 	// the only supported currency is USD.
-	CurrencyCode *string `locationName:"currencyCode" type:"string"`
+	CurrencyCode *string `locationName:"currencyCode" type:"string" enum:"CurrencyCodeValues"`
 
 	// The fixed price for the term.
 	Price *float64 `locationName:"price" type:"double"`
@@ -19568,7 +19575,7 @@ type metadataPriceSchedule struct {
 
 // String returns the string representation
 func (s PriceSchedule) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -19580,7 +19587,7 @@ func (s PriceSchedule) GoString() string {
 type PriceScheduleSpecification struct {
 	// The currency for transacting the Reserved Instance resale. At this time,
 	// the only supported currency is USD.
-	CurrencyCode *string `locationName:"currencyCode" type:"string"`
+	CurrencyCode *string `locationName:"currencyCode" type:"string" enum:"CurrencyCodeValues"`
 
 	// The fixed price for the term.
 	Price *float64 `locationName:"price" type:"double"`
@@ -19598,7 +19605,7 @@ type metadataPriceScheduleSpecification struct {
 
 // String returns the string representation
 func (s PriceScheduleSpecification) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -19623,7 +19630,7 @@ type metadataPricingDetail struct {
 
 // String returns the string representation
 func (s PricingDetail) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -19632,38 +19639,38 @@ func (s PricingDetail) GoString() string {
 }
 
 // Describes a secondary private IP address for a network interface.
-type PrivateIPAddressSpecification struct {
+type PrivateIpAddressSpecification struct {
 	// Indicates whether the private IP address is the primary private IP address.
 	// Only one IP address can be designated as primary.
 	Primary *bool `locationName:"primary" type:"boolean"`
 
 	// The private IP addresses.
-	PrivateIPAddress *string `locationName:"privateIpAddress" type:"string" required:"true"`
+	PrivateIpAddress *string `locationName:"privateIpAddress" type:"string" required:"true"`
 
-	metadataPrivateIPAddressSpecification `json:"-" xml:"-"`
+	metadataPrivateIpAddressSpecification `json:"-" xml:"-"`
 }
 
-type metadataPrivateIPAddressSpecification struct {
+type metadataPrivateIpAddressSpecification struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s PrivateIPAddressSpecification) String() string {
-	return awsutil.StringValue(s)
+func (s PrivateIpAddressSpecification) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s PrivateIPAddressSpecification) GoString() string {
+func (s PrivateIpAddressSpecification) GoString() string {
 	return s.String()
 }
 
 // Describes a product code.
 type ProductCode struct {
 	// The product code.
-	ProductCodeID *string `locationName:"productCode" type:"string"`
+	ProductCodeId *string `locationName:"productCode" type:"string"`
 
 	// The type of product code.
-	ProductCodeType *string `locationName:"type" type:"string"`
+	ProductCodeType *string `locationName:"type" type:"string" enum:"ProductCodeValues"`
 
 	metadataProductCode `json:"-" xml:"-"`
 }
@@ -19674,7 +19681,7 @@ type metadataProductCode struct {
 
 // String returns the string representation
 func (s ProductCode) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -19683,24 +19690,24 @@ func (s ProductCode) GoString() string {
 }
 
 // Describes a virtual private gateway propagating route.
-type PropagatingVGW struct {
+type PropagatingVgw struct {
 	// The ID of the virtual private gateway (VGW).
-	GatewayID *string `locationName:"gatewayId" type:"string"`
+	GatewayId *string `locationName:"gatewayId" type:"string"`
 
-	metadataPropagatingVGW `json:"-" xml:"-"`
+	metadataPropagatingVgw `json:"-" xml:"-"`
 }
 
-type metadataPropagatingVGW struct {
+type metadataPropagatingVgw struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s PropagatingVGW) String() string {
-	return awsutil.StringValue(s)
+func (s PropagatingVgw) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s PropagatingVGW) GoString() string {
+func (s PropagatingVgw) GoString() string {
 	return s.String()
 }
 
@@ -19720,7 +19727,7 @@ type PurchaseReservedInstancesOfferingInput struct {
 	LimitPrice *ReservedInstanceLimitPrice `locationName:"limitPrice" type:"structure"`
 
 	// The ID of the Reserved Instance offering to purchase.
-	ReservedInstancesOfferingID *string `locationName:"ReservedInstancesOfferingId" type:"string" required:"true"`
+	ReservedInstancesOfferingId *string `type:"string" required:"true"`
 
 	metadataPurchaseReservedInstancesOfferingInput `json:"-" xml:"-"`
 }
@@ -19731,7 +19738,7 @@ type metadataPurchaseReservedInstancesOfferingInput struct {
 
 // String returns the string representation
 func (s PurchaseReservedInstancesOfferingInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -19741,7 +19748,7 @@ func (s PurchaseReservedInstancesOfferingInput) GoString() string {
 
 type PurchaseReservedInstancesOfferingOutput struct {
 	// The IDs of the purchased Reserved Instances.
-	ReservedInstancesID *string `locationName:"reservedInstancesId" type:"string"`
+	ReservedInstancesId *string `locationName:"reservedInstancesId" type:"string"`
 
 	metadataPurchaseReservedInstancesOfferingOutput `json:"-" xml:"-"`
 }
@@ -19752,7 +19759,7 @@ type metadataPurchaseReservedInstancesOfferingOutput struct {
 
 // String returns the string representation
 func (s PurchaseReservedInstancesOfferingOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -19768,7 +19775,7 @@ type RebootInstancesInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// One or more instance IDs.
-	InstanceIDs []*string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list" required:"true"`
+	InstanceIds []*string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list" required:"true"`
 
 	metadataRebootInstancesInput `json:"-" xml:"-"`
 }
@@ -19779,7 +19786,7 @@ type metadataRebootInstancesInput struct {
 
 // String returns the string representation
 func (s RebootInstancesInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -19797,7 +19804,7 @@ type metadataRebootInstancesOutput struct {
 
 // String returns the string representation
 func (s RebootInstancesOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -19811,7 +19818,7 @@ type RecurringCharge struct {
 	Amount *float64 `locationName:"amount" type:"double"`
 
 	// The frequency of the recurring charge.
-	Frequency *string `locationName:"frequency" type:"string"`
+	Frequency *string `locationName:"frequency" type:"string" enum:"RecurringChargeFrequency"`
 
 	metadataRecurringCharge `json:"-" xml:"-"`
 }
@@ -19822,7 +19829,7 @@ type metadataRecurringCharge struct {
 
 // String returns the string representation
 func (s RecurringCharge) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -19847,7 +19854,7 @@ type metadataRegion struct {
 
 // String returns the string representation
 func (s Region) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -19860,7 +19867,7 @@ type RegisterImageInput struct {
 	//
 	// Default: For Amazon EBS-backed AMIs, i386. For instance store-backed AMIs,
 	// the architecture specified in the manifest file.
-	Architecture *string `locationName:"architecture" type:"string"`
+	Architecture *string `locationName:"architecture" type:"string" enum:"ArchitectureValues"`
 
 	// One or more block device mapping entries.
 	BlockDeviceMappings []*BlockDeviceMapping `locationName:"BlockDeviceMapping" locationNameList:"BlockDeviceMapping" type:"list"`
@@ -19878,7 +19885,7 @@ type RegisterImageInput struct {
 	ImageLocation *string `type:"string"`
 
 	// The ID of the kernel.
-	KernelID *string `locationName:"kernelId" type:"string"`
+	KernelId *string `locationName:"kernelId" type:"string"`
 
 	// A name for your AMI.
 	//
@@ -19888,7 +19895,7 @@ type RegisterImageInput struct {
 	Name *string `locationName:"name" type:"string" required:"true"`
 
 	// The ID of the RAM disk.
-	RAMDiskID *string `locationName:"ramdiskId" type:"string"`
+	RamdiskId *string `locationName:"ramdiskId" type:"string"`
 
 	// The name of the root device (for example, /dev/sda1, or /dev/xvda).
 	RootDeviceName *string `locationName:"rootDeviceName" type:"string"`
@@ -19900,7 +19907,7 @@ type RegisterImageInput struct {
 	//
 	// This option is supported only for HVM AMIs. Specifying this option with
 	// a PV AMI can make instances launched from the AMI unreachable.
-	SRIOVNetSupport *string `locationName:"sriovNetSupport" type:"string"`
+	SriovNetSupport *string `locationName:"sriovNetSupport" type:"string"`
 
 	// The type of virtualization.
 	//
@@ -19916,7 +19923,7 @@ type metadataRegisterImageInput struct {
 
 // String returns the string representation
 func (s RegisterImageInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -19926,7 +19933,7 @@ func (s RegisterImageInput) GoString() string {
 
 type RegisterImageOutput struct {
 	// The ID of the newly registered AMI.
-	ImageID *string `locationName:"imageId" type:"string"`
+	ImageId *string `locationName:"imageId" type:"string"`
 
 	metadataRegisterImageOutput `json:"-" xml:"-"`
 }
@@ -19937,7 +19944,7 @@ type metadataRegisterImageOutput struct {
 
 // String returns the string representation
 func (s RegisterImageOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -19945,7 +19952,7 @@ func (s RegisterImageOutput) GoString() string {
 	return s.String()
 }
 
-type RejectVPCPeeringConnectionInput struct {
+type RejectVpcPeeringConnectionInput struct {
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
 	// the required permissions, the error response is DryRunOperation. Otherwise,
@@ -19953,49 +19960,49 @@ type RejectVPCPeeringConnectionInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the VPC peering connection.
-	VPCPeeringConnectionID *string `locationName:"vpcPeeringConnectionId" type:"string" required:"true"`
+	VpcPeeringConnectionId *string `locationName:"vpcPeeringConnectionId" type:"string" required:"true"`
 
-	metadataRejectVPCPeeringConnectionInput `json:"-" xml:"-"`
+	metadataRejectVpcPeeringConnectionInput `json:"-" xml:"-"`
 }
 
-type metadataRejectVPCPeeringConnectionInput struct {
+type metadataRejectVpcPeeringConnectionInput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s RejectVPCPeeringConnectionInput) String() string {
-	return awsutil.StringValue(s)
+func (s RejectVpcPeeringConnectionInput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s RejectVPCPeeringConnectionInput) GoString() string {
+func (s RejectVpcPeeringConnectionInput) GoString() string {
 	return s.String()
 }
 
-type RejectVPCPeeringConnectionOutput struct {
+type RejectVpcPeeringConnectionOutput struct {
 	// Returns true if the request succeeds; otherwise, it returns an error.
 	Return *bool `locationName:"return" type:"boolean"`
 
-	metadataRejectVPCPeeringConnectionOutput `json:"-" xml:"-"`
+	metadataRejectVpcPeeringConnectionOutput `json:"-" xml:"-"`
 }
 
-type metadataRejectVPCPeeringConnectionOutput struct {
+type metadataRejectVpcPeeringConnectionOutput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s RejectVPCPeeringConnectionOutput) String() string {
-	return awsutil.StringValue(s)
+func (s RejectVpcPeeringConnectionOutput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s RejectVPCPeeringConnectionOutput) GoString() string {
+func (s RejectVpcPeeringConnectionOutput) GoString() string {
 	return s.String()
 }
 
 type ReleaseAddressInput struct {
 	// [EC2-VPC] The allocation ID. Required for EC2-VPC.
-	AllocationID *string `locationName:"AllocationId" type:"string"`
+	AllocationId *string `type:"string"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -20004,7 +20011,7 @@ type ReleaseAddressInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// [EC2-Classic] The Elastic IP address. Required for EC2-Classic.
-	PublicIP *string `locationName:"PublicIp" type:"string"`
+	PublicIp *string `type:"string"`
 
 	metadataReleaseAddressInput `json:"-" xml:"-"`
 }
@@ -20015,7 +20022,7 @@ type metadataReleaseAddressInput struct {
 
 // String returns the string representation
 func (s ReleaseAddressInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -20033,7 +20040,7 @@ type metadataReleaseAddressOutput struct {
 
 // String returns the string representation
 func (s ReleaseAddressOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -20041,10 +20048,10 @@ func (s ReleaseAddressOutput) GoString() string {
 	return s.String()
 }
 
-type ReplaceNetworkACLAssociationInput struct {
+type ReplaceNetworkAclAssociationInput struct {
 	// The ID of the current association between the original network ACL and the
 	// subnet.
-	AssociationID *string `locationName:"associationId" type:"string" required:"true"`
+	AssociationId *string `locationName:"associationId" type:"string" required:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -20053,49 +20060,49 @@ type ReplaceNetworkACLAssociationInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the new network ACL to associate with the subnet.
-	NetworkACLID *string `locationName:"networkAclId" type:"string" required:"true"`
+	NetworkAclId *string `locationName:"networkAclId" type:"string" required:"true"`
 
-	metadataReplaceNetworkACLAssociationInput `json:"-" xml:"-"`
+	metadataReplaceNetworkAclAssociationInput `json:"-" xml:"-"`
 }
 
-type metadataReplaceNetworkACLAssociationInput struct {
+type metadataReplaceNetworkAclAssociationInput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s ReplaceNetworkACLAssociationInput) String() string {
-	return awsutil.StringValue(s)
+func (s ReplaceNetworkAclAssociationInput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s ReplaceNetworkACLAssociationInput) GoString() string {
+func (s ReplaceNetworkAclAssociationInput) GoString() string {
 	return s.String()
 }
 
-type ReplaceNetworkACLAssociationOutput struct {
+type ReplaceNetworkAclAssociationOutput struct {
 	// The ID of the new association.
-	NewAssociationID *string `locationName:"newAssociationId" type:"string"`
+	NewAssociationId *string `locationName:"newAssociationId" type:"string"`
 
-	metadataReplaceNetworkACLAssociationOutput `json:"-" xml:"-"`
+	metadataReplaceNetworkAclAssociationOutput `json:"-" xml:"-"`
 }
 
-type metadataReplaceNetworkACLAssociationOutput struct {
+type metadataReplaceNetworkAclAssociationOutput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s ReplaceNetworkACLAssociationOutput) String() string {
-	return awsutil.StringValue(s)
+func (s ReplaceNetworkAclAssociationOutput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s ReplaceNetworkACLAssociationOutput) GoString() string {
+func (s ReplaceNetworkAclAssociationOutput) GoString() string {
 	return s.String()
 }
 
-type ReplaceNetworkACLEntryInput struct {
+type ReplaceNetworkAclEntryInput struct {
 	// The network range to allow or deny, in CIDR notation.
-	CIDRBlock *string `locationName:"cidrBlock" type:"string" required:"true"`
+	CidrBlock *string `locationName:"cidrBlock" type:"string" required:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -20110,10 +20117,10 @@ type ReplaceNetworkACLEntryInput struct {
 
 	// ICMP protocol: The ICMP type and code. Required if specifying 1 (ICMP) for
 	// the protocol.
-	ICMPTypeCode *ICMPTypeCode `locationName:"Icmp" type:"structure"`
+	IcmpTypeCode *IcmpTypeCode `locationName:"Icmp" type:"structure"`
 
 	// The ID of the ACL.
-	NetworkACLID *string `locationName:"networkAclId" type:"string" required:"true"`
+	NetworkAclId *string `locationName:"networkAclId" type:"string" required:"true"`
 
 	// TCP or UDP protocols: The range of ports the rule applies to. Required if
 	// specifying 6 (TCP) or 17 (UDP) for the protocol.
@@ -20123,50 +20130,50 @@ type ReplaceNetworkACLEntryInput struct {
 	Protocol *string `locationName:"protocol" type:"string" required:"true"`
 
 	// Indicates whether to allow or deny the traffic that matches the rule.
-	RuleAction *string `locationName:"ruleAction" type:"string" required:"true"`
+	RuleAction *string `locationName:"ruleAction" type:"string" required:"true" enum:"RuleAction"`
 
 	// The rule number of the entry to replace.
 	RuleNumber *int64 `locationName:"ruleNumber" type:"integer" required:"true"`
 
-	metadataReplaceNetworkACLEntryInput `json:"-" xml:"-"`
+	metadataReplaceNetworkAclEntryInput `json:"-" xml:"-"`
 }
 
-type metadataReplaceNetworkACLEntryInput struct {
+type metadataReplaceNetworkAclEntryInput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s ReplaceNetworkACLEntryInput) String() string {
-	return awsutil.StringValue(s)
+func (s ReplaceNetworkAclEntryInput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s ReplaceNetworkACLEntryInput) GoString() string {
+func (s ReplaceNetworkAclEntryInput) GoString() string {
 	return s.String()
 }
 
-type ReplaceNetworkACLEntryOutput struct {
-	metadataReplaceNetworkACLEntryOutput `json:"-" xml:"-"`
+type ReplaceNetworkAclEntryOutput struct {
+	metadataReplaceNetworkAclEntryOutput `json:"-" xml:"-"`
 }
 
-type metadataReplaceNetworkACLEntryOutput struct {
+type metadataReplaceNetworkAclEntryOutput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s ReplaceNetworkACLEntryOutput) String() string {
-	return awsutil.StringValue(s)
+func (s ReplaceNetworkAclEntryOutput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s ReplaceNetworkACLEntryOutput) GoString() string {
+func (s ReplaceNetworkAclEntryOutput) GoString() string {
 	return s.String()
 }
 
 type ReplaceRouteInput struct {
 	// The CIDR address block used for the destination match. The value you provide
 	// must match the CIDR of an existing route in the table.
-	DestinationCIDRBlock *string `locationName:"destinationCidrBlock" type:"string" required:"true"`
+	DestinationCidrBlock *string `locationName:"destinationCidrBlock" type:"string" required:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -20175,19 +20182,19 @@ type ReplaceRouteInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of an Internet gateway or virtual private gateway.
-	GatewayID *string `locationName:"gatewayId" type:"string"`
+	GatewayId *string `locationName:"gatewayId" type:"string"`
 
 	// The ID of a NAT instance in your VPC.
-	InstanceID *string `locationName:"instanceId" type:"string"`
+	InstanceId *string `locationName:"instanceId" type:"string"`
 
 	// The ID of a network interface.
-	NetworkInterfaceID *string `locationName:"networkInterfaceId" type:"string"`
+	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string"`
 
 	// The ID of the route table.
-	RouteTableID *string `locationName:"routeTableId" type:"string" required:"true"`
+	RouteTableId *string `locationName:"routeTableId" type:"string" required:"true"`
 
 	// The ID of a VPC peering connection.
-	VPCPeeringConnectionID *string `locationName:"vpcPeeringConnectionId" type:"string"`
+	VpcPeeringConnectionId *string `locationName:"vpcPeeringConnectionId" type:"string"`
 
 	metadataReplaceRouteInput `json:"-" xml:"-"`
 }
@@ -20198,7 +20205,7 @@ type metadataReplaceRouteInput struct {
 
 // String returns the string representation
 func (s ReplaceRouteInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -20216,7 +20223,7 @@ type metadataReplaceRouteOutput struct {
 
 // String returns the string representation
 func (s ReplaceRouteOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -20226,7 +20233,7 @@ func (s ReplaceRouteOutput) GoString() string {
 
 type ReplaceRouteTableAssociationInput struct {
 	// The association ID.
-	AssociationID *string `locationName:"associationId" type:"string" required:"true"`
+	AssociationId *string `locationName:"associationId" type:"string" required:"true"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -20235,7 +20242,7 @@ type ReplaceRouteTableAssociationInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the new route table to associate with the subnet.
-	RouteTableID *string `locationName:"routeTableId" type:"string" required:"true"`
+	RouteTableId *string `locationName:"routeTableId" type:"string" required:"true"`
 
 	metadataReplaceRouteTableAssociationInput `json:"-" xml:"-"`
 }
@@ -20246,7 +20253,7 @@ type metadataReplaceRouteTableAssociationInput struct {
 
 // String returns the string representation
 func (s ReplaceRouteTableAssociationInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -20256,7 +20263,7 @@ func (s ReplaceRouteTableAssociationInput) GoString() string {
 
 type ReplaceRouteTableAssociationOutput struct {
 	// The ID of the new association.
-	NewAssociationID *string `locationName:"newAssociationId" type:"string"`
+	NewAssociationId *string `locationName:"newAssociationId" type:"string"`
 
 	metadataReplaceRouteTableAssociationOutput `json:"-" xml:"-"`
 }
@@ -20267,7 +20274,7 @@ type metadataReplaceRouteTableAssociationOutput struct {
 
 // String returns the string representation
 func (s ReplaceRouteTableAssociationOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -20319,7 +20326,7 @@ type ReportInstanceStatusInput struct {
 	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"iso8601"`
 
 	// The status of all instances listed.
-	Status *string `locationName:"status" type:"string" required:"true"`
+	Status *string `locationName:"status" type:"string" required:"true" enum:"ReportStatusType"`
 
 	metadataReportInstanceStatusInput `json:"-" xml:"-"`
 }
@@ -20330,7 +20337,7 @@ type metadataReportInstanceStatusInput struct {
 
 // String returns the string representation
 func (s ReportInstanceStatusInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -20348,7 +20355,7 @@ type metadataReportInstanceStatusOutput struct {
 
 // String returns the string representation
 func (s ReportInstanceStatusOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -20376,7 +20383,7 @@ type metadataRequestSpotFleetInput struct {
 
 // String returns the string representation
 func (s RequestSpotFleetInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -20387,7 +20394,7 @@ func (s RequestSpotFleetInput) GoString() string {
 // Contains the output of RequestSpotFleet.
 type RequestSpotFleetOutput struct {
 	// The ID of the Spot fleet request.
-	SpotFleetRequestID *string `locationName:"spotFleetRequestId" type:"string" required:"true"`
+	SpotFleetRequestId *string `locationName:"spotFleetRequestId" type:"string" required:"true"`
 
 	metadataRequestSpotFleetOutput `json:"-" xml:"-"`
 }
@@ -20398,7 +20405,7 @@ type metadataRequestSpotFleetOutput struct {
 
 // String returns the string representation
 func (s RequestSpotFleetOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -20461,7 +20468,7 @@ type RequestSpotInstancesInput struct {
 	// The Spot Instance request type.
 	//
 	// Default: one-time
-	Type *string `locationName:"type" type:"string"`
+	Type *string `locationName:"type" type:"string" enum:"SpotInstanceType"`
 
 	// The start date of the request. If this is a one-time request, the request
 	// becomes active at this date and time and remains active until all instances
@@ -20489,7 +20496,7 @@ type metadataRequestSpotInstancesInput struct {
 
 // String returns the string representation
 func (s RequestSpotInstancesInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -20511,7 +20518,7 @@ type metadataRequestSpotInstancesOutput struct {
 
 // String returns the string representation
 func (s RequestSpotInstancesOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -20534,19 +20541,19 @@ type RequestSpotLaunchSpecification struct {
 	// Optimized instance.
 	//
 	// Default: false
-	EBSOptimized *bool `locationName:"ebsOptimized" type:"boolean"`
+	EbsOptimized *bool `locationName:"ebsOptimized" type:"boolean"`
 
 	// The IAM instance profile.
-	IAMInstanceProfile *IAMInstanceProfileSpecification `locationName:"iamInstanceProfile" type:"structure"`
+	IamInstanceProfile *IamInstanceProfileSpecification `locationName:"iamInstanceProfile" type:"structure"`
 
 	// The ID of the AMI.
-	ImageID *string `locationName:"imageId" type:"string"`
+	ImageId *string `locationName:"imageId" type:"string"`
 
 	// The instance type.
-	InstanceType *string `locationName:"instanceType" type:"string"`
+	InstanceType *string `locationName:"instanceType" type:"string" enum:"InstanceType"`
 
 	// The ID of the kernel.
-	KernelID *string `locationName:"kernelId" type:"string"`
+	KernelId *string `locationName:"kernelId" type:"string"`
 
 	// The name of the key pair.
 	KeyName *string `locationName:"keyName" type:"string"`
@@ -20561,14 +20568,14 @@ type RequestSpotLaunchSpecification struct {
 	Placement *SpotPlacement `locationName:"placement" type:"structure"`
 
 	// The ID of the RAM disk.
-	RAMDiskID *string `locationName:"ramdiskId" type:"string"`
+	RamdiskId *string `locationName:"ramdiskId" type:"string"`
 
-	SecurityGroupIDs []*string `locationName:"SecurityGroupId" locationNameList:"item" type:"list"`
+	SecurityGroupIds []*string `locationName:"SecurityGroupId" locationNameList:"item" type:"list"`
 
 	SecurityGroups []*string `locationName:"SecurityGroup" locationNameList:"item" type:"list"`
 
 	// The ID of the subnet in which to launch the instance.
-	SubnetID *string `locationName:"subnetId" type:"string"`
+	SubnetId *string `locationName:"subnetId" type:"string"`
 
 	// The Base64-encoded MIME user data to make available to the instances.
 	UserData *string `locationName:"userData" type:"string"`
@@ -20582,7 +20589,7 @@ type metadataRequestSpotLaunchSpecification struct {
 
 // String returns the string representation
 func (s RequestSpotLaunchSpecification) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -20599,14 +20606,14 @@ type Reservation struct {
 	Instances []*Instance `locationName:"instancesSet" locationNameList:"item" type:"list"`
 
 	// The ID of the AWS account that owns the reservation.
-	OwnerID *string `locationName:"ownerId" type:"string"`
+	OwnerId *string `locationName:"ownerId" type:"string"`
 
 	// The ID of the requester that launched the instances on your behalf (for example,
 	// AWS Management Console or Auto Scaling).
-	RequesterID *string `locationName:"requesterId" type:"string"`
+	RequesterId *string `locationName:"requesterId" type:"string"`
 
 	// The ID of the reservation.
-	ReservationID *string `locationName:"reservationId" type:"string"`
+	ReservationId *string `locationName:"reservationId" type:"string"`
 
 	metadataReservation `json:"-" xml:"-"`
 }
@@ -20617,7 +20624,7 @@ type metadataReservation struct {
 
 // String returns the string representation
 func (s Reservation) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -20633,7 +20640,7 @@ type ReservedInstanceLimitPrice struct {
 
 	// The currency in which the limitPrice amount is specified. At this time, the
 	// only supported currency is USD.
-	CurrencyCode *string `locationName:"currencyCode" type:"string"`
+	CurrencyCode *string `locationName:"currencyCode" type:"string" enum:"CurrencyCodeValues"`
 
 	metadataReservedInstanceLimitPrice `json:"-" xml:"-"`
 }
@@ -20644,7 +20651,7 @@ type metadataReservedInstanceLimitPrice struct {
 
 // String returns the string representation
 func (s ReservedInstanceLimitPrice) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -20659,7 +20666,7 @@ type ReservedInstances struct {
 
 	// The currency of the Reserved Instance. It's specified using ISO 4217 standard
 	// currency codes. At this time, the only supported currency is USD.
-	CurrencyCode *string `locationName:"currencyCode" type:"string"`
+	CurrencyCode *string `locationName:"currencyCode" type:"string" enum:"CurrencyCodeValues"`
 
 	// The duration of the Reserved Instance, in seconds.
 	Duration *int64 `locationName:"duration" type:"long"`
@@ -20674,28 +20681,28 @@ type ReservedInstances struct {
 	InstanceCount *int64 `locationName:"instanceCount" type:"integer"`
 
 	// The tenancy of the reserved instance.
-	InstanceTenancy *string `locationName:"instanceTenancy" type:"string"`
+	InstanceTenancy *string `locationName:"instanceTenancy" type:"string" enum:"Tenancy"`
 
 	// The instance type on which the Reserved Instance can be used.
-	InstanceType *string `locationName:"instanceType" type:"string"`
+	InstanceType *string `locationName:"instanceType" type:"string" enum:"InstanceType"`
 
 	// The Reserved Instance offering type.
-	OfferingType *string `locationName:"offeringType" type:"string"`
+	OfferingType *string `locationName:"offeringType" type:"string" enum:"OfferingTypeValues"`
 
 	// The Reserved Instance product platform description.
-	ProductDescription *string `locationName:"productDescription" type:"string"`
+	ProductDescription *string `locationName:"productDescription" type:"string" enum:"RIProductDescription"`
 
 	// The recurring charge tag assigned to the resource.
 	RecurringCharges []*RecurringCharge `locationName:"recurringCharges" locationNameList:"item" type:"list"`
 
 	// The ID of the Reserved Instance.
-	ReservedInstancesID *string `locationName:"reservedInstancesId" type:"string"`
+	ReservedInstancesId *string `locationName:"reservedInstancesId" type:"string"`
 
 	// The date and time the Reserved Instance started.
 	Start *time.Time `locationName:"start" type:"timestamp" timestampFormat:"iso8601"`
 
 	// The state of the Reserved Instance purchase.
-	State *string `locationName:"state" type:"string"`
+	State *string `locationName:"state" type:"string" enum:"ReservedInstanceState"`
 
 	// Any tags assigned to the resource.
 	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
@@ -20712,7 +20719,7 @@ type metadataReservedInstances struct {
 
 // String returns the string representation
 func (s ReservedInstances) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -20729,7 +20736,7 @@ type ReservedInstancesConfiguration struct {
 	InstanceCount *int64 `locationName:"instanceCount" type:"integer"`
 
 	// The instance type for the modified Reserved Instances.
-	InstanceType *string `locationName:"instanceType" type:"string"`
+	InstanceType *string `locationName:"instanceType" type:"string" enum:"InstanceType"`
 
 	// The network platform of the modified Reserved Instances, which is either
 	// EC2-Classic or EC2-VPC.
@@ -20744,7 +20751,7 @@ type metadataReservedInstancesConfiguration struct {
 
 // String returns the string representation
 func (s ReservedInstancesConfiguration) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -20753,24 +20760,24 @@ func (s ReservedInstancesConfiguration) GoString() string {
 }
 
 // Describes the ID of a Reserved Instance.
-type ReservedInstancesID struct {
+type ReservedInstancesId struct {
 	// The ID of the Reserved Instance.
-	ReservedInstancesID *string `locationName:"reservedInstancesId" type:"string"`
+	ReservedInstancesId *string `locationName:"reservedInstancesId" type:"string"`
 
-	metadataReservedInstancesID `json:"-" xml:"-"`
+	metadataReservedInstancesId `json:"-" xml:"-"`
 }
 
-type metadataReservedInstancesID struct {
+type metadataReservedInstancesId struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s ReservedInstancesID) String() string {
-	return awsutil.StringValue(s)
+func (s ReservedInstancesId) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s ReservedInstancesID) GoString() string {
+func (s ReservedInstancesId) GoString() string {
 	return s.String()
 }
 
@@ -20790,13 +20797,13 @@ type ReservedInstancesListing struct {
 	PriceSchedules []*PriceSchedule `locationName:"priceSchedules" locationNameList:"item" type:"list"`
 
 	// The ID of the Reserved Instance.
-	ReservedInstancesID *string `locationName:"reservedInstancesId" type:"string"`
+	ReservedInstancesId *string `locationName:"reservedInstancesId" type:"string"`
 
 	// The ID of the Reserved Instance listing.
-	ReservedInstancesListingID *string `locationName:"reservedInstancesListingId" type:"string"`
+	ReservedInstancesListingId *string `locationName:"reservedInstancesListingId" type:"string"`
 
 	// The status of the Reserved Instance listing.
-	Status *string `locationName:"status" type:"string"`
+	Status *string `locationName:"status" type:"string" enum:"ListingStatus"`
 
 	// The reason for the current status of the Reserved Instance listing. The response
 	// can be blank.
@@ -20817,7 +20824,7 @@ type metadataReservedInstancesListing struct {
 
 // String returns the string representation
 func (s ReservedInstancesListing) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -20842,10 +20849,10 @@ type ReservedInstancesModification struct {
 	ModificationResults []*ReservedInstancesModificationResult `locationName:"modificationResultSet" locationNameList:"item" type:"list"`
 
 	// The IDs of one or more Reserved Instances.
-	ReservedInstancesIDs []*ReservedInstancesID `locationName:"reservedInstancesSet" locationNameList:"item" type:"list"`
+	ReservedInstancesIds []*ReservedInstancesId `locationName:"reservedInstancesSet" locationNameList:"item" type:"list"`
 
 	// A unique ID for the Reserved Instance modification.
-	ReservedInstancesModificationID *string `locationName:"reservedInstancesModificationId" type:"string"`
+	ReservedInstancesModificationId *string `locationName:"reservedInstancesModificationId" type:"string"`
 
 	// The status of the Reserved Instances modification request.
 	Status *string `locationName:"status" type:"string"`
@@ -20865,7 +20872,7 @@ type metadataReservedInstancesModification struct {
 
 // String returns the string representation
 func (s ReservedInstancesModification) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -20876,7 +20883,7 @@ func (s ReservedInstancesModification) GoString() string {
 type ReservedInstancesModificationResult struct {
 	// The ID for the Reserved Instances that were created as part of the modification
 	// request. This field is only available when the modification is fulfilled.
-	ReservedInstancesID *string `locationName:"reservedInstancesId" type:"string"`
+	ReservedInstancesId *string `locationName:"reservedInstancesId" type:"string"`
 
 	// The target Reserved Instances configurations supplied as part of the modification
 	// request.
@@ -20891,7 +20898,7 @@ type metadataReservedInstancesModificationResult struct {
 
 // String returns the string representation
 func (s ReservedInstancesModificationResult) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -20907,7 +20914,7 @@ type ReservedInstancesOffering struct {
 	// The currency of the Reserved Instance offering you are purchasing. It's specified
 	// using ISO 4217 standard currency codes. At this time, the only supported
 	// currency is USD.
-	CurrencyCode *string `locationName:"currencyCode" type:"string"`
+	CurrencyCode *string `locationName:"currencyCode" type:"string" enum:"CurrencyCodeValues"`
 
 	// The duration of the Reserved Instance, in seconds.
 	Duration *int64 `locationName:"duration" type:"long"`
@@ -20916,10 +20923,10 @@ type ReservedInstancesOffering struct {
 	FixedPrice *float64 `locationName:"fixedPrice" type:"float"`
 
 	// The tenancy of the reserved instance.
-	InstanceTenancy *string `locationName:"instanceTenancy" type:"string"`
+	InstanceTenancy *string `locationName:"instanceTenancy" type:"string" enum:"Tenancy"`
 
 	// The instance type on which the Reserved Instance can be used.
-	InstanceType *string `locationName:"instanceType" type:"string"`
+	InstanceType *string `locationName:"instanceType" type:"string" enum:"InstanceType"`
 
 	// Indicates whether the offering is available through the Reserved Instance
 	// Marketplace (resale) or AWS. If it's a Reserved Instance Marketplace offering,
@@ -20927,19 +20934,19 @@ type ReservedInstancesOffering struct {
 	Marketplace *bool `locationName:"marketplace" type:"boolean"`
 
 	// The Reserved Instance offering type.
-	OfferingType *string `locationName:"offeringType" type:"string"`
+	OfferingType *string `locationName:"offeringType" type:"string" enum:"OfferingTypeValues"`
 
 	// The pricing details of the Reserved Instance offering.
 	PricingDetails []*PricingDetail `locationName:"pricingDetailsSet" locationNameList:"item" type:"list"`
 
 	// The Reserved Instance product platform description.
-	ProductDescription *string `locationName:"productDescription" type:"string"`
+	ProductDescription *string `locationName:"productDescription" type:"string" enum:"RIProductDescription"`
 
 	// The recurring charge tag assigned to the resource.
 	RecurringCharges []*RecurringCharge `locationName:"recurringCharges" locationNameList:"item" type:"list"`
 
 	// The ID of the Reserved Instance offering.
-	ReservedInstancesOfferingID *string `locationName:"reservedInstancesOfferingId" type:"string"`
+	ReservedInstancesOfferingId *string `locationName:"reservedInstancesOfferingId" type:"string"`
 
 	// The usage price of the Reserved Instance, per hour.
 	UsagePrice *float64 `locationName:"usagePrice" type:"float"`
@@ -20953,7 +20960,7 @@ type metadataReservedInstancesOffering struct {
 
 // String returns the string representation
 func (s ReservedInstancesOffering) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -20964,7 +20971,7 @@ func (s ReservedInstancesOffering) GoString() string {
 type ResetImageAttributeInput struct {
 	// The attribute to reset (currently you can only reset the launch permission
 	// attribute).
-	Attribute *string `type:"string" required:"true"`
+	Attribute *string `type:"string" required:"true" enum:"ResetImageAttributeName"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -20973,7 +20980,7 @@ type ResetImageAttributeInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the AMI.
-	ImageID *string `locationName:"ImageId" type:"string" required:"true"`
+	ImageId *string `type:"string" required:"true"`
 
 	metadataResetImageAttributeInput `json:"-" xml:"-"`
 }
@@ -20984,7 +20991,7 @@ type metadataResetImageAttributeInput struct {
 
 // String returns the string representation
 func (s ResetImageAttributeInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -21002,7 +21009,7 @@ type metadataResetImageAttributeOutput struct {
 
 // String returns the string representation
 func (s ResetImageAttributeOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -21012,7 +21019,7 @@ func (s ResetImageAttributeOutput) GoString() string {
 
 type ResetInstanceAttributeInput struct {
 	// The attribute to reset.
-	Attribute *string `locationName:"attribute" type:"string" required:"true"`
+	Attribute *string `locationName:"attribute" type:"string" required:"true" enum:"InstanceAttributeName"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -21021,7 +21028,7 @@ type ResetInstanceAttributeInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the instance.
-	InstanceID *string `locationName:"instanceId" type:"string" required:"true"`
+	InstanceId *string `locationName:"instanceId" type:"string" required:"true"`
 
 	metadataResetInstanceAttributeInput `json:"-" xml:"-"`
 }
@@ -21032,7 +21039,7 @@ type metadataResetInstanceAttributeInput struct {
 
 // String returns the string representation
 func (s ResetInstanceAttributeInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -21050,7 +21057,7 @@ type metadataResetInstanceAttributeOutput struct {
 
 // String returns the string representation
 func (s ResetInstanceAttributeOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -21066,7 +21073,7 @@ type ResetNetworkInterfaceAttributeInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the network interface.
-	NetworkInterfaceID *string `locationName:"networkInterfaceId" type:"string" required:"true"`
+	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string" required:"true"`
 
 	// The source/destination checking attribute. Resets the value to true.
 	SourceDestCheck *string `locationName:"sourceDestCheck" type:"string"`
@@ -21080,7 +21087,7 @@ type metadataResetNetworkInterfaceAttributeInput struct {
 
 // String returns the string representation
 func (s ResetNetworkInterfaceAttributeInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -21098,7 +21105,7 @@ type metadataResetNetworkInterfaceAttributeOutput struct {
 
 // String returns the string representation
 func (s ResetNetworkInterfaceAttributeOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -21109,7 +21116,7 @@ func (s ResetNetworkInterfaceAttributeOutput) GoString() string {
 type ResetSnapshotAttributeInput struct {
 	// The attribute to reset. Currently, only the attribute for permission to create
 	// volumes can be reset.
-	Attribute *string `type:"string" required:"true"`
+	Attribute *string `type:"string" required:"true" enum:"SnapshotAttributeName"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -21118,7 +21125,7 @@ type ResetSnapshotAttributeInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The ID of the snapshot.
-	SnapshotID *string `locationName:"SnapshotId" type:"string" required:"true"`
+	SnapshotId *string `type:"string" required:"true"`
 
 	metadataResetSnapshotAttributeInput `json:"-" xml:"-"`
 }
@@ -21129,7 +21136,7 @@ type metadataResetSnapshotAttributeInput struct {
 
 // String returns the string representation
 func (s ResetSnapshotAttributeInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -21147,7 +21154,7 @@ type metadataResetSnapshotAttributeOutput struct {
 
 // String returns the string representation
 func (s ResetSnapshotAttributeOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -21163,7 +21170,7 @@ type RestoreAddressToClassicInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// The Elastic IP address.
-	PublicIP *string `locationName:"publicIp" type:"string" required:"true"`
+	PublicIp *string `locationName:"publicIp" type:"string" required:"true"`
 
 	metadataRestoreAddressToClassicInput `json:"-" xml:"-"`
 }
@@ -21174,7 +21181,7 @@ type metadataRestoreAddressToClassicInput struct {
 
 // String returns the string representation
 func (s RestoreAddressToClassicInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -21184,10 +21191,10 @@ func (s RestoreAddressToClassicInput) GoString() string {
 
 type RestoreAddressToClassicOutput struct {
 	// The Elastic IP address.
-	PublicIP *string `locationName:"publicIp" type:"string"`
+	PublicIp *string `locationName:"publicIp" type:"string"`
 
 	// The move status for the IP address.
-	Status *string `locationName:"status" type:"string"`
+	Status *string `locationName:"status" type:"string" enum:"Status"`
 
 	metadataRestoreAddressToClassicOutput `json:"-" xml:"-"`
 }
@@ -21198,7 +21205,7 @@ type metadataRestoreAddressToClassicOutput struct {
 
 // String returns the string representation
 func (s RestoreAddressToClassicOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -21209,7 +21216,7 @@ func (s RestoreAddressToClassicOutput) GoString() string {
 type RevokeSecurityGroupEgressInput struct {
 	// The CIDR IP address range. You can't specify this parameter when specifying
 	// a source security group.
-	CIDRIP *string `locationName:"cidrIp" type:"string"`
+	CidrIp *string `locationName:"cidrIp" type:"string"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -21222,23 +21229,25 @@ type RevokeSecurityGroupEgressInput struct {
 	FromPort *int64 `locationName:"fromPort" type:"integer"`
 
 	// The ID of the security group.
-	GroupID *string `locationName:"groupId" type:"string" required:"true"`
+	GroupId *string `locationName:"groupId" type:"string" required:"true"`
 
 	// A set of IP permissions. You can't specify a destination security group and
 	// a CIDR IP address range.
-	IPPermissions []*IPPermission `locationName:"ipPermissions" locationNameList:"item" type:"list"`
+	IpPermissions []*IpPermission `locationName:"ipPermissions" locationNameList:"item" type:"list"`
 
 	// The IP protocol name (tcp, udp, icmp) or number (see Protocol Numbers (http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)).
 	// Use -1 to specify all.
-	IPProtocol *string `locationName:"ipProtocol" type:"string"`
+	IpProtocol *string `locationName:"ipProtocol" type:"string"`
 
-	// [EC2-Classic, default VPC] The name of the destination security group. You
-	// can't specify a destination security group and a CIDR IP address range.
+	// The name of a destination security group. To revoke outbound access to a
+	// destination security group, we recommend that you use a set of IP permissions
+	// instead.
 	SourceSecurityGroupName *string `locationName:"sourceSecurityGroupName" type:"string"`
 
-	// The ID of the destination security group. You can't specify a destination
-	// security group and a CIDR IP address range.
-	SourceSecurityGroupOwnerID *string `locationName:"sourceSecurityGroupOwnerId" type:"string"`
+	// The AWS account number for a destination security group. To revoke outbound
+	// access to a destination security group, we recommend that you use a set of
+	// IP permissions instead.
+	SourceSecurityGroupOwnerId *string `locationName:"sourceSecurityGroupOwnerId" type:"string"`
 
 	// The end of port range for the TCP and UDP protocols, or an ICMP code number.
 	// For the ICMP code number, use -1 to specify all ICMP codes for the ICMP type.
@@ -21253,7 +21262,7 @@ type metadataRevokeSecurityGroupEgressInput struct {
 
 // String returns the string representation
 func (s RevokeSecurityGroupEgressInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -21271,7 +21280,7 @@ type metadataRevokeSecurityGroupEgressOutput struct {
 
 // String returns the string representation
 func (s RevokeSecurityGroupEgressOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -21282,7 +21291,7 @@ func (s RevokeSecurityGroupEgressOutput) GoString() string {
 type RevokeSecurityGroupIngressInput struct {
 	// The CIDR IP address range. You can't specify this parameter when specifying
 	// a source security group.
-	CIDRIP *string `locationName:"CidrIp" type:"string"`
+	CidrIp *string `type:"string"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -21294,30 +21303,35 @@ type RevokeSecurityGroupIngressInput struct {
 	// For the ICMP type number, use -1 to specify all ICMP types.
 	FromPort *int64 `type:"integer"`
 
-	// The ID of the security group.
-	GroupID *string `locationName:"GroupId" type:"string"`
+	// The ID of the security group. Required for a security group in a nondefault
+	// VPC.
+	GroupId *string `type:"string"`
 
 	// [EC2-Classic, default VPC] The name of the security group.
 	GroupName *string `type:"string"`
 
 	// A set of IP permissions. You can't specify a source security group and a
 	// CIDR IP address range.
-	IPPermissions []*IPPermission `locationName:"IpPermissions" locationNameList:"item" type:"list"`
+	IpPermissions []*IpPermission `locationNameList:"item" type:"list"`
 
 	// The IP protocol name (tcp, udp, icmp) or number (see Protocol Numbers (http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)).
 	// Use -1 to specify all.
-	IPProtocol *string `locationName:"IpProtocol" type:"string"`
+	IpProtocol *string `type:"string"`
 
 	// [EC2-Classic, default VPC] The name of the source security group. You can't
 	// specify this parameter in combination with the following parameters: the
-	// CIDR IP address range, the start of the port range, and the end of the port
-	// range.
+	// CIDR IP address range, the start of the port range, the IP protocol, and
+	// the end of the port range. For EC2-VPC, the source security group must be
+	// in the same VPC.
 	SourceSecurityGroupName *string `type:"string"`
 
-	// The ID of the source security group. You can't specify this parameter in
-	// combination with the following parameters: the CIDR IP address range, the
-	// start of the port range, and the end of the port range.
-	SourceSecurityGroupOwnerID *string `locationName:"SourceSecurityGroupOwnerId" type:"string"`
+	// [EC2-Classic, default VPC] The AWS account ID of the source security group.
+	// For EC2-VPC, the source security group must be in the same VPC. You can't
+	// specify this parameter in combination with the following parameters: the
+	// CIDR IP address range, the IP protocol, the start of the port range, and
+	// the end of the port range. To revoke a specific rule for an IP protocol and
+	// port range, use a set of IP permissions instead.
+	SourceSecurityGroupOwnerId *string `type:"string"`
 
 	// The end of port range for the TCP and UDP protocols, or an ICMP code number.
 	// For the ICMP code number, use -1 to specify all ICMP codes for the ICMP type.
@@ -21332,7 +21346,7 @@ type metadataRevokeSecurityGroupIngressInput struct {
 
 // String returns the string representation
 func (s RevokeSecurityGroupIngressInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -21350,7 +21364,7 @@ type metadataRevokeSecurityGroupIngressOutput struct {
 
 // String returns the string representation
 func (s RevokeSecurityGroupIngressOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -21361,22 +21375,22 @@ func (s RevokeSecurityGroupIngressOutput) GoString() string {
 // Describes a route in a route table.
 type Route struct {
 	// The CIDR block used for the destination match.
-	DestinationCIDRBlock *string `locationName:"destinationCidrBlock" type:"string"`
+	DestinationCidrBlock *string `locationName:"destinationCidrBlock" type:"string"`
 
 	// The prefix of the AWS service.
-	DestinationPrefixListID *string `locationName:"destinationPrefixListId" type:"string"`
+	DestinationPrefixListId *string `locationName:"destinationPrefixListId" type:"string"`
 
 	// The ID of a gateway attached to your VPC.
-	GatewayID *string `locationName:"gatewayId" type:"string"`
+	GatewayId *string `locationName:"gatewayId" type:"string"`
 
 	// The ID of a NAT instance in your VPC.
-	InstanceID *string `locationName:"instanceId" type:"string"`
+	InstanceId *string `locationName:"instanceId" type:"string"`
 
 	// The AWS account ID of the owner of the instance.
-	InstanceOwnerID *string `locationName:"instanceOwnerId" type:"string"`
+	InstanceOwnerId *string `locationName:"instanceOwnerId" type:"string"`
 
 	// The ID of the network interface.
-	NetworkInterfaceID *string `locationName:"networkInterfaceId" type:"string"`
+	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string"`
 
 	// Describes how the route was created.
 	//
@@ -21384,15 +21398,15 @@ type Route struct {
 	// route table was created.  CreateRoute indicates that the route was manually
 	// added to the route table.  EnableVgwRoutePropagation indicates that the route
 	// was propagated by route propagation.
-	Origin *string `locationName:"origin" type:"string"`
+	Origin *string `locationName:"origin" type:"string" enum:"RouteOrigin"`
 
 	// The state of the route. The blackhole state indicates that the route's target
 	// isn't available (for example, the specified gateway isn't attached to the
 	// VPC, or the specified NAT instance has been terminated).
-	State *string `locationName:"state" type:"string"`
+	State *string `locationName:"state" type:"string" enum:"RouteState"`
 
 	// The ID of the VPC peering connection.
-	VPCPeeringConnectionID *string `locationName:"vpcPeeringConnectionId" type:"string"`
+	VpcPeeringConnectionId *string `locationName:"vpcPeeringConnectionId" type:"string"`
 
 	metadataRoute `json:"-" xml:"-"`
 }
@@ -21403,7 +21417,7 @@ type metadataRoute struct {
 
 // String returns the string representation
 func (s Route) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -21417,10 +21431,10 @@ type RouteTable struct {
 	Associations []*RouteTableAssociation `locationName:"associationSet" locationNameList:"item" type:"list"`
 
 	// Any virtual private gateway (VGW) propagating routes.
-	PropagatingVGWs []*PropagatingVGW `locationName:"propagatingVgwSet" locationNameList:"item" type:"list"`
+	PropagatingVgws []*PropagatingVgw `locationName:"propagatingVgwSet" locationNameList:"item" type:"list"`
 
 	// The ID of the route table.
-	RouteTableID *string `locationName:"routeTableId" type:"string"`
+	RouteTableId *string `locationName:"routeTableId" type:"string"`
 
 	// The routes in the route table.
 	Routes []*Route `locationName:"routeSet" locationNameList:"item" type:"list"`
@@ -21429,7 +21443,7 @@ type RouteTable struct {
 	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The ID of the VPC.
-	VPCID *string `locationName:"vpcId" type:"string"`
+	VpcId *string `locationName:"vpcId" type:"string"`
 
 	metadataRouteTable `json:"-" xml:"-"`
 }
@@ -21440,7 +21454,7 @@ type metadataRouteTable struct {
 
 // String returns the string representation
 func (s RouteTable) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -21454,13 +21468,13 @@ type RouteTableAssociation struct {
 	Main *bool `locationName:"main" type:"boolean"`
 
 	// The ID of the association between a route table and a subnet.
-	RouteTableAssociationID *string `locationName:"routeTableAssociationId" type:"string"`
+	RouteTableAssociationId *string `locationName:"routeTableAssociationId" type:"string"`
 
 	// The ID of the route table.
-	RouteTableID *string `locationName:"routeTableId" type:"string"`
+	RouteTableId *string `locationName:"routeTableId" type:"string"`
 
 	// The ID of the subnet. A subnet ID is not returned for an implicit association.
-	SubnetID *string `locationName:"subnetId" type:"string"`
+	SubnetId *string `locationName:"subnetId" type:"string"`
 
 	metadataRouteTableAssociation `json:"-" xml:"-"`
 }
@@ -21471,7 +21485,7 @@ type metadataRouteTableAssociation struct {
 
 // String returns the string representation
 func (s RouteTableAssociation) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -21501,7 +21515,7 @@ type RunInstancesInput struct {
 	// from the instance.
 	//
 	// Default: false
-	DisableAPITermination *bool `locationName:"disableApiTermination" type:"boolean"`
+	DisableApiTermination *bool `locationName:"disableApiTermination" type:"boolean"`
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have
@@ -21516,32 +21530,32 @@ type RunInstancesInput struct {
 	// instance.
 	//
 	// Default: false
-	EBSOptimized *bool `locationName:"ebsOptimized" type:"boolean"`
+	EbsOptimized *bool `locationName:"ebsOptimized" type:"boolean"`
 
 	// The IAM instance profile.
-	IAMInstanceProfile *IAMInstanceProfileSpecification `locationName:"iamInstanceProfile" type:"structure"`
+	IamInstanceProfile *IamInstanceProfileSpecification `locationName:"iamInstanceProfile" type:"structure"`
 
 	// The ID of the AMI, which you can get by calling DescribeImages.
-	ImageID *string `locationName:"ImageId" type:"string" required:"true"`
+	ImageId *string `type:"string" required:"true"`
 
 	// Indicates whether an instance stops or terminates when you initiate shutdown
 	// from the instance (using the operating system command for system shutdown).
 	//
 	// Default: stop
-	InstanceInitiatedShutdownBehavior *string `locationName:"instanceInitiatedShutdownBehavior" type:"string"`
+	InstanceInitiatedShutdownBehavior *string `locationName:"instanceInitiatedShutdownBehavior" type:"string" enum:"ShutdownBehavior"`
 
 	// The instance type. For more information, see Instance Types (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	//
 	// Default: m1.small
-	InstanceType *string `type:"string"`
+	InstanceType *string `type:"string" enum:"InstanceType"`
 
 	// The ID of the kernel.
 	//
 	//  We recommend that you use PV-GRUB instead of kernels and RAM disks. For
 	// more information, see  PV-GRUB (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
-	KernelID *string `locationName:"KernelId" type:"string"`
+	KernelId *string `type:"string"`
 
 	// The name of the key pair. You can create a key pair using CreateKeyPair or
 	// ImportKeyPair.
@@ -21587,19 +21601,19 @@ type RunInstancesInput struct {
 	// and PrivateIpAddresses.n.PrivateIpAddress is set to an IP address.
 	//
 	// Default: We select an IP address from the IP address range of the subnet.
-	PrivateIPAddress *string `locationName:"privateIpAddress" type:"string"`
+	PrivateIpAddress *string `locationName:"privateIpAddress" type:"string"`
 
 	// The ID of the RAM disk.
 	//
 	//  We recommend that you use PV-GRUB instead of kernels and RAM disks. For
 	// more information, see  PV-GRUB (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
-	RAMDiskID *string `locationName:"RamdiskId" type:"string"`
+	RamdiskId *string `type:"string"`
 
 	// One or more security group IDs. You can create a security group using CreateSecurityGroup.
 	//
 	// Default: Amazon EC2 uses the default security group.
-	SecurityGroupIDs []*string `locationName:"SecurityGroupId" locationNameList:"SecurityGroupId" type:"list"`
+	SecurityGroupIds []*string `locationName:"SecurityGroupId" locationNameList:"SecurityGroupId" type:"list"`
 
 	// [EC2-Classic, default VPC] One or more security group names. For a nondefault
 	// VPC, you must use security group IDs instead.
@@ -21608,7 +21622,7 @@ type RunInstancesInput struct {
 	SecurityGroups []*string `locationName:"SecurityGroup" locationNameList:"SecurityGroup" type:"list"`
 
 	// [EC2-VPC] The ID of the subnet to launch the instance into.
-	SubnetID *string `locationName:"SubnetId" type:"string"`
+	SubnetId *string `type:"string"`
 
 	// The Base64-encoded MIME user data for the instances.
 	UserData *string `type:"string"`
@@ -21622,7 +21636,7 @@ type metadataRunInstancesInput struct {
 
 // String returns the string representation
 func (s RunInstancesInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -21644,7 +21658,7 @@ type metadataRunInstancesMonitoringEnabled struct {
 
 // String returns the string representation
 func (s RunInstancesMonitoringEnabled) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -21658,7 +21672,7 @@ type S3Storage struct {
 	// The access key ID of the owner of the bucket. Before you specify a value
 	// for your access key ID, review and follow the guidance in Best Practices
 	// for Managing AWS Access Keys (http://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html).
-	AWSAccessKeyID *string `locationName:"AWSAccessKeyId" type:"string"`
+	AWSAccessKeyId *string `type:"string"`
 
 	// The bucket in which to store the AMI. You can specify a bucket that you already
 	// own or a new bucket that Amazon EC2 creates on your behalf. If you specify
@@ -21684,7 +21698,7 @@ type metadataS3Storage struct {
 
 // String returns the string representation
 func (s S3Storage) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -21698,25 +21712,25 @@ type SecurityGroup struct {
 	Description *string `locationName:"groupDescription" type:"string"`
 
 	// The ID of the security group.
-	GroupID *string `locationName:"groupId" type:"string"`
+	GroupId *string `locationName:"groupId" type:"string"`
 
 	// The name of the security group.
 	GroupName *string `locationName:"groupName" type:"string"`
 
 	// One or more inbound rules associated with the security group.
-	IPPermissions []*IPPermission `locationName:"ipPermissions" locationNameList:"item" type:"list"`
+	IpPermissions []*IpPermission `locationName:"ipPermissions" locationNameList:"item" type:"list"`
 
 	// [EC2-VPC] One or more outbound rules associated with the security group.
-	IPPermissionsEgress []*IPPermission `locationName:"ipPermissionsEgress" locationNameList:"item" type:"list"`
+	IpPermissionsEgress []*IpPermission `locationName:"ipPermissionsEgress" locationNameList:"item" type:"list"`
 
 	// The AWS account ID of the owner of the security group.
-	OwnerID *string `locationName:"ownerId" type:"string"`
+	OwnerId *string `locationName:"ownerId" type:"string"`
 
 	// Any tags assigned to the security group.
 	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// [EC2-VPC] The ID of the VPC for the security group.
-	VPCID *string `locationName:"vpcId" type:"string"`
+	VpcId *string `locationName:"vpcId" type:"string"`
 
 	metadataSecurityGroup `json:"-" xml:"-"`
 }
@@ -21727,7 +21741,7 @@ type metadataSecurityGroup struct {
 
 // String returns the string representation
 func (s SecurityGroup) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -21743,34 +21757,35 @@ type Snapshot struct {
 	// Indicates whether the snapshot is encrypted.
 	Encrypted *bool `locationName:"encrypted" type:"boolean"`
 
-	// The full ARN of the AWS Key Management Service (KMS) Customer Master Key
-	// (CMK) that was used to protect the volume encryption key for the parent volume.
-	KMSKeyID *string `locationName:"kmsKeyId" type:"string"`
+	// The full ARN of the AWS Key Management Service (AWS KMS) customer master
+	// key (CMK) that was used to protect the volume encryption key for the parent
+	// volume.
+	KmsKeyId *string `locationName:"kmsKeyId" type:"string"`
 
 	// The AWS account alias (for example, amazon, self) or AWS account ID that
 	// owns the snapshot.
 	OwnerAlias *string `locationName:"ownerAlias" type:"string"`
 
 	// The AWS account ID of the EBS snapshot owner.
-	OwnerID *string `locationName:"ownerId" type:"string"`
+	OwnerId *string `locationName:"ownerId" type:"string"`
 
 	// The progress of the snapshot, as a percentage.
 	Progress *string `locationName:"progress" type:"string"`
 
 	// The ID of the snapshot.
-	SnapshotID *string `locationName:"snapshotId" type:"string"`
+	SnapshotId *string `locationName:"snapshotId" type:"string"`
 
 	// The time stamp when the snapshot was initiated.
 	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"iso8601"`
 
 	// The snapshot state.
-	State *string `locationName:"status" type:"string"`
+	State *string `locationName:"status" type:"string" enum:"SnapshotState"`
 
 	// Any tags assigned to the snapshot.
 	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The ID of the volume.
-	VolumeID *string `locationName:"volumeId" type:"string"`
+	VolumeId *string `locationName:"volumeId" type:"string"`
 
 	// The size of the volume, in GiB.
 	VolumeSize *int64 `locationName:"volumeSize" type:"integer"`
@@ -21784,7 +21799,7 @@ type metadataSnapshot struct {
 
 // String returns the string representation
 func (s Snapshot) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -21810,7 +21825,7 @@ type SnapshotDetail struct {
 	Progress *string `locationName:"progress" type:"string"`
 
 	// The snapshot ID of the disk being imported.
-	SnapshotID *string `locationName:"snapshotId" type:"string"`
+	SnapshotId *string `locationName:"snapshotId" type:"string"`
 
 	// A brief status of the snapshot creation.
 	Status *string `locationName:"status" type:"string"`
@@ -21819,7 +21834,7 @@ type SnapshotDetail struct {
 	StatusMessage *string `locationName:"statusMessage" type:"string"`
 
 	// The URL used to access the disk image.
-	URL *string `locationName:"url" type:"string"`
+	Url *string `locationName:"url" type:"string"`
 
 	// Describes the S3 bucket for the disk image.
 	UserBucket *UserBucketDetails `locationName:"userBucket" type:"structure"`
@@ -21833,7 +21848,7 @@ type metadataSnapshotDetail struct {
 
 // String returns the string representation
 func (s SnapshotDetail) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -21853,7 +21868,7 @@ type SnapshotDiskContainer struct {
 
 	// The URL to the Amazon S3-based disk image being imported. It can either be
 	// a https URL (https://..) or an Amazon S3 URL (s3://..).
-	URL *string `locationName:"Url" type:"string"`
+	Url *string `type:"string"`
 
 	// Describes the S3 bucket for the disk image.
 	UserBucket *UserBucket `type:"structure"`
@@ -21867,7 +21882,7 @@ type metadataSnapshotDiskContainer struct {
 
 // String returns the string representation
 func (s SnapshotDiskContainer) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -21890,7 +21905,7 @@ type SnapshotTaskDetail struct {
 	Progress *string `locationName:"progress" type:"string"`
 
 	// The snapshot ID of the disk being imported.
-	SnapshotID *string `locationName:"snapshotId" type:"string"`
+	SnapshotId *string `locationName:"snapshotId" type:"string"`
 
 	// A brief status for the import snapshot task.
 	Status *string `locationName:"status" type:"string"`
@@ -21899,7 +21914,7 @@ type SnapshotTaskDetail struct {
 	StatusMessage *string `locationName:"statusMessage" type:"string"`
 
 	// The URL of the disk image from which the snapshot is created.
-	URL *string `locationName:"url" type:"string"`
+	Url *string `locationName:"url" type:"string"`
 
 	// The S3 bucket for the disk image.
 	UserBucket *UserBucketDetails `locationName:"userBucket" type:"structure"`
@@ -21913,7 +21928,7 @@ type metadataSnapshotTaskDetail struct {
 
 // String returns the string representation
 func (s SnapshotTaskDetail) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -21930,13 +21945,13 @@ type SpotDatafeedSubscription struct {
 	Fault *SpotInstanceStateFault `locationName:"fault" type:"structure"`
 
 	// The AWS account ID of the account.
-	OwnerID *string `locationName:"ownerId" type:"string"`
+	OwnerId *string `locationName:"ownerId" type:"string"`
 
 	// The prefix that is prepended to data feed files.
 	Prefix *string `locationName:"prefix" type:"string"`
 
 	// The state of the Spot Instance data feed subscription.
-	State *string `locationName:"state" type:"string"`
+	State *string `locationName:"state" type:"string" enum:"DatafeedSubscriptionState"`
 
 	metadataSpotDatafeedSubscription `json:"-" xml:"-"`
 }
@@ -21947,11 +21962,108 @@ type metadataSpotDatafeedSubscription struct {
 
 // String returns the string representation
 func (s SpotDatafeedSubscription) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
 func (s SpotDatafeedSubscription) GoString() string {
+	return s.String()
+}
+
+// Describes the launch specification for an instance.
+type SpotFleetLaunchSpecification struct {
+	// Deprecated.
+	AddressingType *string `locationName:"addressingType" type:"string"`
+
+	// One or more block device mapping entries.
+	BlockDeviceMappings []*BlockDeviceMapping `locationName:"blockDeviceMapping" locationNameList:"item" type:"list"`
+
+	// Indicates whether the instance is optimized for EBS I/O. This optimization
+	// provides dedicated throughput to Amazon EBS and an optimized configuration
+	// stack to provide optimal EBS I/O performance. This optimization isn't available
+	// with all instance types. Additional usage charges apply when using an EBS
+	// Optimized instance.
+	//
+	// Default: false
+	EbsOptimized *bool `locationName:"ebsOptimized" type:"boolean"`
+
+	// Describes an IAM instance profile.
+	IamInstanceProfile *IamInstanceProfileSpecification `locationName:"iamInstanceProfile" type:"structure"`
+
+	// The ID of the AMI.
+	ImageId *string `locationName:"imageId" type:"string"`
+
+	// The instance type.
+	InstanceType *string `locationName:"instanceType" type:"string" enum:"InstanceType"`
+
+	// The ID of the kernel.
+	KernelId *string `locationName:"kernelId" type:"string"`
+
+	// The name of the key pair.
+	KeyName *string `locationName:"keyName" type:"string"`
+
+	// Enable or disable monitoring for the instance.
+	Monitoring *SpotFleetMonitoring `locationName:"monitoring" type:"structure"`
+
+	// One or more network interfaces.
+	NetworkInterfaces []*InstanceNetworkInterfaceSpecification `locationName:"networkInterfaceSet" locationNameList:"item" type:"list"`
+
+	// Describes Spot Instance placement.
+	Placement *SpotPlacement `locationName:"placement" type:"structure"`
+
+	// The ID of the RAM disk.
+	RamdiskId *string `locationName:"ramdiskId" type:"string"`
+
+	// One or more security groups. To request an instance in a nondefault VPC,
+	// you must specify the ID of the security group. To request an instance in
+	// EC2-Classic or a default VPC, you can specify the name or the ID of the security
+	// group.
+	SecurityGroups []*GroupIdentifier `locationName:"groupSet" locationNameList:"item" type:"list"`
+
+	// The ID of the subnet in which to launch the instance.
+	SubnetId *string `locationName:"subnetId" type:"string"`
+
+	// The Base64-encoded MIME user data to make available to the instances.
+	UserData *string `locationName:"userData" type:"string"`
+
+	metadataSpotFleetLaunchSpecification `json:"-" xml:"-"`
+}
+
+type metadataSpotFleetLaunchSpecification struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s SpotFleetLaunchSpecification) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SpotFleetLaunchSpecification) GoString() string {
+	return s.String()
+}
+
+// Describes whether monitoring is enabled.
+type SpotFleetMonitoring struct {
+	// Enables monitoring for the instance.
+	//
+	// Default: false
+	Enabled *bool `locationName:"enabled" type:"boolean"`
+
+	metadataSpotFleetMonitoring `json:"-" xml:"-"`
+}
+
+type metadataSpotFleetMonitoring struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s SpotFleetMonitoring) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SpotFleetMonitoring) GoString() string {
 	return s.String()
 }
 
@@ -21961,10 +22073,10 @@ type SpotFleetRequestConfig struct {
 	SpotFleetRequestConfig *SpotFleetRequestConfigData `locationName:"spotFleetRequestConfig" type:"structure" required:"true"`
 
 	// The ID of the Spot fleet request.
-	SpotFleetRequestID *string `locationName:"spotFleetRequestId" type:"string" required:"true"`
+	SpotFleetRequestId *string `locationName:"spotFleetRequestId" type:"string" required:"true"`
 
 	// The state of the Spot fleet request.
-	SpotFleetRequestState *string `locationName:"spotFleetRequestState" type:"string" required:"true"`
+	SpotFleetRequestState *string `locationName:"spotFleetRequestState" type:"string" required:"true" enum:"BatchState"`
 
 	metadataSpotFleetRequestConfig `json:"-" xml:"-"`
 }
@@ -21975,7 +22087,7 @@ type metadataSpotFleetRequestConfig struct {
 
 // String returns the string representation
 func (s SpotFleetRequestConfig) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -21993,10 +22105,10 @@ type SpotFleetRequestConfigData struct {
 	// Grants the Spot fleet service permission to terminate instances on your behalf
 	// when you cancel a Spot fleet request using CancelSpotFleetRequests or when
 	// the Spot fleet request expires, if you set terminateInstancesWithExpiration.
-	IAMFleetRole *string `locationName:"iamFleetRole" type:"string" required:"true"`
+	IamFleetRole *string `locationName:"iamFleetRole" type:"string" required:"true"`
 
 	// Information about the launch specifications for the instances.
-	LaunchSpecifications []*LaunchSpecification `locationName:"launchSpecifications" locationNameList:"item" type:"list" required:"true"`
+	LaunchSpecifications []*SpotFleetLaunchSpecification `locationName:"launchSpecifications" locationNameList:"item" type:"list" required:"true"`
 
 	// The maximum hourly price (bid) for any Spot Instance launched to fulfill
 	// the request.
@@ -22027,7 +22139,7 @@ type metadataSpotFleetRequestConfigData struct {
 
 // String returns the string representation
 func (s SpotFleetRequestConfigData) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -22051,7 +22163,7 @@ type SpotInstanceRequest struct {
 
 	// The instance ID, if an instance has been launched to fulfill the Spot Instance
 	// request.
-	InstanceID *string `locationName:"instanceId" type:"string"`
+	InstanceId *string `locationName:"instanceId" type:"string"`
 
 	// The instance launch group. Launch groups are Spot Instances that launch together
 	// and terminate together.
@@ -22064,10 +22176,10 @@ type SpotInstanceRequest struct {
 	LaunchedAvailabilityZone *string `locationName:"launchedAvailabilityZone" type:"string"`
 
 	// The product description associated with the Spot Instance.
-	ProductDescription *string `locationName:"productDescription" type:"string"`
+	ProductDescription *string `locationName:"productDescription" type:"string" enum:"RIProductDescription"`
 
 	// The ID of the Spot Instance request.
-	SpotInstanceRequestID *string `locationName:"spotInstanceRequestId" type:"string"`
+	SpotInstanceRequestId *string `locationName:"spotInstanceRequestId" type:"string"`
 
 	// The maximum hourly price (bid) for any Spot Instance launched to fulfill
 	// the request.
@@ -22077,7 +22189,7 @@ type SpotInstanceRequest struct {
 	// you track your Spot Instance requests. For more information, see Spot Bid
 	// Status (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-bid-status.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
-	State *string `locationName:"state" type:"string"`
+	State *string `locationName:"state" type:"string" enum:"SpotInstanceState"`
 
 	// The status code and status message describing the Spot Instance request.
 	Status *SpotInstanceStatus `locationName:"status" type:"structure"`
@@ -22086,7 +22198,7 @@ type SpotInstanceRequest struct {
 	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The Spot Instance request type.
-	Type *string `locationName:"type" type:"string"`
+	Type *string `locationName:"type" type:"string" enum:"SpotInstanceType"`
 
 	// The start date of the request, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
 	// If this is a one-time request, the request becomes active at this date and
@@ -22110,7 +22222,7 @@ type metadataSpotInstanceRequest struct {
 
 // String returns the string representation
 func (s SpotInstanceRequest) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -22135,7 +22247,7 @@ type metadataSpotInstanceStateFault struct {
 
 // String returns the string representation
 func (s SpotInstanceStateFault) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -22164,7 +22276,7 @@ type metadataSpotInstanceStatus struct {
 
 // String returns the string representation
 func (s SpotInstanceStatus) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -22189,7 +22301,7 @@ type metadataSpotPlacement struct {
 
 // String returns the string representation
 func (s SpotPlacement) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -22204,10 +22316,10 @@ type SpotPrice struct {
 	AvailabilityZone *string `locationName:"availabilityZone" type:"string"`
 
 	// The instance type.
-	InstanceType *string `locationName:"instanceType" type:"string"`
+	InstanceType *string `locationName:"instanceType" type:"string" enum:"InstanceType"`
 
 	// A general description of the AMI.
-	ProductDescription *string `locationName:"productDescription" type:"string"`
+	ProductDescription *string `locationName:"productDescription" type:"string" enum:"RIProductDescription"`
 
 	// The maximum price (bid) that you are willing to pay for a Spot Instance.
 	SpotPrice *string `locationName:"spotPrice" type:"string"`
@@ -22224,7 +22336,7 @@ type metadataSpotPrice struct {
 
 // String returns the string representation
 func (s SpotPrice) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -22243,7 +22355,7 @@ type StartInstancesInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// One or more instance IDs.
-	InstanceIDs []*string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list" required:"true"`
+	InstanceIds []*string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list" required:"true"`
 
 	metadataStartInstancesInput `json:"-" xml:"-"`
 }
@@ -22254,7 +22366,7 @@ type metadataStartInstancesInput struct {
 
 // String returns the string representation
 func (s StartInstancesInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -22275,7 +22387,7 @@ type metadataStartInstancesOutput struct {
 
 // String returns the string representation
 func (s StartInstancesOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -22322,7 +22434,7 @@ type metadataStateReason struct {
 
 // String returns the string representation
 func (s StateReason) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -22346,7 +22458,7 @@ type StopInstancesInput struct {
 	Force *bool `locationName:"force" type:"boolean"`
 
 	// One or more instance IDs.
-	InstanceIDs []*string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list" required:"true"`
+	InstanceIds []*string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list" required:"true"`
 
 	metadataStopInstancesInput `json:"-" xml:"-"`
 }
@@ -22357,7 +22469,7 @@ type metadataStopInstancesInput struct {
 
 // String returns the string representation
 func (s StopInstancesInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -22378,7 +22490,7 @@ type metadataStopInstancesOutput struct {
 
 // String returns the string representation
 func (s StopInstancesOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -22400,7 +22512,7 @@ type metadataStorage struct {
 
 // String returns the string representation
 func (s Storage) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -22415,28 +22527,28 @@ type Subnet struct {
 
 	// The number of unused IP addresses in the subnet. Note that the IP addresses
 	// for any stopped instances are considered unavailable.
-	AvailableIPAddressCount *int64 `locationName:"availableIpAddressCount" type:"integer"`
+	AvailableIpAddressCount *int64 `locationName:"availableIpAddressCount" type:"integer"`
 
 	// The CIDR block assigned to the subnet.
-	CIDRBlock *string `locationName:"cidrBlock" type:"string"`
+	CidrBlock *string `locationName:"cidrBlock" type:"string"`
 
 	// Indicates whether this is the default subnet for the Availability Zone.
-	DefaultForAZ *bool `locationName:"defaultForAz" type:"boolean"`
+	DefaultForAz *bool `locationName:"defaultForAz" type:"boolean"`
 
 	// Indicates whether instances launched in this subnet receive a public IP address.
-	MapPublicIPOnLaunch *bool `locationName:"mapPublicIpOnLaunch" type:"boolean"`
+	MapPublicIpOnLaunch *bool `locationName:"mapPublicIpOnLaunch" type:"boolean"`
 
 	// The current state of the subnet.
-	State *string `locationName:"state" type:"string"`
+	State *string `locationName:"state" type:"string" enum:"SubnetState"`
 
 	// The ID of the subnet.
-	SubnetID *string `locationName:"subnetId" type:"string"`
+	SubnetId *string `locationName:"subnetId" type:"string"`
 
 	// Any tags assigned to the subnet.
 	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The ID of the VPC the subnet is in.
-	VPCID *string `locationName:"vpcId" type:"string"`
+	VpcId *string `locationName:"vpcId" type:"string"`
 
 	metadataSubnet `json:"-" xml:"-"`
 }
@@ -22447,7 +22559,7 @@ type metadataSubnet struct {
 
 // String returns the string representation
 func (s Subnet) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -22478,7 +22590,7 @@ type metadataTag struct {
 
 // String returns the string representation
 func (s Tag) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -22492,10 +22604,10 @@ type TagDescription struct {
 	Key *string `locationName:"key" type:"string"`
 
 	// The ID of the resource. For example, ami-1a2b3c4d.
-	ResourceID *string `locationName:"resourceId" type:"string"`
+	ResourceId *string `locationName:"resourceId" type:"string"`
 
 	// The resource type.
-	ResourceType *string `locationName:"resourceType" type:"string"`
+	ResourceType *string `locationName:"resourceType" type:"string" enum:"ResourceType"`
 
 	// The tag value.
 	Value *string `locationName:"value" type:"string"`
@@ -22509,7 +22621,7 @@ type metadataTagDescription struct {
 
 // String returns the string representation
 func (s TagDescription) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -22525,7 +22637,7 @@ type TerminateInstancesInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// One or more instance IDs.
-	InstanceIDs []*string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list" required:"true"`
+	InstanceIds []*string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list" required:"true"`
 
 	metadataTerminateInstancesInput `json:"-" xml:"-"`
 }
@@ -22536,7 +22648,7 @@ type metadataTerminateInstancesInput struct {
 
 // String returns the string representation
 func (s TerminateInstancesInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -22557,7 +22669,7 @@ type metadataTerminateInstancesOutput struct {
 
 // String returns the string representation
 func (s TerminateInstancesOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -22565,46 +22677,46 @@ func (s TerminateInstancesOutput) GoString() string {
 	return s.String()
 }
 
-type UnassignPrivateIPAddressesInput struct {
+type UnassignPrivateIpAddressesInput struct {
 	// The ID of the network interface.
-	NetworkInterfaceID *string `locationName:"networkInterfaceId" type:"string" required:"true"`
+	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string" required:"true"`
 
 	// The secondary private IP addresses to unassign from the network interface.
 	// You can specify this option multiple times to unassign more than one IP address.
-	PrivateIPAddresses []*string `locationName:"privateIpAddress" locationNameList:"PrivateIpAddress" type:"list" required:"true"`
+	PrivateIpAddresses []*string `locationName:"privateIpAddress" locationNameList:"PrivateIpAddress" type:"list" required:"true"`
 
-	metadataUnassignPrivateIPAddressesInput `json:"-" xml:"-"`
+	metadataUnassignPrivateIpAddressesInput `json:"-" xml:"-"`
 }
 
-type metadataUnassignPrivateIPAddressesInput struct {
+type metadataUnassignPrivateIpAddressesInput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s UnassignPrivateIPAddressesInput) String() string {
-	return awsutil.StringValue(s)
+func (s UnassignPrivateIpAddressesInput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s UnassignPrivateIPAddressesInput) GoString() string {
+func (s UnassignPrivateIpAddressesInput) GoString() string {
 	return s.String()
 }
 
-type UnassignPrivateIPAddressesOutput struct {
-	metadataUnassignPrivateIPAddressesOutput `json:"-" xml:"-"`
+type UnassignPrivateIpAddressesOutput struct {
+	metadataUnassignPrivateIpAddressesOutput `json:"-" xml:"-"`
 }
 
-type metadataUnassignPrivateIPAddressesOutput struct {
+type metadataUnassignPrivateIpAddressesOutput struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s UnassignPrivateIPAddressesOutput) String() string {
-	return awsutil.StringValue(s)
+func (s UnassignPrivateIpAddressesOutput) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s UnassignPrivateIPAddressesOutput) GoString() string {
+func (s UnassignPrivateIpAddressesOutput) GoString() string {
 	return s.String()
 }
 
@@ -22616,7 +22728,7 @@ type UnmonitorInstancesInput struct {
 	DryRun *bool `locationName:"dryRun" type:"boolean"`
 
 	// One or more instance IDs.
-	InstanceIDs []*string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list" required:"true"`
+	InstanceIds []*string `locationName:"InstanceId" locationNameList:"InstanceId" type:"list" required:"true"`
 
 	metadataUnmonitorInstancesInput `json:"-" xml:"-"`
 }
@@ -22627,7 +22739,7 @@ type metadataUnmonitorInstancesInput struct {
 
 // String returns the string representation
 func (s UnmonitorInstancesInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -22648,7 +22760,7 @@ type metadataUnmonitorInstancesOutput struct {
 
 // String returns the string representation
 func (s UnmonitorInstancesOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -22662,7 +22774,7 @@ type UnsuccessfulItem struct {
 	Error *UnsuccessfulItemError `locationName:"error" type:"structure" required:"true"`
 
 	// The ID of the resource.
-	ResourceID *string `locationName:"resourceId" type:"string"`
+	ResourceId *string `locationName:"resourceId" type:"string"`
 
 	metadataUnsuccessfulItem `json:"-" xml:"-"`
 }
@@ -22673,7 +22785,7 @@ type metadataUnsuccessfulItem struct {
 
 // String returns the string representation
 func (s UnsuccessfulItem) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -22699,7 +22811,7 @@ type metadataUnsuccessfulItemError struct {
 
 // String returns the string representation
 func (s UnsuccessfulItemError) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -22724,7 +22836,7 @@ type metadataUserBucket struct {
 
 // String returns the string representation
 func (s UserBucket) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -22749,7 +22861,7 @@ type metadataUserBucketDetails struct {
 
 // String returns the string representation
 func (s UserBucketDetails) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -22771,7 +22883,7 @@ type metadataUserData struct {
 
 // String returns the string representation
 func (s UserData) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -22780,9 +22892,9 @@ func (s UserData) GoString() string {
 }
 
 // Describes a security group and AWS account ID pair.
-type UserIDGroupPair struct {
+type UserIdGroupPair struct {
 	// The ID of the security group.
-	GroupID *string `locationName:"groupId" type:"string"`
+	GroupId *string `locationName:"groupId" type:"string"`
 
 	// The name of the security group. In a request, use this parameter for a security
 	// group in EC2-Classic or a default VPC only. For a security group in a nondefault
@@ -22790,27 +22902,27 @@ type UserIDGroupPair struct {
 	GroupName *string `locationName:"groupName" type:"string"`
 
 	// The ID of an AWS account. EC2-Classic only.
-	UserID *string `locationName:"userId" type:"string"`
+	UserId *string `locationName:"userId" type:"string"`
 
-	metadataUserIDGroupPair `json:"-" xml:"-"`
+	metadataUserIdGroupPair `json:"-" xml:"-"`
 }
 
-type metadataUserIDGroupPair struct {
+type metadataUserIdGroupPair struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s UserIDGroupPair) String() string {
-	return awsutil.StringValue(s)
+func (s UserIdGroupPair) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s UserIDGroupPair) GoString() string {
+func (s UserIdGroupPair) GoString() string {
 	return s.String()
 }
 
 // Describes telemetry for a VPN tunnel.
-type VGWTelemetry struct {
+type VgwTelemetry struct {
 	// The number of accepted routes.
 	AcceptedRouteCount *int64 `locationName:"acceptedRouteCount" type:"integer"`
 
@@ -22819,415 +22931,28 @@ type VGWTelemetry struct {
 
 	// The Internet-routable IP address of the virtual private gateway's outside
 	// interface.
-	OutsideIPAddress *string `locationName:"outsideIpAddress" type:"string"`
+	OutsideIpAddress *string `locationName:"outsideIpAddress" type:"string"`
 
 	// The status of the VPN tunnel.
-	Status *string `locationName:"status" type:"string"`
+	Status *string `locationName:"status" type:"string" enum:"TelemetryStatus"`
 
 	// If an error occurs, a description of the error.
 	StatusMessage *string `locationName:"statusMessage" type:"string"`
 
-	metadataVGWTelemetry `json:"-" xml:"-"`
+	metadataVgwTelemetry `json:"-" xml:"-"`
 }
 
-type metadataVGWTelemetry struct {
+type metadataVgwTelemetry struct {
 	SDKShapeTraits bool `type:"structure"`
 }
 
 // String returns the string representation
-func (s VGWTelemetry) String() string {
-	return awsutil.StringValue(s)
+func (s VgwTelemetry) String() string {
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s VGWTelemetry) GoString() string {
-	return s.String()
-}
-
-// Describes a VPC.
-type VPC struct {
-	// The CIDR block for the VPC.
-	CIDRBlock *string `locationName:"cidrBlock" type:"string"`
-
-	// The ID of the set of DHCP options you've associated with the VPC (or default
-	// if the default options are associated with the VPC).
-	DHCPOptionsID *string `locationName:"dhcpOptionsId" type:"string"`
-
-	// The allowed tenancy of instances launched into the VPC.
-	InstanceTenancy *string `locationName:"instanceTenancy" type:"string"`
-
-	// Indicates whether the VPC is the default VPC.
-	IsDefault *bool `locationName:"isDefault" type:"boolean"`
-
-	// The current state of the VPC.
-	State *string `locationName:"state" type:"string"`
-
-	// Any tags assigned to the VPC.
-	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
-
-	// The ID of the VPC.
-	VPCID *string `locationName:"vpcId" type:"string"`
-
-	metadataVPC `json:"-" xml:"-"`
-}
-
-type metadataVPC struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s VPC) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s VPC) GoString() string {
-	return s.String()
-}
-
-// Describes an attachment between a virtual private gateway and a VPC.
-type VPCAttachment struct {
-	// The current state of the attachment.
-	State *string `locationName:"state" type:"string"`
-
-	// The ID of the VPC.
-	VPCID *string `locationName:"vpcId" type:"string"`
-
-	metadataVPCAttachment `json:"-" xml:"-"`
-}
-
-type metadataVPCAttachment struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s VPCAttachment) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s VPCAttachment) GoString() string {
-	return s.String()
-}
-
-// Describes whether a VPC is enabled for ClassicLink.
-type VPCClassicLink struct {
-	// Indicates whether the VPC is enabled for ClassicLink.
-	ClassicLinkEnabled *bool `locationName:"classicLinkEnabled" type:"boolean"`
-
-	// Any tags assigned to the VPC.
-	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
-
-	// The ID of the VPC.
-	VPCID *string `locationName:"vpcId" type:"string"`
-
-	metadataVPCClassicLink `json:"-" xml:"-"`
-}
-
-type metadataVPCClassicLink struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s VPCClassicLink) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s VPCClassicLink) GoString() string {
-	return s.String()
-}
-
-// Describes a VPC endpoint.
-type VPCEndpoint struct {
-	// The date and time the VPC endpoint was created.
-	CreationTimestamp *time.Time `locationName:"creationTimestamp" type:"timestamp" timestampFormat:"iso8601"`
-
-	// The policy document associated with the endpoint.
-	PolicyDocument *string `locationName:"policyDocument" type:"string"`
-
-	// One or more route tables associated with the endpoint.
-	RouteTableIDs []*string `locationName:"routeTableIdSet" locationNameList:"item" type:"list"`
-
-	// The name of the AWS service to which the endpoint is associated.
-	ServiceName *string `locationName:"serviceName" type:"string"`
-
-	// The state of the VPC endpoint.
-	State *string `locationName:"state" type:"string"`
-
-	// The ID of the VPC endpoint.
-	VPCEndpointID *string `locationName:"vpcEndpointId" type:"string"`
-
-	// The ID of the VPC to which the endpoint is associated.
-	VPCID *string `locationName:"vpcId" type:"string"`
-
-	metadataVPCEndpoint `json:"-" xml:"-"`
-}
-
-type metadataVPCEndpoint struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s VPCEndpoint) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s VPCEndpoint) GoString() string {
-	return s.String()
-}
-
-// Describes a VPC peering connection.
-type VPCPeeringConnection struct {
-	// The information of the peer VPC.
-	AccepterVPCInfo *VPCPeeringConnectionVPCInfo `locationName:"accepterVpcInfo" type:"structure"`
-
-	// The time that an unaccepted VPC peering connection will expire.
-	ExpirationTime *time.Time `locationName:"expirationTime" type:"timestamp" timestampFormat:"iso8601"`
-
-	// The information of the requester VPC.
-	RequesterVPCInfo *VPCPeeringConnectionVPCInfo `locationName:"requesterVpcInfo" type:"structure"`
-
-	// The status of the VPC peering connection.
-	Status *VPCPeeringConnectionStateReason `locationName:"status" type:"structure"`
-
-	// Any tags assigned to the resource.
-	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
-
-	// The ID of the VPC peering connection.
-	VPCPeeringConnectionID *string `locationName:"vpcPeeringConnectionId" type:"string"`
-
-	metadataVPCPeeringConnection `json:"-" xml:"-"`
-}
-
-type metadataVPCPeeringConnection struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s VPCPeeringConnection) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s VPCPeeringConnection) GoString() string {
-	return s.String()
-}
-
-// Describes the status of a VPC peering connection.
-type VPCPeeringConnectionStateReason struct {
-	// The status of the VPC peering connection.
-	Code *string `locationName:"code" type:"string"`
-
-	// A message that provides more information about the status, if applicable.
-	Message *string `locationName:"message" type:"string"`
-
-	metadataVPCPeeringConnectionStateReason `json:"-" xml:"-"`
-}
-
-type metadataVPCPeeringConnectionStateReason struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s VPCPeeringConnectionStateReason) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s VPCPeeringConnectionStateReason) GoString() string {
-	return s.String()
-}
-
-// Describes a VPC in a VPC peering connection.
-type VPCPeeringConnectionVPCInfo struct {
-	// The CIDR block for the VPC.
-	CIDRBlock *string `locationName:"cidrBlock" type:"string"`
-
-	// The AWS account ID of the VPC owner.
-	OwnerID *string `locationName:"ownerId" type:"string"`
-
-	// The ID of the VPC.
-	VPCID *string `locationName:"vpcId" type:"string"`
-
-	metadataVPCPeeringConnectionVPCInfo `json:"-" xml:"-"`
-}
-
-type metadataVPCPeeringConnectionVPCInfo struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s VPCPeeringConnectionVPCInfo) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s VPCPeeringConnectionVPCInfo) GoString() string {
-	return s.String()
-}
-
-// Describes a VPN connection.
-type VPNConnection struct {
-	// The configuration information for the VPN connection's customer gateway (in
-	// the native XML format). This element is always present in the CreateVpnConnection
-	// response; however, it's present in the DescribeVpnConnections response only
-	// if the VPN connection is in the pending or available state.
-	CustomerGatewayConfiguration *string `locationName:"customerGatewayConfiguration" type:"string"`
-
-	// The ID of the customer gateway at your end of the VPN connection.
-	CustomerGatewayID *string `locationName:"customerGatewayId" type:"string"`
-
-	// The VPN connection options.
-	Options *VPNConnectionOptions `locationName:"options" type:"structure"`
-
-	// The static routes associated with the VPN connection.
-	Routes []*VPNStaticRoute `locationName:"routes" locationNameList:"item" type:"list"`
-
-	// The current state of the VPN connection.
-	State *string `locationName:"state" type:"string"`
-
-	// Any tags assigned to the VPN connection.
-	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
-
-	// The type of VPN connection.
-	Type *string `locationName:"type" type:"string"`
-
-	// Information about the VPN tunnel.
-	VGWTelemetry []*VGWTelemetry `locationName:"vgwTelemetry" locationNameList:"item" type:"list"`
-
-	// The ID of the VPN connection.
-	VPNConnectionID *string `locationName:"vpnConnectionId" type:"string"`
-
-	// The ID of the virtual private gateway at the AWS side of the VPN connection.
-	VPNGatewayID *string `locationName:"vpnGatewayId" type:"string"`
-
-	metadataVPNConnection `json:"-" xml:"-"`
-}
-
-type metadataVPNConnection struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s VPNConnection) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s VPNConnection) GoString() string {
-	return s.String()
-}
-
-// Describes VPN connection options.
-type VPNConnectionOptions struct {
-	// Indicates whether the VPN connection uses static routes only. Static routes
-	// must be used for devices that don't support BGP.
-	StaticRoutesOnly *bool `locationName:"staticRoutesOnly" type:"boolean"`
-
-	metadataVPNConnectionOptions `json:"-" xml:"-"`
-}
-
-type metadataVPNConnectionOptions struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s VPNConnectionOptions) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s VPNConnectionOptions) GoString() string {
-	return s.String()
-}
-
-// Describes VPN connection options.
-type VPNConnectionOptionsSpecification struct {
-	// Indicates whether the VPN connection uses static routes only. Static routes
-	// must be used for devices that don't support BGP.
-	StaticRoutesOnly *bool `locationName:"staticRoutesOnly" type:"boolean"`
-
-	metadataVPNConnectionOptionsSpecification `json:"-" xml:"-"`
-}
-
-type metadataVPNConnectionOptionsSpecification struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s VPNConnectionOptionsSpecification) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s VPNConnectionOptionsSpecification) GoString() string {
-	return s.String()
-}
-
-// Describes a virtual private gateway.
-type VPNGateway struct {
-	// The Availability Zone where the virtual private gateway was created.
-	AvailabilityZone *string `locationName:"availabilityZone" type:"string"`
-
-	// The current state of the virtual private gateway.
-	State *string `locationName:"state" type:"string"`
-
-	// Any tags assigned to the virtual private gateway.
-	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
-
-	// The type of VPN connection the virtual private gateway supports.
-	Type *string `locationName:"type" type:"string"`
-
-	// Any VPCs attached to the virtual private gateway.
-	VPCAttachments []*VPCAttachment `locationName:"attachments" locationNameList:"item" type:"list"`
-
-	// The ID of the virtual private gateway.
-	VPNGatewayID *string `locationName:"vpnGatewayId" type:"string"`
-
-	metadataVPNGateway `json:"-" xml:"-"`
-}
-
-type metadataVPNGateway struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s VPNGateway) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s VPNGateway) GoString() string {
-	return s.String()
-}
-
-// Describes a static route for a VPN connection.
-type VPNStaticRoute struct {
-	// The CIDR block associated with the local subnet of the customer data center.
-	DestinationCIDRBlock *string `locationName:"destinationCidrBlock" type:"string"`
-
-	// Indicates how the routes were provided.
-	Source *string `locationName:"source" type:"string"`
-
-	// The current state of the static route.
-	State *string `locationName:"state" type:"string"`
-
-	metadataVPNStaticRoute `json:"-" xml:"-"`
-}
-
-type metadataVPNStaticRoute struct {
-	SDKShapeTraits bool `type:"structure"`
-}
-
-// String returns the string representation
-func (s VPNStaticRoute) String() string {
-	return awsutil.StringValue(s)
-}
-
-// GoString returns the string representation
-func (s VPNStaticRoute) GoString() string {
+func (s VgwTelemetry) GoString() string {
 	return s.String()
 }
 
@@ -23258,30 +22983,30 @@ type Volume struct {
 	//
 	// Condition: This parameter is required for requests to create io1 volumes;
 	// it is not used in requests to create standard or gp2 volumes.
-	IOPS *int64 `locationName:"iops" type:"integer"`
+	Iops *int64 `locationName:"iops" type:"integer"`
 
-	// The full ARN of the AWS Key Management Service (KMS) Customer Master Key
-	// (CMK) that was used to protect the volume encryption key for the volume.
-	KMSKeyID *string `locationName:"kmsKeyId" type:"string"`
+	// The full ARN of the AWS Key Management Service (AWS KMS) customer master
+	// key (CMK) that was used to protect the volume encryption key for the volume.
+	KmsKeyId *string `locationName:"kmsKeyId" type:"string"`
 
 	// The size of the volume, in GiBs.
 	Size *int64 `locationName:"size" type:"integer"`
 
 	// The snapshot from which the volume was created, if applicable.
-	SnapshotID *string `locationName:"snapshotId" type:"string"`
+	SnapshotId *string `locationName:"snapshotId" type:"string"`
 
 	// The volume state.
-	State *string `locationName:"status" type:"string"`
+	State *string `locationName:"status" type:"string" enum:"VolumeState"`
 
 	// Any tags assigned to the volume.
 	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
 
 	// The ID of the volume.
-	VolumeID *string `locationName:"volumeId" type:"string"`
+	VolumeId *string `locationName:"volumeId" type:"string"`
 
 	// The volume type. This can be gp2 for General Purpose (SSD) volumes, io1 for
 	// Provisioned IOPS (SSD) volumes, or standard for Magnetic volumes.
-	VolumeType *string `locationName:"volumeType" type:"string"`
+	VolumeType *string `locationName:"volumeType" type:"string" enum:"VolumeType"`
 
 	metadataVolume `json:"-" xml:"-"`
 }
@@ -23292,7 +23017,7 @@ type metadataVolume struct {
 
 // String returns the string representation
 func (s Volume) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -23312,13 +23037,13 @@ type VolumeAttachment struct {
 	Device *string `locationName:"device" type:"string"`
 
 	// The ID of the instance.
-	InstanceID *string `locationName:"instanceId" type:"string"`
+	InstanceId *string `locationName:"instanceId" type:"string"`
 
 	// The attachment state of the volume.
-	State *string `locationName:"status" type:"string"`
+	State *string `locationName:"status" type:"string" enum:"VolumeAttachmentState"`
 
 	// The ID of the volume.
-	VolumeID *string `locationName:"volumeId" type:"string"`
+	VolumeId *string `locationName:"volumeId" type:"string"`
 
 	metadataVolumeAttachment `json:"-" xml:"-"`
 }
@@ -23329,7 +23054,7 @@ type metadataVolumeAttachment struct {
 
 // String returns the string representation
 func (s VolumeAttachment) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -23351,7 +23076,7 @@ type metadataVolumeDetail struct {
 
 // String returns the string representation
 func (s VolumeDetail) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -23368,7 +23093,7 @@ type VolumeStatusAction struct {
 	Description *string `locationName:"description" type:"string"`
 
 	// The ID of the event associated with this operation.
-	EventID *string `locationName:"eventId" type:"string"`
+	EventId *string `locationName:"eventId" type:"string"`
 
 	// The event type associated with this operation.
 	EventType *string `locationName:"eventType" type:"string"`
@@ -23382,7 +23107,7 @@ type metadataVolumeStatusAction struct {
 
 // String returns the string representation
 func (s VolumeStatusAction) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -23393,7 +23118,7 @@ func (s VolumeStatusAction) GoString() string {
 // Describes a volume status.
 type VolumeStatusDetails struct {
 	// The name of the volume status.
-	Name *string `locationName:"name" type:"string"`
+	Name *string `locationName:"name" type:"string" enum:"VolumeStatusName"`
 
 	// The intended status of the volume status.
 	Status *string `locationName:"status" type:"string"`
@@ -23407,7 +23132,7 @@ type metadataVolumeStatusDetails struct {
 
 // String returns the string representation
 func (s VolumeStatusDetails) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -23421,7 +23146,7 @@ type VolumeStatusEvent struct {
 	Description *string `locationName:"description" type:"string"`
 
 	// The ID of this event.
-	EventID *string `locationName:"eventId" type:"string"`
+	EventId *string `locationName:"eventId" type:"string"`
 
 	// The type of this event.
 	EventType *string `locationName:"eventType" type:"string"`
@@ -23441,7 +23166,7 @@ type metadataVolumeStatusEvent struct {
 
 // String returns the string representation
 func (s VolumeStatusEvent) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -23455,7 +23180,7 @@ type VolumeStatusInfo struct {
 	Details []*VolumeStatusDetails `locationName:"details" locationNameList:"item" type:"list"`
 
 	// The status of the volume.
-	Status *string `locationName:"status" type:"string"`
+	Status *string `locationName:"status" type:"string" enum:"VolumeStatusInfoStatus"`
 
 	metadataVolumeStatusInfo `json:"-" xml:"-"`
 }
@@ -23466,7 +23191,7 @@ type metadataVolumeStatusInfo struct {
 
 // String returns the string representation
 func (s VolumeStatusInfo) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -23486,7 +23211,7 @@ type VolumeStatusItem struct {
 	Events []*VolumeStatusEvent `locationName:"eventsSet" locationNameList:"item" type:"list"`
 
 	// The volume ID.
-	VolumeID *string `locationName:"volumeId" type:"string"`
+	VolumeId *string `locationName:"volumeId" type:"string"`
 
 	// The volume status.
 	VolumeStatus *VolumeStatusInfo `locationName:"volumeStatus" type:"structure"`
@@ -23500,10 +23225,1266 @@ type metadataVolumeStatusItem struct {
 
 // String returns the string representation
 func (s VolumeStatusItem) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
 func (s VolumeStatusItem) GoString() string {
 	return s.String()
 }
+
+// Describes a VPC.
+type Vpc struct {
+	// The CIDR block for the VPC.
+	CidrBlock *string `locationName:"cidrBlock" type:"string"`
+
+	// The ID of the set of DHCP options you've associated with the VPC (or default
+	// if the default options are associated with the VPC).
+	DhcpOptionsId *string `locationName:"dhcpOptionsId" type:"string"`
+
+	// The allowed tenancy of instances launched into the VPC.
+	InstanceTenancy *string `locationName:"instanceTenancy" type:"string" enum:"Tenancy"`
+
+	// Indicates whether the VPC is the default VPC.
+	IsDefault *bool `locationName:"isDefault" type:"boolean"`
+
+	// The current state of the VPC.
+	State *string `locationName:"state" type:"string" enum:"VpcState"`
+
+	// Any tags assigned to the VPC.
+	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
+
+	// The ID of the VPC.
+	VpcId *string `locationName:"vpcId" type:"string"`
+
+	metadataVpc `json:"-" xml:"-"`
+}
+
+type metadataVpc struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s Vpc) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Vpc) GoString() string {
+	return s.String()
+}
+
+// Describes an attachment between a virtual private gateway and a VPC.
+type VpcAttachment struct {
+	// The current state of the attachment.
+	State *string `locationName:"state" type:"string" enum:"AttachmentStatus"`
+
+	// The ID of the VPC.
+	VpcId *string `locationName:"vpcId" type:"string"`
+
+	metadataVpcAttachment `json:"-" xml:"-"`
+}
+
+type metadataVpcAttachment struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s VpcAttachment) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s VpcAttachment) GoString() string {
+	return s.String()
+}
+
+// Describes whether a VPC is enabled for ClassicLink.
+type VpcClassicLink struct {
+	// Indicates whether the VPC is enabled for ClassicLink.
+	ClassicLinkEnabled *bool `locationName:"classicLinkEnabled" type:"boolean"`
+
+	// Any tags assigned to the VPC.
+	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
+
+	// The ID of the VPC.
+	VpcId *string `locationName:"vpcId" type:"string"`
+
+	metadataVpcClassicLink `json:"-" xml:"-"`
+}
+
+type metadataVpcClassicLink struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s VpcClassicLink) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s VpcClassicLink) GoString() string {
+	return s.String()
+}
+
+// Describes a VPC endpoint.
+type VpcEndpoint struct {
+	// The date and time the VPC endpoint was created.
+	CreationTimestamp *time.Time `locationName:"creationTimestamp" type:"timestamp" timestampFormat:"iso8601"`
+
+	// The policy document associated with the endpoint.
+	PolicyDocument *string `locationName:"policyDocument" type:"string"`
+
+	// One or more route tables associated with the endpoint.
+	RouteTableIds []*string `locationName:"routeTableIdSet" locationNameList:"item" type:"list"`
+
+	// The name of the AWS service to which the endpoint is associated.
+	ServiceName *string `locationName:"serviceName" type:"string"`
+
+	// The state of the VPC endpoint.
+	State *string `locationName:"state" type:"string" enum:"State"`
+
+	// The ID of the VPC endpoint.
+	VpcEndpointId *string `locationName:"vpcEndpointId" type:"string"`
+
+	// The ID of the VPC to which the endpoint is associated.
+	VpcId *string `locationName:"vpcId" type:"string"`
+
+	metadataVpcEndpoint `json:"-" xml:"-"`
+}
+
+type metadataVpcEndpoint struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s VpcEndpoint) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s VpcEndpoint) GoString() string {
+	return s.String()
+}
+
+// Describes a VPC peering connection.
+type VpcPeeringConnection struct {
+	// The information of the peer VPC.
+	AccepterVpcInfo *VpcPeeringConnectionVpcInfo `locationName:"accepterVpcInfo" type:"structure"`
+
+	// The time that an unaccepted VPC peering connection will expire.
+	ExpirationTime *time.Time `locationName:"expirationTime" type:"timestamp" timestampFormat:"iso8601"`
+
+	// The information of the requester VPC.
+	RequesterVpcInfo *VpcPeeringConnectionVpcInfo `locationName:"requesterVpcInfo" type:"structure"`
+
+	// The status of the VPC peering connection.
+	Status *VpcPeeringConnectionStateReason `locationName:"status" type:"structure"`
+
+	// Any tags assigned to the resource.
+	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
+
+	// The ID of the VPC peering connection.
+	VpcPeeringConnectionId *string `locationName:"vpcPeeringConnectionId" type:"string"`
+
+	metadataVpcPeeringConnection `json:"-" xml:"-"`
+}
+
+type metadataVpcPeeringConnection struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s VpcPeeringConnection) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s VpcPeeringConnection) GoString() string {
+	return s.String()
+}
+
+// Describes the status of a VPC peering connection.
+type VpcPeeringConnectionStateReason struct {
+	// The status of the VPC peering connection.
+	Code *string `locationName:"code" type:"string" enum:"VpcPeeringConnectionStateReasonCode"`
+
+	// A message that provides more information about the status, if applicable.
+	Message *string `locationName:"message" type:"string"`
+
+	metadataVpcPeeringConnectionStateReason `json:"-" xml:"-"`
+}
+
+type metadataVpcPeeringConnectionStateReason struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s VpcPeeringConnectionStateReason) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s VpcPeeringConnectionStateReason) GoString() string {
+	return s.String()
+}
+
+// Describes a VPC in a VPC peering connection.
+type VpcPeeringConnectionVpcInfo struct {
+	// The CIDR block for the VPC.
+	CidrBlock *string `locationName:"cidrBlock" type:"string"`
+
+	// The AWS account ID of the VPC owner.
+	OwnerId *string `locationName:"ownerId" type:"string"`
+
+	// The ID of the VPC.
+	VpcId *string `locationName:"vpcId" type:"string"`
+
+	metadataVpcPeeringConnectionVpcInfo `json:"-" xml:"-"`
+}
+
+type metadataVpcPeeringConnectionVpcInfo struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s VpcPeeringConnectionVpcInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s VpcPeeringConnectionVpcInfo) GoString() string {
+	return s.String()
+}
+
+// Describes a VPN connection.
+type VpnConnection struct {
+	// The configuration information for the VPN connection's customer gateway (in
+	// the native XML format). This element is always present in the CreateVpnConnection
+	// response; however, it's present in the DescribeVpnConnections response only
+	// if the VPN connection is in the pending or available state.
+	CustomerGatewayConfiguration *string `locationName:"customerGatewayConfiguration" type:"string"`
+
+	// The ID of the customer gateway at your end of the VPN connection.
+	CustomerGatewayId *string `locationName:"customerGatewayId" type:"string"`
+
+	// The VPN connection options.
+	Options *VpnConnectionOptions `locationName:"options" type:"structure"`
+
+	// The static routes associated with the VPN connection.
+	Routes []*VpnStaticRoute `locationName:"routes" locationNameList:"item" type:"list"`
+
+	// The current state of the VPN connection.
+	State *string `locationName:"state" type:"string" enum:"VpnState"`
+
+	// Any tags assigned to the VPN connection.
+	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
+
+	// The type of VPN connection.
+	Type *string `locationName:"type" type:"string" enum:"GatewayType"`
+
+	// Information about the VPN tunnel.
+	VgwTelemetry []*VgwTelemetry `locationName:"vgwTelemetry" locationNameList:"item" type:"list"`
+
+	// The ID of the VPN connection.
+	VpnConnectionId *string `locationName:"vpnConnectionId" type:"string"`
+
+	// The ID of the virtual private gateway at the AWS side of the VPN connection.
+	VpnGatewayId *string `locationName:"vpnGatewayId" type:"string"`
+
+	metadataVpnConnection `json:"-" xml:"-"`
+}
+
+type metadataVpnConnection struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s VpnConnection) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s VpnConnection) GoString() string {
+	return s.String()
+}
+
+// Describes VPN connection options.
+type VpnConnectionOptions struct {
+	// Indicates whether the VPN connection uses static routes only. Static routes
+	// must be used for devices that don't support BGP.
+	StaticRoutesOnly *bool `locationName:"staticRoutesOnly" type:"boolean"`
+
+	metadataVpnConnectionOptions `json:"-" xml:"-"`
+}
+
+type metadataVpnConnectionOptions struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s VpnConnectionOptions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s VpnConnectionOptions) GoString() string {
+	return s.String()
+}
+
+// Describes VPN connection options.
+type VpnConnectionOptionsSpecification struct {
+	// Indicates whether the VPN connection uses static routes only. Static routes
+	// must be used for devices that don't support BGP.
+	StaticRoutesOnly *bool `locationName:"staticRoutesOnly" type:"boolean"`
+
+	metadataVpnConnectionOptionsSpecification `json:"-" xml:"-"`
+}
+
+type metadataVpnConnectionOptionsSpecification struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s VpnConnectionOptionsSpecification) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s VpnConnectionOptionsSpecification) GoString() string {
+	return s.String()
+}
+
+// Describes a virtual private gateway.
+type VpnGateway struct {
+	// The Availability Zone where the virtual private gateway was created.
+	AvailabilityZone *string `locationName:"availabilityZone" type:"string"`
+
+	// The current state of the virtual private gateway.
+	State *string `locationName:"state" type:"string" enum:"VpnState"`
+
+	// Any tags assigned to the virtual private gateway.
+	Tags []*Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
+
+	// The type of VPN connection the virtual private gateway supports.
+	Type *string `locationName:"type" type:"string" enum:"GatewayType"`
+
+	// Any VPCs attached to the virtual private gateway.
+	VpcAttachments []*VpcAttachment `locationName:"attachments" locationNameList:"item" type:"list"`
+
+	// The ID of the virtual private gateway.
+	VpnGatewayId *string `locationName:"vpnGatewayId" type:"string"`
+
+	metadataVpnGateway `json:"-" xml:"-"`
+}
+
+type metadataVpnGateway struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s VpnGateway) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s VpnGateway) GoString() string {
+	return s.String()
+}
+
+// Describes a static route for a VPN connection.
+type VpnStaticRoute struct {
+	// The CIDR block associated with the local subnet of the customer data center.
+	DestinationCidrBlock *string `locationName:"destinationCidrBlock" type:"string"`
+
+	// Indicates how the routes were provided.
+	Source *string `locationName:"source" type:"string" enum:"VpnStaticRouteSource"`
+
+	// The current state of the static route.
+	State *string `locationName:"state" type:"string" enum:"VpnState"`
+
+	metadataVpnStaticRoute `json:"-" xml:"-"`
+}
+
+type metadataVpnStaticRoute struct {
+	SDKShapeTraits bool `type:"structure"`
+}
+
+// String returns the string representation
+func (s VpnStaticRoute) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s VpnStaticRoute) GoString() string {
+	return s.String()
+}
+
+const (
+	// @enum AccountAttributeName
+	AccountAttributeNameSupportedPlatforms = "supported-platforms"
+	// @enum AccountAttributeName
+	AccountAttributeNameDefaultVpc = "default-vpc"
+)
+
+const (
+	// @enum ArchitectureValues
+	ArchitectureValuesI386 = "i386"
+	// @enum ArchitectureValues
+	ArchitectureValuesX8664 = "x86_64"
+)
+
+const (
+	// @enum AttachmentStatus
+	AttachmentStatusAttaching = "attaching"
+	// @enum AttachmentStatus
+	AttachmentStatusAttached = "attached"
+	// @enum AttachmentStatus
+	AttachmentStatusDetaching = "detaching"
+	// @enum AttachmentStatus
+	AttachmentStatusDetached = "detached"
+)
+
+const (
+	// @enum AvailabilityZoneState
+	AvailabilityZoneStateAvailable = "available"
+)
+
+const (
+	// @enum BatchState
+	BatchStateSubmitted = "submitted"
+	// @enum BatchState
+	BatchStateActive = "active"
+	// @enum BatchState
+	BatchStateCancelled = "cancelled"
+	// @enum BatchState
+	BatchStateFailed = "failed"
+	// @enum BatchState
+	BatchStateCancelledRunning = "cancelled_running"
+	// @enum BatchState
+	BatchStateCancelledTerminating = "cancelled_terminating"
+)
+
+const (
+	// @enum BundleTaskState
+	BundleTaskStatePending = "pending"
+	// @enum BundleTaskState
+	BundleTaskStateWaitingForShutdown = "waiting-for-shutdown"
+	// @enum BundleTaskState
+	BundleTaskStateBundling = "bundling"
+	// @enum BundleTaskState
+	BundleTaskStateStoring = "storing"
+	// @enum BundleTaskState
+	BundleTaskStateCancelling = "cancelling"
+	// @enum BundleTaskState
+	BundleTaskStateComplete = "complete"
+	// @enum BundleTaskState
+	BundleTaskStateFailed = "failed"
+)
+
+const (
+	// @enum CancelBatchErrorCode
+	CancelBatchErrorCodeFleetRequestIdDoesNotExist = "fleetRequestIdDoesNotExist"
+	// @enum CancelBatchErrorCode
+	CancelBatchErrorCodeFleetRequestIdMalformed = "fleetRequestIdMalformed"
+	// @enum CancelBatchErrorCode
+	CancelBatchErrorCodeFleetRequestNotInCancellableState = "fleetRequestNotInCancellableState"
+	// @enum CancelBatchErrorCode
+	CancelBatchErrorCodeUnexpectedError = "unexpectedError"
+)
+
+const (
+	// @enum CancelSpotInstanceRequestState
+	CancelSpotInstanceRequestStateActive = "active"
+	// @enum CancelSpotInstanceRequestState
+	CancelSpotInstanceRequestStateOpen = "open"
+	// @enum CancelSpotInstanceRequestState
+	CancelSpotInstanceRequestStateClosed = "closed"
+	// @enum CancelSpotInstanceRequestState
+	CancelSpotInstanceRequestStateCancelled = "cancelled"
+	// @enum CancelSpotInstanceRequestState
+	CancelSpotInstanceRequestStateCompleted = "completed"
+)
+
+const (
+	// @enum ContainerFormat
+	ContainerFormatOva = "ova"
+)
+
+const (
+	// @enum ConversionTaskState
+	ConversionTaskStateActive = "active"
+	// @enum ConversionTaskState
+	ConversionTaskStateCancelling = "cancelling"
+	// @enum ConversionTaskState
+	ConversionTaskStateCancelled = "cancelled"
+	// @enum ConversionTaskState
+	ConversionTaskStateCompleted = "completed"
+)
+
+const (
+	// @enum CurrencyCodeValues
+	CurrencyCodeValuesUsd = "USD"
+)
+
+const (
+	// @enum DatafeedSubscriptionState
+	DatafeedSubscriptionStateActive = "Active"
+	// @enum DatafeedSubscriptionState
+	DatafeedSubscriptionStateInactive = "Inactive"
+)
+
+const (
+	// @enum DeviceType
+	DeviceTypeEbs = "ebs"
+	// @enum DeviceType
+	DeviceTypeInstanceStore = "instance-store"
+)
+
+const (
+	// @enum DiskImageFormat
+	DiskImageFormatVmdk = "VMDK"
+	// @enum DiskImageFormat
+	DiskImageFormatRaw = "RAW"
+	// @enum DiskImageFormat
+	DiskImageFormatVhd = "VHD"
+)
+
+const (
+	// @enum DomainType
+	DomainTypeVpc = "vpc"
+	// @enum DomainType
+	DomainTypeStandard = "standard"
+)
+
+const (
+	// @enum EventCode
+	EventCodeInstanceReboot = "instance-reboot"
+	// @enum EventCode
+	EventCodeSystemReboot = "system-reboot"
+	// @enum EventCode
+	EventCodeSystemMaintenance = "system-maintenance"
+	// @enum EventCode
+	EventCodeInstanceRetirement = "instance-retirement"
+	// @enum EventCode
+	EventCodeInstanceStop = "instance-stop"
+)
+
+const (
+	// @enum EventType
+	EventTypeInstanceChange = "instanceChange"
+	// @enum EventType
+	EventTypeFleetRequestChange = "fleetRequestChange"
+	// @enum EventType
+	EventTypeError = "error"
+)
+
+const (
+	// @enum ExportEnvironment
+	ExportEnvironmentCitrix = "citrix"
+	// @enum ExportEnvironment
+	ExportEnvironmentVmware = "vmware"
+	// @enum ExportEnvironment
+	ExportEnvironmentMicrosoft = "microsoft"
+)
+
+const (
+	// @enum ExportTaskState
+	ExportTaskStateActive = "active"
+	// @enum ExportTaskState
+	ExportTaskStateCancelling = "cancelling"
+	// @enum ExportTaskState
+	ExportTaskStateCancelled = "cancelled"
+	// @enum ExportTaskState
+	ExportTaskStateCompleted = "completed"
+)
+
+const (
+	// @enum FlowLogsResourceType
+	FlowLogsResourceTypeVpc = "VPC"
+	// @enum FlowLogsResourceType
+	FlowLogsResourceTypeSubnet = "Subnet"
+	// @enum FlowLogsResourceType
+	FlowLogsResourceTypeNetworkInterface = "NetworkInterface"
+)
+
+const (
+	// @enum GatewayType
+	GatewayTypeIpsec1 = "ipsec.1"
+)
+
+const (
+	// @enum HypervisorType
+	HypervisorTypeOvm = "ovm"
+	// @enum HypervisorType
+	HypervisorTypeXen = "xen"
+)
+
+const (
+	// @enum ImageAttributeName
+	ImageAttributeNameDescription = "description"
+	// @enum ImageAttributeName
+	ImageAttributeNameKernel = "kernel"
+	// @enum ImageAttributeName
+	ImageAttributeNameRamdisk = "ramdisk"
+	// @enum ImageAttributeName
+	ImageAttributeNameLaunchPermission = "launchPermission"
+	// @enum ImageAttributeName
+	ImageAttributeNameProductCodes = "productCodes"
+	// @enum ImageAttributeName
+	ImageAttributeNameBlockDeviceMapping = "blockDeviceMapping"
+	// @enum ImageAttributeName
+	ImageAttributeNameSriovNetSupport = "sriovNetSupport"
+)
+
+const (
+	// @enum ImageState
+	ImageStatePending = "pending"
+	// @enum ImageState
+	ImageStateAvailable = "available"
+	// @enum ImageState
+	ImageStateInvalid = "invalid"
+	// @enum ImageState
+	ImageStateDeregistered = "deregistered"
+	// @enum ImageState
+	ImageStateTransient = "transient"
+	// @enum ImageState
+	ImageStateFailed = "failed"
+	// @enum ImageState
+	ImageStateError = "error"
+)
+
+const (
+	// @enum ImageTypeValues
+	ImageTypeValuesMachine = "machine"
+	// @enum ImageTypeValues
+	ImageTypeValuesKernel = "kernel"
+	// @enum ImageTypeValues
+	ImageTypeValuesRamdisk = "ramdisk"
+)
+
+const (
+	// @enum InstanceAttributeName
+	InstanceAttributeNameInstanceType = "instanceType"
+	// @enum InstanceAttributeName
+	InstanceAttributeNameKernel = "kernel"
+	// @enum InstanceAttributeName
+	InstanceAttributeNameRamdisk = "ramdisk"
+	// @enum InstanceAttributeName
+	InstanceAttributeNameUserData = "userData"
+	// @enum InstanceAttributeName
+	InstanceAttributeNameDisableApiTermination = "disableApiTermination"
+	// @enum InstanceAttributeName
+	InstanceAttributeNameInstanceInitiatedShutdownBehavior = "instanceInitiatedShutdownBehavior"
+	// @enum InstanceAttributeName
+	InstanceAttributeNameRootDeviceName = "rootDeviceName"
+	// @enum InstanceAttributeName
+	InstanceAttributeNameBlockDeviceMapping = "blockDeviceMapping"
+	// @enum InstanceAttributeName
+	InstanceAttributeNameProductCodes = "productCodes"
+	// @enum InstanceAttributeName
+	InstanceAttributeNameSourceDestCheck = "sourceDestCheck"
+	// @enum InstanceAttributeName
+	InstanceAttributeNameGroupSet = "groupSet"
+	// @enum InstanceAttributeName
+	InstanceAttributeNameEbsOptimized = "ebsOptimized"
+	// @enum InstanceAttributeName
+	InstanceAttributeNameSriovNetSupport = "sriovNetSupport"
+)
+
+const (
+	// @enum InstanceLifecycleType
+	InstanceLifecycleTypeSpot = "spot"
+)
+
+const (
+	// @enum InstanceStateName
+	InstanceStateNamePending = "pending"
+	// @enum InstanceStateName
+	InstanceStateNameRunning = "running"
+	// @enum InstanceStateName
+	InstanceStateNameShuttingDown = "shutting-down"
+	// @enum InstanceStateName
+	InstanceStateNameTerminated = "terminated"
+	// @enum InstanceStateName
+	InstanceStateNameStopping = "stopping"
+	// @enum InstanceStateName
+	InstanceStateNameStopped = "stopped"
+)
+
+const (
+	// @enum InstanceType
+	InstanceTypeT1Micro = "t1.micro"
+	// @enum InstanceType
+	InstanceTypeM1Small = "m1.small"
+	// @enum InstanceType
+	InstanceTypeM1Medium = "m1.medium"
+	// @enum InstanceType
+	InstanceTypeM1Large = "m1.large"
+	// @enum InstanceType
+	InstanceTypeM1Xlarge = "m1.xlarge"
+	// @enum InstanceType
+	InstanceTypeM3Medium = "m3.medium"
+	// @enum InstanceType
+	InstanceTypeM3Large = "m3.large"
+	// @enum InstanceType
+	InstanceTypeM3Xlarge = "m3.xlarge"
+	// @enum InstanceType
+	InstanceTypeM32xlarge = "m3.2xlarge"
+	// @enum InstanceType
+	InstanceTypeM4Large = "m4.large"
+	// @enum InstanceType
+	InstanceTypeM4Xlarge = "m4.xlarge"
+	// @enum InstanceType
+	InstanceTypeM42xlarge = "m4.2xlarge"
+	// @enum InstanceType
+	InstanceTypeM44xlarge = "m4.4xlarge"
+	// @enum InstanceType
+	InstanceTypeM410xlarge = "m4.10xlarge"
+	// @enum InstanceType
+	InstanceTypeT2Micro = "t2.micro"
+	// @enum InstanceType
+	InstanceTypeT2Small = "t2.small"
+	// @enum InstanceType
+	InstanceTypeT2Medium = "t2.medium"
+	// @enum InstanceType
+	InstanceTypeT2Large = "t2.large"
+	// @enum InstanceType
+	InstanceTypeM2Xlarge = "m2.xlarge"
+	// @enum InstanceType
+	InstanceTypeM22xlarge = "m2.2xlarge"
+	// @enum InstanceType
+	InstanceTypeM24xlarge = "m2.4xlarge"
+	// @enum InstanceType
+	InstanceTypeCr18xlarge = "cr1.8xlarge"
+	// @enum InstanceType
+	InstanceTypeI2Xlarge = "i2.xlarge"
+	// @enum InstanceType
+	InstanceTypeI22xlarge = "i2.2xlarge"
+	// @enum InstanceType
+	InstanceTypeI24xlarge = "i2.4xlarge"
+	// @enum InstanceType
+	InstanceTypeI28xlarge = "i2.8xlarge"
+	// @enum InstanceType
+	InstanceTypeHi14xlarge = "hi1.4xlarge"
+	// @enum InstanceType
+	InstanceTypeHs18xlarge = "hs1.8xlarge"
+	// @enum InstanceType
+	InstanceTypeC1Medium = "c1.medium"
+	// @enum InstanceType
+	InstanceTypeC1Xlarge = "c1.xlarge"
+	// @enum InstanceType
+	InstanceTypeC3Large = "c3.large"
+	// @enum InstanceType
+	InstanceTypeC3Xlarge = "c3.xlarge"
+	// @enum InstanceType
+	InstanceTypeC32xlarge = "c3.2xlarge"
+	// @enum InstanceType
+	InstanceTypeC34xlarge = "c3.4xlarge"
+	// @enum InstanceType
+	InstanceTypeC38xlarge = "c3.8xlarge"
+	// @enum InstanceType
+	InstanceTypeC4Large = "c4.large"
+	// @enum InstanceType
+	InstanceTypeC4Xlarge = "c4.xlarge"
+	// @enum InstanceType
+	InstanceTypeC42xlarge = "c4.2xlarge"
+	// @enum InstanceType
+	InstanceTypeC44xlarge = "c4.4xlarge"
+	// @enum InstanceType
+	InstanceTypeC48xlarge = "c4.8xlarge"
+	// @enum InstanceType
+	InstanceTypeCc14xlarge = "cc1.4xlarge"
+	// @enum InstanceType
+	InstanceTypeCc28xlarge = "cc2.8xlarge"
+	// @enum InstanceType
+	InstanceTypeG22xlarge = "g2.2xlarge"
+	// @enum InstanceType
+	InstanceTypeCg14xlarge = "cg1.4xlarge"
+	// @enum InstanceType
+	InstanceTypeR3Large = "r3.large"
+	// @enum InstanceType
+	InstanceTypeR3Xlarge = "r3.xlarge"
+	// @enum InstanceType
+	InstanceTypeR32xlarge = "r3.2xlarge"
+	// @enum InstanceType
+	InstanceTypeR34xlarge = "r3.4xlarge"
+	// @enum InstanceType
+	InstanceTypeR38xlarge = "r3.8xlarge"
+	// @enum InstanceType
+	InstanceTypeD2Xlarge = "d2.xlarge"
+	// @enum InstanceType
+	InstanceTypeD22xlarge = "d2.2xlarge"
+	// @enum InstanceType
+	InstanceTypeD24xlarge = "d2.4xlarge"
+	// @enum InstanceType
+	InstanceTypeD28xlarge = "d2.8xlarge"
+)
+
+const (
+	// @enum ListingState
+	ListingStateAvailable = "available"
+	// @enum ListingState
+	ListingStateSold = "sold"
+	// @enum ListingState
+	ListingStateCancelled = "cancelled"
+	// @enum ListingState
+	ListingStatePending = "pending"
+)
+
+const (
+	// @enum ListingStatus
+	ListingStatusActive = "active"
+	// @enum ListingStatus
+	ListingStatusPending = "pending"
+	// @enum ListingStatus
+	ListingStatusCancelled = "cancelled"
+	// @enum ListingStatus
+	ListingStatusClosed = "closed"
+)
+
+const (
+	// @enum MonitoringState
+	MonitoringStateDisabled = "disabled"
+	// @enum MonitoringState
+	MonitoringStateDisabling = "disabling"
+	// @enum MonitoringState
+	MonitoringStateEnabled = "enabled"
+	// @enum MonitoringState
+	MonitoringStatePending = "pending"
+)
+
+const (
+	// @enum MoveStatus
+	MoveStatusMovingToVpc = "movingToVpc"
+	// @enum MoveStatus
+	MoveStatusRestoringToClassic = "restoringToClassic"
+)
+
+const (
+	// @enum NetworkInterfaceAttribute
+	NetworkInterfaceAttributeDescription = "description"
+	// @enum NetworkInterfaceAttribute
+	NetworkInterfaceAttributeGroupSet = "groupSet"
+	// @enum NetworkInterfaceAttribute
+	NetworkInterfaceAttributeSourceDestCheck = "sourceDestCheck"
+	// @enum NetworkInterfaceAttribute
+	NetworkInterfaceAttributeAttachment = "attachment"
+)
+
+const (
+	// @enum NetworkInterfaceStatus
+	NetworkInterfaceStatusAvailable = "available"
+	// @enum NetworkInterfaceStatus
+	NetworkInterfaceStatusAttaching = "attaching"
+	// @enum NetworkInterfaceStatus
+	NetworkInterfaceStatusInUse = "in-use"
+	// @enum NetworkInterfaceStatus
+	NetworkInterfaceStatusDetaching = "detaching"
+)
+
+const (
+	// @enum OfferingTypeValues
+	OfferingTypeValuesHeavyUtilization = "Heavy Utilization"
+	// @enum OfferingTypeValues
+	OfferingTypeValuesMediumUtilization = "Medium Utilization"
+	// @enum OfferingTypeValues
+	OfferingTypeValuesLightUtilization = "Light Utilization"
+	// @enum OfferingTypeValues
+	OfferingTypeValuesNoUpfront = "No Upfront"
+	// @enum OfferingTypeValues
+	OfferingTypeValuesPartialUpfront = "Partial Upfront"
+	// @enum OfferingTypeValues
+	OfferingTypeValuesAllUpfront = "All Upfront"
+)
+
+const (
+	// @enum PermissionGroup
+	PermissionGroupAll = "all"
+)
+
+const (
+	// @enum PlacementGroupState
+	PlacementGroupStatePending = "pending"
+	// @enum PlacementGroupState
+	PlacementGroupStateAvailable = "available"
+	// @enum PlacementGroupState
+	PlacementGroupStateDeleting = "deleting"
+	// @enum PlacementGroupState
+	PlacementGroupStateDeleted = "deleted"
+)
+
+const (
+	// @enum PlacementStrategy
+	PlacementStrategyCluster = "cluster"
+)
+
+const (
+	// @enum PlatformValues
+	PlatformValuesWindows = "Windows"
+)
+
+const (
+	// @enum ProductCodeValues
+	ProductCodeValuesDevpay = "devpay"
+	// @enum ProductCodeValues
+	ProductCodeValuesMarketplace = "marketplace"
+)
+
+const (
+	// @enum RIProductDescription
+	RIProductDescriptionLinuxUnix = "Linux/UNIX"
+	// @enum RIProductDescription
+	RIProductDescriptionLinuxUnixamazonVpc = "Linux/UNIX (Amazon VPC)"
+	// @enum RIProductDescription
+	RIProductDescriptionWindows = "Windows"
+	// @enum RIProductDescription
+	RIProductDescriptionWindowsAmazonVpc = "Windows (Amazon VPC)"
+)
+
+const (
+	// @enum RecurringChargeFrequency
+	RecurringChargeFrequencyHourly = "Hourly"
+)
+
+const (
+	// @enum ReportInstanceReasonCodes
+	ReportInstanceReasonCodesInstanceStuckInState = "instance-stuck-in-state"
+	// @enum ReportInstanceReasonCodes
+	ReportInstanceReasonCodesUnresponsive = "unresponsive"
+	// @enum ReportInstanceReasonCodes
+	ReportInstanceReasonCodesNotAcceptingCredentials = "not-accepting-credentials"
+	// @enum ReportInstanceReasonCodes
+	ReportInstanceReasonCodesPasswordNotAvailable = "password-not-available"
+	// @enum ReportInstanceReasonCodes
+	ReportInstanceReasonCodesPerformanceNetwork = "performance-network"
+	// @enum ReportInstanceReasonCodes
+	ReportInstanceReasonCodesPerformanceInstanceStore = "performance-instance-store"
+	// @enum ReportInstanceReasonCodes
+	ReportInstanceReasonCodesPerformanceEbsVolume = "performance-ebs-volume"
+	// @enum ReportInstanceReasonCodes
+	ReportInstanceReasonCodesPerformanceOther = "performance-other"
+	// @enum ReportInstanceReasonCodes
+	ReportInstanceReasonCodesOther = "other"
+)
+
+const (
+	// @enum ReportStatusType
+	ReportStatusTypeOk = "ok"
+	// @enum ReportStatusType
+	ReportStatusTypeImpaired = "impaired"
+)
+
+const (
+	// @enum ReservedInstanceState
+	ReservedInstanceStatePaymentPending = "payment-pending"
+	// @enum ReservedInstanceState
+	ReservedInstanceStateActive = "active"
+	// @enum ReservedInstanceState
+	ReservedInstanceStatePaymentFailed = "payment-failed"
+	// @enum ReservedInstanceState
+	ReservedInstanceStateRetired = "retired"
+)
+
+const (
+	// @enum ResetImageAttributeName
+	ResetImageAttributeNameLaunchPermission = "launchPermission"
+)
+
+const (
+	// @enum ResourceType
+	ResourceTypeCustomerGateway = "customer-gateway"
+	// @enum ResourceType
+	ResourceTypeDhcpOptions = "dhcp-options"
+	// @enum ResourceType
+	ResourceTypeImage = "image"
+	// @enum ResourceType
+	ResourceTypeInstance = "instance"
+	// @enum ResourceType
+	ResourceTypeInternetGateway = "internet-gateway"
+	// @enum ResourceType
+	ResourceTypeNetworkAcl = "network-acl"
+	// @enum ResourceType
+	ResourceTypeNetworkInterface = "network-interface"
+	// @enum ResourceType
+	ResourceTypeReservedInstances = "reserved-instances"
+	// @enum ResourceType
+	ResourceTypeRouteTable = "route-table"
+	// @enum ResourceType
+	ResourceTypeSnapshot = "snapshot"
+	// @enum ResourceType
+	ResourceTypeSpotInstancesRequest = "spot-instances-request"
+	// @enum ResourceType
+	ResourceTypeSubnet = "subnet"
+	// @enum ResourceType
+	ResourceTypeSecurityGroup = "security-group"
+	// @enum ResourceType
+	ResourceTypeVolume = "volume"
+	// @enum ResourceType
+	ResourceTypeVpc = "vpc"
+	// @enum ResourceType
+	ResourceTypeVpnConnection = "vpn-connection"
+	// @enum ResourceType
+	ResourceTypeVpnGateway = "vpn-gateway"
+)
+
+const (
+	// @enum RouteOrigin
+	RouteOriginCreateRouteTable = "CreateRouteTable"
+	// @enum RouteOrigin
+	RouteOriginCreateRoute = "CreateRoute"
+	// @enum RouteOrigin
+	RouteOriginEnableVgwRoutePropagation = "EnableVgwRoutePropagation"
+)
+
+const (
+	// @enum RouteState
+	RouteStateActive = "active"
+	// @enum RouteState
+	RouteStateBlackhole = "blackhole"
+)
+
+const (
+	// @enum RuleAction
+	RuleActionAllow = "allow"
+	// @enum RuleAction
+	RuleActionDeny = "deny"
+)
+
+const (
+	// @enum ShutdownBehavior
+	ShutdownBehaviorStop = "stop"
+	// @enum ShutdownBehavior
+	ShutdownBehaviorTerminate = "terminate"
+)
+
+const (
+	// @enum SnapshotAttributeName
+	SnapshotAttributeNameProductCodes = "productCodes"
+	// @enum SnapshotAttributeName
+	SnapshotAttributeNameCreateVolumePermission = "createVolumePermission"
+)
+
+const (
+	// @enum SnapshotState
+	SnapshotStatePending = "pending"
+	// @enum SnapshotState
+	SnapshotStateCompleted = "completed"
+	// @enum SnapshotState
+	SnapshotStateError = "error"
+)
+
+const (
+	// @enum SpotInstanceState
+	SpotInstanceStateOpen = "open"
+	// @enum SpotInstanceState
+	SpotInstanceStateActive = "active"
+	// @enum SpotInstanceState
+	SpotInstanceStateClosed = "closed"
+	// @enum SpotInstanceState
+	SpotInstanceStateCancelled = "cancelled"
+	// @enum SpotInstanceState
+	SpotInstanceStateFailed = "failed"
+)
+
+const (
+	// @enum SpotInstanceType
+	SpotInstanceTypeOneTime = "one-time"
+	// @enum SpotInstanceType
+	SpotInstanceTypePersistent = "persistent"
+)
+
+const (
+	// @enum State
+	StatePending = "Pending"
+	// @enum State
+	StateAvailable = "Available"
+	// @enum State
+	StateDeleting = "Deleting"
+	// @enum State
+	StateDeleted = "Deleted"
+)
+
+const (
+	// @enum Status
+	StatusMoveInProgress = "MoveInProgress"
+	// @enum Status
+	StatusInVpc = "InVpc"
+	// @enum Status
+	StatusInClassic = "InClassic"
+)
+
+const (
+	// @enum StatusName
+	StatusNameReachability = "reachability"
+)
+
+const (
+	// @enum StatusType
+	StatusTypePassed = "passed"
+	// @enum StatusType
+	StatusTypeFailed = "failed"
+	// @enum StatusType
+	StatusTypeInsufficientData = "insufficient-data"
+	// @enum StatusType
+	StatusTypeInitializing = "initializing"
+)
+
+const (
+	// @enum SubnetState
+	SubnetStatePending = "pending"
+	// @enum SubnetState
+	SubnetStateAvailable = "available"
+)
+
+const (
+	// @enum SummaryStatus
+	SummaryStatusOk = "ok"
+	// @enum SummaryStatus
+	SummaryStatusImpaired = "impaired"
+	// @enum SummaryStatus
+	SummaryStatusInsufficientData = "insufficient-data"
+	// @enum SummaryStatus
+	SummaryStatusNotApplicable = "not-applicable"
+	// @enum SummaryStatus
+	SummaryStatusInitializing = "initializing"
+)
+
+const (
+	// @enum TelemetryStatus
+	TelemetryStatusUp = "UP"
+	// @enum TelemetryStatus
+	TelemetryStatusDown = "DOWN"
+)
+
+const (
+	// @enum Tenancy
+	TenancyDefault = "default"
+	// @enum Tenancy
+	TenancyDedicated = "dedicated"
+)
+
+const (
+	// @enum TrafficType
+	TrafficTypeAccept = "ACCEPT"
+	// @enum TrafficType
+	TrafficTypeReject = "REJECT"
+	// @enum TrafficType
+	TrafficTypeAll = "ALL"
+)
+
+const (
+	// @enum VirtualizationType
+	VirtualizationTypeHvm = "hvm"
+	// @enum VirtualizationType
+	VirtualizationTypeParavirtual = "paravirtual"
+)
+
+const (
+	// @enum VolumeAttachmentState
+	VolumeAttachmentStateAttaching = "attaching"
+	// @enum VolumeAttachmentState
+	VolumeAttachmentStateAttached = "attached"
+	// @enum VolumeAttachmentState
+	VolumeAttachmentStateDetaching = "detaching"
+	// @enum VolumeAttachmentState
+	VolumeAttachmentStateDetached = "detached"
+)
+
+const (
+	// @enum VolumeAttributeName
+	VolumeAttributeNameAutoEnableIo = "autoEnableIO"
+	// @enum VolumeAttributeName
+	VolumeAttributeNameProductCodes = "productCodes"
+)
+
+const (
+	// @enum VolumeState
+	VolumeStateCreating = "creating"
+	// @enum VolumeState
+	VolumeStateAvailable = "available"
+	// @enum VolumeState
+	VolumeStateInUse = "in-use"
+	// @enum VolumeState
+	VolumeStateDeleting = "deleting"
+	// @enum VolumeState
+	VolumeStateDeleted = "deleted"
+	// @enum VolumeState
+	VolumeStateError = "error"
+)
+
+const (
+	// @enum VolumeStatusInfoStatus
+	VolumeStatusInfoStatusOk = "ok"
+	// @enum VolumeStatusInfoStatus
+	VolumeStatusInfoStatusImpaired = "impaired"
+	// @enum VolumeStatusInfoStatus
+	VolumeStatusInfoStatusInsufficientData = "insufficient-data"
+)
+
+const (
+	// @enum VolumeStatusName
+	VolumeStatusNameIoEnabled = "io-enabled"
+	// @enum VolumeStatusName
+	VolumeStatusNameIoPerformance = "io-performance"
+)
+
+const (
+	// @enum VolumeType
+	VolumeTypeStandard = "standard"
+	// @enum VolumeType
+	VolumeTypeIo1 = "io1"
+	// @enum VolumeType
+	VolumeTypeGp2 = "gp2"
+)
+
+const (
+	// @enum VpcAttributeName
+	VpcAttributeNameEnableDnsSupport = "enableDnsSupport"
+	// @enum VpcAttributeName
+	VpcAttributeNameEnableDnsHostnames = "enableDnsHostnames"
+)
+
+const (
+	// @enum VpcPeeringConnectionStateReasonCode
+	VpcPeeringConnectionStateReasonCodeInitiatingRequest = "initiating-request"
+	// @enum VpcPeeringConnectionStateReasonCode
+	VpcPeeringConnectionStateReasonCodePendingAcceptance = "pending-acceptance"
+	// @enum VpcPeeringConnectionStateReasonCode
+	VpcPeeringConnectionStateReasonCodeActive = "active"
+	// @enum VpcPeeringConnectionStateReasonCode
+	VpcPeeringConnectionStateReasonCodeDeleted = "deleted"
+	// @enum VpcPeeringConnectionStateReasonCode
+	VpcPeeringConnectionStateReasonCodeRejected = "rejected"
+	// @enum VpcPeeringConnectionStateReasonCode
+	VpcPeeringConnectionStateReasonCodeFailed = "failed"
+	// @enum VpcPeeringConnectionStateReasonCode
+	VpcPeeringConnectionStateReasonCodeExpired = "expired"
+	// @enum VpcPeeringConnectionStateReasonCode
+	VpcPeeringConnectionStateReasonCodeProvisioning = "provisioning"
+	// @enum VpcPeeringConnectionStateReasonCode
+	VpcPeeringConnectionStateReasonCodeDeleting = "deleting"
+)
+
+const (
+	// @enum VpcState
+	VpcStatePending = "pending"
+	// @enum VpcState
+	VpcStateAvailable = "available"
+)
+
+const (
+	// @enum VpnState
+	VpnStatePending = "pending"
+	// @enum VpnState
+	VpnStateAvailable = "available"
+	// @enum VpnState
+	VpnStateDeleting = "deleting"
+	// @enum VpnState
+	VpnStateDeleted = "deleted"
+)
+
+const (
+	// @enum VpnStaticRouteSource
+	VpnStaticRouteSourceStatic = "Static"
+)

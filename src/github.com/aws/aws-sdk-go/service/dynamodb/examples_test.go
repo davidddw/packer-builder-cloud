@@ -26,7 +26,7 @@ func ExampleDynamoDB_BatchGetItem() {
 					{ // Required
 						"Key": { // Required
 							B:    []byte("PAYLOAD"),
-							BOOL: aws.Boolean(true),
+							BOOL: aws.Bool(true),
 							BS: [][]byte{
 								[]byte("PAYLOAD"), // Required
 								// More values...
@@ -48,7 +48,7 @@ func ExampleDynamoDB_BatchGetItem() {
 								aws.String("NumberAttributeValue"), // Required
 								// More values...
 							},
-							NULL: aws.Boolean(true),
+							NULL: aws.Bool(true),
 							S:    aws.String("StringAttributeValue"),
 							SS: []*string{
 								aws.String("StringAttributeValue"), // Required
@@ -63,7 +63,7 @@ func ExampleDynamoDB_BatchGetItem() {
 					aws.String("AttributeName"), // Required
 					// More values...
 				},
-				ConsistentRead: aws.Boolean(true),
+				ConsistentRead: aws.Bool(true),
 				ExpressionAttributeNames: map[string]*string{
 					"Key": aws.String("AttributeName"), // Required
 					// More values...
@@ -92,7 +92,7 @@ func ExampleDynamoDB_BatchGetItem() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleDynamoDB_BatchWriteItem() {
@@ -106,7 +106,7 @@ func ExampleDynamoDB_BatchWriteItem() {
 						Key: map[string]*dynamodb.AttributeValue{ // Required
 							"Key": { // Required
 								B:    []byte("PAYLOAD"),
-								BOOL: aws.Boolean(true),
+								BOOL: aws.Bool(true),
 								BS: [][]byte{
 									[]byte("PAYLOAD"), // Required
 									// More values...
@@ -128,7 +128,7 @@ func ExampleDynamoDB_BatchWriteItem() {
 									aws.String("NumberAttributeValue"), // Required
 									// More values...
 								},
-								NULL: aws.Boolean(true),
+								NULL: aws.Bool(true),
 								S:    aws.String("StringAttributeValue"),
 								SS: []*string{
 									aws.String("StringAttributeValue"), // Required
@@ -142,7 +142,7 @@ func ExampleDynamoDB_BatchWriteItem() {
 						Item: map[string]*dynamodb.AttributeValue{ // Required
 							"Key": { // Required
 								B:    []byte("PAYLOAD"),
-								BOOL: aws.Boolean(true),
+								BOOL: aws.Bool(true),
 								BS: [][]byte{
 									[]byte("PAYLOAD"), // Required
 									// More values...
@@ -164,7 +164,7 @@ func ExampleDynamoDB_BatchWriteItem() {
 									aws.String("NumberAttributeValue"), // Required
 									// More values...
 								},
-								NULL: aws.Boolean(true),
+								NULL: aws.Bool(true),
 								S:    aws.String("StringAttributeValue"),
 								SS: []*string{
 									aws.String("StringAttributeValue"), // Required
@@ -200,7 +200,7 @@ func ExampleDynamoDB_BatchWriteItem() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleDynamoDB_CreateTable() {
@@ -222,8 +222,8 @@ func ExampleDynamoDB_CreateTable() {
 			// More values...
 		},
 		ProvisionedThroughput: &dynamodb.ProvisionedThroughput{ // Required
-			ReadCapacityUnits:  aws.Long(1), // Required
-			WriteCapacityUnits: aws.Long(1), // Required
+			ReadCapacityUnits:  aws.Int64(1), // Required
+			WriteCapacityUnits: aws.Int64(1), // Required
 		},
 		TableName: aws.String("TableName"), // Required
 		GlobalSecondaryIndexes: []*dynamodb.GlobalSecondaryIndex{
@@ -244,8 +244,8 @@ func ExampleDynamoDB_CreateTable() {
 					ProjectionType: aws.String("ProjectionType"),
 				},
 				ProvisionedThroughput: &dynamodb.ProvisionedThroughput{ // Required
-					ReadCapacityUnits:  aws.Long(1), // Required
-					WriteCapacityUnits: aws.Long(1), // Required
+					ReadCapacityUnits:  aws.Int64(1), // Required
+					WriteCapacityUnits: aws.Int64(1), // Required
 				},
 			},
 			// More values...
@@ -270,6 +270,10 @@ func ExampleDynamoDB_CreateTable() {
 			},
 			// More values...
 		},
+		StreamSpecification: &dynamodb.StreamSpecification{
+			StreamEnabled:  aws.Bool(true),
+			StreamViewType: aws.String("StreamViewType"),
+		},
 	}
 	resp, err := svc.CreateTable(params)
 
@@ -289,7 +293,7 @@ func ExampleDynamoDB_CreateTable() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleDynamoDB_DeleteItem() {
@@ -299,7 +303,7 @@ func ExampleDynamoDB_DeleteItem() {
 		Key: map[string]*dynamodb.AttributeValue{ // Required
 			"Key": { // Required
 				B:    []byte("PAYLOAD"),
-				BOOL: aws.Boolean(true),
+				BOOL: aws.Bool(true),
 				BS: [][]byte{
 					[]byte("PAYLOAD"), // Required
 					// More values...
@@ -321,7 +325,7 @@ func ExampleDynamoDB_DeleteItem() {
 					aws.String("NumberAttributeValue"), // Required
 					// More values...
 				},
-				NULL: aws.Boolean(true),
+				NULL: aws.Bool(true),
 				S:    aws.String("StringAttributeValue"),
 				SS: []*string{
 					aws.String("StringAttributeValue"), // Required
@@ -338,7 +342,7 @@ func ExampleDynamoDB_DeleteItem() {
 				AttributeValueList: []*dynamodb.AttributeValue{
 					{ // Required
 						B:    []byte("PAYLOAD"),
-						BOOL: aws.Boolean(true),
+						BOOL: aws.Bool(true),
 						BS: [][]byte{
 							[]byte("PAYLOAD"), // Required
 							// More values...
@@ -360,7 +364,7 @@ func ExampleDynamoDB_DeleteItem() {
 							aws.String("NumberAttributeValue"), // Required
 							// More values...
 						},
-						NULL: aws.Boolean(true),
+						NULL: aws.Bool(true),
 						S:    aws.String("StringAttributeValue"),
 						SS: []*string{
 							aws.String("StringAttributeValue"), // Required
@@ -370,10 +374,10 @@ func ExampleDynamoDB_DeleteItem() {
 					// More values...
 				},
 				ComparisonOperator: aws.String("ComparisonOperator"),
-				Exists:             aws.Boolean(true),
+				Exists:             aws.Bool(true),
 				Value: &dynamodb.AttributeValue{
 					B:    []byte("PAYLOAD"),
-					BOOL: aws.Boolean(true),
+					BOOL: aws.Bool(true),
 					BS: [][]byte{
 						[]byte("PAYLOAD"), // Required
 						// More values...
@@ -395,7 +399,7 @@ func ExampleDynamoDB_DeleteItem() {
 						aws.String("NumberAttributeValue"), // Required
 						// More values...
 					},
-					NULL: aws.Boolean(true),
+					NULL: aws.Bool(true),
 					S:    aws.String("StringAttributeValue"),
 					SS: []*string{
 						aws.String("StringAttributeValue"), // Required
@@ -412,7 +416,7 @@ func ExampleDynamoDB_DeleteItem() {
 		ExpressionAttributeValues: map[string]*dynamodb.AttributeValue{
 			"Key": { // Required
 				B:    []byte("PAYLOAD"),
-				BOOL: aws.Boolean(true),
+				BOOL: aws.Bool(true),
 				BS: [][]byte{
 					[]byte("PAYLOAD"), // Required
 					// More values...
@@ -434,7 +438,7 @@ func ExampleDynamoDB_DeleteItem() {
 					aws.String("NumberAttributeValue"), // Required
 					// More values...
 				},
-				NULL: aws.Boolean(true),
+				NULL: aws.Bool(true),
 				S:    aws.String("StringAttributeValue"),
 				SS: []*string{
 					aws.String("StringAttributeValue"), // Required
@@ -465,7 +469,7 @@ func ExampleDynamoDB_DeleteItem() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleDynamoDB_DeleteTable() {
@@ -492,7 +496,7 @@ func ExampleDynamoDB_DeleteTable() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleDynamoDB_DescribeTable() {
@@ -519,7 +523,7 @@ func ExampleDynamoDB_DescribeTable() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleDynamoDB_GetItem() {
@@ -529,7 +533,7 @@ func ExampleDynamoDB_GetItem() {
 		Key: map[string]*dynamodb.AttributeValue{ // Required
 			"Key": { // Required
 				B:    []byte("PAYLOAD"),
-				BOOL: aws.Boolean(true),
+				BOOL: aws.Bool(true),
 				BS: [][]byte{
 					[]byte("PAYLOAD"), // Required
 					// More values...
@@ -551,7 +555,7 @@ func ExampleDynamoDB_GetItem() {
 					aws.String("NumberAttributeValue"), // Required
 					// More values...
 				},
-				NULL: aws.Boolean(true),
+				NULL: aws.Bool(true),
 				S:    aws.String("StringAttributeValue"),
 				SS: []*string{
 					aws.String("StringAttributeValue"), // Required
@@ -565,7 +569,7 @@ func ExampleDynamoDB_GetItem() {
 			aws.String("AttributeName"), // Required
 			// More values...
 		},
-		ConsistentRead: aws.Boolean(true),
+		ConsistentRead: aws.Bool(true),
 		ExpressionAttributeNames: map[string]*string{
 			"Key": aws.String("AttributeName"), // Required
 			// More values...
@@ -591,7 +595,7 @@ func ExampleDynamoDB_GetItem() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleDynamoDB_ListTables() {
@@ -599,7 +603,7 @@ func ExampleDynamoDB_ListTables() {
 
 	params := &dynamodb.ListTablesInput{
 		ExclusiveStartTableName: aws.String("TableName"),
-		Limit: aws.Long(1),
+		Limit: aws.Int64(1),
 	}
 	resp, err := svc.ListTables(params)
 
@@ -619,7 +623,7 @@ func ExampleDynamoDB_ListTables() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleDynamoDB_PutItem() {
@@ -629,7 +633,7 @@ func ExampleDynamoDB_PutItem() {
 		Item: map[string]*dynamodb.AttributeValue{ // Required
 			"Key": { // Required
 				B:    []byte("PAYLOAD"),
-				BOOL: aws.Boolean(true),
+				BOOL: aws.Bool(true),
 				BS: [][]byte{
 					[]byte("PAYLOAD"), // Required
 					// More values...
@@ -651,7 +655,7 @@ func ExampleDynamoDB_PutItem() {
 					aws.String("NumberAttributeValue"), // Required
 					// More values...
 				},
-				NULL: aws.Boolean(true),
+				NULL: aws.Bool(true),
 				S:    aws.String("StringAttributeValue"),
 				SS: []*string{
 					aws.String("StringAttributeValue"), // Required
@@ -668,7 +672,7 @@ func ExampleDynamoDB_PutItem() {
 				AttributeValueList: []*dynamodb.AttributeValue{
 					{ // Required
 						B:    []byte("PAYLOAD"),
-						BOOL: aws.Boolean(true),
+						BOOL: aws.Bool(true),
 						BS: [][]byte{
 							[]byte("PAYLOAD"), // Required
 							// More values...
@@ -690,7 +694,7 @@ func ExampleDynamoDB_PutItem() {
 							aws.String("NumberAttributeValue"), // Required
 							// More values...
 						},
-						NULL: aws.Boolean(true),
+						NULL: aws.Bool(true),
 						S:    aws.String("StringAttributeValue"),
 						SS: []*string{
 							aws.String("StringAttributeValue"), // Required
@@ -700,10 +704,10 @@ func ExampleDynamoDB_PutItem() {
 					// More values...
 				},
 				ComparisonOperator: aws.String("ComparisonOperator"),
-				Exists:             aws.Boolean(true),
+				Exists:             aws.Bool(true),
 				Value: &dynamodb.AttributeValue{
 					B:    []byte("PAYLOAD"),
-					BOOL: aws.Boolean(true),
+					BOOL: aws.Bool(true),
 					BS: [][]byte{
 						[]byte("PAYLOAD"), // Required
 						// More values...
@@ -725,7 +729,7 @@ func ExampleDynamoDB_PutItem() {
 						aws.String("NumberAttributeValue"), // Required
 						// More values...
 					},
-					NULL: aws.Boolean(true),
+					NULL: aws.Bool(true),
 					S:    aws.String("StringAttributeValue"),
 					SS: []*string{
 						aws.String("StringAttributeValue"), // Required
@@ -742,7 +746,7 @@ func ExampleDynamoDB_PutItem() {
 		ExpressionAttributeValues: map[string]*dynamodb.AttributeValue{
 			"Key": { // Required
 				B:    []byte("PAYLOAD"),
-				BOOL: aws.Boolean(true),
+				BOOL: aws.Bool(true),
 				BS: [][]byte{
 					[]byte("PAYLOAD"), // Required
 					// More values...
@@ -764,7 +768,7 @@ func ExampleDynamoDB_PutItem() {
 					aws.String("NumberAttributeValue"), // Required
 					// More values...
 				},
-				NULL: aws.Boolean(true),
+				NULL: aws.Bool(true),
 				S:    aws.String("StringAttributeValue"),
 				SS: []*string{
 					aws.String("StringAttributeValue"), // Required
@@ -795,7 +799,7 @@ func ExampleDynamoDB_PutItem() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleDynamoDB_Query() {
@@ -808,11 +812,11 @@ func ExampleDynamoDB_Query() {
 			// More values...
 		},
 		ConditionalOperator: aws.String("ConditionalOperator"),
-		ConsistentRead:      aws.Boolean(true),
+		ConsistentRead:      aws.Bool(true),
 		ExclusiveStartKey: map[string]*dynamodb.AttributeValue{
 			"Key": { // Required
 				B:    []byte("PAYLOAD"),
-				BOOL: aws.Boolean(true),
+				BOOL: aws.Bool(true),
 				BS: [][]byte{
 					[]byte("PAYLOAD"), // Required
 					// More values...
@@ -834,7 +838,7 @@ func ExampleDynamoDB_Query() {
 					aws.String("NumberAttributeValue"), // Required
 					// More values...
 				},
-				NULL: aws.Boolean(true),
+				NULL: aws.Bool(true),
 				S:    aws.String("StringAttributeValue"),
 				SS: []*string{
 					aws.String("StringAttributeValue"), // Required
@@ -850,7 +854,7 @@ func ExampleDynamoDB_Query() {
 		ExpressionAttributeValues: map[string]*dynamodb.AttributeValue{
 			"Key": { // Required
 				B:    []byte("PAYLOAD"),
-				BOOL: aws.Boolean(true),
+				BOOL: aws.Bool(true),
 				BS: [][]byte{
 					[]byte("PAYLOAD"), // Required
 					// More values...
@@ -872,7 +876,7 @@ func ExampleDynamoDB_Query() {
 					aws.String("NumberAttributeValue"), // Required
 					// More values...
 				},
-				NULL: aws.Boolean(true),
+				NULL: aws.Bool(true),
 				S:    aws.String("StringAttributeValue"),
 				SS: []*string{
 					aws.String("StringAttributeValue"), // Required
@@ -890,7 +894,7 @@ func ExampleDynamoDB_Query() {
 				AttributeValueList: []*dynamodb.AttributeValue{
 					{ // Required
 						B:    []byte("PAYLOAD"),
-						BOOL: aws.Boolean(true),
+						BOOL: aws.Bool(true),
 						BS: [][]byte{
 							[]byte("PAYLOAD"), // Required
 							// More values...
@@ -912,7 +916,7 @@ func ExampleDynamoDB_Query() {
 							aws.String("NumberAttributeValue"), // Required
 							// More values...
 						},
-						NULL: aws.Boolean(true),
+						NULL: aws.Bool(true),
 						S:    aws.String("StringAttributeValue"),
 						SS: []*string{
 							aws.String("StringAttributeValue"), // Required
@@ -924,7 +928,7 @@ func ExampleDynamoDB_Query() {
 			},
 			// More values...
 		},
-		Limit:                aws.Long(1),
+		Limit:                aws.Int64(1),
 		ProjectionExpression: aws.String("ProjectionExpression"),
 		QueryFilter: map[string]*dynamodb.Condition{
 			"Key": { // Required
@@ -932,7 +936,7 @@ func ExampleDynamoDB_Query() {
 				AttributeValueList: []*dynamodb.AttributeValue{
 					{ // Required
 						B:    []byte("PAYLOAD"),
-						BOOL: aws.Boolean(true),
+						BOOL: aws.Bool(true),
 						BS: [][]byte{
 							[]byte("PAYLOAD"), // Required
 							// More values...
@@ -954,7 +958,7 @@ func ExampleDynamoDB_Query() {
 							aws.String("NumberAttributeValue"), // Required
 							// More values...
 						},
-						NULL: aws.Boolean(true),
+						NULL: aws.Bool(true),
 						S:    aws.String("StringAttributeValue"),
 						SS: []*string{
 							aws.String("StringAttributeValue"), // Required
@@ -967,7 +971,7 @@ func ExampleDynamoDB_Query() {
 			// More values...
 		},
 		ReturnConsumedCapacity: aws.String("ReturnConsumedCapacity"),
-		ScanIndexForward:       aws.Boolean(true),
+		ScanIndexForward:       aws.Bool(true),
 		Select:                 aws.String("Select"),
 	}
 	resp, err := svc.Query(params)
@@ -988,7 +992,7 @@ func ExampleDynamoDB_Query() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleDynamoDB_Scan() {
@@ -1001,10 +1005,11 @@ func ExampleDynamoDB_Scan() {
 			// More values...
 		},
 		ConditionalOperator: aws.String("ConditionalOperator"),
+		ConsistentRead:      aws.Bool(true),
 		ExclusiveStartKey: map[string]*dynamodb.AttributeValue{
 			"Key": { // Required
 				B:    []byte("PAYLOAD"),
-				BOOL: aws.Boolean(true),
+				BOOL: aws.Bool(true),
 				BS: [][]byte{
 					[]byte("PAYLOAD"), // Required
 					// More values...
@@ -1026,7 +1031,7 @@ func ExampleDynamoDB_Scan() {
 					aws.String("NumberAttributeValue"), // Required
 					// More values...
 				},
-				NULL: aws.Boolean(true),
+				NULL: aws.Bool(true),
 				S:    aws.String("StringAttributeValue"),
 				SS: []*string{
 					aws.String("StringAttributeValue"), // Required
@@ -1042,7 +1047,7 @@ func ExampleDynamoDB_Scan() {
 		ExpressionAttributeValues: map[string]*dynamodb.AttributeValue{
 			"Key": { // Required
 				B:    []byte("PAYLOAD"),
-				BOOL: aws.Boolean(true),
+				BOOL: aws.Bool(true),
 				BS: [][]byte{
 					[]byte("PAYLOAD"), // Required
 					// More values...
@@ -1064,7 +1069,7 @@ func ExampleDynamoDB_Scan() {
 					aws.String("NumberAttributeValue"), // Required
 					// More values...
 				},
-				NULL: aws.Boolean(true),
+				NULL: aws.Bool(true),
 				S:    aws.String("StringAttributeValue"),
 				SS: []*string{
 					aws.String("StringAttributeValue"), // Required
@@ -1075,7 +1080,7 @@ func ExampleDynamoDB_Scan() {
 		},
 		FilterExpression:       aws.String("ConditionExpression"),
 		IndexName:              aws.String("IndexName"),
-		Limit:                  aws.Long(1),
+		Limit:                  aws.Int64(1),
 		ProjectionExpression:   aws.String("ProjectionExpression"),
 		ReturnConsumedCapacity: aws.String("ReturnConsumedCapacity"),
 		ScanFilter: map[string]*dynamodb.Condition{
@@ -1084,7 +1089,7 @@ func ExampleDynamoDB_Scan() {
 				AttributeValueList: []*dynamodb.AttributeValue{
 					{ // Required
 						B:    []byte("PAYLOAD"),
-						BOOL: aws.Boolean(true),
+						BOOL: aws.Bool(true),
 						BS: [][]byte{
 							[]byte("PAYLOAD"), // Required
 							// More values...
@@ -1106,7 +1111,7 @@ func ExampleDynamoDB_Scan() {
 							aws.String("NumberAttributeValue"), // Required
 							// More values...
 						},
-						NULL: aws.Boolean(true),
+						NULL: aws.Bool(true),
 						S:    aws.String("StringAttributeValue"),
 						SS: []*string{
 							aws.String("StringAttributeValue"), // Required
@@ -1118,9 +1123,9 @@ func ExampleDynamoDB_Scan() {
 			},
 			// More values...
 		},
-		Segment:       aws.Long(1),
+		Segment:       aws.Int64(1),
 		Select:        aws.String("Select"),
-		TotalSegments: aws.Long(1),
+		TotalSegments: aws.Int64(1),
 	}
 	resp, err := svc.Scan(params)
 
@@ -1140,7 +1145,7 @@ func ExampleDynamoDB_Scan() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleDynamoDB_UpdateItem() {
@@ -1150,7 +1155,7 @@ func ExampleDynamoDB_UpdateItem() {
 		Key: map[string]*dynamodb.AttributeValue{ // Required
 			"Key": { // Required
 				B:    []byte("PAYLOAD"),
-				BOOL: aws.Boolean(true),
+				BOOL: aws.Bool(true),
 				BS: [][]byte{
 					[]byte("PAYLOAD"), // Required
 					// More values...
@@ -1172,7 +1177,7 @@ func ExampleDynamoDB_UpdateItem() {
 					aws.String("NumberAttributeValue"), // Required
 					// More values...
 				},
-				NULL: aws.Boolean(true),
+				NULL: aws.Bool(true),
 				S:    aws.String("StringAttributeValue"),
 				SS: []*string{
 					aws.String("StringAttributeValue"), // Required
@@ -1187,7 +1192,7 @@ func ExampleDynamoDB_UpdateItem() {
 				Action: aws.String("AttributeAction"),
 				Value: &dynamodb.AttributeValue{
 					B:    []byte("PAYLOAD"),
-					BOOL: aws.Boolean(true),
+					BOOL: aws.Bool(true),
 					BS: [][]byte{
 						[]byte("PAYLOAD"), // Required
 						// More values...
@@ -1209,7 +1214,7 @@ func ExampleDynamoDB_UpdateItem() {
 						aws.String("NumberAttributeValue"), // Required
 						// More values...
 					},
-					NULL: aws.Boolean(true),
+					NULL: aws.Bool(true),
 					S:    aws.String("StringAttributeValue"),
 					SS: []*string{
 						aws.String("StringAttributeValue"), // Required
@@ -1226,7 +1231,7 @@ func ExampleDynamoDB_UpdateItem() {
 				AttributeValueList: []*dynamodb.AttributeValue{
 					{ // Required
 						B:    []byte("PAYLOAD"),
-						BOOL: aws.Boolean(true),
+						BOOL: aws.Bool(true),
 						BS: [][]byte{
 							[]byte("PAYLOAD"), // Required
 							// More values...
@@ -1248,7 +1253,7 @@ func ExampleDynamoDB_UpdateItem() {
 							aws.String("NumberAttributeValue"), // Required
 							// More values...
 						},
-						NULL: aws.Boolean(true),
+						NULL: aws.Bool(true),
 						S:    aws.String("StringAttributeValue"),
 						SS: []*string{
 							aws.String("StringAttributeValue"), // Required
@@ -1258,10 +1263,10 @@ func ExampleDynamoDB_UpdateItem() {
 					// More values...
 				},
 				ComparisonOperator: aws.String("ComparisonOperator"),
-				Exists:             aws.Boolean(true),
+				Exists:             aws.Bool(true),
 				Value: &dynamodb.AttributeValue{
 					B:    []byte("PAYLOAD"),
-					BOOL: aws.Boolean(true),
+					BOOL: aws.Bool(true),
 					BS: [][]byte{
 						[]byte("PAYLOAD"), // Required
 						// More values...
@@ -1283,7 +1288,7 @@ func ExampleDynamoDB_UpdateItem() {
 						aws.String("NumberAttributeValue"), // Required
 						// More values...
 					},
-					NULL: aws.Boolean(true),
+					NULL: aws.Bool(true),
 					S:    aws.String("StringAttributeValue"),
 					SS: []*string{
 						aws.String("StringAttributeValue"), // Required
@@ -1300,7 +1305,7 @@ func ExampleDynamoDB_UpdateItem() {
 		ExpressionAttributeValues: map[string]*dynamodb.AttributeValue{
 			"Key": { // Required
 				B:    []byte("PAYLOAD"),
-				BOOL: aws.Boolean(true),
+				BOOL: aws.Bool(true),
 				BS: [][]byte{
 					[]byte("PAYLOAD"), // Required
 					// More values...
@@ -1322,7 +1327,7 @@ func ExampleDynamoDB_UpdateItem() {
 					aws.String("NumberAttributeValue"), // Required
 					// More values...
 				},
-				NULL: aws.Boolean(true),
+				NULL: aws.Bool(true),
 				S:    aws.String("StringAttributeValue"),
 				SS: []*string{
 					aws.String("StringAttributeValue"), // Required
@@ -1354,7 +1359,7 @@ func ExampleDynamoDB_UpdateItem() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleDynamoDB_UpdateTable() {
@@ -1388,8 +1393,8 @@ func ExampleDynamoDB_UpdateTable() {
 						ProjectionType: aws.String("ProjectionType"),
 					},
 					ProvisionedThroughput: &dynamodb.ProvisionedThroughput{ // Required
-						ReadCapacityUnits:  aws.Long(1), // Required
-						WriteCapacityUnits: aws.Long(1), // Required
+						ReadCapacityUnits:  aws.Int64(1), // Required
+						WriteCapacityUnits: aws.Int64(1), // Required
 					},
 				},
 				Delete: &dynamodb.DeleteGlobalSecondaryIndexAction{
@@ -1398,16 +1403,20 @@ func ExampleDynamoDB_UpdateTable() {
 				Update: &dynamodb.UpdateGlobalSecondaryIndexAction{
 					IndexName: aws.String("IndexName"), // Required
 					ProvisionedThroughput: &dynamodb.ProvisionedThroughput{ // Required
-						ReadCapacityUnits:  aws.Long(1), // Required
-						WriteCapacityUnits: aws.Long(1), // Required
+						ReadCapacityUnits:  aws.Int64(1), // Required
+						WriteCapacityUnits: aws.Int64(1), // Required
 					},
 				},
 			},
 			// More values...
 		},
 		ProvisionedThroughput: &dynamodb.ProvisionedThroughput{
-			ReadCapacityUnits:  aws.Long(1), // Required
-			WriteCapacityUnits: aws.Long(1), // Required
+			ReadCapacityUnits:  aws.Int64(1), // Required
+			WriteCapacityUnits: aws.Int64(1), // Required
+		},
+		StreamSpecification: &dynamodb.StreamSpecification{
+			StreamEnabled:  aws.Bool(true),
+			StreamViewType: aws.String("StreamViewType"),
 		},
 	}
 	resp, err := svc.UpdateTable(params)
@@ -1428,5 +1437,5 @@ func ExampleDynamoDB_UpdateTable() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }

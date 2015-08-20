@@ -6,15 +6,15 @@ package ssm
 import (
 	"time"
 
-	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awsutil"
+	"github.com/aws/aws-sdk-go/aws/service"
 )
 
 const opCreateAssociation = "CreateAssociation"
 
 // CreateAssociationRequest generates a request for the CreateAssociation operation.
-func (c *SSM) CreateAssociationRequest(input *CreateAssociationInput) (req *aws.Request, output *CreateAssociationOutput) {
-	op := &aws.Operation{
+func (c *SSM) CreateAssociationRequest(input *CreateAssociationInput) (req *service.Request, output *CreateAssociationOutput) {
+	op := &service.Operation{
 		Name:       opCreateAssociation,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -48,8 +48,8 @@ func (c *SSM) CreateAssociation(input *CreateAssociationInput) (*CreateAssociati
 const opCreateAssociationBatch = "CreateAssociationBatch"
 
 // CreateAssociationBatchRequest generates a request for the CreateAssociationBatch operation.
-func (c *SSM) CreateAssociationBatchRequest(input *CreateAssociationBatchInput) (req *aws.Request, output *CreateAssociationBatchOutput) {
-	op := &aws.Operation{
+func (c *SSM) CreateAssociationBatchRequest(input *CreateAssociationBatchInput) (req *service.Request, output *CreateAssociationBatchOutput) {
+	op := &service.Operation{
 		Name:       opCreateAssociationBatch,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -83,8 +83,8 @@ func (c *SSM) CreateAssociationBatch(input *CreateAssociationBatchInput) (*Creat
 const opCreateDocument = "CreateDocument"
 
 // CreateDocumentRequest generates a request for the CreateDocument operation.
-func (c *SSM) CreateDocumentRequest(input *CreateDocumentInput) (req *aws.Request, output *CreateDocumentOutput) {
-	op := &aws.Operation{
+func (c *SSM) CreateDocumentRequest(input *CreateDocumentInput) (req *service.Request, output *CreateDocumentOutput) {
+	op := &service.Operation{
 		Name:       opCreateDocument,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -113,8 +113,8 @@ func (c *SSM) CreateDocument(input *CreateDocumentInput) (*CreateDocumentOutput,
 const opDeleteAssociation = "DeleteAssociation"
 
 // DeleteAssociationRequest generates a request for the DeleteAssociation operation.
-func (c *SSM) DeleteAssociationRequest(input *DeleteAssociationInput) (req *aws.Request, output *DeleteAssociationOutput) {
-	op := &aws.Operation{
+func (c *SSM) DeleteAssociationRequest(input *DeleteAssociationInput) (req *service.Request, output *DeleteAssociationOutput) {
+	op := &service.Operation{
 		Name:       opDeleteAssociation,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -146,8 +146,8 @@ func (c *SSM) DeleteAssociation(input *DeleteAssociationInput) (*DeleteAssociati
 const opDeleteDocument = "DeleteDocument"
 
 // DeleteDocumentRequest generates a request for the DeleteDocument operation.
-func (c *SSM) DeleteDocumentRequest(input *DeleteDocumentInput) (req *aws.Request, output *DeleteDocumentOutput) {
-	op := &aws.Operation{
+func (c *SSM) DeleteDocumentRequest(input *DeleteDocumentInput) (req *service.Request, output *DeleteDocumentOutput) {
+	op := &service.Operation{
 		Name:       opDeleteDocument,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -176,8 +176,8 @@ func (c *SSM) DeleteDocument(input *DeleteDocumentInput) (*DeleteDocumentOutput,
 const opDescribeAssociation = "DescribeAssociation"
 
 // DescribeAssociationRequest generates a request for the DescribeAssociation operation.
-func (c *SSM) DescribeAssociationRequest(input *DescribeAssociationInput) (req *aws.Request, output *DescribeAssociationOutput) {
-	op := &aws.Operation{
+func (c *SSM) DescribeAssociationRequest(input *DescribeAssociationInput) (req *service.Request, output *DescribeAssociationOutput) {
+	op := &service.Operation{
 		Name:       opDescribeAssociation,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -203,8 +203,8 @@ func (c *SSM) DescribeAssociation(input *DescribeAssociationInput) (*DescribeAss
 const opDescribeDocument = "DescribeDocument"
 
 // DescribeDocumentRequest generates a request for the DescribeDocument operation.
-func (c *SSM) DescribeDocumentRequest(input *DescribeDocumentInput) (req *aws.Request, output *DescribeDocumentOutput) {
-	op := &aws.Operation{
+func (c *SSM) DescribeDocumentRequest(input *DescribeDocumentInput) (req *service.Request, output *DescribeDocumentOutput) {
+	op := &service.Operation{
 		Name:       opDescribeDocument,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -230,8 +230,8 @@ func (c *SSM) DescribeDocument(input *DescribeDocumentInput) (*DescribeDocumentO
 const opGetDocument = "GetDocument"
 
 // GetDocumentRequest generates a request for the GetDocument operation.
-func (c *SSM) GetDocumentRequest(input *GetDocumentInput) (req *aws.Request, output *GetDocumentOutput) {
-	op := &aws.Operation{
+func (c *SSM) GetDocumentRequest(input *GetDocumentInput) (req *service.Request, output *GetDocumentOutput) {
+	op := &service.Operation{
 		Name:       opGetDocument,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -257,8 +257,8 @@ func (c *SSM) GetDocument(input *GetDocumentInput) (*GetDocumentOutput, error) {
 const opListAssociations = "ListAssociations"
 
 // ListAssociationsRequest generates a request for the ListAssociations operation.
-func (c *SSM) ListAssociationsRequest(input *ListAssociationsInput) (req *aws.Request, output *ListAssociationsOutput) {
-	op := &aws.Operation{
+func (c *SSM) ListAssociationsRequest(input *ListAssociationsInput) (req *service.Request, output *ListAssociationsOutput) {
+	op := &service.Operation{
 		Name:       opListAssociations,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -284,8 +284,8 @@ func (c *SSM) ListAssociations(input *ListAssociationsInput) (*ListAssociationsO
 const opListDocuments = "ListDocuments"
 
 // ListDocumentsRequest generates a request for the ListDocuments operation.
-func (c *SSM) ListDocumentsRequest(input *ListDocumentsInput) (req *aws.Request, output *ListDocumentsOutput) {
-	op := &aws.Operation{
+func (c *SSM) ListDocumentsRequest(input *ListDocumentsInput) (req *service.Request, output *ListDocumentsOutput) {
+	op := &service.Operation{
 		Name:       opListDocuments,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -311,8 +311,8 @@ func (c *SSM) ListDocuments(input *ListDocumentsInput) (*ListDocumentsOutput, er
 const opUpdateAssociationStatus = "UpdateAssociationStatus"
 
 // UpdateAssociationStatusRequest generates a request for the UpdateAssociationStatus operation.
-func (c *SSM) UpdateAssociationStatusRequest(input *UpdateAssociationStatusInput) (req *aws.Request, output *UpdateAssociationStatusOutput) {
-	op := &aws.Operation{
+func (c *SSM) UpdateAssociationStatusRequest(input *UpdateAssociationStatusInput) (req *service.Request, output *UpdateAssociationStatusOutput) {
+	op := &service.Operation{
 		Name:       opUpdateAssociationStatus,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -339,7 +339,7 @@ func (c *SSM) UpdateAssociationStatus(input *UpdateAssociationStatusInput) (*Upd
 // Describes an association of a configuration document and an instance.
 type Association struct {
 	// The ID of the instance.
-	InstanceID *string `locationName:"InstanceId" type:"string"`
+	InstanceId *string `type:"string"`
 
 	// The name of the configuration document.
 	Name *string `type:"string"`
@@ -353,7 +353,7 @@ type metadataAssociation struct {
 
 // String returns the string representation
 func (s Association) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -367,7 +367,7 @@ type AssociationDescription struct {
 	Date *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The ID of the instance.
-	InstanceID *string `locationName:"InstanceId" type:"string"`
+	InstanceId *string `type:"string"`
 
 	// The name of the configuration document.
 	Name *string `type:"string"`
@@ -384,7 +384,7 @@ type metadataAssociationDescription struct {
 
 // String returns the string representation
 func (s AssociationDescription) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -395,7 +395,7 @@ func (s AssociationDescription) GoString() string {
 // Describes a filter.
 type AssociationFilter struct {
 	// The name of the filter.
-	Key *string `locationName:"key" type:"string" required:"true"`
+	Key *string `locationName:"key" type:"string" required:"true" enum:"AssociationFilterKey"`
 
 	// The filter value.
 	Value *string `locationName:"value" type:"string" required:"true"`
@@ -409,7 +409,7 @@ type metadataAssociationFilter struct {
 
 // String returns the string representation
 func (s AssociationFilter) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -429,7 +429,7 @@ type AssociationStatus struct {
 	Message *string `type:"string" required:"true"`
 
 	// The status.
-	Name *string `type:"string" required:"true"`
+	Name *string `type:"string" required:"true" enum:"AssociationStatusName"`
 
 	metadataAssociationStatus `json:"-" xml:"-"`
 }
@@ -440,7 +440,7 @@ type metadataAssociationStatus struct {
 
 // String returns the string representation
 func (s AssociationStatus) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -461,7 +461,7 @@ type metadataCreateAssociationBatchInput struct {
 
 // String returns the string representation
 func (s CreateAssociationBatchInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -485,7 +485,7 @@ type metadataCreateAssociationBatchOutput struct {
 
 // String returns the string representation
 func (s CreateAssociationBatchOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -496,7 +496,7 @@ func (s CreateAssociationBatchOutput) GoString() string {
 // Describes the association of a configuration document and an instance.
 type CreateAssociationBatchRequestEntry struct {
 	// The ID of the instance.
-	InstanceID *string `locationName:"InstanceId" type:"string"`
+	InstanceId *string `type:"string"`
 
 	// The name of the configuration document.
 	Name *string `type:"string"`
@@ -510,7 +510,7 @@ type metadataCreateAssociationBatchRequestEntry struct {
 
 // String returns the string representation
 func (s CreateAssociationBatchRequestEntry) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -520,7 +520,7 @@ func (s CreateAssociationBatchRequestEntry) GoString() string {
 
 type CreateAssociationInput struct {
 	// The ID of the instance.
-	InstanceID *string `locationName:"InstanceId" type:"string" required:"true"`
+	InstanceId *string `type:"string" required:"true"`
 
 	// The name of the configuration document.
 	Name *string `type:"string" required:"true"`
@@ -534,7 +534,7 @@ type metadataCreateAssociationInput struct {
 
 // String returns the string representation
 func (s CreateAssociationInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -555,7 +555,7 @@ type metadataCreateAssociationOutput struct {
 
 // String returns the string representation
 func (s CreateAssociationOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -580,7 +580,7 @@ type metadataCreateDocumentInput struct {
 
 // String returns the string representation
 func (s CreateDocumentInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -601,7 +601,7 @@ type metadataCreateDocumentOutput struct {
 
 // String returns the string representation
 func (s CreateDocumentOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -611,7 +611,7 @@ func (s CreateDocumentOutput) GoString() string {
 
 type DeleteAssociationInput struct {
 	// The ID of the instance.
-	InstanceID *string `locationName:"InstanceId" type:"string" required:"true"`
+	InstanceId *string `type:"string" required:"true"`
 
 	// The name of the configuration document.
 	Name *string `type:"string" required:"true"`
@@ -625,7 +625,7 @@ type metadataDeleteAssociationInput struct {
 
 // String returns the string representation
 func (s DeleteAssociationInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -643,7 +643,7 @@ type metadataDeleteAssociationOutput struct {
 
 // String returns the string representation
 func (s DeleteAssociationOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -664,7 +664,7 @@ type metadataDeleteDocumentInput struct {
 
 // String returns the string representation
 func (s DeleteDocumentInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -682,7 +682,7 @@ type metadataDeleteDocumentOutput struct {
 
 // String returns the string representation
 func (s DeleteDocumentOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -692,7 +692,7 @@ func (s DeleteDocumentOutput) GoString() string {
 
 type DescribeAssociationInput struct {
 	// The ID of the instance.
-	InstanceID *string `locationName:"InstanceId" type:"string" required:"true"`
+	InstanceId *string `type:"string" required:"true"`
 
 	// The name of the configuration document.
 	Name *string `type:"string" required:"true"`
@@ -706,7 +706,7 @@ type metadataDescribeAssociationInput struct {
 
 // String returns the string representation
 func (s DescribeAssociationInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -727,7 +727,7 @@ type metadataDescribeAssociationOutput struct {
 
 // String returns the string representation
 func (s DescribeAssociationOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -748,7 +748,7 @@ type metadataDescribeDocumentInput struct {
 
 // String returns the string representation
 func (s DescribeDocumentInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -769,7 +769,7 @@ type metadataDescribeDocumentOutput struct {
 
 // String returns the string representation
 func (s DescribeDocumentOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -786,10 +786,10 @@ type DocumentDescription struct {
 	Name *string `type:"string"`
 
 	// The SHA1 hash of the document, which you can use for verification purposes.
-	SHA1 *string `locationName:"Sha1" type:"string"`
+	Sha1 *string `type:"string"`
 
 	// The status of the configuration document.
-	Status *string `type:"string"`
+	Status *string `type:"string" enum:"DocumentStatus"`
 
 	metadataDocumentDescription `json:"-" xml:"-"`
 }
@@ -800,7 +800,7 @@ type metadataDocumentDescription struct {
 
 // String returns the string representation
 func (s DocumentDescription) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -811,7 +811,7 @@ func (s DocumentDescription) GoString() string {
 // Describes a filter.
 type DocumentFilter struct {
 	// The name of the filter.
-	Key *string `locationName:"key" type:"string" required:"true"`
+	Key *string `locationName:"key" type:"string" required:"true" enum:"DocumentFilterKey"`
 
 	// The value of the filter.
 	Value *string `locationName:"value" type:"string" required:"true"`
@@ -825,7 +825,7 @@ type metadataDocumentFilter struct {
 
 // String returns the string representation
 func (s DocumentFilter) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -847,7 +847,7 @@ type metadataDocumentIdentifier struct {
 
 // String returns the string representation
 func (s DocumentIdentifier) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -861,7 +861,7 @@ type FailedCreateAssociation struct {
 	Entry *CreateAssociationBatchRequestEntry `type:"structure"`
 
 	// The source of the failure.
-	Fault *string `type:"string"`
+	Fault *string `type:"string" enum:"Fault"`
 
 	// A description of the failure.
 	Message *string `type:"string"`
@@ -875,7 +875,7 @@ type metadataFailedCreateAssociation struct {
 
 // String returns the string representation
 func (s FailedCreateAssociation) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -896,7 +896,7 @@ type metadataGetDocumentInput struct {
 
 // String returns the string representation
 func (s GetDocumentInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -920,7 +920,7 @@ type metadataGetDocumentOutput struct {
 
 // String returns the string representation
 func (s GetDocumentOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -950,7 +950,7 @@ type metadataListAssociationsInput struct {
 
 // String returns the string representation
 func (s ListAssociationsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -975,7 +975,7 @@ type metadataListAssociationsOutput struct {
 
 // String returns the string representation
 func (s ListAssociationsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1005,7 +1005,7 @@ type metadataListDocumentsInput struct {
 
 // String returns the string representation
 func (s ListDocumentsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1030,7 +1030,7 @@ type metadataListDocumentsOutput struct {
 
 // String returns the string representation
 func (s ListDocumentsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1043,7 +1043,7 @@ type UpdateAssociationStatusInput struct {
 	AssociationStatus *AssociationStatus `type:"structure" required:"true"`
 
 	// The ID of the instance.
-	InstanceID *string `locationName:"InstanceId" type:"string" required:"true"`
+	InstanceId *string `type:"string" required:"true"`
 
 	// The name of the configuration document.
 	Name *string `type:"string" required:"true"`
@@ -1057,7 +1057,7 @@ type metadataUpdateAssociationStatusInput struct {
 
 // String returns the string representation
 func (s UpdateAssociationStatusInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1078,10 +1078,49 @@ type metadataUpdateAssociationStatusOutput struct {
 
 // String returns the string representation
 func (s UpdateAssociationStatusOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
 func (s UpdateAssociationStatusOutput) GoString() string {
 	return s.String()
 }
+
+const (
+	// @enum AssociationFilterKey
+	AssociationFilterKeyInstanceId = "InstanceId"
+	// @enum AssociationFilterKey
+	AssociationFilterKeyName = "Name"
+)
+
+const (
+	// @enum AssociationStatusName
+	AssociationStatusNamePending = "Pending"
+	// @enum AssociationStatusName
+	AssociationStatusNameSuccess = "Success"
+	// @enum AssociationStatusName
+	AssociationStatusNameFailed = "Failed"
+)
+
+const (
+	// @enum DocumentFilterKey
+	DocumentFilterKeyName = "Name"
+)
+
+const (
+	// @enum DocumentStatus
+	DocumentStatusCreating = "Creating"
+	// @enum DocumentStatus
+	DocumentStatusActive = "Active"
+	// @enum DocumentStatus
+	DocumentStatusDeleting = "Deleting"
+)
+
+const (
+	// @enum Fault
+	FaultClient = "Client"
+	// @enum Fault
+	FaultServer = "Server"
+	// @enum Fault
+	FaultUnknown = "Unknown"
+)

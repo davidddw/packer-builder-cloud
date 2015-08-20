@@ -4,15 +4,15 @@
 package kinesis
 
 import (
-	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awsutil"
+	"github.com/aws/aws-sdk-go/aws/service"
 )
 
 const opAddTagsToStream = "AddTagsToStream"
 
 // AddTagsToStreamRequest generates a request for the AddTagsToStream operation.
-func (c *Kinesis) AddTagsToStreamRequest(input *AddTagsToStreamInput) (req *aws.Request, output *AddTagsToStreamOutput) {
-	op := &aws.Operation{
+func (c *Kinesis) AddTagsToStreamRequest(input *AddTagsToStreamInput) (req *service.Request, output *AddTagsToStreamOutput) {
+	op := &service.Operation{
 		Name:       opAddTagsToStream,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -42,8 +42,8 @@ func (c *Kinesis) AddTagsToStream(input *AddTagsToStreamInput) (*AddTagsToStream
 const opCreateStream = "CreateStream"
 
 // CreateStreamRequest generates a request for the CreateStream operation.
-func (c *Kinesis) CreateStreamRequest(input *CreateStreamInput) (req *aws.Request, output *CreateStreamOutput) {
-	op := &aws.Operation{
+func (c *Kinesis) CreateStreamRequest(input *CreateStreamInput) (req *service.Request, output *CreateStreamOutput) {
+	op := &service.Operation{
 		Name:       opCreateStream,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -104,8 +104,8 @@ func (c *Kinesis) CreateStream(input *CreateStreamInput) (*CreateStreamOutput, e
 const opDeleteStream = "DeleteStream"
 
 // DeleteStreamRequest generates a request for the DeleteStream operation.
-func (c *Kinesis) DeleteStreamRequest(input *DeleteStreamInput) (req *aws.Request, output *DeleteStreamOutput) {
-	op := &aws.Operation{
+func (c *Kinesis) DeleteStreamRequest(input *DeleteStreamInput) (req *service.Request, output *DeleteStreamOutput) {
+	op := &service.Operation{
 		Name:       opDeleteStream,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -149,12 +149,12 @@ func (c *Kinesis) DeleteStream(input *DeleteStreamInput) (*DeleteStreamOutput, e
 const opDescribeStream = "DescribeStream"
 
 // DescribeStreamRequest generates a request for the DescribeStream operation.
-func (c *Kinesis) DescribeStreamRequest(input *DescribeStreamInput) (req *aws.Request, output *DescribeStreamOutput) {
-	op := &aws.Operation{
+func (c *Kinesis) DescribeStreamRequest(input *DescribeStreamInput) (req *service.Request, output *DescribeStreamOutput) {
+	op := &service.Operation{
 		Name:       opDescribeStream,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
+		Paginator: &service.Paginator{
 			InputTokens:     []string{"ExclusiveStartShardId"},
 			OutputTokens:    []string{"StreamDescription.Shards[-1].ShardId"},
 			LimitToken:      "Limit",
@@ -210,8 +210,8 @@ func (c *Kinesis) DescribeStreamPages(input *DescribeStreamInput, fn func(p *Des
 const opGetRecords = "GetRecords"
 
 // GetRecordsRequest generates a request for the GetRecords operation.
-func (c *Kinesis) GetRecordsRequest(input *GetRecordsInput) (req *aws.Request, output *GetRecordsOutput) {
-	op := &aws.Operation{
+func (c *Kinesis) GetRecordsRequest(input *GetRecordsInput) (req *service.Request, output *GetRecordsOutput) {
+	op := &service.Operation{
 		Name:       opGetRecords,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -280,8 +280,8 @@ func (c *Kinesis) GetRecords(input *GetRecordsInput) (*GetRecordsOutput, error) 
 const opGetShardIterator = "GetShardIterator"
 
 // GetShardIteratorRequest generates a request for the GetShardIterator operation.
-func (c *Kinesis) GetShardIteratorRequest(input *GetShardIteratorInput) (req *aws.Request, output *GetShardIteratorOutput) {
-	op := &aws.Operation{
+func (c *Kinesis) GetShardIteratorRequest(input *GetShardIteratorInput) (req *service.Request, output *GetShardIteratorOutput) {
+	op := &service.Operation{
 		Name:       opGetShardIterator,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -343,12 +343,12 @@ func (c *Kinesis) GetShardIterator(input *GetShardIteratorInput) (*GetShardItera
 const opListStreams = "ListStreams"
 
 // ListStreamsRequest generates a request for the ListStreams operation.
-func (c *Kinesis) ListStreamsRequest(input *ListStreamsInput) (req *aws.Request, output *ListStreamsOutput) {
-	op := &aws.Operation{
+func (c *Kinesis) ListStreamsRequest(input *ListStreamsInput) (req *service.Request, output *ListStreamsOutput) {
+	op := &service.Operation{
 		Name:       opListStreams,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
+		Paginator: &service.Paginator{
 			InputTokens:     []string{"ExclusiveStartStreamName"},
 			OutputTokens:    []string{"StreamNames[-1]"},
 			LimitToken:      "Limit",
@@ -398,8 +398,8 @@ func (c *Kinesis) ListStreamsPages(input *ListStreamsInput, fn func(p *ListStrea
 const opListTagsForStream = "ListTagsForStream"
 
 // ListTagsForStreamRequest generates a request for the ListTagsForStream operation.
-func (c *Kinesis) ListTagsForStreamRequest(input *ListTagsForStreamInput) (req *aws.Request, output *ListTagsForStreamOutput) {
-	op := &aws.Operation{
+func (c *Kinesis) ListTagsForStreamRequest(input *ListTagsForStreamInput) (req *service.Request, output *ListTagsForStreamOutput) {
+	op := &service.Operation{
 		Name:       opListTagsForStream,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -425,8 +425,8 @@ func (c *Kinesis) ListTagsForStream(input *ListTagsForStreamInput) (*ListTagsFor
 const opMergeShards = "MergeShards"
 
 // MergeShardsRequest generates a request for the MergeShards operation.
-func (c *Kinesis) MergeShardsRequest(input *MergeShardsInput) (req *aws.Request, output *MergeShardsOutput) {
-	op := &aws.Operation{
+func (c *Kinesis) MergeShardsRequest(input *MergeShardsInput) (req *service.Request, output *MergeShardsOutput) {
+	op := &service.Operation{
 		Name:       opMergeShards,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -486,8 +486,8 @@ func (c *Kinesis) MergeShards(input *MergeShardsInput) (*MergeShardsOutput, erro
 const opPutRecord = "PutRecord"
 
 // PutRecordRequest generates a request for the PutRecord operation.
-func (c *Kinesis) PutRecordRequest(input *PutRecordInput) (req *aws.Request, output *PutRecordOutput) {
-	op := &aws.Operation{
+func (c *Kinesis) PutRecordRequest(input *PutRecordInput) (req *service.Request, output *PutRecordOutput) {
+	op := &service.Operation{
 		Name:       opPutRecord,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -550,8 +550,8 @@ func (c *Kinesis) PutRecord(input *PutRecordInput) (*PutRecordOutput, error) {
 const opPutRecords = "PutRecords"
 
 // PutRecordsRequest generates a request for the PutRecords operation.
-func (c *Kinesis) PutRecordsRequest(input *PutRecordsInput) (req *aws.Request, output *PutRecordsOutput) {
-	op := &aws.Operation{
+func (c *Kinesis) PutRecordsRequest(input *PutRecordsInput) (req *service.Request, output *PutRecordsOutput) {
+	op := &service.Operation{
 		Name:       opPutRecords,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -631,8 +631,8 @@ func (c *Kinesis) PutRecords(input *PutRecordsInput) (*PutRecordsOutput, error) 
 const opRemoveTagsFromStream = "RemoveTagsFromStream"
 
 // RemoveTagsFromStreamRequest generates a request for the RemoveTagsFromStream operation.
-func (c *Kinesis) RemoveTagsFromStreamRequest(input *RemoveTagsFromStreamInput) (req *aws.Request, output *RemoveTagsFromStreamOutput) {
-	op := &aws.Operation{
+func (c *Kinesis) RemoveTagsFromStreamRequest(input *RemoveTagsFromStreamInput) (req *service.Request, output *RemoveTagsFromStreamOutput) {
+	op := &service.Operation{
 		Name:       opRemoveTagsFromStream,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -660,8 +660,8 @@ func (c *Kinesis) RemoveTagsFromStream(input *RemoveTagsFromStreamInput) (*Remov
 const opSplitShard = "SplitShard"
 
 // SplitShardRequest generates a request for the SplitShard operation.
-func (c *Kinesis) SplitShardRequest(input *SplitShardInput) (req *aws.Request, output *SplitShardOutput) {
-	op := &aws.Operation{
+func (c *Kinesis) SplitShardRequest(input *SplitShardInput) (req *service.Request, output *SplitShardOutput) {
+	op := &service.Operation{
 		Name:       opSplitShard,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -746,7 +746,7 @@ type metadataAddTagsToStreamInput struct {
 
 // String returns the string representation
 func (s AddTagsToStreamInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -764,7 +764,7 @@ type metadataAddTagsToStreamOutput struct {
 
 // String returns the string representation
 func (s AddTagsToStreamOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -797,7 +797,7 @@ type metadataCreateStreamInput struct {
 
 // String returns the string representation
 func (s CreateStreamInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -815,7 +815,7 @@ type metadataCreateStreamOutput struct {
 
 // String returns the string representation
 func (s CreateStreamOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -837,7 +837,7 @@ type metadataDeleteStreamInput struct {
 
 // String returns the string representation
 func (s DeleteStreamInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -855,7 +855,7 @@ type metadataDeleteStreamOutput struct {
 
 // String returns the string representation
 func (s DeleteStreamOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -866,7 +866,7 @@ func (s DeleteStreamOutput) GoString() string {
 // Represents the input for DescribeStream.
 type DescribeStreamInput struct {
 	// The shard ID of the shard to start with.
-	ExclusiveStartShardID *string `locationName:"ExclusiveStartShardId" type:"string"`
+	ExclusiveStartShardId *string `type:"string"`
 
 	// The maximum number of shards to return.
 	Limit *int64 `type:"integer"`
@@ -883,7 +883,7 @@ type metadataDescribeStreamInput struct {
 
 // String returns the string representation
 func (s DescribeStreamInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -906,7 +906,7 @@ type metadataDescribeStreamOutput struct {
 
 // String returns the string representation
 func (s DescribeStreamOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -934,7 +934,7 @@ type metadataGetRecordsInput struct {
 
 // String returns the string representation
 func (s GetRecordsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -967,7 +967,7 @@ type metadataGetRecordsOutput struct {
 
 // String returns the string representation
 func (s GetRecordsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -978,7 +978,7 @@ func (s GetRecordsOutput) GoString() string {
 // Represents the input for GetShardIterator.
 type GetShardIteratorInput struct {
 	// The shard ID of the shard to get the iterator for.
-	ShardID *string `locationName:"ShardId" type:"string" required:"true"`
+	ShardId *string `type:"string" required:"true"`
 
 	// Determines how the shard iterator is used to start reading data records from
 	// the shard.
@@ -992,7 +992,7 @@ type GetShardIteratorInput struct {
 	// the oldest data record in the shard. LATEST - Start reading just after the
 	// most recent record in the shard, so that you always read the most recent
 	// data in the shard.
-	ShardIteratorType *string `type:"string" required:"true"`
+	ShardIteratorType *string `type:"string" required:"true" enum:"ShardIteratorType"`
 
 	// The sequence number of the data record in the shard from which to start reading
 	// from.
@@ -1010,7 +1010,7 @@ type metadataGetShardIteratorInput struct {
 
 // String returns the string representation
 func (s GetShardIteratorInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1034,7 +1034,7 @@ type metadataGetShardIteratorOutput struct {
 
 // String returns the string representation
 func (s GetShardIteratorOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1060,7 +1060,7 @@ type metadataHashKeyRange struct {
 
 // String returns the string representation
 func (s HashKeyRange) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1085,7 +1085,7 @@ type metadataListStreamsInput struct {
 
 // String returns the string representation
 func (s ListStreamsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1111,7 +1111,7 @@ type metadataListStreamsOutput struct {
 
 // String returns the string representation
 func (s ListStreamsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1142,7 +1142,7 @@ type metadataListTagsForStreamInput struct {
 
 // String returns the string representation
 func (s ListTagsForStreamInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1169,7 +1169,7 @@ type metadataListTagsForStreamOutput struct {
 
 // String returns the string representation
 func (s ListTagsForStreamOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1197,7 +1197,7 @@ type metadataMergeShardsInput struct {
 
 // String returns the string representation
 func (s MergeShardsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1215,7 +1215,7 @@ type metadataMergeShardsOutput struct {
 
 // String returns the string representation
 func (s MergeShardsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1263,7 +1263,7 @@ type metadataPutRecordInput struct {
 
 // String returns the string representation
 func (s PutRecordInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1280,7 +1280,7 @@ type PutRecordOutput struct {
 	SequenceNumber *string `type:"string" required:"true"`
 
 	// The shard ID of the shard where the data record was placed.
-	ShardID *string `locationName:"ShardId" type:"string" required:"true"`
+	ShardId *string `type:"string" required:"true"`
 
 	metadataPutRecordOutput `json:"-" xml:"-"`
 }
@@ -1291,7 +1291,7 @@ type metadataPutRecordOutput struct {
 
 // String returns the string representation
 func (s PutRecordOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1316,7 +1316,7 @@ type metadataPutRecordsInput struct {
 
 // String returns the string representation
 func (s PutRecordsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1345,7 +1345,7 @@ type metadataPutRecordsOutput struct {
 
 // String returns the string representation
 func (s PutRecordsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1383,7 +1383,7 @@ type metadataPutRecordsRequestEntry struct {
 
 // String returns the string representation
 func (s PutRecordsRequestEntry) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1411,7 +1411,7 @@ type PutRecordsResultEntry struct {
 	SequenceNumber *string `type:"string"`
 
 	// The shard ID for an individual record result.
-	ShardID *string `locationName:"ShardId" type:"string"`
+	ShardId *string `type:"string"`
 
 	metadataPutRecordsResultEntry `json:"-" xml:"-"`
 }
@@ -1422,7 +1422,7 @@ type metadataPutRecordsResultEntry struct {
 
 // String returns the string representation
 func (s PutRecordsResultEntry) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1454,7 +1454,7 @@ type metadataRecord struct {
 
 // String returns the string representation
 func (s Record) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1479,7 +1479,7 @@ type metadataRemoveTagsFromStreamInput struct {
 
 // String returns the string representation
 func (s RemoveTagsFromStreamInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1497,7 +1497,7 @@ type metadataRemoveTagsFromStreamOutput struct {
 
 // String returns the string representation
 func (s RemoveTagsFromStreamOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1523,7 +1523,7 @@ type metadataSequenceNumberRange struct {
 
 // String returns the string representation
 func (s SequenceNumberRange) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1534,20 +1534,20 @@ func (s SequenceNumberRange) GoString() string {
 // A uniquely identified group of data records in an Amazon Kinesis stream.
 type Shard struct {
 	// The shard Id of the shard adjacent to the shard's parent.
-	AdjacentParentShardID *string `locationName:"AdjacentParentShardId" type:"string"`
+	AdjacentParentShardId *string `type:"string"`
 
 	// The range of possible hash key values for the shard, which is a set of ordered
 	// contiguous positive integers.
 	HashKeyRange *HashKeyRange `type:"structure" required:"true"`
 
 	// The shard Id of the shard's parent.
-	ParentShardID *string `locationName:"ParentShardId" type:"string"`
+	ParentShardId *string `type:"string"`
 
 	// The range of possible sequence numbers for the shard.
 	SequenceNumberRange *SequenceNumberRange `type:"structure" required:"true"`
 
 	// The unique identifier of the shard within the Amazon Kinesis stream.
-	ShardID *string `locationName:"ShardId" type:"string" required:"true"`
+	ShardId *string `type:"string" required:"true"`
 
 	metadataShard `json:"-" xml:"-"`
 }
@@ -1558,7 +1558,7 @@ type metadataShard struct {
 
 // String returns the string representation
 func (s Shard) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1592,7 +1592,7 @@ type metadataSplitShardInput struct {
 
 // String returns the string representation
 func (s SplitShardInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1610,7 +1610,7 @@ type metadataSplitShardOutput struct {
 
 // String returns the string representation
 func (s SplitShardOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1644,7 +1644,7 @@ type StreamDescription struct {
 	// on an ACTIVE stream.  UPDATING - Shards in the stream are being merged or
 	// split. Read and write operations continue to work while the stream is in
 	// the UPDATING state.
-	StreamStatus *string `type:"string" required:"true"`
+	StreamStatus *string `type:"string" required:"true" enum:"StreamStatus"`
 
 	metadataStreamDescription `json:"-" xml:"-"`
 }
@@ -1655,7 +1655,7 @@ type metadataStreamDescription struct {
 
 // String returns the string representation
 func (s StreamDescription) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1683,10 +1683,32 @@ type metadataTag struct {
 
 // String returns the string representation
 func (s Tag) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
 func (s Tag) GoString() string {
 	return s.String()
 }
+
+const (
+	// @enum ShardIteratorType
+	ShardIteratorTypeAtSequenceNumber = "AT_SEQUENCE_NUMBER"
+	// @enum ShardIteratorType
+	ShardIteratorTypeAfterSequenceNumber = "AFTER_SEQUENCE_NUMBER"
+	// @enum ShardIteratorType
+	ShardIteratorTypeTrimHorizon = "TRIM_HORIZON"
+	// @enum ShardIteratorType
+	ShardIteratorTypeLatest = "LATEST"
+)
+
+const (
+	// @enum StreamStatus
+	StreamStatusCreating = "CREATING"
+	// @enum StreamStatus
+	StreamStatusDeleting = "DELETING"
+	// @enum StreamStatus
+	StreamStatusActive = "ACTIVE"
+	// @enum StreamStatus
+	StreamStatusUpdating = "UPDATING"
+)

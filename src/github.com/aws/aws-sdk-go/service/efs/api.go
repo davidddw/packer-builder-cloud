@@ -6,15 +6,15 @@ package efs
 import (
 	"time"
 
-	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awsutil"
+	"github.com/aws/aws-sdk-go/aws/service"
 )
 
 const opCreateFileSystem = "CreateFileSystem"
 
 // CreateFileSystemRequest generates a request for the CreateFileSystem operation.
-func (c *EFS) CreateFileSystemRequest(input *CreateFileSystemInput) (req *aws.Request, output *FileSystemDescription) {
-	op := &aws.Operation{
+func (c *EFS) CreateFileSystemRequest(input *CreateFileSystemInput) (req *service.Request, output *FileSystemDescription) {
+	op := &service.Operation{
 		Name:       opCreateFileSystem,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2015-02-01/file-systems",
@@ -70,8 +70,8 @@ func (c *EFS) CreateFileSystem(input *CreateFileSystemInput) (*FileSystemDescrip
 const opCreateMountTarget = "CreateMountTarget"
 
 // CreateMountTargetRequest generates a request for the CreateMountTarget operation.
-func (c *EFS) CreateMountTargetRequest(input *CreateMountTargetInput) (req *aws.Request, output *MountTargetDescription) {
-	op := &aws.Operation{
+func (c *EFS) CreateMountTargetRequest(input *CreateMountTargetInput) (req *service.Request, output *MountTargetDescription) {
+	op := &service.Operation{
 		Name:       opCreateMountTarget,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2015-02-01/mount-targets",
@@ -172,8 +172,8 @@ func (c *EFS) CreateMountTarget(input *CreateMountTargetInput) (*MountTargetDesc
 const opCreateTags = "CreateTags"
 
 // CreateTagsRequest generates a request for the CreateTags operation.
-func (c *EFS) CreateTagsRequest(input *CreateTagsInput) (req *aws.Request, output *CreateTagsOutput) {
-	op := &aws.Operation{
+func (c *EFS) CreateTagsRequest(input *CreateTagsInput) (req *service.Request, output *CreateTagsOutput) {
+	op := &service.Operation{
 		Name:       opCreateTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2015-02-01/create-tags/{FileSystemId}",
@@ -206,8 +206,8 @@ func (c *EFS) CreateTags(input *CreateTagsInput) (*CreateTagsOutput, error) {
 const opDeleteFileSystem = "DeleteFileSystem"
 
 // DeleteFileSystemRequest generates a request for the DeleteFileSystem operation.
-func (c *EFS) DeleteFileSystemRequest(input *DeleteFileSystemInput) (req *aws.Request, output *DeleteFileSystemOutput) {
-	op := &aws.Operation{
+func (c *EFS) DeleteFileSystemRequest(input *DeleteFileSystemInput) (req *service.Request, output *DeleteFileSystemOutput) {
+	op := &service.Operation{
 		Name:       opDeleteFileSystem,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/2015-02-01/file-systems/{FileSystemId}",
@@ -246,8 +246,8 @@ func (c *EFS) DeleteFileSystem(input *DeleteFileSystemInput) (*DeleteFileSystemO
 const opDeleteMountTarget = "DeleteMountTarget"
 
 // DeleteMountTargetRequest generates a request for the DeleteMountTarget operation.
-func (c *EFS) DeleteMountTargetRequest(input *DeleteMountTargetInput) (req *aws.Request, output *DeleteMountTargetOutput) {
-	op := &aws.Operation{
+func (c *EFS) DeleteMountTargetRequest(input *DeleteMountTargetInput) (req *service.Request, output *DeleteMountTargetOutput) {
+	op := &service.Operation{
 		Name:       opDeleteMountTarget,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/2015-02-01/mount-targets/{MountTargetId}",
@@ -294,8 +294,8 @@ func (c *EFS) DeleteMountTarget(input *DeleteMountTargetInput) (*DeleteMountTarg
 const opDeleteTags = "DeleteTags"
 
 // DeleteTagsRequest generates a request for the DeleteTags operation.
-func (c *EFS) DeleteTagsRequest(input *DeleteTagsInput) (req *aws.Request, output *DeleteTagsOutput) {
-	op := &aws.Operation{
+func (c *EFS) DeleteTagsRequest(input *DeleteTagsInput) (req *service.Request, output *DeleteTagsOutput) {
+	op := &service.Operation{
 		Name:       opDeleteTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2015-02-01/delete-tags/{FileSystemId}",
@@ -328,8 +328,8 @@ func (c *EFS) DeleteTags(input *DeleteTagsInput) (*DeleteTagsOutput, error) {
 const opDescribeFileSystems = "DescribeFileSystems"
 
 // DescribeFileSystemsRequest generates a request for the DescribeFileSystems operation.
-func (c *EFS) DescribeFileSystemsRequest(input *DescribeFileSystemsInput) (req *aws.Request, output *DescribeFileSystemsOutput) {
-	op := &aws.Operation{
+func (c *EFS) DescribeFileSystemsRequest(input *DescribeFileSystemsInput) (req *service.Request, output *DescribeFileSystemsOutput) {
+	op := &service.Operation{
 		Name:       opDescribeFileSystems,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2015-02-01/file-systems",
@@ -380,8 +380,8 @@ func (c *EFS) DescribeFileSystems(input *DescribeFileSystemsInput) (*DescribeFil
 const opDescribeMountTargetSecurityGroups = "DescribeMountTargetSecurityGroups"
 
 // DescribeMountTargetSecurityGroupsRequest generates a request for the DescribeMountTargetSecurityGroups operation.
-func (c *EFS) DescribeMountTargetSecurityGroupsRequest(input *DescribeMountTargetSecurityGroupsInput) (req *aws.Request, output *DescribeMountTargetSecurityGroupsOutput) {
-	op := &aws.Operation{
+func (c *EFS) DescribeMountTargetSecurityGroupsRequest(input *DescribeMountTargetSecurityGroupsInput) (req *service.Request, output *DescribeMountTargetSecurityGroupsOutput) {
+	op := &service.Operation{
 		Name:       opDescribeMountTargetSecurityGroups,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2015-02-01/mount-targets/{MountTargetId}/security-groups",
@@ -415,8 +415,8 @@ func (c *EFS) DescribeMountTargetSecurityGroups(input *DescribeMountTargetSecuri
 const opDescribeMountTargets = "DescribeMountTargets"
 
 // DescribeMountTargetsRequest generates a request for the DescribeMountTargets operation.
-func (c *EFS) DescribeMountTargetsRequest(input *DescribeMountTargetsInput) (req *aws.Request, output *DescribeMountTargetsOutput) {
-	op := &aws.Operation{
+func (c *EFS) DescribeMountTargetsRequest(input *DescribeMountTargetsInput) (req *service.Request, output *DescribeMountTargetsOutput) {
+	op := &service.Operation{
 		Name:       opDescribeMountTargets,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2015-02-01/mount-targets",
@@ -446,8 +446,8 @@ func (c *EFS) DescribeMountTargets(input *DescribeMountTargetsInput) (*DescribeM
 const opDescribeTags = "DescribeTags"
 
 // DescribeTagsRequest generates a request for the DescribeTags operation.
-func (c *EFS) DescribeTagsRequest(input *DescribeTagsInput) (req *aws.Request, output *DescribeTagsOutput) {
-	op := &aws.Operation{
+func (c *EFS) DescribeTagsRequest(input *DescribeTagsInput) (req *service.Request, output *DescribeTagsOutput) {
+	op := &service.Operation{
 		Name:       opDescribeTags,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2015-02-01/tags/{FileSystemId}/",
@@ -479,8 +479,8 @@ func (c *EFS) DescribeTags(input *DescribeTagsInput) (*DescribeTagsOutput, error
 const opModifyMountTargetSecurityGroups = "ModifyMountTargetSecurityGroups"
 
 // ModifyMountTargetSecurityGroupsRequest generates a request for the ModifyMountTargetSecurityGroups operation.
-func (c *EFS) ModifyMountTargetSecurityGroupsRequest(input *ModifyMountTargetSecurityGroupsInput) (req *aws.Request, output *ModifyMountTargetSecurityGroupsOutput) {
-	op := &aws.Operation{
+func (c *EFS) ModifyMountTargetSecurityGroupsRequest(input *ModifyMountTargetSecurityGroupsInput) (req *service.Request, output *ModifyMountTargetSecurityGroupsOutput) {
+	op := &service.Operation{
 		Name:       opModifyMountTargetSecurityGroups,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/2015-02-01/mount-targets/{MountTargetId}/security-groups",
@@ -530,7 +530,7 @@ type metadataCreateFileSystemInput struct {
 
 // String returns the string representation
 func (s CreateFileSystemInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -540,17 +540,17 @@ func (s CreateFileSystemInput) GoString() string {
 
 type CreateMountTargetInput struct {
 	// The ID of the file system for which to create the mount target.
-	FileSystemID *string `locationName:"FileSystemId" type:"string" required:"true"`
+	FileSystemId *string `type:"string" required:"true"`
 
 	// A valid IPv4 address within the address range of the specified subnet.
-	IPAddress *string `locationName:"IpAddress" type:"string"`
+	IpAddress *string `type:"string"`
 
 	// Up to 5 VPC security group IDs, of the form "sg-xxxxxxxx". These must be
 	// for the same VPC as subnet specified.
 	SecurityGroups []*string `type:"list"`
 
 	// The ID of the subnet to add the mount target in.
-	SubnetID *string `locationName:"SubnetId" type:"string" required:"true"`
+	SubnetId *string `type:"string" required:"true"`
 
 	metadataCreateMountTargetInput `json:"-" xml:"-"`
 }
@@ -561,7 +561,7 @@ type metadataCreateMountTargetInput struct {
 
 // String returns the string representation
 func (s CreateMountTargetInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -572,7 +572,7 @@ func (s CreateMountTargetInput) GoString() string {
 type CreateTagsInput struct {
 	// String. The ID of the file system whose tags you want to modify. This operation
 	// modifies only the tags and not the file system.
-	FileSystemID *string `location:"uri" locationName:"FileSystemId" type:"string" required:"true"`
+	FileSystemId *string `location:"uri" locationName:"FileSystemId" type:"string" required:"true"`
 
 	// An array of Tag objects to add. Each Tag object is a key-value pair.
 	Tags []*Tag `type:"list" required:"true"`
@@ -586,7 +586,7 @@ type metadataCreateTagsInput struct {
 
 // String returns the string representation
 func (s CreateTagsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -604,7 +604,7 @@ type metadataCreateTagsOutput struct {
 
 // String returns the string representation
 func (s CreateTagsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -614,7 +614,7 @@ func (s CreateTagsOutput) GoString() string {
 
 type DeleteFileSystemInput struct {
 	// The ID of the file system you want to delete.
-	FileSystemID *string `location:"uri" locationName:"FileSystemId" type:"string" required:"true"`
+	FileSystemId *string `location:"uri" locationName:"FileSystemId" type:"string" required:"true"`
 
 	metadataDeleteFileSystemInput `json:"-" xml:"-"`
 }
@@ -625,7 +625,7 @@ type metadataDeleteFileSystemInput struct {
 
 // String returns the string representation
 func (s DeleteFileSystemInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -643,7 +643,7 @@ type metadataDeleteFileSystemOutput struct {
 
 // String returns the string representation
 func (s DeleteFileSystemOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -653,7 +653,7 @@ func (s DeleteFileSystemOutput) GoString() string {
 
 type DeleteMountTargetInput struct {
 	// String. The ID of the mount target to delete.
-	MountTargetID *string `location:"uri" locationName:"MountTargetId" type:"string" required:"true"`
+	MountTargetId *string `location:"uri" locationName:"MountTargetId" type:"string" required:"true"`
 
 	metadataDeleteMountTargetInput `json:"-" xml:"-"`
 }
@@ -664,7 +664,7 @@ type metadataDeleteMountTargetInput struct {
 
 // String returns the string representation
 func (s DeleteMountTargetInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -682,7 +682,7 @@ type metadataDeleteMountTargetOutput struct {
 
 // String returns the string representation
 func (s DeleteMountTargetOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -692,7 +692,7 @@ func (s DeleteMountTargetOutput) GoString() string {
 
 type DeleteTagsInput struct {
 	// String. The ID of the file system whose tags you want to delete.
-	FileSystemID *string `location:"uri" locationName:"FileSystemId" type:"string" required:"true"`
+	FileSystemId *string `location:"uri" locationName:"FileSystemId" type:"string" required:"true"`
 
 	// A list of tag keys to delete.
 	TagKeys []*string `type:"list" required:"true"`
@@ -706,7 +706,7 @@ type metadataDeleteTagsInput struct {
 
 // String returns the string representation
 func (s DeleteTagsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -724,7 +724,7 @@ type metadataDeleteTagsOutput struct {
 
 // String returns the string representation
 func (s DeleteTagsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -739,7 +739,7 @@ type DescribeFileSystemsInput struct {
 	CreationToken *string `location:"querystring" locationName:"CreationToken" type:"string"`
 
 	// Optional string. File system ID whose description you want to retrieve.
-	FileSystemID *string `location:"querystring" locationName:"FileSystemId" type:"string"`
+	FileSystemId *string `location:"querystring" locationName:"FileSystemId" type:"string"`
 
 	// Optional string. Opaque pagination token returned from a previous DescribeFileSystems
 	// operation. If present, specifies to continue the list from where the returning
@@ -762,7 +762,7 @@ type metadataDescribeFileSystemsInput struct {
 
 // String returns the string representation
 func (s DescribeFileSystemsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -790,7 +790,7 @@ type metadataDescribeFileSystemsOutput struct {
 
 // String returns the string representation
 func (s DescribeFileSystemsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -800,7 +800,7 @@ func (s DescribeFileSystemsOutput) GoString() string {
 
 type DescribeMountTargetSecurityGroupsInput struct {
 	// The ID of the mount target whose security groups you want to retrieve.
-	MountTargetID *string `location:"uri" locationName:"MountTargetId" type:"string" required:"true"`
+	MountTargetId *string `location:"uri" locationName:"MountTargetId" type:"string" required:"true"`
 
 	metadataDescribeMountTargetSecurityGroupsInput `json:"-" xml:"-"`
 }
@@ -811,7 +811,7 @@ type metadataDescribeMountTargetSecurityGroupsInput struct {
 
 // String returns the string representation
 func (s DescribeMountTargetSecurityGroupsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -832,7 +832,7 @@ type metadataDescribeMountTargetSecurityGroupsOutput struct {
 
 // String returns the string representation
 func (s DescribeMountTargetSecurityGroupsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -842,7 +842,7 @@ func (s DescribeMountTargetSecurityGroupsOutput) GoString() string {
 
 type DescribeMountTargetsInput struct {
 	// String. The ID of the file system whose mount targets you want to list.
-	FileSystemID *string `location:"querystring" locationName:"FileSystemId" type:"string" required:"true"`
+	FileSystemId *string `location:"querystring" locationName:"FileSystemId" type:"string" required:"true"`
 
 	// Optional. String. Opaque pagination token returned from a previous DescribeMountTargets
 	// operation. If present, it specifies to continue the list from where the previous
@@ -862,7 +862,7 @@ type metadataDescribeMountTargetsInput struct {
 
 // String returns the string representation
 func (s DescribeMountTargetsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -893,7 +893,7 @@ type metadataDescribeMountTargetsOutput struct {
 
 // String returns the string representation
 func (s DescribeMountTargetsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -903,7 +903,7 @@ func (s DescribeMountTargetsOutput) GoString() string {
 
 type DescribeTagsInput struct {
 	// The ID of the file system whose tag set you want to retrieve.
-	FileSystemID *string `location:"uri" locationName:"FileSystemId" type:"string" required:"true"`
+	FileSystemId *string `location:"uri" locationName:"FileSystemId" type:"string" required:"true"`
 
 	// Optional. String. Opaque pagination token returned from a previous DescribeTags
 	// operation. If present, it specifies to continue the list from where the previous
@@ -923,7 +923,7 @@ type metadataDescribeTagsInput struct {
 
 // String returns the string representation
 func (s DescribeTagsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -953,7 +953,7 @@ type metadataDescribeTagsOutput struct {
 
 // String returns the string representation
 func (s DescribeTagsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -970,11 +970,11 @@ type FileSystemDescription struct {
 	CreationToken *string `type:"string" required:"true"`
 
 	// The file system ID assigned by Amazon EFS.
-	FileSystemID *string `locationName:"FileSystemId" type:"string" required:"true"`
+	FileSystemId *string `type:"string" required:"true"`
 
 	// A predefined string value that indicates the lifecycle phase of the file
 	// system.
-	LifeCycleState *string `type:"string" required:"true"`
+	LifeCycleState *string `type:"string" required:"true" enum:"LifeCycleState"`
 
 	// You can add tags to a file system (see CreateTags) including a "Name" tag.
 	// If the file system has a "Name" tag, Amazon EFS returns the value in this
@@ -987,7 +987,7 @@ type FileSystemDescription struct {
 
 	// The AWS account that created the file system. If the file system was created
 	// by an IAM user, the parent account to which the user belongs is the owner.
-	OwnerID *string `locationName:"OwnerId" type:"string" required:"true"`
+	OwnerId *string `type:"string" required:"true"`
 
 	// This object provides the latest known metered size of data stored in the
 	// file system, in bytes, in its Value field, and the time at which that size
@@ -1009,7 +1009,7 @@ type metadataFileSystemDescription struct {
 
 // String returns the string representation
 func (s FileSystemDescription) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1042,7 +1042,7 @@ type metadataFileSystemSize struct {
 
 // String returns the string representation
 func (s FileSystemSize) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1052,7 +1052,7 @@ func (s FileSystemSize) GoString() string {
 
 type ModifyMountTargetSecurityGroupsInput struct {
 	// The ID of the mount target whose security groups you want to modify.
-	MountTargetID *string `location:"uri" locationName:"MountTargetId" type:"string" required:"true"`
+	MountTargetId *string `location:"uri" locationName:"MountTargetId" type:"string" required:"true"`
 
 	// An array of up to five VPC security group IDs.
 	SecurityGroups []*string `type:"list"`
@@ -1066,7 +1066,7 @@ type metadataModifyMountTargetSecurityGroupsInput struct {
 
 // String returns the string representation
 func (s ModifyMountTargetSecurityGroupsInput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1084,7 +1084,7 @@ type metadataModifyMountTargetSecurityGroupsOutput struct {
 
 // String returns the string representation
 func (s ModifyMountTargetSecurityGroupsOutput) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1095,26 +1095,26 @@ func (s ModifyMountTargetSecurityGroupsOutput) GoString() string {
 // This object provides description of a mount target.
 type MountTargetDescription struct {
 	// The ID of the file system for which the mount target is intended.
-	FileSystemID *string `locationName:"FileSystemId" type:"string" required:"true"`
+	FileSystemId *string `type:"string" required:"true"`
 
 	// The address at which the file system may be mounted via the mount target.
-	IPAddress *string `locationName:"IpAddress" type:"string"`
+	IpAddress *string `type:"string"`
 
 	// The lifecycle state the mount target is in.
-	LifeCycleState *string `type:"string" required:"true"`
+	LifeCycleState *string `type:"string" required:"true" enum:"LifeCycleState"`
 
 	// The system-assigned mount target ID.
-	MountTargetID *string `locationName:"MountTargetId" type:"string" required:"true"`
+	MountTargetId *string `type:"string" required:"true"`
 
 	// The ID of the network interface that Amazon EFS created when it created the
 	// mount target.
-	NetworkInterfaceID *string `locationName:"NetworkInterfaceId" type:"string"`
+	NetworkInterfaceId *string `type:"string"`
 
 	// The AWS account ID that owns the resource.
-	OwnerID *string `locationName:"OwnerId" type:"string"`
+	OwnerId *string `type:"string"`
 
 	// The ID of the subnet that the mount target is in.
-	SubnetID *string `locationName:"SubnetId" type:"string" required:"true"`
+	SubnetId *string `type:"string" required:"true"`
 
 	metadataMountTargetDescription `json:"-" xml:"-"`
 }
@@ -1125,7 +1125,7 @@ type metadataMountTargetDescription struct {
 
 // String returns the string representation
 func (s MountTargetDescription) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
@@ -1152,10 +1152,21 @@ type metadataTag struct {
 
 // String returns the string representation
 func (s Tag) String() string {
-	return awsutil.StringValue(s)
+	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
 func (s Tag) GoString() string {
 	return s.String()
 }
+
+const (
+	// @enum LifeCycleState
+	LifeCycleStateCreating = "creating"
+	// @enum LifeCycleState
+	LifeCycleStateAvailable = "available"
+	// @enum LifeCycleState
+	LifeCycleStateDeleting = "deleting"
+	// @enum LifeCycleState
+	LifeCycleStateDeleted = "deleted"
+)

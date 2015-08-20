@@ -36,7 +36,7 @@ func ExampleELB_AddTags() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -50,7 +50,7 @@ func ExampleELB_AddTags() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleELB_ApplySecurityGroupsToLoadBalancer() {
@@ -67,7 +67,7 @@ func ExampleELB_ApplySecurityGroupsToLoadBalancer() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -81,7 +81,7 @@ func ExampleELB_ApplySecurityGroupsToLoadBalancer() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleELB_AttachLoadBalancerToSubnets() {
@@ -98,7 +98,7 @@ func ExampleELB_AttachLoadBalancerToSubnets() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -112,7 +112,7 @@ func ExampleELB_AttachLoadBalancerToSubnets() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleELB_ConfigureHealthCheck() {
@@ -120,11 +120,11 @@ func ExampleELB_ConfigureHealthCheck() {
 
 	params := &elb.ConfigureHealthCheckInput{
 		HealthCheck: &elb.HealthCheck{ // Required
-			HealthyThreshold:   aws.Long(1),                     // Required
-			Interval:           aws.Long(1),                     // Required
+			HealthyThreshold:   aws.Int64(1),                    // Required
+			Interval:           aws.Int64(1),                    // Required
 			Target:             aws.String("HealthCheckTarget"), // Required
-			Timeout:            aws.Long(1),                     // Required
-			UnhealthyThreshold: aws.Long(1),                     // Required
+			Timeout:            aws.Int64(1),                    // Required
+			UnhealthyThreshold: aws.Int64(1),                    // Required
 		},
 		LoadBalancerName: aws.String("AccessPointName"), // Required
 	}
@@ -132,7 +132,7 @@ func ExampleELB_ConfigureHealthCheck() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -146,7 +146,7 @@ func ExampleELB_ConfigureHealthCheck() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleELB_CreateAppCookieStickinessPolicy() {
@@ -161,7 +161,7 @@ func ExampleELB_CreateAppCookieStickinessPolicy() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -175,7 +175,7 @@ func ExampleELB_CreateAppCookieStickinessPolicy() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleELB_CreateLBCookieStickinessPolicy() {
@@ -184,13 +184,13 @@ func ExampleELB_CreateLBCookieStickinessPolicy() {
 	params := &elb.CreateLBCookieStickinessPolicyInput{
 		LoadBalancerName:       aws.String("AccessPointName"), // Required
 		PolicyName:             aws.String("PolicyName"),      // Required
-		CookieExpirationPeriod: aws.Long(1),
+		CookieExpirationPeriod: aws.Int64(1),
 	}
 	resp, err := svc.CreateLBCookieStickinessPolicy(params)
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -204,7 +204,7 @@ func ExampleELB_CreateLBCookieStickinessPolicy() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleELB_CreateLoadBalancer() {
@@ -213,11 +213,11 @@ func ExampleELB_CreateLoadBalancer() {
 	params := &elb.CreateLoadBalancerInput{
 		Listeners: []*elb.Listener{ // Required
 			{ // Required
-				InstancePort:     aws.Long(1),            // Required
-				LoadBalancerPort: aws.Long(1),            // Required
+				InstancePort:     aws.Int64(1),           // Required
+				LoadBalancerPort: aws.Int64(1),           // Required
 				Protocol:         aws.String("Protocol"), // Required
 				InstanceProtocol: aws.String("Protocol"),
-				SSLCertificateID: aws.String("SSLCertificateId"),
+				SSLCertificateId: aws.String("SSLCertificateId"),
 			},
 			// More values...
 		},
@@ -247,7 +247,7 @@ func ExampleELB_CreateLoadBalancer() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -261,7 +261,7 @@ func ExampleELB_CreateLoadBalancer() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleELB_CreateLoadBalancerListeners() {
@@ -270,11 +270,11 @@ func ExampleELB_CreateLoadBalancerListeners() {
 	params := &elb.CreateLoadBalancerListenersInput{
 		Listeners: []*elb.Listener{ // Required
 			{ // Required
-				InstancePort:     aws.Long(1),            // Required
-				LoadBalancerPort: aws.Long(1),            // Required
+				InstancePort:     aws.Int64(1),           // Required
+				LoadBalancerPort: aws.Int64(1),           // Required
 				Protocol:         aws.String("Protocol"), // Required
 				InstanceProtocol: aws.String("Protocol"),
-				SSLCertificateID: aws.String("SSLCertificateId"),
+				SSLCertificateId: aws.String("SSLCertificateId"),
 			},
 			// More values...
 		},
@@ -284,7 +284,7 @@ func ExampleELB_CreateLoadBalancerListeners() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -298,7 +298,7 @@ func ExampleELB_CreateLoadBalancerListeners() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleELB_CreateLoadBalancerPolicy() {
@@ -320,7 +320,7 @@ func ExampleELB_CreateLoadBalancerPolicy() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -334,7 +334,7 @@ func ExampleELB_CreateLoadBalancerPolicy() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleELB_DeleteLoadBalancer() {
@@ -347,7 +347,7 @@ func ExampleELB_DeleteLoadBalancer() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -361,7 +361,7 @@ func ExampleELB_DeleteLoadBalancer() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleELB_DeleteLoadBalancerListeners() {
@@ -370,7 +370,7 @@ func ExampleELB_DeleteLoadBalancerListeners() {
 	params := &elb.DeleteLoadBalancerListenersInput{
 		LoadBalancerName: aws.String("AccessPointName"), // Required
 		LoadBalancerPorts: []*int64{ // Required
-			aws.Long(1), // Required
+			aws.Int64(1), // Required
 			// More values...
 		},
 	}
@@ -378,7 +378,7 @@ func ExampleELB_DeleteLoadBalancerListeners() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -392,7 +392,7 @@ func ExampleELB_DeleteLoadBalancerListeners() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleELB_DeleteLoadBalancerPolicy() {
@@ -406,7 +406,7 @@ func ExampleELB_DeleteLoadBalancerPolicy() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -420,7 +420,7 @@ func ExampleELB_DeleteLoadBalancerPolicy() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleELB_DeregisterInstancesFromLoadBalancer() {
@@ -429,7 +429,7 @@ func ExampleELB_DeregisterInstancesFromLoadBalancer() {
 	params := &elb.DeregisterInstancesFromLoadBalancerInput{
 		Instances: []*elb.Instance{ // Required
 			{ // Required
-				InstanceID: aws.String("InstanceId"),
+				InstanceId: aws.String("InstanceId"),
 			},
 			// More values...
 		},
@@ -439,7 +439,7 @@ func ExampleELB_DeregisterInstancesFromLoadBalancer() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -453,7 +453,7 @@ func ExampleELB_DeregisterInstancesFromLoadBalancer() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleELB_DescribeInstanceHealth() {
@@ -463,7 +463,7 @@ func ExampleELB_DescribeInstanceHealth() {
 		LoadBalancerName: aws.String("AccessPointName"), // Required
 		Instances: []*elb.Instance{
 			{ // Required
-				InstanceID: aws.String("InstanceId"),
+				InstanceId: aws.String("InstanceId"),
 			},
 			// More values...
 		},
@@ -472,7 +472,7 @@ func ExampleELB_DescribeInstanceHealth() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -486,7 +486,7 @@ func ExampleELB_DescribeInstanceHealth() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleELB_DescribeLoadBalancerAttributes() {
@@ -499,7 +499,7 @@ func ExampleELB_DescribeLoadBalancerAttributes() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -513,7 +513,7 @@ func ExampleELB_DescribeLoadBalancerAttributes() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleELB_DescribeLoadBalancerPolicies() {
@@ -530,7 +530,7 @@ func ExampleELB_DescribeLoadBalancerPolicies() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -544,7 +544,7 @@ func ExampleELB_DescribeLoadBalancerPolicies() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleELB_DescribeLoadBalancerPolicyTypes() {
@@ -560,7 +560,7 @@ func ExampleELB_DescribeLoadBalancerPolicyTypes() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -574,7 +574,7 @@ func ExampleELB_DescribeLoadBalancerPolicyTypes() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleELB_DescribeLoadBalancers() {
@@ -586,13 +586,13 @@ func ExampleELB_DescribeLoadBalancers() {
 			// More values...
 		},
 		Marker:   aws.String("Marker"),
-		PageSize: aws.Long(1),
+		PageSize: aws.Int64(1),
 	}
 	resp, err := svc.DescribeLoadBalancers(params)
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -606,7 +606,7 @@ func ExampleELB_DescribeLoadBalancers() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleELB_DescribeTags() {
@@ -622,7 +622,7 @@ func ExampleELB_DescribeTags() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -636,7 +636,7 @@ func ExampleELB_DescribeTags() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleELB_DetachLoadBalancerFromSubnets() {
@@ -653,7 +653,7 @@ func ExampleELB_DetachLoadBalancerFromSubnets() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -667,7 +667,7 @@ func ExampleELB_DetachLoadBalancerFromSubnets() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleELB_DisableAvailabilityZonesForLoadBalancer() {
@@ -684,7 +684,7 @@ func ExampleELB_DisableAvailabilityZonesForLoadBalancer() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -698,7 +698,7 @@ func ExampleELB_DisableAvailabilityZonesForLoadBalancer() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleELB_EnableAvailabilityZonesForLoadBalancer() {
@@ -715,7 +715,7 @@ func ExampleELB_EnableAvailabilityZonesForLoadBalancer() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -729,7 +729,7 @@ func ExampleELB_EnableAvailabilityZonesForLoadBalancer() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleELB_ModifyLoadBalancerAttributes() {
@@ -738,8 +738,8 @@ func ExampleELB_ModifyLoadBalancerAttributes() {
 	params := &elb.ModifyLoadBalancerAttributesInput{
 		LoadBalancerAttributes: &elb.LoadBalancerAttributes{ // Required
 			AccessLog: &elb.AccessLog{
-				Enabled:        aws.Boolean(true), // Required
-				EmitInterval:   aws.Long(1),
+				Enabled:        aws.Bool(true), // Required
+				EmitInterval:   aws.Int64(1),
 				S3BucketName:   aws.String("S3BucketName"),
 				S3BucketPrefix: aws.String("AccessLogPrefix"),
 			},
@@ -751,14 +751,14 @@ func ExampleELB_ModifyLoadBalancerAttributes() {
 				// More values...
 			},
 			ConnectionDraining: &elb.ConnectionDraining{
-				Enabled: aws.Boolean(true), // Required
-				Timeout: aws.Long(1),
+				Enabled: aws.Bool(true), // Required
+				Timeout: aws.Int64(1),
 			},
 			ConnectionSettings: &elb.ConnectionSettings{
-				IdleTimeout: aws.Long(1), // Required
+				IdleTimeout: aws.Int64(1), // Required
 			},
 			CrossZoneLoadBalancing: &elb.CrossZoneLoadBalancing{
-				Enabled: aws.Boolean(true), // Required
+				Enabled: aws.Bool(true), // Required
 			},
 		},
 		LoadBalancerName: aws.String("AccessPointName"), // Required
@@ -767,7 +767,7 @@ func ExampleELB_ModifyLoadBalancerAttributes() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -781,7 +781,7 @@ func ExampleELB_ModifyLoadBalancerAttributes() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleELB_RegisterInstancesWithLoadBalancer() {
@@ -790,7 +790,7 @@ func ExampleELB_RegisterInstancesWithLoadBalancer() {
 	params := &elb.RegisterInstancesWithLoadBalancerInput{
 		Instances: []*elb.Instance{ // Required
 			{ // Required
-				InstanceID: aws.String("InstanceId"),
+				InstanceId: aws.String("InstanceId"),
 			},
 			// More values...
 		},
@@ -800,7 +800,7 @@ func ExampleELB_RegisterInstancesWithLoadBalancer() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -814,7 +814,7 @@ func ExampleELB_RegisterInstancesWithLoadBalancer() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleELB_RemoveTags() {
@@ -836,7 +836,7 @@ func ExampleELB_RemoveTags() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -850,7 +850,7 @@ func ExampleELB_RemoveTags() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleELB_SetLoadBalancerListenerSSLCertificate() {
@@ -858,14 +858,14 @@ func ExampleELB_SetLoadBalancerListenerSSLCertificate() {
 
 	params := &elb.SetLoadBalancerListenerSSLCertificateInput{
 		LoadBalancerName: aws.String("AccessPointName"),  // Required
-		LoadBalancerPort: aws.Long(1),                    // Required
-		SSLCertificateID: aws.String("SSLCertificateId"), // Required
+		LoadBalancerPort: aws.Int64(1),                   // Required
+		SSLCertificateId: aws.String("SSLCertificateId"), // Required
 	}
 	resp, err := svc.SetLoadBalancerListenerSSLCertificate(params)
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -879,14 +879,14 @@ func ExampleELB_SetLoadBalancerListenerSSLCertificate() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleELB_SetLoadBalancerPoliciesForBackendServer() {
 	svc := elb.New(nil)
 
 	params := &elb.SetLoadBalancerPoliciesForBackendServerInput{
-		InstancePort:     aws.Long(1),                   // Required
+		InstancePort:     aws.Int64(1),                  // Required
 		LoadBalancerName: aws.String("AccessPointName"), // Required
 		PolicyNames: []*string{ // Required
 			aws.String("PolicyName"), // Required
@@ -897,7 +897,7 @@ func ExampleELB_SetLoadBalancerPoliciesForBackendServer() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -911,7 +911,7 @@ func ExampleELB_SetLoadBalancerPoliciesForBackendServer() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleELB_SetLoadBalancerPoliciesOfListener() {
@@ -919,7 +919,7 @@ func ExampleELB_SetLoadBalancerPoliciesOfListener() {
 
 	params := &elb.SetLoadBalancerPoliciesOfListenerInput{
 		LoadBalancerName: aws.String("AccessPointName"), // Required
-		LoadBalancerPort: aws.Long(1),                   // Required
+		LoadBalancerPort: aws.Int64(1),                  // Required
 		PolicyNames: []*string{ // Required
 			aws.String("PolicyName"), // Required
 			// More values...
@@ -929,7 +929,7 @@ func ExampleELB_SetLoadBalancerPoliciesOfListener() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -943,5 +943,5 @@ func ExampleELB_SetLoadBalancerPoliciesOfListener() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }

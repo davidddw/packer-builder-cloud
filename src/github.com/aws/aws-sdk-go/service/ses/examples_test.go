@@ -40,7 +40,35 @@ func ExampleSES_DeleteIdentity() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
+}
+
+func ExampleSES_DeleteIdentityPolicy() {
+	svc := ses.New(nil)
+
+	params := &ses.DeleteIdentityPolicyInput{
+		Identity:   aws.String("Identity"),   // Required
+		PolicyName: aws.String("PolicyName"), // Required
+	}
+	resp, err := svc.DeleteIdentityPolicy(params)
+
+	if err != nil {
+		if awsErr, ok := err.(awserr.Error); ok {
+			// Generic AWS error with Code, Message, and original error (if any)
+			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
+			if reqErr, ok := err.(awserr.RequestFailure); ok {
+				// A service error occurred
+				fmt.Println(reqErr.Code(), reqErr.Message(), reqErr.StatusCode(), reqErr.RequestID())
+			}
+		} else {
+			// This case should never be hit, the SDK should always return an
+			// error which satisfies the awserr.Error interface.
+			fmt.Println(err.Error())
+		}
+	}
+
+	// Pretty-print the response data.
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSES_DeleteVerifiedEmailAddress() {
@@ -67,19 +95,19 @@ func ExampleSES_DeleteVerifiedEmailAddress() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
-func ExampleSES_GetIdentityDKIMAttributes() {
+func ExampleSES_GetIdentityDkimAttributes() {
 	svc := ses.New(nil)
 
-	params := &ses.GetIdentityDKIMAttributesInput{
+	params := &ses.GetIdentityDkimAttributesInput{
 		Identities: []*string{ // Required
 			aws.String("Identity"), // Required
 			// More values...
 		},
 	}
-	resp, err := svc.GetIdentityDKIMAttributes(params)
+	resp, err := svc.GetIdentityDkimAttributes(params)
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
@@ -97,7 +125,7 @@ func ExampleSES_GetIdentityDKIMAttributes() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSES_GetIdentityNotificationAttributes() {
@@ -127,7 +155,38 @@ func ExampleSES_GetIdentityNotificationAttributes() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
+}
+
+func ExampleSES_GetIdentityPolicies() {
+	svc := ses.New(nil)
+
+	params := &ses.GetIdentityPoliciesInput{
+		Identity: aws.String("Identity"), // Required
+		PolicyNames: []*string{ // Required
+			aws.String("PolicyName"), // Required
+			// More values...
+		},
+	}
+	resp, err := svc.GetIdentityPolicies(params)
+
+	if err != nil {
+		if awsErr, ok := err.(awserr.Error); ok {
+			// Generic AWS error with Code, Message, and original error (if any)
+			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
+			if reqErr, ok := err.(awserr.RequestFailure); ok {
+				// A service error occurred
+				fmt.Println(reqErr.Code(), reqErr.Message(), reqErr.StatusCode(), reqErr.RequestID())
+			}
+		} else {
+			// This case should never be hit, the SDK should always return an
+			// error which satisfies the awserr.Error interface.
+			fmt.Println(err.Error())
+		}
+	}
+
+	// Pretty-print the response data.
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSES_GetIdentityVerificationAttributes() {
@@ -157,7 +216,7 @@ func ExampleSES_GetIdentityVerificationAttributes() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSES_GetSendQuota() {
@@ -182,7 +241,7 @@ func ExampleSES_GetSendQuota() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSES_GetSendStatistics() {
@@ -207,7 +266,7 @@ func ExampleSES_GetSendStatistics() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSES_ListIdentities() {
@@ -215,7 +274,7 @@ func ExampleSES_ListIdentities() {
 
 	params := &ses.ListIdentitiesInput{
 		IdentityType: aws.String("IdentityType"),
-		MaxItems:     aws.Long(1),
+		MaxItems:     aws.Int64(1),
 		NextToken:    aws.String("NextToken"),
 	}
 	resp, err := svc.ListIdentities(params)
@@ -236,7 +295,34 @@ func ExampleSES_ListIdentities() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
+}
+
+func ExampleSES_ListIdentityPolicies() {
+	svc := ses.New(nil)
+
+	params := &ses.ListIdentityPoliciesInput{
+		Identity: aws.String("Identity"), // Required
+	}
+	resp, err := svc.ListIdentityPolicies(params)
+
+	if err != nil {
+		if awsErr, ok := err.(awserr.Error); ok {
+			// Generic AWS error with Code, Message, and original error (if any)
+			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
+			if reqErr, ok := err.(awserr.RequestFailure); ok {
+				// A service error occurred
+				fmt.Println(reqErr.Code(), reqErr.Message(), reqErr.StatusCode(), reqErr.RequestID())
+			}
+		} else {
+			// This case should never be hit, the SDK should always return an
+			// error which satisfies the awserr.Error interface.
+			fmt.Println(err.Error())
+		}
+	}
+
+	// Pretty-print the response data.
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSES_ListVerifiedEmailAddresses() {
@@ -261,7 +347,36 @@ func ExampleSES_ListVerifiedEmailAddresses() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
+}
+
+func ExampleSES_PutIdentityPolicy() {
+	svc := ses.New(nil)
+
+	params := &ses.PutIdentityPolicyInput{
+		Identity:   aws.String("Identity"),   // Required
+		Policy:     aws.String("Policy"),     // Required
+		PolicyName: aws.String("PolicyName"), // Required
+	}
+	resp, err := svc.PutIdentityPolicy(params)
+
+	if err != nil {
+		if awsErr, ok := err.(awserr.Error); ok {
+			// Generic AWS error with Code, Message, and original error (if any)
+			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
+			if reqErr, ok := err.(awserr.RequestFailure); ok {
+				// A service error occurred
+				fmt.Println(reqErr.Code(), reqErr.Message(), reqErr.StatusCode(), reqErr.RequestID())
+			}
+		} else {
+			// This case should never be hit, the SDK should always return an
+			// error which satisfies the awserr.Error interface.
+			fmt.Println(err.Error())
+		}
+	}
+
+	// Pretty-print the response data.
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSES_SendEmail() {
@@ -269,11 +384,11 @@ func ExampleSES_SendEmail() {
 
 	params := &ses.SendEmailInput{
 		Destination: &ses.Destination{ // Required
-			BCCAddresses: []*string{
+			BccAddresses: []*string{
 				aws.String("Address"), // Required
 				// More values...
 			},
-			CCAddresses: []*string{
+			CcAddresses: []*string{
 				aws.String("Address"), // Required
 				// More values...
 			},
@@ -284,7 +399,7 @@ func ExampleSES_SendEmail() {
 		},
 		Message: &ses.Message{ // Required
 			Body: &ses.Body{ // Required
-				HTML: &ses.Content{
+				Html: &ses.Content{
 					Data:    aws.String("MessageData"), // Required
 					Charset: aws.String("Charset"),
 				},
@@ -303,7 +418,9 @@ func ExampleSES_SendEmail() {
 			aws.String("Address"), // Required
 			// More values...
 		},
-		ReturnPath: aws.String("Address"),
+		ReturnPath:    aws.String("Address"),
+		ReturnPathArn: aws.String("AmazonResourceName"),
+		SourceArn:     aws.String("AmazonResourceName"),
 	}
 	resp, err := svc.SendEmail(params)
 
@@ -323,7 +440,7 @@ func ExampleSES_SendEmail() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSES_SendRawEmail() {
@@ -337,7 +454,10 @@ func ExampleSES_SendRawEmail() {
 			aws.String("Address"), // Required
 			// More values...
 		},
-		Source: aws.String("Address"),
+		FromArn:       aws.String("AmazonResourceName"),
+		ReturnPathArn: aws.String("AmazonResourceName"),
+		Source:        aws.String("Address"),
+		SourceArn:     aws.String("AmazonResourceName"),
 	}
 	resp, err := svc.SendRawEmail(params)
 
@@ -357,17 +477,17 @@ func ExampleSES_SendRawEmail() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
-func ExampleSES_SetIdentityDKIMEnabled() {
+func ExampleSES_SetIdentityDkimEnabled() {
 	svc := ses.New(nil)
 
-	params := &ses.SetIdentityDKIMEnabledInput{
-		DKIMEnabled: aws.Boolean(true),      // Required
+	params := &ses.SetIdentityDkimEnabledInput{
+		DkimEnabled: aws.Bool(true),         // Required
 		Identity:    aws.String("Identity"), // Required
 	}
-	resp, err := svc.SetIdentityDKIMEnabled(params)
+	resp, err := svc.SetIdentityDkimEnabled(params)
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
@@ -385,14 +505,14 @@ func ExampleSES_SetIdentityDKIMEnabled() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSES_SetIdentityFeedbackForwardingEnabled() {
 	svc := ses.New(nil)
 
 	params := &ses.SetIdentityFeedbackForwardingEnabledInput{
-		ForwardingEnabled: aws.Boolean(true),      // Required
+		ForwardingEnabled: aws.Bool(true),         // Required
 		Identity:          aws.String("Identity"), // Required
 	}
 	resp, err := svc.SetIdentityFeedbackForwardingEnabled(params)
@@ -413,7 +533,7 @@ func ExampleSES_SetIdentityFeedbackForwardingEnabled() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSES_SetIdentityNotificationTopic() {
@@ -422,7 +542,7 @@ func ExampleSES_SetIdentityNotificationTopic() {
 	params := &ses.SetIdentityNotificationTopicInput{
 		Identity:         aws.String("Identity"),         // Required
 		NotificationType: aws.String("NotificationType"), // Required
-		SNSTopic:         aws.String("NotificationTopic"),
+		SnsTopic:         aws.String("NotificationTopic"),
 	}
 	resp, err := svc.SetIdentityNotificationTopic(params)
 
@@ -442,16 +562,16 @@ func ExampleSES_SetIdentityNotificationTopic() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
-func ExampleSES_VerifyDomainDKIM() {
+func ExampleSES_VerifyDomainDkim() {
 	svc := ses.New(nil)
 
-	params := &ses.VerifyDomainDKIMInput{
+	params := &ses.VerifyDomainDkimInput{
 		Domain: aws.String("Domain"), // Required
 	}
-	resp, err := svc.VerifyDomainDKIM(params)
+	resp, err := svc.VerifyDomainDkim(params)
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
@@ -469,7 +589,7 @@ func ExampleSES_VerifyDomainDKIM() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSES_VerifyDomainIdentity() {
@@ -496,7 +616,7 @@ func ExampleSES_VerifyDomainIdentity() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSES_VerifyEmailAddress() {
@@ -523,7 +643,7 @@ func ExampleSES_VerifyEmailAddress() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleSES_VerifyEmailIdentity() {
@@ -550,5 +670,5 @@ func ExampleSES_VerifyEmailIdentity() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }

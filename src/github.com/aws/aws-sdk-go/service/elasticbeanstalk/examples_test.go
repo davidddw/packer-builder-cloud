@@ -20,14 +20,14 @@ func ExampleElasticBeanstalk_AbortEnvironmentUpdate() {
 	svc := elasticbeanstalk.New(nil)
 
 	params := &elasticbeanstalk.AbortEnvironmentUpdateInput{
-		EnvironmentID:   aws.String("EnvironmentId"),
+		EnvironmentId:   aws.String("EnvironmentId"),
 		EnvironmentName: aws.String("EnvironmentName"),
 	}
 	resp, err := svc.AbortEnvironmentUpdate(params)
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -41,7 +41,7 @@ func ExampleElasticBeanstalk_AbortEnvironmentUpdate() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleElasticBeanstalk_CheckDNSAvailability() {
@@ -54,7 +54,7 @@ func ExampleElasticBeanstalk_CheckDNSAvailability() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -68,7 +68,7 @@ func ExampleElasticBeanstalk_CheckDNSAvailability() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleElasticBeanstalk_CreateApplication() {
@@ -82,7 +82,7 @@ func ExampleElasticBeanstalk_CreateApplication() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -96,7 +96,7 @@ func ExampleElasticBeanstalk_CreateApplication() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleElasticBeanstalk_CreateApplicationVersion() {
@@ -105,7 +105,7 @@ func ExampleElasticBeanstalk_CreateApplicationVersion() {
 	params := &elasticbeanstalk.CreateApplicationVersionInput{
 		ApplicationName:       aws.String("ApplicationName"), // Required
 		VersionLabel:          aws.String("VersionLabel"),    // Required
-		AutoCreateApplication: aws.Boolean(true),
+		AutoCreateApplication: aws.Bool(true),
 		Description:           aws.String("Description"),
 		SourceBundle: &elasticbeanstalk.S3Location{
 			S3Bucket: aws.String("S3Bucket"),
@@ -116,7 +116,7 @@ func ExampleElasticBeanstalk_CreateApplicationVersion() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -130,7 +130,7 @@ func ExampleElasticBeanstalk_CreateApplicationVersion() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleElasticBeanstalk_CreateConfigurationTemplate() {
@@ -140,7 +140,7 @@ func ExampleElasticBeanstalk_CreateConfigurationTemplate() {
 		ApplicationName: aws.String("ApplicationName"),           // Required
 		TemplateName:    aws.String("ConfigurationTemplateName"), // Required
 		Description:     aws.String("Description"),
-		EnvironmentID:   aws.String("EnvironmentId"),
+		EnvironmentId:   aws.String("EnvironmentId"),
 		OptionSettings: []*elasticbeanstalk.ConfigurationOptionSetting{
 			{ // Required
 				Namespace:    aws.String("OptionNamespace"),
@@ -160,7 +160,7 @@ func ExampleElasticBeanstalk_CreateConfigurationTemplate() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -174,7 +174,7 @@ func ExampleElasticBeanstalk_CreateConfigurationTemplate() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleElasticBeanstalk_CreateEnvironment() {
@@ -222,7 +222,7 @@ func ExampleElasticBeanstalk_CreateEnvironment() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -236,7 +236,7 @@ func ExampleElasticBeanstalk_CreateEnvironment() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleElasticBeanstalk_CreateStorageLocation() {
@@ -247,7 +247,7 @@ func ExampleElasticBeanstalk_CreateStorageLocation() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -261,7 +261,7 @@ func ExampleElasticBeanstalk_CreateStorageLocation() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleElasticBeanstalk_DeleteApplication() {
@@ -269,13 +269,13 @@ func ExampleElasticBeanstalk_DeleteApplication() {
 
 	params := &elasticbeanstalk.DeleteApplicationInput{
 		ApplicationName:     aws.String("ApplicationName"), // Required
-		TerminateEnvByForce: aws.Boolean(true),
+		TerminateEnvByForce: aws.Bool(true),
 	}
 	resp, err := svc.DeleteApplication(params)
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -289,7 +289,7 @@ func ExampleElasticBeanstalk_DeleteApplication() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleElasticBeanstalk_DeleteApplicationVersion() {
@@ -298,13 +298,13 @@ func ExampleElasticBeanstalk_DeleteApplicationVersion() {
 	params := &elasticbeanstalk.DeleteApplicationVersionInput{
 		ApplicationName:    aws.String("ApplicationName"), // Required
 		VersionLabel:       aws.String("VersionLabel"),    // Required
-		DeleteSourceBundle: aws.Boolean(true),
+		DeleteSourceBundle: aws.Bool(true),
 	}
 	resp, err := svc.DeleteApplicationVersion(params)
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -318,7 +318,7 @@ func ExampleElasticBeanstalk_DeleteApplicationVersion() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleElasticBeanstalk_DeleteConfigurationTemplate() {
@@ -332,7 +332,7 @@ func ExampleElasticBeanstalk_DeleteConfigurationTemplate() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -346,7 +346,7 @@ func ExampleElasticBeanstalk_DeleteConfigurationTemplate() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleElasticBeanstalk_DeleteEnvironmentConfiguration() {
@@ -360,7 +360,7 @@ func ExampleElasticBeanstalk_DeleteEnvironmentConfiguration() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -374,7 +374,7 @@ func ExampleElasticBeanstalk_DeleteEnvironmentConfiguration() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleElasticBeanstalk_DescribeApplicationVersions() {
@@ -391,7 +391,7 @@ func ExampleElasticBeanstalk_DescribeApplicationVersions() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -405,7 +405,7 @@ func ExampleElasticBeanstalk_DescribeApplicationVersions() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleElasticBeanstalk_DescribeApplications() {
@@ -421,7 +421,7 @@ func ExampleElasticBeanstalk_DescribeApplications() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -435,7 +435,7 @@ func ExampleElasticBeanstalk_DescribeApplications() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleElasticBeanstalk_DescribeConfigurationOptions() {
@@ -459,7 +459,7 @@ func ExampleElasticBeanstalk_DescribeConfigurationOptions() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -473,7 +473,7 @@ func ExampleElasticBeanstalk_DescribeConfigurationOptions() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleElasticBeanstalk_DescribeConfigurationSettings() {
@@ -488,7 +488,7 @@ func ExampleElasticBeanstalk_DescribeConfigurationSettings() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -502,21 +502,53 @@ func ExampleElasticBeanstalk_DescribeConfigurationSettings() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
+}
+
+func ExampleElasticBeanstalk_DescribeEnvironmentHealth() {
+	svc := elasticbeanstalk.New(nil)
+
+	params := &elasticbeanstalk.DescribeEnvironmentHealthInput{
+		AttributeNames: []*string{
+			aws.String("EnvironmentHealthAttribute"), // Required
+			// More values...
+		},
+		EnvironmentId:   aws.String("EnvironmentId"),
+		EnvironmentName: aws.String("EnvironmentName"),
+	}
+	resp, err := svc.DescribeEnvironmentHealth(params)
+
+	if err != nil {
+		if awsErr, ok := err.(awserr.Error); ok {
+			// Generic AWS error with Code, Message, and original error (if any)
+			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
+			if reqErr, ok := err.(awserr.RequestFailure); ok {
+				// A service error occurred
+				fmt.Println(reqErr.Code(), reqErr.Message(), reqErr.StatusCode(), reqErr.RequestID())
+			}
+		} else {
+			// This case should never be hit, the SDK should always return an
+			// error which satisfies the awserr.Error interface.
+			fmt.Println(err.Error())
+		}
+	}
+
+	// Pretty-print the response data.
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleElasticBeanstalk_DescribeEnvironmentResources() {
 	svc := elasticbeanstalk.New(nil)
 
 	params := &elasticbeanstalk.DescribeEnvironmentResourcesInput{
-		EnvironmentID:   aws.String("EnvironmentId"),
+		EnvironmentId:   aws.String("EnvironmentId"),
 		EnvironmentName: aws.String("EnvironmentName"),
 	}
 	resp, err := svc.DescribeEnvironmentResources(params)
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -530,7 +562,7 @@ func ExampleElasticBeanstalk_DescribeEnvironmentResources() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleElasticBeanstalk_DescribeEnvironments() {
@@ -538,7 +570,7 @@ func ExampleElasticBeanstalk_DescribeEnvironments() {
 
 	params := &elasticbeanstalk.DescribeEnvironmentsInput{
 		ApplicationName: aws.String("ApplicationName"),
-		EnvironmentIDs: []*string{
+		EnvironmentIds: []*string{
 			aws.String("EnvironmentId"), // Required
 			// More values...
 		},
@@ -546,7 +578,7 @@ func ExampleElasticBeanstalk_DescribeEnvironments() {
 			aws.String("EnvironmentName"), // Required
 			// More values...
 		},
-		IncludeDeleted:        aws.Boolean(true),
+		IncludeDeleted:        aws.Bool(true),
 		IncludedDeletedBackTo: aws.Time(time.Now()),
 		VersionLabel:          aws.String("VersionLabel"),
 	}
@@ -554,7 +586,7 @@ func ExampleElasticBeanstalk_DescribeEnvironments() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -568,7 +600,7 @@ func ExampleElasticBeanstalk_DescribeEnvironments() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleElasticBeanstalk_DescribeEvents() {
@@ -577,11 +609,11 @@ func ExampleElasticBeanstalk_DescribeEvents() {
 	params := &elasticbeanstalk.DescribeEventsInput{
 		ApplicationName: aws.String("ApplicationName"),
 		EndTime:         aws.Time(time.Now()),
-		EnvironmentID:   aws.String("EnvironmentId"),
+		EnvironmentId:   aws.String("EnvironmentId"),
 		EnvironmentName: aws.String("EnvironmentName"),
-		MaxRecords:      aws.Long(1),
+		MaxRecords:      aws.Int64(1),
 		NextToken:       aws.String("Token"),
-		RequestID:       aws.String("RequestId"),
+		RequestId:       aws.String("RequestId"),
 		Severity:        aws.String("EventSeverity"),
 		StartTime:       aws.Time(time.Now()),
 		TemplateName:    aws.String("ConfigurationTemplateName"),
@@ -591,7 +623,7 @@ func ExampleElasticBeanstalk_DescribeEvents() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -605,7 +637,40 @@ func ExampleElasticBeanstalk_DescribeEvents() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
+}
+
+func ExampleElasticBeanstalk_DescribeInstancesHealth() {
+	svc := elasticbeanstalk.New(nil)
+
+	params := &elasticbeanstalk.DescribeInstancesHealthInput{
+		AttributeNames: []*string{
+			aws.String("InstancesHealthAttribute"), // Required
+			// More values...
+		},
+		EnvironmentId:   aws.String("EnvironmentId"),
+		EnvironmentName: aws.String("EnvironmentName"),
+		NextToken:       aws.String("NextToken"),
+	}
+	resp, err := svc.DescribeInstancesHealth(params)
+
+	if err != nil {
+		if awsErr, ok := err.(awserr.Error); ok {
+			// Generic AWS error with Code, Message, and original error (if any)
+			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
+			if reqErr, ok := err.(awserr.RequestFailure); ok {
+				// A service error occurred
+				fmt.Println(reqErr.Code(), reqErr.Message(), reqErr.StatusCode(), reqErr.RequestID())
+			}
+		} else {
+			// This case should never be hit, the SDK should always return an
+			// error which satisfies the awserr.Error interface.
+			fmt.Println(err.Error())
+		}
+	}
+
+	// Pretty-print the response data.
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleElasticBeanstalk_ListAvailableSolutionStacks() {
@@ -616,7 +681,7 @@ func ExampleElasticBeanstalk_ListAvailableSolutionStacks() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -630,21 +695,21 @@ func ExampleElasticBeanstalk_ListAvailableSolutionStacks() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleElasticBeanstalk_RebuildEnvironment() {
 	svc := elasticbeanstalk.New(nil)
 
 	params := &elasticbeanstalk.RebuildEnvironmentInput{
-		EnvironmentID:   aws.String("EnvironmentId"),
+		EnvironmentId:   aws.String("EnvironmentId"),
 		EnvironmentName: aws.String("EnvironmentName"),
 	}
 	resp, err := svc.RebuildEnvironment(params)
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -658,7 +723,7 @@ func ExampleElasticBeanstalk_RebuildEnvironment() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleElasticBeanstalk_RequestEnvironmentInfo() {
@@ -666,14 +731,14 @@ func ExampleElasticBeanstalk_RequestEnvironmentInfo() {
 
 	params := &elasticbeanstalk.RequestEnvironmentInfoInput{
 		InfoType:        aws.String("EnvironmentInfoType"), // Required
-		EnvironmentID:   aws.String("EnvironmentId"),
+		EnvironmentId:   aws.String("EnvironmentId"),
 		EnvironmentName: aws.String("EnvironmentName"),
 	}
 	resp, err := svc.RequestEnvironmentInfo(params)
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -687,21 +752,21 @@ func ExampleElasticBeanstalk_RequestEnvironmentInfo() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleElasticBeanstalk_RestartAppServer() {
 	svc := elasticbeanstalk.New(nil)
 
 	params := &elasticbeanstalk.RestartAppServerInput{
-		EnvironmentID:   aws.String("EnvironmentId"),
+		EnvironmentId:   aws.String("EnvironmentId"),
 		EnvironmentName: aws.String("EnvironmentName"),
 	}
 	resp, err := svc.RestartAppServer(params)
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -715,7 +780,7 @@ func ExampleElasticBeanstalk_RestartAppServer() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleElasticBeanstalk_RetrieveEnvironmentInfo() {
@@ -723,14 +788,14 @@ func ExampleElasticBeanstalk_RetrieveEnvironmentInfo() {
 
 	params := &elasticbeanstalk.RetrieveEnvironmentInfoInput{
 		InfoType:        aws.String("EnvironmentInfoType"), // Required
-		EnvironmentID:   aws.String("EnvironmentId"),
+		EnvironmentId:   aws.String("EnvironmentId"),
 		EnvironmentName: aws.String("EnvironmentName"),
 	}
 	resp, err := svc.RetrieveEnvironmentInfo(params)
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -744,23 +809,23 @@ func ExampleElasticBeanstalk_RetrieveEnvironmentInfo() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleElasticBeanstalk_SwapEnvironmentCNAMEs() {
 	svc := elasticbeanstalk.New(nil)
 
 	params := &elasticbeanstalk.SwapEnvironmentCNAMEsInput{
-		DestinationEnvironmentID:   aws.String("EnvironmentId"),
+		DestinationEnvironmentId:   aws.String("EnvironmentId"),
 		DestinationEnvironmentName: aws.String("EnvironmentName"),
-		SourceEnvironmentID:        aws.String("EnvironmentId"),
+		SourceEnvironmentId:        aws.String("EnvironmentId"),
 		SourceEnvironmentName:      aws.String("EnvironmentName"),
 	}
 	resp, err := svc.SwapEnvironmentCNAMEs(params)
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -774,22 +839,22 @@ func ExampleElasticBeanstalk_SwapEnvironmentCNAMEs() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleElasticBeanstalk_TerminateEnvironment() {
 	svc := elasticbeanstalk.New(nil)
 
 	params := &elasticbeanstalk.TerminateEnvironmentInput{
-		EnvironmentID:      aws.String("EnvironmentId"),
+		EnvironmentId:      aws.String("EnvironmentId"),
 		EnvironmentName:    aws.String("EnvironmentName"),
-		TerminateResources: aws.Boolean(true),
+		TerminateResources: aws.Bool(true),
 	}
 	resp, err := svc.TerminateEnvironment(params)
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -803,7 +868,7 @@ func ExampleElasticBeanstalk_TerminateEnvironment() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleElasticBeanstalk_UpdateApplication() {
@@ -817,7 +882,7 @@ func ExampleElasticBeanstalk_UpdateApplication() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -831,7 +896,7 @@ func ExampleElasticBeanstalk_UpdateApplication() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleElasticBeanstalk_UpdateApplicationVersion() {
@@ -846,7 +911,7 @@ func ExampleElasticBeanstalk_UpdateApplicationVersion() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -860,7 +925,7 @@ func ExampleElasticBeanstalk_UpdateApplicationVersion() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleElasticBeanstalk_UpdateConfigurationTemplate() {
@@ -892,7 +957,7 @@ func ExampleElasticBeanstalk_UpdateConfigurationTemplate() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -906,7 +971,7 @@ func ExampleElasticBeanstalk_UpdateConfigurationTemplate() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleElasticBeanstalk_UpdateEnvironment() {
@@ -914,7 +979,7 @@ func ExampleElasticBeanstalk_UpdateEnvironment() {
 
 	params := &elasticbeanstalk.UpdateEnvironmentInput{
 		Description:     aws.String("Description"),
-		EnvironmentID:   aws.String("EnvironmentId"),
+		EnvironmentId:   aws.String("EnvironmentId"),
 		EnvironmentName: aws.String("EnvironmentName"),
 		OptionSettings: []*elasticbeanstalk.ConfigurationOptionSetting{
 			{ // Required
@@ -946,7 +1011,7 @@ func ExampleElasticBeanstalk_UpdateEnvironment() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -960,7 +1025,7 @@ func ExampleElasticBeanstalk_UpdateEnvironment() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleElasticBeanstalk_ValidateConfigurationSettings() {
@@ -984,7 +1049,7 @@ func ExampleElasticBeanstalk_ValidateConfigurationSettings() {
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
-			// Generic AWS Error with Code, Message, and original error (if any)
+			// Generic AWS error with Code, Message, and original error (if any)
 			fmt.Println(awsErr.Code(), awsErr.Message(), awsErr.OrigErr())
 			if reqErr, ok := err.(awserr.RequestFailure); ok {
 				// A service error occurred
@@ -998,5 +1063,5 @@ func ExampleElasticBeanstalk_ValidateConfigurationSettings() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }

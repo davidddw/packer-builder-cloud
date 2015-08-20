@@ -23,7 +23,7 @@ func ExampleRedshift_AuthorizeClusterSecurityGroupIngress() {
 		ClusterSecurityGroupName: aws.String("String"), // Required
 		CIDRIP:                  aws.String("String"),
 		EC2SecurityGroupName:    aws.String("String"),
-		EC2SecurityGroupOwnerID: aws.String("String"),
+		EC2SecurityGroupOwnerId: aws.String("String"),
 	}
 	resp, err := svc.AuthorizeClusterSecurityGroupIngress(params)
 
@@ -43,7 +43,7 @@ func ExampleRedshift_AuthorizeClusterSecurityGroupIngress() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_AuthorizeSnapshotAccess() {
@@ -72,7 +72,7 @@ func ExampleRedshift_AuthorizeSnapshotAccess() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_CopyClusterSnapshot() {
@@ -101,7 +101,7 @@ func ExampleRedshift_CopyClusterSnapshot() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_CreateCluster() {
@@ -112,8 +112,8 @@ func ExampleRedshift_CreateCluster() {
 		MasterUserPassword:               aws.String("String"), // Required
 		MasterUsername:                   aws.String("String"), // Required
 		NodeType:                         aws.String("String"), // Required
-		AllowVersionUpgrade:              aws.Boolean(true),
-		AutomatedSnapshotRetentionPeriod: aws.Long(1),
+		AllowVersionUpgrade:              aws.Bool(true),
+		AutomatedSnapshotRetentionPeriod: aws.Int64(1),
 		AvailabilityZone:                 aws.String("String"),
 		ClusterParameterGroupName:        aws.String("String"),
 		ClusterSecurityGroups: []*string{
@@ -124,15 +124,15 @@ func ExampleRedshift_CreateCluster() {
 		ClusterType:                    aws.String("String"),
 		ClusterVersion:                 aws.String("String"),
 		DBName:                         aws.String("String"),
-		ElasticIP:                      aws.String("String"),
-		Encrypted:                      aws.Boolean(true),
-		HSMClientCertificateIdentifier: aws.String("String"),
-		HSMConfigurationIdentifier:     aws.String("String"),
-		KMSKeyID:                       aws.String("String"),
-		NumberOfNodes:                  aws.Long(1),
-		Port:                           aws.Long(1),
+		ElasticIp:                      aws.String("String"),
+		Encrypted:                      aws.Bool(true),
+		HsmClientCertificateIdentifier: aws.String("String"),
+		HsmConfigurationIdentifier:     aws.String("String"),
+		KmsKeyId:                       aws.String("String"),
+		NumberOfNodes:                  aws.Int64(1),
+		Port:                           aws.Int64(1),
 		PreferredMaintenanceWindow: aws.String("String"),
-		PubliclyAccessible:         aws.Boolean(true),
+		PubliclyAccessible:         aws.Bool(true),
 		Tags: []*redshift.Tag{
 			{ // Required
 				Key:   aws.String("String"),
@@ -140,7 +140,7 @@ func ExampleRedshift_CreateCluster() {
 			},
 			// More values...
 		},
-		VPCSecurityGroupIDs: []*string{
+		VpcSecurityGroupIds: []*string{
 			aws.String("String"), // Required
 			// More values...
 		},
@@ -163,7 +163,7 @@ func ExampleRedshift_CreateCluster() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_CreateClusterParameterGroup() {
@@ -199,7 +199,7 @@ func ExampleRedshift_CreateClusterParameterGroup() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_CreateClusterSecurityGroup() {
@@ -234,7 +234,7 @@ func ExampleRedshift_CreateClusterSecurityGroup() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_CreateClusterSnapshot() {
@@ -269,7 +269,7 @@ func ExampleRedshift_CreateClusterSnapshot() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_CreateClusterSubnetGroup() {
@@ -278,7 +278,7 @@ func ExampleRedshift_CreateClusterSubnetGroup() {
 	params := &redshift.CreateClusterSubnetGroupInput{
 		ClusterSubnetGroupName: aws.String("String"), // Required
 		Description:            aws.String("String"), // Required
-		SubnetIDs: []*string{ // Required
+		SubnetIds: []*string{ // Required
 			aws.String("String"), // Required
 			// More values...
 		},
@@ -308,22 +308,22 @@ func ExampleRedshift_CreateClusterSubnetGroup() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_CreateEventSubscription() {
 	svc := redshift.New(nil)
 
 	params := &redshift.CreateEventSubscriptionInput{
-		SNSTopicARN:      aws.String("String"), // Required
+		SnsTopicArn:      aws.String("String"), // Required
 		SubscriptionName: aws.String("String"), // Required
-		Enabled:          aws.Boolean(true),
+		Enabled:          aws.Bool(true),
 		EventCategories: []*string{
 			aws.String("String"), // Required
 			// More values...
 		},
 		Severity: aws.String("String"),
-		SourceIDs: []*string{
+		SourceIds: []*string{
 			aws.String("String"), // Required
 			// More values...
 		},
@@ -354,14 +354,14 @@ func ExampleRedshift_CreateEventSubscription() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
-func ExampleRedshift_CreateHSMClientCertificate() {
+func ExampleRedshift_CreateHsmClientCertificate() {
 	svc := redshift.New(nil)
 
-	params := &redshift.CreateHSMClientCertificateInput{
-		HSMClientCertificateIdentifier: aws.String("String"), // Required
+	params := &redshift.CreateHsmClientCertificateInput{
+		HsmClientCertificateIdentifier: aws.String("String"), // Required
 		Tags: []*redshift.Tag{
 			{ // Required
 				Key:   aws.String("String"),
@@ -370,7 +370,7 @@ func ExampleRedshift_CreateHSMClientCertificate() {
 			// More values...
 		},
 	}
-	resp, err := svc.CreateHSMClientCertificate(params)
+	resp, err := svc.CreateHsmClientCertificate(params)
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
@@ -388,19 +388,19 @@ func ExampleRedshift_CreateHSMClientCertificate() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
-func ExampleRedshift_CreateHSMConfiguration() {
+func ExampleRedshift_CreateHsmConfiguration() {
 	svc := redshift.New(nil)
 
-	params := &redshift.CreateHSMConfigurationInput{
+	params := &redshift.CreateHsmConfigurationInput{
 		Description:                aws.String("String"), // Required
-		HSMConfigurationIdentifier: aws.String("String"), // Required
-		HSMIPAddress:               aws.String("String"), // Required
-		HSMPartitionName:           aws.String("String"), // Required
-		HSMPartitionPassword:       aws.String("String"), // Required
-		HSMServerPublicCertificate: aws.String("String"), // Required
+		HsmConfigurationIdentifier: aws.String("String"), // Required
+		HsmIpAddress:               aws.String("String"), // Required
+		HsmPartitionName:           aws.String("String"), // Required
+		HsmPartitionPassword:       aws.String("String"), // Required
+		HsmServerPublicCertificate: aws.String("String"), // Required
 		Tags: []*redshift.Tag{
 			{ // Required
 				Key:   aws.String("String"),
@@ -409,7 +409,7 @@ func ExampleRedshift_CreateHSMConfiguration() {
 			// More values...
 		},
 	}
-	resp, err := svc.CreateHSMConfiguration(params)
+	resp, err := svc.CreateHsmConfiguration(params)
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
@@ -427,7 +427,7 @@ func ExampleRedshift_CreateHSMConfiguration() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_CreateSnapshotCopyGrant() {
@@ -435,7 +435,7 @@ func ExampleRedshift_CreateSnapshotCopyGrant() {
 
 	params := &redshift.CreateSnapshotCopyGrantInput{
 		SnapshotCopyGrantName: aws.String("String"), // Required
-		KMSKeyID:              aws.String("String"),
+		KmsKeyId:              aws.String("String"),
 		Tags: []*redshift.Tag{
 			{ // Required
 				Key:   aws.String("String"),
@@ -462,7 +462,7 @@ func ExampleRedshift_CreateSnapshotCopyGrant() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_CreateTags() {
@@ -496,7 +496,7 @@ func ExampleRedshift_CreateTags() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_DeleteCluster() {
@@ -505,7 +505,7 @@ func ExampleRedshift_DeleteCluster() {
 	params := &redshift.DeleteClusterInput{
 		ClusterIdentifier:              aws.String("String"), // Required
 		FinalClusterSnapshotIdentifier: aws.String("String"),
-		SkipFinalClusterSnapshot:       aws.Boolean(true),
+		SkipFinalClusterSnapshot:       aws.Bool(true),
 	}
 	resp, err := svc.DeleteCluster(params)
 
@@ -525,7 +525,7 @@ func ExampleRedshift_DeleteCluster() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_DeleteClusterParameterGroup() {
@@ -552,7 +552,7 @@ func ExampleRedshift_DeleteClusterParameterGroup() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_DeleteClusterSecurityGroup() {
@@ -579,7 +579,7 @@ func ExampleRedshift_DeleteClusterSecurityGroup() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_DeleteClusterSnapshot() {
@@ -607,7 +607,7 @@ func ExampleRedshift_DeleteClusterSnapshot() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_DeleteClusterSubnetGroup() {
@@ -634,7 +634,7 @@ func ExampleRedshift_DeleteClusterSubnetGroup() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_DeleteEventSubscription() {
@@ -661,16 +661,16 @@ func ExampleRedshift_DeleteEventSubscription() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
-func ExampleRedshift_DeleteHSMClientCertificate() {
+func ExampleRedshift_DeleteHsmClientCertificate() {
 	svc := redshift.New(nil)
 
-	params := &redshift.DeleteHSMClientCertificateInput{
-		HSMClientCertificateIdentifier: aws.String("String"), // Required
+	params := &redshift.DeleteHsmClientCertificateInput{
+		HsmClientCertificateIdentifier: aws.String("String"), // Required
 	}
-	resp, err := svc.DeleteHSMClientCertificate(params)
+	resp, err := svc.DeleteHsmClientCertificate(params)
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
@@ -688,16 +688,16 @@ func ExampleRedshift_DeleteHSMClientCertificate() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
-func ExampleRedshift_DeleteHSMConfiguration() {
+func ExampleRedshift_DeleteHsmConfiguration() {
 	svc := redshift.New(nil)
 
-	params := &redshift.DeleteHSMConfigurationInput{
-		HSMConfigurationIdentifier: aws.String("String"), // Required
+	params := &redshift.DeleteHsmConfigurationInput{
+		HsmConfigurationIdentifier: aws.String("String"), // Required
 	}
-	resp, err := svc.DeleteHSMConfiguration(params)
+	resp, err := svc.DeleteHsmConfiguration(params)
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
@@ -715,7 +715,7 @@ func ExampleRedshift_DeleteHSMConfiguration() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_DeleteSnapshotCopyGrant() {
@@ -742,7 +742,7 @@ func ExampleRedshift_DeleteSnapshotCopyGrant() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_DeleteTags() {
@@ -773,7 +773,7 @@ func ExampleRedshift_DeleteTags() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_DescribeClusterParameterGroups() {
@@ -781,7 +781,7 @@ func ExampleRedshift_DescribeClusterParameterGroups() {
 
 	params := &redshift.DescribeClusterParameterGroupsInput{
 		Marker:             aws.String("String"),
-		MaxRecords:         aws.Long(1),
+		MaxRecords:         aws.Int64(1),
 		ParameterGroupName: aws.String("String"),
 		TagKeys: []*string{
 			aws.String("String"), // Required
@@ -810,7 +810,7 @@ func ExampleRedshift_DescribeClusterParameterGroups() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_DescribeClusterParameters() {
@@ -819,7 +819,7 @@ func ExampleRedshift_DescribeClusterParameters() {
 	params := &redshift.DescribeClusterParametersInput{
 		ParameterGroupName: aws.String("String"), // Required
 		Marker:             aws.String("String"),
-		MaxRecords:         aws.Long(1),
+		MaxRecords:         aws.Int64(1),
 		Source:             aws.String("String"),
 	}
 	resp, err := svc.DescribeClusterParameters(params)
@@ -840,7 +840,7 @@ func ExampleRedshift_DescribeClusterParameters() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_DescribeClusterSecurityGroups() {
@@ -849,7 +849,7 @@ func ExampleRedshift_DescribeClusterSecurityGroups() {
 	params := &redshift.DescribeClusterSecurityGroupsInput{
 		ClusterSecurityGroupName: aws.String("String"),
 		Marker:     aws.String("String"),
-		MaxRecords: aws.Long(1),
+		MaxRecords: aws.Int64(1),
 		TagKeys: []*string{
 			aws.String("String"), // Required
 			// More values...
@@ -877,7 +877,7 @@ func ExampleRedshift_DescribeClusterSecurityGroups() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_DescribeClusterSnapshots() {
@@ -887,7 +887,7 @@ func ExampleRedshift_DescribeClusterSnapshots() {
 		ClusterIdentifier:  aws.String("String"),
 		EndTime:            aws.Time(time.Now()),
 		Marker:             aws.String("String"),
-		MaxRecords:         aws.Long(1),
+		MaxRecords:         aws.Int64(1),
 		OwnerAccount:       aws.String("String"),
 		SnapshotIdentifier: aws.String("String"),
 		SnapshotType:       aws.String("String"),
@@ -919,7 +919,7 @@ func ExampleRedshift_DescribeClusterSnapshots() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_DescribeClusterSubnetGroups() {
@@ -928,7 +928,7 @@ func ExampleRedshift_DescribeClusterSubnetGroups() {
 	params := &redshift.DescribeClusterSubnetGroupsInput{
 		ClusterSubnetGroupName: aws.String("String"),
 		Marker:                 aws.String("String"),
-		MaxRecords:             aws.Long(1),
+		MaxRecords:             aws.Int64(1),
 		TagKeys: []*string{
 			aws.String("String"), // Required
 			// More values...
@@ -956,7 +956,7 @@ func ExampleRedshift_DescribeClusterSubnetGroups() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_DescribeClusterVersions() {
@@ -966,7 +966,7 @@ func ExampleRedshift_DescribeClusterVersions() {
 		ClusterParameterGroupFamily: aws.String("String"),
 		ClusterVersion:              aws.String("String"),
 		Marker:                      aws.String("String"),
-		MaxRecords:                  aws.Long(1),
+		MaxRecords:                  aws.Int64(1),
 	}
 	resp, err := svc.DescribeClusterVersions(params)
 
@@ -986,7 +986,7 @@ func ExampleRedshift_DescribeClusterVersions() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_DescribeClusters() {
@@ -995,7 +995,7 @@ func ExampleRedshift_DescribeClusters() {
 	params := &redshift.DescribeClustersInput{
 		ClusterIdentifier: aws.String("String"),
 		Marker:            aws.String("String"),
-		MaxRecords:        aws.Long(1),
+		MaxRecords:        aws.Int64(1),
 		TagKeys: []*string{
 			aws.String("String"), // Required
 			// More values...
@@ -1023,7 +1023,7 @@ func ExampleRedshift_DescribeClusters() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_DescribeDefaultClusterParameters() {
@@ -1032,7 +1032,7 @@ func ExampleRedshift_DescribeDefaultClusterParameters() {
 	params := &redshift.DescribeDefaultClusterParametersInput{
 		ParameterGroupFamily: aws.String("String"), // Required
 		Marker:               aws.String("String"),
-		MaxRecords:           aws.Long(1),
+		MaxRecords:           aws.Int64(1),
 	}
 	resp, err := svc.DescribeDefaultClusterParameters(params)
 
@@ -1052,7 +1052,7 @@ func ExampleRedshift_DescribeDefaultClusterParameters() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_DescribeEventCategories() {
@@ -1079,7 +1079,7 @@ func ExampleRedshift_DescribeEventCategories() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_DescribeEventSubscriptions() {
@@ -1087,7 +1087,7 @@ func ExampleRedshift_DescribeEventSubscriptions() {
 
 	params := &redshift.DescribeEventSubscriptionsInput{
 		Marker:           aws.String("String"),
-		MaxRecords:       aws.Long(1),
+		MaxRecords:       aws.Int64(1),
 		SubscriptionName: aws.String("String"),
 	}
 	resp, err := svc.DescribeEventSubscriptions(params)
@@ -1108,17 +1108,17 @@ func ExampleRedshift_DescribeEventSubscriptions() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_DescribeEvents() {
 	svc := redshift.New(nil)
 
 	params := &redshift.DescribeEventsInput{
-		Duration:         aws.Long(1),
+		Duration:         aws.Int64(1),
 		EndTime:          aws.Time(time.Now()),
 		Marker:           aws.String("String"),
-		MaxRecords:       aws.Long(1),
+		MaxRecords:       aws.Int64(1),
 		SourceIdentifier: aws.String("String"),
 		SourceType:       aws.String("SourceType"),
 		StartTime:        aws.Time(time.Now()),
@@ -1141,16 +1141,16 @@ func ExampleRedshift_DescribeEvents() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
-func ExampleRedshift_DescribeHSMClientCertificates() {
+func ExampleRedshift_DescribeHsmClientCertificates() {
 	svc := redshift.New(nil)
 
-	params := &redshift.DescribeHSMClientCertificatesInput{
-		HSMClientCertificateIdentifier: aws.String("String"),
+	params := &redshift.DescribeHsmClientCertificatesInput{
+		HsmClientCertificateIdentifier: aws.String("String"),
 		Marker:     aws.String("String"),
-		MaxRecords: aws.Long(1),
+		MaxRecords: aws.Int64(1),
 		TagKeys: []*string{
 			aws.String("String"), // Required
 			// More values...
@@ -1160,7 +1160,7 @@ func ExampleRedshift_DescribeHSMClientCertificates() {
 			// More values...
 		},
 	}
-	resp, err := svc.DescribeHSMClientCertificates(params)
+	resp, err := svc.DescribeHsmClientCertificates(params)
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
@@ -1178,16 +1178,16 @@ func ExampleRedshift_DescribeHSMClientCertificates() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
-func ExampleRedshift_DescribeHSMConfigurations() {
+func ExampleRedshift_DescribeHsmConfigurations() {
 	svc := redshift.New(nil)
 
-	params := &redshift.DescribeHSMConfigurationsInput{
-		HSMConfigurationIdentifier: aws.String("String"),
+	params := &redshift.DescribeHsmConfigurationsInput{
+		HsmConfigurationIdentifier: aws.String("String"),
 		Marker:     aws.String("String"),
-		MaxRecords: aws.Long(1),
+		MaxRecords: aws.Int64(1),
 		TagKeys: []*string{
 			aws.String("String"), // Required
 			// More values...
@@ -1197,7 +1197,7 @@ func ExampleRedshift_DescribeHSMConfigurations() {
 			// More values...
 		},
 	}
-	resp, err := svc.DescribeHSMConfigurations(params)
+	resp, err := svc.DescribeHsmConfigurations(params)
 
 	if err != nil {
 		if awsErr, ok := err.(awserr.Error); ok {
@@ -1215,7 +1215,7 @@ func ExampleRedshift_DescribeHSMConfigurations() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_DescribeLoggingStatus() {
@@ -1242,7 +1242,7 @@ func ExampleRedshift_DescribeLoggingStatus() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_DescribeOrderableClusterOptions() {
@@ -1251,7 +1251,7 @@ func ExampleRedshift_DescribeOrderableClusterOptions() {
 	params := &redshift.DescribeOrderableClusterOptionsInput{
 		ClusterVersion: aws.String("String"),
 		Marker:         aws.String("String"),
-		MaxRecords:     aws.Long(1),
+		MaxRecords:     aws.Int64(1),
 		NodeType:       aws.String("String"),
 	}
 	resp, err := svc.DescribeOrderableClusterOptions(params)
@@ -1272,7 +1272,7 @@ func ExampleRedshift_DescribeOrderableClusterOptions() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_DescribeReservedNodeOfferings() {
@@ -1280,8 +1280,8 @@ func ExampleRedshift_DescribeReservedNodeOfferings() {
 
 	params := &redshift.DescribeReservedNodeOfferingsInput{
 		Marker:                 aws.String("String"),
-		MaxRecords:             aws.Long(1),
-		ReservedNodeOfferingID: aws.String("String"),
+		MaxRecords:             aws.Int64(1),
+		ReservedNodeOfferingId: aws.String("String"),
 	}
 	resp, err := svc.DescribeReservedNodeOfferings(params)
 
@@ -1301,7 +1301,7 @@ func ExampleRedshift_DescribeReservedNodeOfferings() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_DescribeReservedNodes() {
@@ -1309,8 +1309,8 @@ func ExampleRedshift_DescribeReservedNodes() {
 
 	params := &redshift.DescribeReservedNodesInput{
 		Marker:         aws.String("String"),
-		MaxRecords:     aws.Long(1),
-		ReservedNodeID: aws.String("String"),
+		MaxRecords:     aws.Int64(1),
+		ReservedNodeId: aws.String("String"),
 	}
 	resp, err := svc.DescribeReservedNodes(params)
 
@@ -1330,7 +1330,7 @@ func ExampleRedshift_DescribeReservedNodes() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_DescribeResize() {
@@ -1357,7 +1357,7 @@ func ExampleRedshift_DescribeResize() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_DescribeSnapshotCopyGrants() {
@@ -1365,7 +1365,7 @@ func ExampleRedshift_DescribeSnapshotCopyGrants() {
 
 	params := &redshift.DescribeSnapshotCopyGrantsInput{
 		Marker:                aws.String("String"),
-		MaxRecords:            aws.Long(1),
+		MaxRecords:            aws.Int64(1),
 		SnapshotCopyGrantName: aws.String("String"),
 		TagKeys: []*string{
 			aws.String("String"), // Required
@@ -1394,7 +1394,7 @@ func ExampleRedshift_DescribeSnapshotCopyGrants() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_DescribeTags() {
@@ -1402,7 +1402,7 @@ func ExampleRedshift_DescribeTags() {
 
 	params := &redshift.DescribeTagsInput{
 		Marker:       aws.String("String"),
-		MaxRecords:   aws.Long(1),
+		MaxRecords:   aws.Int64(1),
 		ResourceName: aws.String("String"),
 		ResourceType: aws.String("String"),
 		TagKeys: []*string{
@@ -1432,7 +1432,7 @@ func ExampleRedshift_DescribeTags() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_DisableLogging() {
@@ -1459,7 +1459,7 @@ func ExampleRedshift_DisableLogging() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_DisableSnapshotCopy() {
@@ -1486,7 +1486,7 @@ func ExampleRedshift_DisableSnapshotCopy() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_EnableLogging() {
@@ -1515,7 +1515,7 @@ func ExampleRedshift_EnableLogging() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_EnableSnapshotCopy() {
@@ -1524,7 +1524,7 @@ func ExampleRedshift_EnableSnapshotCopy() {
 	params := &redshift.EnableSnapshotCopyInput{
 		ClusterIdentifier:     aws.String("String"), // Required
 		DestinationRegion:     aws.String("String"), // Required
-		RetentionPeriod:       aws.Long(1),
+		RetentionPeriod:       aws.Int64(1),
 		SnapshotCopyGrantName: aws.String("String"),
 	}
 	resp, err := svc.EnableSnapshotCopy(params)
@@ -1545,7 +1545,7 @@ func ExampleRedshift_EnableSnapshotCopy() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_ModifyCluster() {
@@ -1553,8 +1553,8 @@ func ExampleRedshift_ModifyCluster() {
 
 	params := &redshift.ModifyClusterInput{
 		ClusterIdentifier:                aws.String("String"), // Required
-		AllowVersionUpgrade:              aws.Boolean(true),
-		AutomatedSnapshotRetentionPeriod: aws.Long(1),
+		AllowVersionUpgrade:              aws.Bool(true),
+		AutomatedSnapshotRetentionPeriod: aws.Int64(1),
 		ClusterParameterGroupName:        aws.String("String"),
 		ClusterSecurityGroups: []*string{
 			aws.String("String"), // Required
@@ -1562,14 +1562,14 @@ func ExampleRedshift_ModifyCluster() {
 		},
 		ClusterType:                    aws.String("String"),
 		ClusterVersion:                 aws.String("String"),
-		HSMClientCertificateIdentifier: aws.String("String"),
-		HSMConfigurationIdentifier:     aws.String("String"),
+		HsmClientCertificateIdentifier: aws.String("String"),
+		HsmConfigurationIdentifier:     aws.String("String"),
 		MasterUserPassword:             aws.String("String"),
 		NewClusterIdentifier:           aws.String("String"),
 		NodeType:                       aws.String("String"),
-		NumberOfNodes:                  aws.Long(1),
+		NumberOfNodes:                  aws.Int64(1),
 		PreferredMaintenanceWindow:     aws.String("String"),
-		VPCSecurityGroupIDs: []*string{
+		VpcSecurityGroupIds: []*string{
 			aws.String("String"), // Required
 			// More values...
 		},
@@ -1592,7 +1592,7 @@ func ExampleRedshift_ModifyCluster() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_ModifyClusterParameterGroup() {
@@ -1606,7 +1606,7 @@ func ExampleRedshift_ModifyClusterParameterGroup() {
 				ApplyType:            aws.String("ParameterApplyType"),
 				DataType:             aws.String("String"),
 				Description:          aws.String("String"),
-				IsModifiable:         aws.Boolean(true),
+				IsModifiable:         aws.Bool(true),
 				MinimumEngineVersion: aws.String("String"),
 				ParameterName:        aws.String("String"),
 				ParameterValue:       aws.String("String"),
@@ -1633,7 +1633,7 @@ func ExampleRedshift_ModifyClusterParameterGroup() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_ModifyClusterSubnetGroup() {
@@ -1641,7 +1641,7 @@ func ExampleRedshift_ModifyClusterSubnetGroup() {
 
 	params := &redshift.ModifyClusterSubnetGroupInput{
 		ClusterSubnetGroupName: aws.String("String"), // Required
-		SubnetIDs: []*string{ // Required
+		SubnetIds: []*string{ // Required
 			aws.String("String"), // Required
 			// More values...
 		},
@@ -1665,7 +1665,7 @@ func ExampleRedshift_ModifyClusterSubnetGroup() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_ModifyEventSubscription() {
@@ -1673,14 +1673,14 @@ func ExampleRedshift_ModifyEventSubscription() {
 
 	params := &redshift.ModifyEventSubscriptionInput{
 		SubscriptionName: aws.String("String"), // Required
-		Enabled:          aws.Boolean(true),
+		Enabled:          aws.Bool(true),
 		EventCategories: []*string{
 			aws.String("String"), // Required
 			// More values...
 		},
-		SNSTopicARN: aws.String("String"),
 		Severity:    aws.String("String"),
-		SourceIDs: []*string{
+		SnsTopicArn: aws.String("String"),
+		SourceIds: []*string{
 			aws.String("String"), // Required
 			// More values...
 		},
@@ -1704,7 +1704,7 @@ func ExampleRedshift_ModifyEventSubscription() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_ModifySnapshotCopyRetentionPeriod() {
@@ -1712,7 +1712,7 @@ func ExampleRedshift_ModifySnapshotCopyRetentionPeriod() {
 
 	params := &redshift.ModifySnapshotCopyRetentionPeriodInput{
 		ClusterIdentifier: aws.String("String"), // Required
-		RetentionPeriod:   aws.Long(1),          // Required
+		RetentionPeriod:   aws.Int64(1),         // Required
 	}
 	resp, err := svc.ModifySnapshotCopyRetentionPeriod(params)
 
@@ -1732,15 +1732,15 @@ func ExampleRedshift_ModifySnapshotCopyRetentionPeriod() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_PurchaseReservedNodeOffering() {
 	svc := redshift.New(nil)
 
 	params := &redshift.PurchaseReservedNodeOfferingInput{
-		ReservedNodeOfferingID: aws.String("String"), // Required
-		NodeCount:              aws.Long(1),
+		ReservedNodeOfferingId: aws.String("String"), // Required
+		NodeCount:              aws.Int64(1),
 	}
 	resp, err := svc.PurchaseReservedNodeOffering(params)
 
@@ -1760,7 +1760,7 @@ func ExampleRedshift_PurchaseReservedNodeOffering() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_RebootCluster() {
@@ -1787,7 +1787,7 @@ func ExampleRedshift_RebootCluster() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_ResetClusterParameterGroup() {
@@ -1801,7 +1801,7 @@ func ExampleRedshift_ResetClusterParameterGroup() {
 				ApplyType:            aws.String("ParameterApplyType"),
 				DataType:             aws.String("String"),
 				Description:          aws.String("String"),
-				IsModifiable:         aws.Boolean(true),
+				IsModifiable:         aws.Bool(true),
 				MinimumEngineVersion: aws.String("String"),
 				ParameterName:        aws.String("String"),
 				ParameterValue:       aws.String("String"),
@@ -1809,7 +1809,7 @@ func ExampleRedshift_ResetClusterParameterGroup() {
 			},
 			// More values...
 		},
-		ResetAllParameters: aws.Boolean(true),
+		ResetAllParameters: aws.Bool(true),
 	}
 	resp, err := svc.ResetClusterParameterGroup(params)
 
@@ -1829,7 +1829,7 @@ func ExampleRedshift_ResetClusterParameterGroup() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_RestoreFromClusterSnapshot() {
@@ -1838,8 +1838,8 @@ func ExampleRedshift_RestoreFromClusterSnapshot() {
 	params := &redshift.RestoreFromClusterSnapshotInput{
 		ClusterIdentifier:                aws.String("String"), // Required
 		SnapshotIdentifier:               aws.String("String"), // Required
-		AllowVersionUpgrade:              aws.Boolean(true),
-		AutomatedSnapshotRetentionPeriod: aws.Long(1),
+		AllowVersionUpgrade:              aws.Bool(true),
+		AutomatedSnapshotRetentionPeriod: aws.Int64(1),
 		AvailabilityZone:                 aws.String("String"),
 		ClusterParameterGroupName:        aws.String("String"),
 		ClusterSecurityGroups: []*string{
@@ -1847,17 +1847,17 @@ func ExampleRedshift_RestoreFromClusterSnapshot() {
 			// More values...
 		},
 		ClusterSubnetGroupName:         aws.String("String"),
-		ElasticIP:                      aws.String("String"),
-		HSMClientCertificateIdentifier: aws.String("String"),
-		HSMConfigurationIdentifier:     aws.String("String"),
-		KMSKeyID:                       aws.String("String"),
+		ElasticIp:                      aws.String("String"),
+		HsmClientCertificateIdentifier: aws.String("String"),
+		HsmConfigurationIdentifier:     aws.String("String"),
+		KmsKeyId:                       aws.String("String"),
 		NodeType:                       aws.String("String"),
 		OwnerAccount:                   aws.String("String"),
-		Port:                           aws.Long(1),
+		Port:                           aws.Int64(1),
 		PreferredMaintenanceWindow: aws.String("String"),
-		PubliclyAccessible:         aws.Boolean(true),
+		PubliclyAccessible:         aws.Bool(true),
 		SnapshotClusterIdentifier:  aws.String("String"),
-		VPCSecurityGroupIDs: []*string{
+		VpcSecurityGroupIds: []*string{
 			aws.String("String"), // Required
 			// More values...
 		},
@@ -1880,7 +1880,7 @@ func ExampleRedshift_RestoreFromClusterSnapshot() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_RevokeClusterSecurityGroupIngress() {
@@ -1890,7 +1890,7 @@ func ExampleRedshift_RevokeClusterSecurityGroupIngress() {
 		ClusterSecurityGroupName: aws.String("String"), // Required
 		CIDRIP:                  aws.String("String"),
 		EC2SecurityGroupName:    aws.String("String"),
-		EC2SecurityGroupOwnerID: aws.String("String"),
+		EC2SecurityGroupOwnerId: aws.String("String"),
 	}
 	resp, err := svc.RevokeClusterSecurityGroupIngress(params)
 
@@ -1910,7 +1910,7 @@ func ExampleRedshift_RevokeClusterSecurityGroupIngress() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_RevokeSnapshotAccess() {
@@ -1939,7 +1939,7 @@ func ExampleRedshift_RevokeSnapshotAccess() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleRedshift_RotateEncryptionKey() {
@@ -1966,5 +1966,5 @@ func ExampleRedshift_RotateEncryptionKey() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }

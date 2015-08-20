@@ -21,7 +21,7 @@ func ExampleKMS_CreateAlias() {
 
 	params := &kms.CreateAliasInput{
 		AliasName:   aws.String("AliasNameType"), // Required
-		TargetKeyID: aws.String("KeyIdType"),     // Required
+		TargetKeyId: aws.String("KeyIdType"),     // Required
 	}
 	resp, err := svc.CreateAlias(params)
 
@@ -41,7 +41,7 @@ func ExampleKMS_CreateAlias() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleKMS_CreateGrant() {
@@ -49,7 +49,7 @@ func ExampleKMS_CreateGrant() {
 
 	params := &kms.CreateGrantInput{
 		GranteePrincipal: aws.String("PrincipalIdType"), // Required
-		KeyID:            aws.String("KeyIdType"),       // Required
+		KeyId:            aws.String("KeyIdType"),       // Required
 		Constraints: &kms.GrantConstraints{
 			EncryptionContextEquals: map[string]*string{
 				"Key": aws.String("EncryptionContextValue"), // Required
@@ -88,7 +88,7 @@ func ExampleKMS_CreateGrant() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleKMS_CreateKey() {
@@ -117,7 +117,7 @@ func ExampleKMS_CreateKey() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleKMS_Decrypt() {
@@ -152,7 +152,7 @@ func ExampleKMS_Decrypt() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleKMS_DeleteAlias() {
@@ -179,14 +179,14 @@ func ExampleKMS_DeleteAlias() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleKMS_DescribeKey() {
 	svc := kms.New(nil)
 
 	params := &kms.DescribeKeyInput{
-		KeyID: aws.String("KeyIdType"), // Required
+		KeyId: aws.String("KeyIdType"), // Required
 	}
 	resp, err := svc.DescribeKey(params)
 
@@ -206,14 +206,14 @@ func ExampleKMS_DescribeKey() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleKMS_DisableKey() {
 	svc := kms.New(nil)
 
 	params := &kms.DisableKeyInput{
-		KeyID: aws.String("KeyIdType"), // Required
+		KeyId: aws.String("KeyIdType"), // Required
 	}
 	resp, err := svc.DisableKey(params)
 
@@ -233,14 +233,14 @@ func ExampleKMS_DisableKey() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleKMS_DisableKeyRotation() {
 	svc := kms.New(nil)
 
 	params := &kms.DisableKeyRotationInput{
-		KeyID: aws.String("KeyIdType"), // Required
+		KeyId: aws.String("KeyIdType"), // Required
 	}
 	resp, err := svc.DisableKeyRotation(params)
 
@@ -260,14 +260,14 @@ func ExampleKMS_DisableKeyRotation() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleKMS_EnableKey() {
 	svc := kms.New(nil)
 
 	params := &kms.EnableKeyInput{
-		KeyID: aws.String("KeyIdType"), // Required
+		KeyId: aws.String("KeyIdType"), // Required
 	}
 	resp, err := svc.EnableKey(params)
 
@@ -287,14 +287,14 @@ func ExampleKMS_EnableKey() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleKMS_EnableKeyRotation() {
 	svc := kms.New(nil)
 
 	params := &kms.EnableKeyRotationInput{
-		KeyID: aws.String("KeyIdType"), // Required
+		KeyId: aws.String("KeyIdType"), // Required
 	}
 	resp, err := svc.EnableKeyRotation(params)
 
@@ -314,14 +314,14 @@ func ExampleKMS_EnableKeyRotation() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleKMS_Encrypt() {
 	svc := kms.New(nil)
 
 	params := &kms.EncryptInput{
-		KeyID:     aws.String("KeyIdType"), // Required
+		KeyId:     aws.String("KeyIdType"), // Required
 		Plaintext: []byte("PAYLOAD"),       // Required
 		EncryptionContext: map[string]*string{
 			"Key": aws.String("EncryptionContextValue"), // Required
@@ -350,14 +350,14 @@ func ExampleKMS_Encrypt() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleKMS_GenerateDataKey() {
 	svc := kms.New(nil)
 
 	params := &kms.GenerateDataKeyInput{
-		KeyID: aws.String("KeyIdType"), // Required
+		KeyId: aws.String("KeyIdType"), // Required
 		EncryptionContext: map[string]*string{
 			"Key": aws.String("EncryptionContextValue"), // Required
 			// More values...
@@ -367,7 +367,7 @@ func ExampleKMS_GenerateDataKey() {
 			// More values...
 		},
 		KeySpec:       aws.String("DataKeySpec"),
-		NumberOfBytes: aws.Long(1),
+		NumberOfBytes: aws.Int64(1),
 	}
 	resp, err := svc.GenerateDataKey(params)
 
@@ -387,14 +387,14 @@ func ExampleKMS_GenerateDataKey() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleKMS_GenerateDataKeyWithoutPlaintext() {
 	svc := kms.New(nil)
 
 	params := &kms.GenerateDataKeyWithoutPlaintextInput{
-		KeyID: aws.String("KeyIdType"), // Required
+		KeyId: aws.String("KeyIdType"), // Required
 		EncryptionContext: map[string]*string{
 			"Key": aws.String("EncryptionContextValue"), // Required
 			// More values...
@@ -404,7 +404,7 @@ func ExampleKMS_GenerateDataKeyWithoutPlaintext() {
 			// More values...
 		},
 		KeySpec:       aws.String("DataKeySpec"),
-		NumberOfBytes: aws.Long(1),
+		NumberOfBytes: aws.Int64(1),
 	}
 	resp, err := svc.GenerateDataKeyWithoutPlaintext(params)
 
@@ -424,14 +424,14 @@ func ExampleKMS_GenerateDataKeyWithoutPlaintext() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleKMS_GenerateRandom() {
 	svc := kms.New(nil)
 
 	params := &kms.GenerateRandomInput{
-		NumberOfBytes: aws.Long(1),
+		NumberOfBytes: aws.Int64(1),
 	}
 	resp, err := svc.GenerateRandom(params)
 
@@ -451,14 +451,14 @@ func ExampleKMS_GenerateRandom() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleKMS_GetKeyPolicy() {
 	svc := kms.New(nil)
 
 	params := &kms.GetKeyPolicyInput{
-		KeyID:      aws.String("KeyIdType"),      // Required
+		KeyId:      aws.String("KeyIdType"),      // Required
 		PolicyName: aws.String("PolicyNameType"), // Required
 	}
 	resp, err := svc.GetKeyPolicy(params)
@@ -479,14 +479,14 @@ func ExampleKMS_GetKeyPolicy() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleKMS_GetKeyRotationStatus() {
 	svc := kms.New(nil)
 
 	params := &kms.GetKeyRotationStatusInput{
-		KeyID: aws.String("KeyIdType"), // Required
+		KeyId: aws.String("KeyIdType"), // Required
 	}
 	resp, err := svc.GetKeyRotationStatus(params)
 
@@ -506,14 +506,14 @@ func ExampleKMS_GetKeyRotationStatus() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleKMS_ListAliases() {
 	svc := kms.New(nil)
 
 	params := &kms.ListAliasesInput{
-		Limit:  aws.Long(1),
+		Limit:  aws.Int64(1),
 		Marker: aws.String("MarkerType"),
 	}
 	resp, err := svc.ListAliases(params)
@@ -534,15 +534,15 @@ func ExampleKMS_ListAliases() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleKMS_ListGrants() {
 	svc := kms.New(nil)
 
 	params := &kms.ListGrantsInput{
-		KeyID:  aws.String("KeyIdType"), // Required
-		Limit:  aws.Long(1),
+		KeyId:  aws.String("KeyIdType"), // Required
+		Limit:  aws.Int64(1),
 		Marker: aws.String("MarkerType"),
 	}
 	resp, err := svc.ListGrants(params)
@@ -563,15 +563,15 @@ func ExampleKMS_ListGrants() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleKMS_ListKeyPolicies() {
 	svc := kms.New(nil)
 
 	params := &kms.ListKeyPoliciesInput{
-		KeyID:  aws.String("KeyIdType"), // Required
-		Limit:  aws.Long(1),
+		KeyId:  aws.String("KeyIdType"), // Required
+		Limit:  aws.Int64(1),
 		Marker: aws.String("MarkerType"),
 	}
 	resp, err := svc.ListKeyPolicies(params)
@@ -592,14 +592,14 @@ func ExampleKMS_ListKeyPolicies() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleKMS_ListKeys() {
 	svc := kms.New(nil)
 
 	params := &kms.ListKeysInput{
-		Limit:  aws.Long(1),
+		Limit:  aws.Int64(1),
 		Marker: aws.String("MarkerType"),
 	}
 	resp, err := svc.ListKeys(params)
@@ -620,14 +620,14 @@ func ExampleKMS_ListKeys() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleKMS_PutKeyPolicy() {
 	svc := kms.New(nil)
 
 	params := &kms.PutKeyPolicyInput{
-		KeyID:      aws.String("KeyIdType"),      // Required
+		KeyId:      aws.String("KeyIdType"),      // Required
 		Policy:     aws.String("PolicyType"),     // Required
 		PolicyName: aws.String("PolicyNameType"), // Required
 	}
@@ -649,7 +649,7 @@ func ExampleKMS_PutKeyPolicy() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleKMS_ReEncrypt() {
@@ -657,7 +657,7 @@ func ExampleKMS_ReEncrypt() {
 
 	params := &kms.ReEncryptInput{
 		CiphertextBlob:   []byte("PAYLOAD"),       // Required
-		DestinationKeyID: aws.String("KeyIdType"), // Required
+		DestinationKeyId: aws.String("KeyIdType"), // Required
 		DestinationEncryptionContext: map[string]*string{
 			"Key": aws.String("EncryptionContextValue"), // Required
 			// More values...
@@ -689,16 +689,16 @@ func ExampleKMS_ReEncrypt() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleKMS_RetireGrant() {
 	svc := kms.New(nil)
 
 	params := &kms.RetireGrantInput{
-		GrantID:    aws.String("GrantIdType"),
+		GrantId:    aws.String("GrantIdType"),
 		GrantToken: aws.String("GrantTokenType"),
-		KeyID:      aws.String("KeyIdType"),
+		KeyId:      aws.String("KeyIdType"),
 	}
 	resp, err := svc.RetireGrant(params)
 
@@ -718,15 +718,15 @@ func ExampleKMS_RetireGrant() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleKMS_RevokeGrant() {
 	svc := kms.New(nil)
 
 	params := &kms.RevokeGrantInput{
-		GrantID: aws.String("GrantIdType"), // Required
-		KeyID:   aws.String("KeyIdType"),   // Required
+		GrantId: aws.String("GrantIdType"), // Required
+		KeyId:   aws.String("KeyIdType"),   // Required
 	}
 	resp, err := svc.RevokeGrant(params)
 
@@ -746,7 +746,7 @@ func ExampleKMS_RevokeGrant() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleKMS_UpdateAlias() {
@@ -754,7 +754,7 @@ func ExampleKMS_UpdateAlias() {
 
 	params := &kms.UpdateAliasInput{
 		AliasName:   aws.String("AliasNameType"), // Required
-		TargetKeyID: aws.String("KeyIdType"),     // Required
+		TargetKeyId: aws.String("KeyIdType"),     // Required
 	}
 	resp, err := svc.UpdateAlias(params)
 
@@ -774,7 +774,7 @@ func ExampleKMS_UpdateAlias() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
 
 func ExampleKMS_UpdateKeyDescription() {
@@ -782,7 +782,7 @@ func ExampleKMS_UpdateKeyDescription() {
 
 	params := &kms.UpdateKeyDescriptionInput{
 		Description: aws.String("DescriptionType"), // Required
-		KeyID:       aws.String("KeyIdType"),       // Required
+		KeyId:       aws.String("KeyIdType"),       // Required
 	}
 	resp, err := svc.UpdateKeyDescription(params)
 
@@ -802,5 +802,5 @@ func ExampleKMS_UpdateKeyDescription() {
 	}
 
 	// Pretty-print the response data.
-	fmt.Println(awsutil.StringValue(resp))
+	fmt.Println(awsutil.Prettify(resp))
 }
