@@ -38,13 +38,16 @@ Optional:
     has more detailed usage instructions. By default, no arguments are sent to
     the script.
 
+-   `disable_sudo` (boolean) - By default, the bootstrap install command is prefixed with `sudo`. When using a
+    Docker builder, you will likely want to pass `true` since `sudo` is often not pre-installed.
+
 -   `remote_pillar_roots` (string) - The path to your remote [pillar
     roots](http://docs.saltstack.com/ref/configuration/master.html#pillar-configuration).
-    default: `/srv/pillar`.
+    default: `/srv/pillar`. This option cannot be used with `minion_config`.
 
 -   `remote_state_tree` (string) - The path to your remote [state
     tree](http://docs.saltstack.com/ref/states/highstate.html#the-salt-state-tree).
-    default: `/srv/salt`.
+    default: `/srv/salt`. This option cannot be used with `minion_config`.
 
 -   `local_pillar_roots` (string) - The path to your local [pillar
     roots](http://docs.saltstack.com/ref/configuration/master.html#pillar-configuration).
@@ -56,7 +59,8 @@ Optional:
 
 -   `minion_config` (string) - The path to your local [minion config
     file](http://docs.saltstack.com/ref/configuration/minion.html). This will be
-    uploaded to the `/etc/salt` on the remote.
+    uploaded to the `/etc/salt` on the remote. This option overrides the
+    `remote_state_tree` or `remote_pillar_roots` options.
 
 -   `skip_bootstrap` (boolean) - By default the salt provisioner runs [salt
     bootstrap](https://github.com/saltstack/salt-bootstrap) to install salt. Set
@@ -64,3 +68,8 @@ Optional:
 
 -   `temp_config_dir` (string) - Where your local state tree will be copied
     before moving to the `/srv/salt` directory. Default is `/tmp/salt`.
+
+-   `no_exit_on_failure` (boolean) - Packer will exit if the Salt highstate command
+    fails. Set this option to true to ignore Salt failures.
+
+-   `log_level` (string) - Set the logging level for the Salt highstate run.

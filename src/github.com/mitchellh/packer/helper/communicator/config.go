@@ -15,20 +15,21 @@ type Config struct {
 	Type string `mapstructure:"communicator"`
 
 	// SSH
-	SSHHost              string        `mapstructure:"ssh_host"`
-	SSHPort              int           `mapstructure:"ssh_port"`
-	SSHUsername          string        `mapstructure:"ssh_username"`
-	SSHPassword          string        `mapstructure:"ssh_password"`
-	SSHPrivateKey        string        `mapstructure:"ssh_private_key_file"`
-	SSHPty               bool          `mapstructure:"ssh_pty"`
-	SSHTimeout           time.Duration `mapstructure:"ssh_timeout"`
-	SSHDisableAgent      bool          `mapstructure:"ssh_disable_agent"`
-	SSHHandshakeAttempts int           `mapstructure:"ssh_handshake_attempts"`
-	SSHBastionHost       string        `mapstructure:"ssh_bastion_host"`
-	SSHBastionPort       int           `mapstructure:"ssh_bastion_port"`
-	SSHBastionUsername   string        `mapstructure:"ssh_bastion_username"`
-	SSHBastionPassword   string        `mapstructure:"ssh_bastion_password"`
-	SSHBastionPrivateKey string        `mapstructure:"ssh_bastion_private_key_file"`
+	SSHHost               string        `mapstructure:"ssh_host"`
+	SSHPort               int           `mapstructure:"ssh_port"`
+	SSHUsername           string        `mapstructure:"ssh_username"`
+	SSHPassword           string        `mapstructure:"ssh_password"`
+	SSHPrivateKey         string        `mapstructure:"ssh_private_key_file"`
+	SSHPty                bool          `mapstructure:"ssh_pty"`
+	SSHTimeout            time.Duration `mapstructure:"ssh_timeout"`
+	SSHDisableAgent       bool          `mapstructure:"ssh_disable_agent"`
+	SSHHandshakeAttempts  int           `mapstructure:"ssh_handshake_attempts"`
+	SSHBastionHost        string        `mapstructure:"ssh_bastion_host"`
+	SSHBastionPort        int           `mapstructure:"ssh_bastion_port"`
+	SSHBastionUsername    string        `mapstructure:"ssh_bastion_username"`
+	SSHBastionPassword    string        `mapstructure:"ssh_bastion_password"`
+	SSHBastionPrivateKey  string        `mapstructure:"ssh_bastion_private_key_file"`
+	SSHFileTransferMethod string        `mapstructure:"ssh_file_transfer_method"`
 
 	// WinRM
 	WinRMUser     string        `mapstructure:"winrm_username"`
@@ -36,6 +37,8 @@ type Config struct {
 	WinRMHost     string        `mapstructure:"winrm_host"`
 	WinRMPort     int           `mapstructure:"winrm_port"`
 	WinRMTimeout  time.Duration `mapstructure:"winrm_timeout"`
+	WinRMUseSSL   bool          `mapstructure:"winrm_use_ssl"`
+	WinRMInsecure bool          `mapstructure:"winrm_insecure"`
 }
 
 // Port returns the port that will be used for access based on config.
@@ -65,6 +68,10 @@ func (c *Config) Prepare(ctx *interpolate.Context) []error {
 		if es := c.prepareWinRM(ctx); len(es) > 0 {
 			errs = append(errs, es...)
 		}
+	case "docker", "none":
+		break
+	default:
+		return []error{fmt.Errorf("Communicator type %s is invalid", c.Type)}
 	}
 
 	return errs
@@ -93,6 +100,10 @@ func (c *Config) prepareSSH(ctx *interpolate.Context) []error {
 		}
 	}
 
+	if c.SSHFileTransferMethod == "" {
+		c.SSHFileTransferMethod = "scp"
+	}
+
 	// Validation
 	var errs []error
 	if c.SSHUsername == "" {
@@ -114,6 +125,12 @@ func (c *Config) prepareSSH(ctx *interpolate.Context) []error {
 			errs = append(errs, errors.New(
 				"ssh_bastion_password or ssh_bastion_private_key_file must be specified"))
 		}
+	}
+
+	if c.SSHFileTransferMethod != "scp" && c.SSHFileTransferMethod != "sftp" {
+		errs = append(errs, fmt.Errorf(
+			"ssh_file_transfer_method ('%s') is invalid, valid methods: sftp, scp",
+			c.SSHFileTransferMethod))
 	}
 
 	return errs

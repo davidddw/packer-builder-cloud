@@ -12,6 +12,10 @@ import (
 	"sync/atomic"
 )
 
+// ErrInvalid is returned when the data being read is not an LZ4 archive
+// (LZ4 magic number detection failed).
+var ErrInvalid = errors.New("invalid lz4 data")
+
 // errEndOfBlock is returned by readBlock when it has reached the last block of the frame.
 // It is not an error.
 var errEndOfBlock = errors.New("end of block")
@@ -67,7 +71,7 @@ func (z *Reader) readHeader(first bool) error {
 			continue
 		}
 		if magic != frameMagic {
-			return fmt.Errorf("lz4.Read: invalid frame magic number: got %x expected %x", magic, frameMagic)
+			return ErrInvalid
 		}
 		break
 	}
@@ -187,11 +191,14 @@ func (z *Reader) Read(buf []byte) (n int, err error) {
 		// cannot decompress concurrently when dealing with block dependency
 		z.decompressBlock(zb, nil)
 		// the last block may not contain enough data
+		if len(z.window) == 0 {
+			z.window = make([]byte, winSize)
+		}
 		if len(zb.data) >= winSize {
-			if len(z.window) == 0 {
-				z.window = make([]byte, winSize)
-			}
 			copy(z.window, zb.data[len(zb.data)-winSize:])
+		} else {
+			copy(z.window, z.window[len(zb.data):])
+			copy(z.window[len(zb.data)+1:], zb.data)
 		}
 	}
 	z.wg.Wait()
@@ -238,6 +245,9 @@ func (z *Reader) readBlock(buf []byte, b *block) error {
 		b.zdata = make([]byte, bLen)
 	default:
 		bLen = bLen & (1<<31 - 1)
+		if int(bLen) > len(buf) {
+			return fmt.Errorf("lz4.Read: invalid block size: %d", bLen)
+		}
 		b.data = buf[:bLen]
 		b.zdata = buf[:bLen]
 	}

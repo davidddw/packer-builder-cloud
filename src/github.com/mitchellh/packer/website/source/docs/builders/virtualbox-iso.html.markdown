@@ -57,13 +57,20 @@ builder.
 -   `iso_checksum` (string) - The checksum for the OS ISO file. Because ISO
     files are so large, this is required and Packer will verify it prior to
     booting a virtual machine with the ISO attached. The type of the checksum is
-    specified with `iso_checksum_type`, documented below.
+    specified with `iso_checksum_type`, documented below. At least one of
+    `iso_checksum` and `iso_checksum_url` must be defined. This has precedence
+    over `iso_checksum_url` type.
 
 -   `iso_checksum_type` (string) - The type of the checksum specified in
     `iso_checksum`. Valid values are "none", "md5", "sha1", "sha256", or
     "sha512" currently. While "none" will skip checksumming, this is not
     recommended since ISO files are generally large and corruption does happen
     from time to time.
+
+-   `iso_checksum_url` (string) - A URL to a GNU or BSD style checksum file
+    containing a checksum for the OS ISO file. At least one of `iso_checksum`
+    and `iso_checksum_url` must be defined. This will be ignored if
+    `iso_checksum` is non empty.
 
 -   `iso_url` (string) - A URL to the ISO containing the installation image.
     This URL can be either an HTTP URL or a file URL (or path to a file). If
@@ -170,6 +177,10 @@ builder.
     to, defaults to "ide". When set to "sata", the drive is attached to an AHCI
     SATA controller.
 
+-   `iso_target_path` (string) - The path where the iso should be saved after
+    download. By default will go in the packer cache, with a hash of the
+    original filename as its name.
+
 -   `iso_urls` (array of strings) - Multiple URLs for the ISO to download.
     Packer will try these in order. If anything goes wrong attempting to
     download or while downloading a single URL, it will move on to the next. All
@@ -194,13 +205,13 @@ builder.
 -   `shutdown_timeout` (string) - The amount of time to wait after executing the
     `shutdown_command` for the virtual machine to actually shut down. If it
     doesn't shut down in this time, it is an error. By default, the timeout is
-    "5m", or five minutes.
+    `5m`, or five minutes.
 
 -   `ssh_host_port_min` and `ssh_host_port_max` (integer) - The minimum and
     maximum port to use for the SSH port on the host machine which is forwarded
     to the SSH port on the guest machine. Because Packer often runs in parallel,
     Packer will choose a randomly available port in this range to use as the
-    host port.
+    host port. By default this is 2222 to 4444.
 
 -   `ssh_skip_nat_mapping` (boolean) - Defaults to false. When enabled, Packer
     does not setup forwarded port mapping for SSH requests and uses `ssh_port`
@@ -230,6 +241,12 @@ builder.
 -   `vm_name` (string) - This is the name of the OVF file for the new virtual
     machine, without the file extension. By default this is "packer-BUILDNAME",
     where "BUILDNAME" is the name of the build.
+
+-   `vrdp_port_min` and `vrdp_port_max` (integer) - The minimum and maximum port
+    to use for VRDP access to the virtual machine. Packer uses a randomly chosen
+    port in this range that appears available. By default this is 5900 to 6000.
+    The minimum and maximum ports are inclusive.
+
 
 ## Boot Command
 
@@ -318,7 +335,7 @@ directory of the SSH user.
 
 In order to perform extra customization of the virtual machine, a template can
 define extra calls to `VBoxManage` to perform.
-[VBoxManage](http://www.virtualbox.org/manual/ch08.html) is the command-line
+[VBoxManage](https://www.virtualbox.org/manual/ch08.html) is the command-line
 interface to VirtualBox where you can completely control VirtualBox. It can be
 used to do things such as set RAM, CPUs, etc.
 

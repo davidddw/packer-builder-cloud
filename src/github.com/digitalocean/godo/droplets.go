@@ -2,18 +2,22 @@ package godo
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 )
 
 const dropletBasePath = "v2/droplets"
 
+var errNoNetworks = errors.New("no networks have been defined")
+
 // DropletsService is an interface for interfacing with the droplet
-// endpoints of the Digital Ocean API
+// endpoints of the DigitalOcean API
 // See: https://developers.digitalocean.com/documentation/v2#droplets
 type DropletsService interface {
 	List(*ListOptions) ([]Droplet, *Response, error)
 	Get(int) (*Droplet, *Response, error)
 	Create(*DropletCreateRequest) (*Droplet, *Response, error)
+	CreateMultiple(*DropletMultiCreateRequest) ([]Droplet, *Response, error)
 	Delete(int) (*Response, error)
 	Kernels(int, *ListOptions) ([]Kernel, *Response, error)
 	Snapshots(int, *ListOptions) ([]Image, *Response, error)
@@ -48,6 +52,52 @@ type Droplet struct {
 	Networks    *Networks `json:"networks,omitempty"`
 	ActionIDs   []int     `json:"action_ids,omitempty"`
 	Created     string    `json:"created_at,omitempty"`
+	Kernel      *Kernel   `json:"kernel, omitempty"`
+}
+
+// PublicIPv4 returns the public IPv4 address for the Droplet.
+func (d *Droplet) PublicIPv4() (string, error) {
+	if d.Networks == nil {
+		return "", errNoNetworks
+	}
+
+	for _, v4 := range d.Networks.V4 {
+		if v4.Type == "public" {
+			return v4.IPAddress, nil
+		}
+	}
+
+	return "", nil
+}
+
+// PrivateIPv4 returns the private IPv4 address for the Droplet.
+func (d *Droplet) PrivateIPv4() (string, error) {
+	if d.Networks == nil {
+		return "", errNoNetworks
+	}
+
+	for _, v4 := range d.Networks.V4 {
+		if v4.Type == "private" {
+			return v4.IPAddress, nil
+		}
+	}
+
+	return "", nil
+}
+
+// PublicIPv6 returns the private IPv6 address for the Droplet.
+func (d *Droplet) PublicIPv6() (string, error) {
+	if d.Networks == nil {
+		return "", errNoNetworks
+	}
+
+	for _, v4 := range d.Networks.V6 {
+		if v4.Type == "public" {
+			return v4.IPAddress, nil
+		}
+	}
+
+	return "", nil
 }
 
 // Kernel object
@@ -133,7 +183,24 @@ type DropletCreateRequest struct {
 	UserData          string                `json:"user_data,omitempty"`
 }
 
+// DropletMultiCreateRequest is a request to create multiple droplets.
+type DropletMultiCreateRequest struct {
+	Names             []string              `json:"names"`
+	Region            string                `json:"region"`
+	Size              string                `json:"size"`
+	Image             DropletCreateImage    `json:"image"`
+	SSHKeys           []DropletCreateSSHKey `json:"ssh_keys"`
+	Backups           bool                  `json:"backups"`
+	IPv6              bool                  `json:"ipv6"`
+	PrivateNetworking bool                  `json:"private_networking"`
+	UserData          string                `json:"user_data,omitempty"`
+}
+
 func (d DropletCreateRequest) String() string {
+	return Stringify(d)
+}
+
+func (d DropletMultiCreateRequest) String() string {
 	return Stringify(d)
 }
 
@@ -194,6 +261,10 @@ func (s *DropletsServiceOp) List(opt *ListOptions) ([]Droplet, *Response, error)
 
 // Get individual droplet
 func (s *DropletsServiceOp) Get(dropletID int) (*Droplet, *Response, error) {
+	if dropletID < 1 {
+		return nil, nil, NewArgError("dropletID", "cannot be less than 1")
+	}
+
 	path := fmt.Sprintf("%s/%d", dropletBasePath, dropletID)
 
 	req, err := s.client.NewRequest("GET", path, nil)
@@ -212,6 +283,10 @@ func (s *DropletsServiceOp) Get(dropletID int) (*Droplet, *Response, error) {
 
 // Create droplet
 func (s *DropletsServiceOp) Create(createRequest *DropletCreateRequest) (*Droplet, *Response, error) {
+	if createRequest == nil {
+		return nil, nil, NewArgError("createRequest", "cannot be nil")
+	}
+
 	path := dropletBasePath
 
 	req, err := s.client.NewRequest("POST", path, createRequest)
@@ -231,8 +306,37 @@ func (s *DropletsServiceOp) Create(createRequest *DropletCreateRequest) (*Drople
 	return root.Droplet, resp, err
 }
 
+// CreateMultiple creates multiple droplets.
+func (s *DropletsServiceOp) CreateMultiple(createRequest *DropletMultiCreateRequest) ([]Droplet, *Response, error) {
+	if createRequest == nil {
+		return nil, nil, NewArgError("createRequest", "cannot be nil")
+	}
+
+	path := dropletBasePath
+
+	req, err := s.client.NewRequest("POST", path, createRequest)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	root := new(dropletsRoot)
+	resp, err := s.client.Do(req, root)
+	if err != nil {
+		return nil, resp, err
+	}
+	if l := root.Links; l != nil {
+		resp.Links = l
+	}
+
+	return root.Droplets, resp, err
+}
+
 // Delete droplet
 func (s *DropletsServiceOp) Delete(dropletID int) (*Response, error) {
+	if dropletID < 1 {
+		return nil, NewArgError("dropletID", "cannot be less than 1")
+	}
+
 	path := fmt.Sprintf("%s/%d", dropletBasePath, dropletID)
 
 	req, err := s.client.NewRequest("DELETE", path, nil)
@@ -247,6 +351,10 @@ func (s *DropletsServiceOp) Delete(dropletID int) (*Response, error) {
 
 // Kernels lists kernels available for a droplet.
 func (s *DropletsServiceOp) Kernels(dropletID int, opt *ListOptions) ([]Kernel, *Response, error) {
+	if dropletID < 1 {
+		return nil, nil, NewArgError("dropletID", "cannot be less than 1")
+	}
+
 	path := fmt.Sprintf("%s/%d/kernels", dropletBasePath, dropletID)
 	path, err := addOptions(path, opt)
 	if err != nil {
@@ -269,6 +377,10 @@ func (s *DropletsServiceOp) Kernels(dropletID int, opt *ListOptions) ([]Kernel, 
 
 // Actions lists the actions for a droplet.
 func (s *DropletsServiceOp) Actions(dropletID int, opt *ListOptions) ([]Action, *Response, error) {
+	if dropletID < 1 {
+		return nil, nil, NewArgError("dropletID", "cannot be less than 1")
+	}
+
 	path := fmt.Sprintf("%s/%d/actions", dropletBasePath, dropletID)
 	path, err := addOptions(path, opt)
 	if err != nil {
@@ -294,6 +406,10 @@ func (s *DropletsServiceOp) Actions(dropletID int, opt *ListOptions) ([]Action, 
 
 // Backups lists the backups for a droplet.
 func (s *DropletsServiceOp) Backups(dropletID int, opt *ListOptions) ([]Image, *Response, error) {
+	if dropletID < 1 {
+		return nil, nil, NewArgError("dropletID", "cannot be less than 1")
+	}
+
 	path := fmt.Sprintf("%s/%d/backups", dropletBasePath, dropletID)
 	path, err := addOptions(path, opt)
 	if err != nil {
@@ -319,6 +435,10 @@ func (s *DropletsServiceOp) Backups(dropletID int, opt *ListOptions) ([]Image, *
 
 // Snapshots lists the snapshots available for a droplet.
 func (s *DropletsServiceOp) Snapshots(dropletID int, opt *ListOptions) ([]Image, *Response, error) {
+	if dropletID < 1 {
+		return nil, nil, NewArgError("dropletID", "cannot be less than 1")
+	}
+
 	path := fmt.Sprintf("%s/%d/snapshots", dropletBasePath, dropletID)
 	path, err := addOptions(path, opt)
 	if err != nil {
@@ -344,6 +464,10 @@ func (s *DropletsServiceOp) Snapshots(dropletID int, opt *ListOptions) ([]Image,
 
 // Neighbors lists the neighbors for a droplet.
 func (s *DropletsServiceOp) Neighbors(dropletID int) ([]Droplet, *Response, error) {
+	if dropletID < 1 {
+		return nil, nil, NewArgError("dropletID", "cannot be less than 1")
+	}
+
 	path := fmt.Sprintf("%s/%d/neighbors", dropletBasePath, dropletID)
 
 	req, err := s.client.NewRequest("GET", path, nil)

@@ -6,7 +6,7 @@
 Package remote_api implements the /_ah/remote_api endpoint.
 This endpoint is used by offline tools such as the bulk loader.
 */
-package remote_api // import "google.golang.org/appengine/remote_api"
+package remote_api
 
 import (
 	"fmt"
@@ -33,7 +33,10 @@ func handle(w http.ResponseWriter, req *http.Request) {
 
 	u := user.Current(c)
 	if u == nil {
-		u, _ = user.CurrentOAuth(c, "")
+		u, _ = user.CurrentOAuth(c,
+			"https://www.googleapis.com/auth/cloud-platform",
+			"https://www.googleapis.com/auth/appengine.apis",
+		)
 	}
 
 	if u == nil || !u.Admin {

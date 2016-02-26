@@ -20,6 +20,7 @@ type StepRunSourceInstance struct {
 	AvailabilityZone         string
 	BlockDevices             BlockDevices
 	Debug                    bool
+	EbsOptimized             bool
 	ExpectedRootDevice       string
 	InstanceType             string
 	IamInstanceProfile       string
@@ -54,14 +55,13 @@ func (s *StepRunSourceInstance) Run(state multistep.StateBag) multistep.StepActi
 			return multistep.ActionHalt
 		}
 
-		// Test if it is encoded already, and if not, encode it
-		if _, err := base64.StdEncoding.DecodeString(string(contents)); err != nil {
-			log.Printf("[DEBUG] base64 encoding user data...")
-			contents = []byte(base64.StdEncoding.EncodeToString(contents))
-		}
-
 		userData = string(contents)
+	}
 
+	// Test if it is encoded already, and if not, encode it
+	if _, err := base64.StdEncoding.DecodeString(userData); err != nil {
+		log.Printf("[DEBUG] base64 encoding user data...")
+		userData = base64.StdEncoding.EncodeToString([]byte(userData))
 	}
 
 	ui.Say("Launching a source AWS instance...")
@@ -135,7 +135,7 @@ func (s *StepRunSourceInstance) Run(state multistep.StateBag) multistep.StepActi
 
 	var instanceId string
 
-	if spotPrice == "" {
+	if spotPrice == "" || spotPrice == "0" {
 		runOpts := &ec2.RunInstancesInput{
 			KeyName:             &keyName,
 			ImageId:             &s.SourceAMI,
@@ -146,6 +146,7 @@ func (s *StepRunSourceInstance) Run(state multistep.StateBag) multistep.StepActi
 			IamInstanceProfile:  &ec2.IamInstanceProfileSpecification{Name: &s.IamInstanceProfile},
 			BlockDeviceMappings: s.BlockDevices.BuildLaunchDevices(),
 			Placement:           &ec2.Placement{AvailabilityZone: &s.AvailabilityZone},
+			EbsOptimized:        &s.EbsOptimized,
 		}
 
 		if s.SubnetId != "" && s.AssociatePublicIpAddress {
@@ -196,6 +197,7 @@ func (s *StepRunSourceInstance) Run(state multistep.StateBag) multistep.StepActi
 					AvailabilityZone: &availabilityZone,
 				},
 				BlockDeviceMappings: s.BlockDevices.BuildLaunchDevices(),
+				EbsOptimized:        &s.EbsOptimized,
 			},
 		})
 		if err != nil {

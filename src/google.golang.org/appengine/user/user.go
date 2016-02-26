@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 
 // Package user provides a client for App Engine's user authentication service.
-package user // import "google.golang.org/appengine/user"
+package user
 
 import (
 	"strings"
@@ -25,6 +25,10 @@ type User struct {
 	// It is populated if the Email is associated
 	// with a Google account, or empty otherwise.
 	ID string
+
+	// ClientID is the ID of the pre-registered client so its identity can be verified.
+	// See https://developers.google.com/console/help/#generatingoauth2 for more information.
+	ClientID string
 
 	FederatedIdentity string
 	FederatedProvider string

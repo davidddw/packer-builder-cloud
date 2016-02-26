@@ -1,3 +1,7 @@
+// Copyright 2015 Google Inc. All rights reserved.
+// Use of this source code is governed by the Apache 2.0
+// license that can be found in the LICENSE file.
+
 // +build appengine
 
 package internal
@@ -27,26 +31,42 @@ func ClassicContextFromContext(ctx netcontext.Context) appengine.Context {
 	return fromContext(ctx)
 }
 
-func toContext(c appengine.Context) netcontext.Context {
-	ctx := netcontext.WithValue(netcontext.Background(), &contextKey, c)
+func withContext(parent netcontext.Context, c appengine.Context) netcontext.Context {
+	ctx := netcontext.WithValue(parent, &contextKey, c)
 
 	s := &basepb.StringProto{}
 	c.Call("__go__", "GetNamespace", &basepb.VoidProto{}, s, nil)
 	if ns := s.GetValue(); ns != "" {
-		ctx = WithNamespace(ctx, ns)
+		ctx = NamespacedContext(ctx, ns)
 	}
 
 	return ctx
 }
 
-func NewContext(req *http.Request) netcontext.Context {
+func IncomingHeaders(ctx netcontext.Context) http.Header {
+	if c := fromContext(ctx); c != nil {
+		if req, ok := c.Request().(*http.Request); ok {
+			return req.Header
+		}
+	}
+	return nil
+}
+
+func WithContext(parent netcontext.Context, req *http.Request) netcontext.Context {
 	c := appengine.NewContext(req)
-	return toContext(c)
+	return withContext(parent, c)
 }
 
 func Call(ctx netcontext.Context, service, method string, in, out proto.Message) error {
-	if f, ok := ctx.Value(&callOverrideKey).(callOverrideFunc); ok {
+	if f, ctx, ok := callOverrideFromContext(ctx); ok {
 		return f(ctx, service, method, in, out)
+	}
+
+	// Handle already-done contexts quickly.
+	select {
+	case <-ctx.Done():
+		return ctx.Err()
+	default:
 	}
 
 	c := fromContext(ctx)
@@ -70,7 +90,22 @@ func Call(ctx netcontext.Context, service, method string, in, out proto.Message)
 		}
 	}
 
-	return c.Call(service, method, in, out, opts)
+	err := c.Call(service, method, in, out, opts)
+	switch v := err.(type) {
+	case *appengine_internal.APIError:
+		return &APIError{
+			Service: v.Service,
+			Detail:  v.Detail,
+			Code:    v.Code,
+		}
+	case *appengine_internal.CallError:
+		return &CallError{
+			Detail:  v.Detail,
+			Code:    v.Code,
+			Timeout: v.Timeout,
+		}
+	}
+	return err
 }
 
 func handleHTTP(w http.ResponseWriter, r *http.Request) {

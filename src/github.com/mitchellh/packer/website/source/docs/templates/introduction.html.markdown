@@ -81,9 +81,9 @@ builders, provisioners, etc. will still result in validation errors.
 
 ## Example Template
 
-Below is an example of a basic template that is nearly fully functional. It is
-just missing valid AWS access keys. Otherwise, it would work properly with
-`packer build`.
+Below is an example of a basic template that could be invoked with `packer build`. It would create an instance in AWS, and once running copy a script to it and run that script using SSH.
+
+-&gt; **Note:** This example requires an account with Amazon Web Services. There are a number of parameters which need to be provided for a functional build to take place. See the [Amazon builder](/docs/builders/amazon.html) documentation for more information.
 
 ``` {.javascript}
 {
@@ -93,8 +93,8 @@ just missing valid AWS access keys. Otherwise, it would work properly with
       "access_key": "...",
       "secret_key": "...",
       "region": "us-east-1",
-      "source_ami": "ami-de0d9eb7",
-      "instance_type": "t1.micro",
+      "source_ami": "ami-72b9e018",
+      "instance_type": "t2.micro",
       "ssh_username": "ubuntu",
       "ami_name": "packer {{timestamp}}"
     }

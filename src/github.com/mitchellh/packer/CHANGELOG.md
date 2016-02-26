@@ -1,4 +1,111 @@
-## 0.8.6 (Unreleased)
+## 0.9.0 (Unreleased)
+
+BACKWARDS INCOMPATIBILITIES:
+
+  * Packer now ships as a single binary, including plugins. If you install
+    packer 0.9.0 over a previous packer installation, **you must delete all of
+    the packer-* plugin files** or packer will load out-of-date plugins from
+    disk.
+  * Release binaries are now provided via <https://releases.hashicorp.com>.
+  * Packer 0.9.0 is now built with Go 1.6. Future versions will drop support
+    for building with Go 1.4.
+  * core: Plugins that implement the Communicator interface must now implement
+    a DownloadDir method [GH-2618]
+  * builder/amazon: Inline `user_data` for EC2 is now base64 encoded
+    automatically [GH-2539]
+  * builder/parallels: `parallels_tools_host_path` and `guest_os_distribution`
+    have been replaced by `guest_os_type`; use `packer fix` to update your
+    templates [GH-2751]
+
+FEATURES:
+
+  * **Chef on Windows**: The chef provisioner now has native support for
+    Windows using Powershell and WinRM [GH-1215]
+  * **New `vmware-esxi` feature**: Packer can now export images from vCloud or
+    vSphere during the build [GH-1921]
+  * **New Ansible Provisioner**: `ansible` provisioner supports remote
+    provisioning to keep your build image cleaner [GH-1969]
+  * **New Amazon Import post-processor**: `amazon-import` allows you to upload an OVA-based VM to Amazon EC2 [GH-2962]
+  * **Shell Local post-processor**: `shell-local` allows you to run shell
+    commands on the host after a build has completed for custom packaging or
+    publishing of your artifacts [GH-2706]
+  * **Artifice post-processor**: Override packer artifacts during post-
+    processing. This allows you to extract artifacts from a packer builder and
+    use them with other post-processors like compress, docker, and Atlas.
+
+IMPROVEMENTS:
+
+  * core: Packer plugins are now compiled into the main binary, reducing file
+    size and build times, and making packer easier to install. The overall
+    plugin architecture has not changed and third-party plugins can still be
+    loaded from disk. Please make sure your plugins are up-to-date! [GH-2854]
+  * core: Packer now indicates line numbers for template parse errors [GH-2742]
+  * core: Scripts are executed via `/usr/bin/env bash` instead of `/bin/bash`
+    for broader compatibility. [GH-2913]
+  * core: `target_path` for builder downloads can now be specified. [GH-2600]
+  * core: WinRM communicator now supports HTTPS protocol [GH-3061]
+  * core: Template syntax errors now show line, column, offset [GH-3180]
+  * core: SSH communicator now supports downloading directories [GH-2618]
+  * builder/amazon: Add support for `ebs_optimized` [GH-2806]
+  * builder/amazon: You can now specify `0` for `spot_price` to switch to on
+    demand instances [GH-2845]
+  * builder/amazon: Added `ap-northeast-2` (Seoul) [GH-3056]
+  * builder/amazon: packer will try to derive the AZ if only a subnet is
+    specified [GH-3037]
+  * builder/digitalocean: doubled instance wait timeouts to power off or
+    shutdown (now 4 minutes) and to complete a snapshot (now 20 minutes)
+    [GH-2939]
+  * builder/google: `account_file` can now be provided as a JSON string
+    [GH-2811]
+  * builder/google: added support for `preemptible` instances [GH-2982]
+  * builder/google: added support for static external IPs via `address` option
+    [GH-3030]
+  * builder/openstack: added retry on WaitForImage 404 [GH-3009]
+  * builder/openstack: Can specify `source_image_name` instead of the ID
+    [GH-2577]
+  * builder/openstack: added support for SSH over IPv6 [GH-3197]
+  * builder/parallels: Improve support for Parallels 11 [GH-2662]
+  * builder/parallels: Parallels disks are now compacted by default [GH-2731]
+  * builder/parallels: Packer will look for Parallels in
+    `/Applications/Parallels Desktop.app` if it is not detected automatically
+    [GH-2839]
+  * builder/qemu: qcow2 images are now compacted by default [GH-2748]
+  * builder/qemu: qcow2 images can now be compressed [GH-2748]
+  * builder/qemu: Now specifies `virtio-scsi` by default [GH-2422]
+  * builder/qemu: Now checks for version-specific options [GH-2376]
+  * builder/qemu: Can now bypass disk cache using `iso_skip_cache` [GH-3105]
+  * builder/qemu: `<wait>` in `boot_command` now accepts an arbitrary duration
+    like <wait1m30s> [GH-3129]
+  * builder/qemu: Expose `{{ .SSHHostPort }}` in templates [GH-2884]
+  * builder/virtualbox: Added VRDP for debugging [GH-3188]
+  * builder/vmware-esxi: Added private key auth for remote builds via
+    `remote_private_key_file` [GH-2912]
+  * post-processor/atlas: Added support for compile ID. [GH-2775]
+  * post-processor/docker-import: Can now import Artifice artifacts [GH-2718]
+  * provisioner/chef: Added `encrypted_data_bag_secret_path` option [GH-2653]
+  * provisioner/puppet: Added the `extra_arguments` parameter [GH-2635]
+  * provisioner/salt: Added `no_exit_on_failure`, `log_level`, and improvements
+    to salt command invocation [GH-2660]
+
+BUG FIXES:
+
+  * core: Random number generator is now seeded. [GH-2640]
+  * core: Packer should now have a lot less race conditions [GH-2824]
+  * builder/amazon: The `no_device` option for block device mappings is now handled correctly [GH-2398]
+  * builder/amazon: AMI name validation now matches Amazon's spec [GH-2774]
+  * builder/amazon: Use snapshot size when volume size is unspecified [GH-2480]
+  * builder/amazon: Pass AccessKey and SecretKey when uploading bundles for
+    instance-backed AMIs [GH-2596]
+  * builder/parallels: Added interpolation in `prlctl_post` [GH-2828]
+  * builder/vmware: `format` option is now read correctly [GH-2892]
+  * builder/vmware-esxi: Correct endless loop in destroy validation logic
+    [GH-2911]
+  * provisioner/shell: No longer leaves temp scripts behind [GH-1536]
+  * provisioner/winrm: Now waits for reboot to complete before continuing with provisioning [GH-2568]
+  * post-processor/artifice: Fix truncation of files downloaded from Docker. [GH-2793]
+
+
+## 0.8.6 (Aug 22, 2015)
 
 IMPROVEMENTS:
 

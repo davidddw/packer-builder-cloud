@@ -32,7 +32,7 @@ func main() {
 	gen.Init()
 	genTables()
 	genTablesTest()
-	genTrieval()
+	gen.Repackage("gen_trieval.go", "trieval.go", "cases")
 }
 
 // runeInfo contains all information for a rune that we care about for casing
@@ -52,7 +52,7 @@ type runeInfo struct {
 	Conditional bool
 	Special     [1 + maxCaseMode][]rune
 
-	// Folding (TODO)
+	// Folding
 	FoldSimple  rune
 	FoldSpecial rune
 	FoldFull    []rune
@@ -90,22 +90,8 @@ func (r *runeInfo) mapping(c info) string {
 	return string(r.Rune)
 }
 
-// ucdParser is a parser for UCD files.
-type ucdParser []ucd.Option
-
-func parser(opts ...ucd.Option) ucdParser { return ucdParser(opts) }
-
-// parse calls f for each entry in the given UCD file.
-func (opts ucdParser) parse(filename string, f func(p *ucd.Parser)) {
-	r := gen.OpenUCDFile(filename)
-	defer r.Close()
-	p := ucd.New(r, opts...)
-	for p.Next() {
-		f(p)
-	}
-	if err := p.Err(); err != nil {
-		log.Fatal(err)
-	}
+func parse(file string, f func(p *ucd.Parser)) {
+	ucd.Parse(gen.OpenUCDFile(file), f)
 }
 
 func parseUCD() []runeInfo {
@@ -117,7 +103,7 @@ func parseUCD() []runeInfo {
 		return c
 	}
 
-	parser().parse("UnicodeData.txt", func(p *ucd.Parser) {
+	parse("UnicodeData.txt", func(p *ucd.Parser) {
 		ri := get(p.Rune(0))
 		ri.CCC = byte(p.Int(ucd.CanonicalCombiningClass))
 		ri.Simple[cLower] = p.Runes(ucd.SimpleLowercaseMapping)
@@ -129,14 +115,14 @@ func parseUCD() []runeInfo {
 	})
 
 	// <code>; <property>
-	parser().parse("PropList.txt", func(p *ucd.Parser) {
+	parse("PropList.txt", func(p *ucd.Parser) {
 		if p.String(1) == "Soft_Dotted" {
 			chars[p.Rune(0)].SoftDotted = true
 		}
 	})
 
 	// <code>; <word break type>
-	parser().parse("DerivedCoreProperties.txt", func(p *ucd.Parser) {
+	parse("DerivedCoreProperties.txt", func(p *ucd.Parser) {
 		ri := get(p.Rune(0))
 		switch p.String(1) {
 		case "Case_Ignorable":
@@ -151,7 +137,7 @@ func parseUCD() []runeInfo {
 	})
 
 	// <code>; <lower> ; <title> ; <upper> ; (<condition_list> ;)?
-	parser().parse("SpecialCasing.txt", func(p *ucd.Parser) {
+	parse("SpecialCasing.txt", func(p *ucd.Parser) {
 		// We drop all conditional special casing and deal with them manually in
 		// the language-specific case mappers. Rune 0x03A3 is the only one with
 		// a conditional formatting that is not language-specific. However,
@@ -170,7 +156,7 @@ func parseUCD() []runeInfo {
 
 	// TODO: Use text breaking according to UAX #29.
 	// <code>; <word break type>
-	parser().parse("auxiliary/WordBreakProperty.txt", func(p *ucd.Parser) {
+	parse("auxiliary/WordBreakProperty.txt", func(p *ucd.Parser) {
 		ri := get(p.Rune(0))
 		ri.BreakType = p.String(1)
 
@@ -183,22 +169,23 @@ func parseUCD() []runeInfo {
 		}
 	})
 
-	// TODO: Support case folding.
-	// // <code>; <status>; <mapping>;
-	// parser().parse("CaseFolding.txt", func (p *ucd.Parser) {
-	// 	ri := get(p.Rune(0))
-	// 	switch p.String(1) {
-	// 	case "C":
-	// 		ri.FoldSimple = p.Rune(2)
-	// 		ri.FoldFull = p.Runes(2)
-	// 	case "S":
-	// 		ri.FoldSimple = p.Rune(2)
-	// 	case "T":
-	// 		ri.FoldSpecial = p.Rune(2)
-	// 	case "F":
-	// 		ri.FoldFull = p.Runes(2)
-	// 	}
-	// })
+	// <code>; <type>; <mapping>
+	parse("CaseFolding.txt", func(p *ucd.Parser) {
+		ri := get(p.Rune(0))
+		switch p.String(1) {
+		case "C":
+			ri.FoldSimple = p.Rune(2)
+			ri.FoldFull = p.Runes(2)
+		case "S":
+			ri.FoldSimple = p.Rune(2)
+		case "T":
+			ri.FoldSpecial = p.Rune(2)
+		case "F":
+			ri.FoldFull = p.Runes(2)
+		default:
+			log.Fatalf("%U: unknown type: %s", p.Rune(0), p.String(1))
+		}
+	})
 
 	return chars
 }
@@ -214,20 +201,23 @@ func genTables() {
 		t.Insert(rune(i), uint64(c.entry))
 	}
 
-	w := &bytes.Buffer{}
+	w := gen.NewCodeWriter()
+	defer w.WriteGoFile("tables.go", "cases")
+
+	gen.WriteUnicodeVersion(w)
+
+	// TODO: write CLDR version after adding a mechanism to detect that the
+	// tables on which the manually created locale-sensitive casing code is
+	// based hasn't changed.
+
+	w.WriteVar("xorData", string(xorData))
+	w.WriteVar("exceptions", string(exceptionData))
 
 	sz, err := t.Gen(w, triegen.Compact(&sparseCompacter{}))
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	fmt.Fprintf(w, "// exceptions: %d bytes\n", len(exceptionData))
-	fmt.Fprintf(w, "var exceptions = %q\n\n", string(exceptionData))
-
-	sz += len(exceptionData)
-	fmt.Fprintf(w, "// Total table size %d bytes (%dKiB)\n", sz, sz/1024)
-
-	gen.WriteGoFile("tables.go", "cases", w.Bytes())
+	w.Size += sz
 }
 
 func makeEntry(ri *runeInfo) {
@@ -265,6 +255,10 @@ func makeEntry(ri *runeInfo) {
 		makeException(ri)
 		return
 	}
+	if f := string(ri.FoldFull); len(f) > 0 && f != ri.mapping(cUpper) && f != ri.mapping(cLower) {
+		makeException(ri)
+		return
+	}
 
 	// Rune is either lowercase or uppercase.
 
@@ -281,35 +275,45 @@ func makeEntry(ri *runeInfo) {
 		return
 	}
 
+	if string(ri.FoldFull) == ri.mapping(cUpper) {
+		ri.entry |= inverseFoldBit
+	}
+
 	n := len(orig)
 
-	// XOR pattern is only possible for the 10 least-significant bits.
-	if n > 2 && orig[:n-2] != mapped[:n-2] {
-		makeException(ri)
+	// Create per-byte XOR mask.
+	var b []byte
+	for i := 0; i < n; i++ {
+		b = append(b, orig[i]^mapped[i])
+	}
+
+	// Remove leading 0 bytes, but keep at least one byte.
+	for ; len(b) > 1 && b[0] == 0; b = b[1:] {
+	}
+
+	if len(b) == 1 && b[0]&0xc0 == 0 {
+		ri.entry |= info(b[0]) << xorShift
 		return
 	}
 
-	v1 := int(orig[n-1])
-	v2 := int(mapped[n-1])
-	if n > 1 {
-		v1 += int(orig[n-2]) << 8
-		v2 += int(mapped[n-2]) << 8
-	}
+	key := string(b)
+	x, ok := xorCache[key]
+	if !ok {
+		xorData = append(xorData, 0) // for detecting start of sequence
+		xorData = append(xorData, b...)
 
-	// Ensure that the two most-significant bits of the last byte are always the
-	// same. It is possible that they are not for ASCII, except that we know
-	// it doesn't occur.
-	if v1&0xc0 != v2&0xc0 {
-		log.Fatalf("%U: 2 msb of least-significant bytes differ (%x and %x)", ri.Rune, v1, v2)
+		x = len(xorData) - 1
+		xorCache[key] = x
 	}
-
-	x := v2 ^ v1
-	if x >= 1<<(numXORBits+2) {
-		makeException(ri)
-		return
-	}
-	ri.entry |= info((x&0xFF00)<<(xorShift-2) + (x&0x3F)<<xorShift)
+	ri.entry |= info(x<<xorShift) | xorIndexBit
 }
+
+var xorCache = map[string]int{}
+
+// xorData contains byte-wise XOR data for the least significant bytes of a
+// UTF-8 encoded rune. An index points to the last byte. The sequence starts
+// with a zero terminator.
+var xorData = []byte{}
 
 // See the comments in gen_trieval.go re "the exceptions slice".
 var exceptionData = []byte{0}
@@ -317,11 +321,10 @@ var exceptionData = []byte{0}
 // makeException encodes case mappings that cannot be expressed in a simple
 // XOR diff.
 func makeException(ri *runeInfo) {
+	ccc := ri.entry & cccMask
+	// Set exception bit and retain case type.
+	ri.entry &= 0x0007
 	ri.entry |= exceptionBit
-
-	if ccc := ri.entry & cccMask; ccc != cccZero {
-		log.Fatalf("%U:CCC type was %d; want %d", ri.Rune, ccc, cccZero)
-	}
 
 	if len(exceptionData) >= 1<<numExceptionBits {
 		log.Fatalf("%U:exceptionData too large %x > %d bits", ri.Rune, len(exceptionData), numExceptionBits)
@@ -334,6 +337,7 @@ func makeException(ri *runeInfo) {
 	tc := ri.mapping(cTitle)
 	uc := ri.mapping(cUpper)
 	lc := ri.mapping(cLower)
+	ff := string(ri.FoldFull)
 
 	// addString sets the length of a string and adds it to the expansions array.
 	addString := func(s string, b *byte) {
@@ -354,12 +358,16 @@ func makeException(ri *runeInfo) {
 	}
 
 	// byte 0:
-	exceptionData = append(exceptionData, 0)
+	exceptionData = append(exceptionData, byte(ccc)|byte(len(ff)))
 
 	// byte 1:
 	p := len(exceptionData)
 	exceptionData = append(exceptionData, 0)
 
+	if len(ff) > 7 { // May be zero-length.
+		log.Fatalf("%U: fold string larger than 7 (%d)", ri.Rune, len(ff))
+	}
+	exceptionData = append(exceptionData, ff...)
 	ct := ri.CaseMode
 	if ct != cLower {
 		addString(lc, &exceptionData[p])
@@ -633,7 +641,7 @@ func genTablesTest() {
 
 	// <code>; <lower> ; <title> ; <upper> ; (<condition_list> ;)?
 	fmt.Fprintln(w, "\tspecial = map[rune]struct{ toLower, toTitle, toUpper string }{")
-	parser().parse("SpecialCasing.txt", func(p *ucd.Parser) {
+	parse("SpecialCasing.txt", func(p *ucd.Parser) {
 		// Skip conditional entries.
 		if p.String(4) != "" {
 			return
@@ -644,9 +652,42 @@ func genTablesTest() {
 	})
 	fmt.Fprint(w, "\t}\n\n")
 
+	// <code>; <type>; <runes>
+	table := map[rune]struct{ simple, full, special string }{}
+	parse("CaseFolding.txt", func(p *ucd.Parser) {
+		r := p.Rune(0)
+		t := p.String(1)
+		v := string(p.Runes(2))
+		if t != "T" && v == string(unicode.ToLower(r)) {
+			return
+		}
+		x := table[r]
+		switch t {
+		case "C":
+			x.full = v
+			x.simple = v
+		case "S":
+			x.simple = v
+		case "F":
+			x.full = v
+		case "T":
+			x.special = v
+		}
+		table[r] = x
+	})
+	fmt.Fprintln(w, "\tfoldMap = map[rune]struct{ simple, full, special string }{")
+	for r := rune(0); r < 0x10FFFF; r++ {
+		x, ok := table[r]
+		if !ok {
+			continue
+		}
+		fmt.Fprintf(w, "\t\t0x%04x: {%q, %q, %q},\n", r, x.simple, x.full, x.special)
+	}
+	fmt.Fprint(w, "\t}\n\n")
+
 	// Break property
 	notBreak := map[rune]bool{}
-	parser().parse("auxiliary/WordBreakProperty.txt", func(p *ucd.Parser) {
+	parse("auxiliary/WordBreakProperty.txt", func(p *ucd.Parser) {
 		switch p.String(1) {
 		case "Extend", "Format", "MidLetter", "MidNumLet", "Single_Quote",
 			"ALetter", "Hebrew_Letter", "Numeric", "ExtendNumLet":
@@ -674,14 +715,14 @@ func genTablesTest() {
 	// Word break test
 	// Filter out all samples that do not contain cased characters.
 	cased := map[rune]bool{}
-	parser().parse("DerivedCoreProperties.txt", func(p *ucd.Parser) {
+	parse("DerivedCoreProperties.txt", func(p *ucd.Parser) {
 		if p.String(1) == "Cased" {
 			cased[p.Rune(0)] = true
 		}
 	})
 
 	fmt.Fprintln(w, "\tbreakTest = []string{")
-	parser(ucd.KeepRanges).parse("auxiliary/WordBreakTest.txt", func(p *ucd.Parser) {
+	parse("auxiliary/WordBreakTest.txt", func(p *ucd.Parser) {
 		c := strings.Split(p.String(0), " ")
 
 		const sep = '|'
@@ -757,7 +798,7 @@ func printProperties(w io.Writer, file, property string, f func(r rune) bool) in
 	varNameParts := strings.Split(property, "_")
 	varNameParts[0] = strings.ToLower(varNameParts[0])
 	fmt.Fprintf(w, "\t%s = map[rune]bool{\n", strings.Join(varNameParts, ""))
-	parser().parse(file, func(p *ucd.Parser) {
+	parse(file, func(p *ucd.Parser) {
 		if p.String(1) == property {
 			r := p.Rune(0)
 			verify[r] = true
@@ -776,21 +817,6 @@ func printProperties(w io.Writer, file, property string, f func(r rune) bool) in
 		}
 	}
 	return n
-}
-
-func genTrieval() {
-	src, err := ioutil.ReadFile("gen_trieval.go")
-	if err != nil {
-		log.Fatalf("reading gen_trieval.go: %v", err)
-	}
-	const toDelete = "// +build ignore\n\npackage main\n\n"
-	i := bytes.Index(src, []byte(toDelete))
-	if i < 0 {
-		log.Fatalf("could not find %q in gen_trieval.go", toDelete)
-	}
-	w := &bytes.Buffer{}
-	w.Write(src[i+len(toDelete):])
-	gen.WriteGoFile("trieval.go", "cases", w.Bytes())
 }
 
 // The newCaseTrie, sparseValues and sparseOffsets definitions below are

@@ -6,6 +6,7 @@ import (
 	"os"
 	"os/signal"
 	"path/filepath"
+	"regexp"
 	"strings"
 
 	"github.com/hashicorp/atlas-go/archive"
@@ -15,6 +16,11 @@ import (
 
 // archiveTemplateEntry is the name the template always takes within the slug.
 const archiveTemplateEntry = ".packer-template"
+
+var (
+	reName         = regexp.MustCompile("^[a-zA-Z0-9-_/]+$")
+	errInvalidName = fmt.Errorf("Your build name can only contain these characters: [a-zA-Z0-9-_]+")
+)
 
 type PushCommand struct {
 	Meta
@@ -45,6 +51,10 @@ func (c *PushCommand) Run(args []string) int {
 	f.BoolVar(&create, "create", false, "create (deprecated)")
 	if err := f.Parse(args); err != nil {
 		return 1
+	}
+
+	if message != "" {
+		c.Ui.Say("[DEPRECATED] -m/-message is deprecated and will be removed in a future Packer release")
 	}
 
 	args = f.Args()
@@ -85,6 +95,11 @@ func (c *PushCommand) Run(args []string) int {
 			"The 'push' section must be specified in the template with\n" +
 				"at least the 'name' option set. Alternatively, you can pass the\n" +
 				"name parameter from the CLI."))
+		return 1
+	}
+
+	if !reName.MatchString(name) {
+		c.Ui.Error(errInvalidName.Error())
 		return 1
 	}
 
@@ -256,9 +271,6 @@ Usage: packer push [options] TEMPLATE
   see the online documentation for more information about these configurables.
 
 Options:
-
-  -m, -message=<detail>    A message to identify the purpose or changes in this
-                           Packer template much like a VCS commit message
 
   -name=<name>             The destination build in Atlas. This is in a format
                            "username/name".

@@ -16,13 +16,14 @@ package pgzip
 
 import (
 	"bufio"
-	"compress/flate"
 	"errors"
 	"hash"
-	"hash/crc32"
 	"io"
 	"sync"
 	"time"
+
+	"github.com/klauspost/compress/flate"
+	"github.com/klauspost/crc32"
 )
 
 const (
@@ -84,13 +85,25 @@ type Reader struct {
 	buf          [512]byte
 	err          error
 	closeErr     chan error
+	multistream  bool
 
-	readAhead   chan interface{}
+	readAhead   chan read
+	roff        int // read offset
 	current     []byte
 	closeReader chan struct{}
 	lastBlock   bool
 	blockSize   int
 	blocks      int
+
+	activeRA bool       // Indication if readahead is active
+	mu       sync.Mutex // Lock for above
+
+	blockPool chan []byte
+}
+
+type read struct {
+	b   []byte
+	err error
 }
 
 // NewReader creates a new Reader reading the given reader.
@@ -102,6 +115,11 @@ func NewReader(r io.Reader) (*Reader, error) {
 	z.blockSize = defaultBlockSize
 	z.r = makeReader(r)
 	z.digest = crc32.NewIEEE()
+	z.multistream = true
+	z.blockPool = make(chan []byte, z.blocks)
+	for i := 0; i < z.blocks; i++ {
+		z.blockPool <- make([]byte, z.blockSize)
+	}
 	if err := z.readHeader(true); err != nil {
 		return nil, err
 	}
@@ -124,6 +142,19 @@ func NewReaderN(r io.Reader, blockSize, blocks int) (*Reader, error) {
 	z.blockSize = blockSize
 	z.r = makeReader(r)
 	z.digest = crc32.NewIEEE()
+	z.multistream = true
+
+	// Account for too small values
+	if z.blocks <= 0 {
+		z.blocks = defaultBlocks
+	}
+	if z.blockSize <= 512 {
+		z.blockSize = defaultBlockSize
+	}
+	z.blockPool = make(chan []byte, z.blocks)
+	for i := 0; i < z.blocks; i++ {
+		z.blockPool <- make([]byte, z.blockSize)
+	}
 	if err := z.readHeader(true); err != nil {
 		return nil, err
 	}
@@ -134,15 +165,49 @@ func NewReaderN(r io.Reader, blockSize, blocks int) (*Reader, error) {
 // result of its original state from NewReader, but reading from r instead.
 // This permits reusing a Reader rather than allocating a new one.
 func (z *Reader) Reset(r io.Reader) error {
-	if z.closeReader != nil {
-		close(z.closeReader)
-		z.closeReader = nil
-	}
+	z.killReadAhead()
 	z.r = makeReader(r)
 	z.digest = crc32.NewIEEE()
 	z.size = 0
 	z.err = nil
+	z.multistream = true
+
+	// Account for uninitialized values
+	if z.blocks <= 0 {
+		z.blocks = defaultBlocks
+	}
+	if z.blockSize <= 512 {
+		z.blockSize = defaultBlockSize
+	}
+
+	if z.blockPool == nil {
+		z.blockPool = make(chan []byte, z.blocks)
+		for i := 0; i < z.blocks; i++ {
+			z.blockPool <- make([]byte, z.blockSize)
+		}
+	}
+
 	return z.readHeader(true)
+}
+
+// Multistream controls whether the reader supports multistream files.
+//
+// If enabled (the default), the Reader expects the input to be a sequence
+// of individually gzipped data streams, each with its own header and
+// trailer, ending at EOF. The effect is that the concatenation of a sequence
+// of gzipped files is treated as equivalent to the gzip of the concatenation
+// of the sequence. This is standard behavior for gzip readers.
+//
+// Calling Multistream(false) disables this behavior; disabling the behavior
+// can be useful when reading file formats that distinguish individual gzip
+// data streams or mix gzip data streams with other data streams.
+// In this mode, when the Reader reaches the end of the data stream,
+// Read returns io.EOF. If the underlying reader implements io.ByteReader,
+// it will be left positioned just after the gzip stream.
+// To start the next stream, call z.Reset(r) followed by z.Multistream(false).
+// If there is no next stream, z.Reset(r) will return io.EOF.
+func (z *Reader) Multistream(ok bool) {
+	z.multistream = ok
 }
 
 // GZIP (RFC 1952) is little-endian, unlike ZLIB (RFC 1950).
@@ -187,6 +252,8 @@ func (z *Reader) read2() (uint32, error) {
 }
 
 func (z *Reader) readHeader(save bool) error {
+	z.killReadAhead()
+
 	_, err := io.ReadFull(z.r, z.buf[0:10])
 	if err != nil {
 		return err
@@ -253,59 +320,93 @@ func (z *Reader) readHeader(save bool) error {
 	return nil
 }
 
+func (z *Reader) killReadAhead() error {
+	z.mu.Lock()
+	defer z.mu.Unlock()
+	if z.activeRA {
+		if z.closeReader != nil {
+			close(z.closeReader)
+		}
+
+		// Wait for decompressor to be closed and return error, if any.
+		e, ok := <-z.closeErr
+		z.activeRA = false
+		if !ok {
+			// Channel is closed, so if there was any error it has already been returned.
+			return nil
+		}
+		return e
+	}
+	return nil
+}
+
 // Starts readahead.
 // Will return on error (including io.EOF)
 // or when z.closeReader is closed.
 func (z *Reader) doReadAhead() {
+	z.mu.Lock()
+	defer z.mu.Unlock()
+	z.activeRA = true
+
 	if z.blocks <= 0 {
 		z.blocks = defaultBlocks
 	}
 	if z.blockSize <= 512 {
 		z.blockSize = defaultBlockSize
 	}
-	z.readAhead = make(chan interface{}, z.blocks*2)
+	ra := make(chan read, z.blocks)
+	z.readAhead = ra
 	closeReader := make(chan struct{}, 0)
 	z.closeReader = closeReader
 	z.lastBlock = false
 	closeErr := make(chan error, 1)
 	z.closeErr = closeErr
+	z.size = 0
+	z.roff = 0
+	z.current = nil
+	decomp := z.decompressor
 
 	go func() {
-		defer close(z.readAhead)
 		defer func() {
-			closeErr <- z.decompressor.Close()
+			closeErr <- decomp.Close()
 			close(closeErr)
+			close(ra)
 		}()
 
 		// We hold a local reference to digest, since
 		// it way be changed by reset.
 		digest := z.digest
-		// Lock for our digest.
-		dLock := sync.Mutex{}
+		var wg sync.WaitGroup
 		for {
-			buf := make([]byte, z.blockSize)
-			n, err := z.decompressor.Read(buf)
+			var buf []byte
+			select {
+			case buf = <-z.blockPool:
+			case <-closeReader:
+				return
+			}
+			buf = buf[0:z.blockSize]
+			// Try to fill the buffer
+			n, err := io.ReadFull(decomp, buf)
+			if err == io.ErrUnexpectedEOF {
+				err = nil
+			}
 			if n < len(buf) {
 				buf = buf[0:n]
 			}
-
-			dLock.Lock()
+			wg.Wait()
+			wg.Add(1)
 			go func() {
 				digest.Write(buf)
-				dLock.Unlock()
+				wg.Done()
 			}()
 			z.size += uint32(n)
 
+			// If we return any error, out digest must be ready
+			if err != nil {
+				wg.Wait()
+			}
 			select {
-			case z.readAhead <- buf:
-				// Also send the error
-				if err != nil {
-					// When we send an error, digest must be finished.
-					dLock.Lock()
-					dLock.Unlock()
-				}
-				z.readAhead <- err
-
+			case z.readAhead <- read{b: buf, err: err}:
 			case <-closeReader:
 				// Sent on close, we don't care about the next results
 				return
@@ -327,40 +428,38 @@ func (z *Reader) Read(p []byte) (n int, err error) {
 
 	for {
 		if len(z.current) == 0 && !z.lastBlock {
-			bufi := <-z.readAhead
-			erri := <-z.readAhead
+			read := <-z.readAhead
 
-			if erri != nil {
+			if read.err != nil {
 				// If not nil, the reader will have exited
 				z.closeReader = nil
 
-				err = erri.(error)
-				if err != io.EOF {
-					z.err = err
+				if read.err != io.EOF {
+					z.err = read.err
 					return
 				}
-				if err == io.EOF {
+				if read.err == io.EOF {
 					z.lastBlock = true
 					err = nil
 				}
 			}
-			buf := bufi.([]byte)
-			z.current = buf
+			z.current = read.b
+			z.roff = 0
 		}
-		if len(p) >= len(z.current) {
+		avail := z.current[z.roff:]
+		if len(p) >= len(avail) {
 			// If len(p) >= len(current), return all content of current
-			copy(p, z.current)
-			n = len(z.current)
+			n = copy(p, avail)
+			z.blockPool <- z.current
 			z.current = nil
 			if z.lastBlock {
 				err = io.EOF
 				break
 			}
 		} else {
-			// We copy as much as there is space for, and reslice current
-			copy(p, z.current[0:len(p)])
-			n = len(p)
-			z.current = z.current[n:]
+			// We copy as much as there is space for
+			n = copy(p, avail)
+			z.roff += n
 		}
 		return
 	}
@@ -377,30 +476,89 @@ func (z *Reader) Read(p []byte) (n int, err error) {
 		return 0, z.err
 	}
 
-	// File is ok; is there another?
+	// File is ok; should we attempt reading one more?
+	if !z.multistream {
+		return 0, io.EOF
+	}
+
+	// Is there another?
 	if err = z.readHeader(false); err != nil {
 		z.err = err
 		return
 	}
 
 	// Yes.  Reset and read from it.
-	z.digest.Reset()
-	z.size = 0
 	return z.Read(p)
+}
+
+func (z *Reader) WriteTo(w io.Writer) (n int64, err error) {
+	total := int64(0)
+	for {
+		if z.err != nil {
+			return total, z.err
+		}
+		// We write both to output and digest.
+		for {
+			// Read from input
+			read := <-z.readAhead
+			if read.err != nil {
+				// If not nil, the reader will have exited
+				z.closeReader = nil
+
+				if read.err != io.EOF {
+					z.err = read.err
+					return total, z.err
+				}
+				if read.err == io.EOF {
+					z.lastBlock = true
+					err = nil
+				}
+			}
+			// Write what we got
+			n, err := w.Write(read.b)
+			if n != len(read.b) {
+				return total, io.ErrShortWrite
+			}
+			total += int64(n)
+			if err != nil {
+				return total, err
+			}
+			// Put block back
+			z.blockPool <- read.b
+			if z.lastBlock {
+				break
+			}
+		}
+
+		// Finished file; check checksum + size.
+		if _, err := io.ReadFull(z.r, z.buf[0:8]); err != nil {
+			z.err = err
+			return total, err
+		}
+		crc32, isize := get4(z.buf[0:4]), get4(z.buf[4:8])
+		sum := z.digest.Sum32()
+		if sum != crc32 || isize != z.size {
+			z.err = ErrChecksum
+			return total, z.err
+		}
+		// File is ok; should we attempt reading one more?
+		if !z.multistream {
+			return total, nil
+		}
+
+		// Is there another?
+		err = z.readHeader(false)
+		if err == io.EOF {
+			return total, nil
+		}
+		if err != nil {
+			z.err = err
+			return total, err
+		}
+	}
 }
 
 // Close closes the Reader. It does not close the underlying io.Reader.
 func (z *Reader) Close() error {
-	if z.closeReader != nil {
-		close(z.closeReader)
-		z.closeReader = nil
-	}
-
-	// Wait for decompressor to be closed and return error, if any.
-	e, ok := <-z.closeErr
-	if !ok {
-		// Channel is closed, so if there was any error it has already been returned.
-		return nil
-	}
-	return e
+	return z.killReadAhead()
 }

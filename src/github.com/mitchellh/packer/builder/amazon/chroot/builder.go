@@ -9,6 +9,7 @@ import (
 	"log"
 	"runtime"
 
+	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/ec2"
 	"github.com/mitchellh/multistep"
 	awscommon "github.com/mitchellh/packer/builder/amazon/common"
@@ -36,6 +37,7 @@ type Config struct {
 	SourceAmi      string     `mapstructure:"source_ami"`
 	RootVolumeSize int64      `mapstructure:"root_volume_size"`
 	MountOptions   []string   `mapstructure:"mount_options"`
+	MountPartition int        `mapstructure:"mount_partition"`
 
 	ctx interpolate.Context
 }
@@ -96,6 +98,10 @@ func (b *Builder) Prepare(raws ...interface{}) ([]string, error) {
 		b.config.MountPath = "/mnt/packer-amazon-chroot-volumes/{{.Device}}"
 	}
 
+	if b.config.MountPartition == 0 {
+		b.config.MountPartition = 1
+	}
+
 	// Accumulate any errors
 	var errs *packer.MultiError
 	errs = packer.MultiErrorAppend(errs, b.config.AccessConfig.Prepare(&b.config.ctx)...)
@@ -131,7 +137,8 @@ func (b *Builder) Run(ui packer.Ui, hook packer.Hook, cache packer.Cache) (packe
 		return nil, err
 	}
 
-	ec2conn := ec2.New(config)
+	session := session.New(config)
+	ec2conn := ec2.New(session)
 
 	wrappedCommand := func(command string) (string, error) {
 		ctx := b.config.ctx
@@ -167,7 +174,8 @@ func (b *Builder) Run(ui packer.Ui, hook packer.Hook, cache packer.Cache) (packe
 		&StepAttachVolume{},
 		&StepEarlyUnflock{},
 		&StepMountDevice{
-			MountOptions: b.config.MountOptions,
+			MountOptions:   b.config.MountOptions,
+			MountPartition: b.config.MountPartition,
 		},
 		&StepMountExtra{},
 		&StepCopyFiles{},
@@ -187,9 +195,10 @@ func (b *Builder) Run(ui packer.Ui, hook packer.Hook, cache packer.Cache) (packe
 			Name:         b.config.AMIName,
 		},
 		&awscommon.StepModifyAMIAttributes{
-			Description: b.config.AMIDescription,
-			Users:       b.config.AMIUsers,
-			Groups:      b.config.AMIGroups,
+			Description:  b.config.AMIDescription,
+			Users:        b.config.AMIUsers,
+			Groups:       b.config.AMIGroups,
+			ProductCodes: b.config.AMIProductCodes,
 		},
 		&awscommon.StepCreateTags{
 			Tags: b.config.AMITags,

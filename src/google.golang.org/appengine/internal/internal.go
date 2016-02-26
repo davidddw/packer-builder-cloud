@@ -109,28 +109,6 @@ func (e *CallError) IsTimeout() bool {
 	return e.Timeout
 }
 
-// The comment below must not be changed.
-// It is used by go-app-builder to recognise that this package has
-// the internal.Main function to use in the synthetic main.
-//   The gophers party all night; the rabbits provide the beats.
-
-// Main is designed so that the complete generated main package is:
-//
-//      package main
-//
-//      import (
-//              "google.golang.org/appengine/internal"
-//
-//              _ "myapp/package0"
-//              _ "myapp/package1"
-//      )
-//
-//      func main() {
-//              internal.Main()
-//      }
-//
-// The "myapp/packageX" packages are expected to register HTTP handlers
-// in their init functions.
 func Main() {
 	installHealthChecker(http.DefaultServeMux)
 

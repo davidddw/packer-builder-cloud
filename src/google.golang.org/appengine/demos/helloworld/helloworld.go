@@ -2,7 +2,10 @@
 // Use of this source code is governed by the Apache 2.0
 // license that can be found in the LICENSE file.
 
-package helloworld
+// This example only works on Managed VMs.
+// +build !appengine
+
+package main
 
 import (
 	"html/template"
@@ -15,8 +18,9 @@ import (
 
 var initTime = time.Now()
 
-func init() {
+func main() {
 	http.HandleFunc("/", handle)
+	appengine.Main()
 }
 
 func handle(w http.ResponseWriter, r *http.Request) {
@@ -25,8 +29,8 @@ func handle(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	c := appengine.NewContext(r)
-	log.Infof(c, "Serving the front page.")
+	ctx := appengine.NewContext(r)
+	log.Infof(ctx, "Serving the front page.")
 
 	tmpl.Execute(w, time.Since(initTime))
 }

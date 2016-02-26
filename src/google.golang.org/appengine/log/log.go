@@ -26,7 +26,7 @@ Example:
 		log.Infof(c, "Saw record %v", record)
 	}
 */
-package log // import "google.golang.org/appengine/log"
+package log
 
 import (
 	"errors"

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # This script builds the application from source for multiple platforms.
 set -e
@@ -12,7 +12,7 @@ DIR="$( cd -P "$( dirname "$SOURCE" )/.." && pwd )"
 cd $DIR
 
 # Get the git commit
-GIT_COMMIT=$(git rev-parse HEAD)
+GIT_COMMIT=b49d74d9990c56eba0b967fd952347d83cd68488
 GIT_DIRTY=$(test -n "`git status --porcelain`" && echo "+CHANGES" || true)
 
 # If its dev mode, only build for ourself
@@ -22,12 +22,8 @@ if [ "${PACKER_DEV}x" != "x" ]; then
 fi
 
 # Determine the arch/os combos we're building for
-XC_ARCH=${XC_ARCH:-"amd64"}
+XC_ARCH=${XC_ARCH:-"386 amd64"}
 XC_OS=${XC_OS:-linux}
-
-# Install dependencies
-echo "==> Getting dependencies..."
-go get -d ./...
 
 # Delete the old dir
 echo "==> Removing old directory..."
@@ -42,17 +38,9 @@ gox \
     -os="${XC_OS}" \
     -arch="${XC_ARCH}" \
     -ldflags "-X main.GitCommit ${GIT_COMMIT}${GIT_DIRTY}" \
-    -output "pkg/{{.OS}}_{{.Arch}}/packer-{{.Dir}}" \
-    ./...
+    -output "pkg/{{.OS}}_{{.Arch}}/packer" \
+    .
 set -e
-
-# Make sure "packer-packer" is renamed properly
-for PLATFORM in $(find ./pkg -mindepth 1 -maxdepth 1 -type d); do
-    set +e
-    mv ${PLATFORM}/packer-packer.exe ${PLATFORM}/packer.exe 2>/dev/null
-    mv ${PLATFORM}/packer-packer ${PLATFORM}/packer 2>/dev/null
-    set -e
-done
 
 # Move all the compiled things to the $GOPATH/bin
 GOPATH=${GOPATH:-$(go env GOPATH)}

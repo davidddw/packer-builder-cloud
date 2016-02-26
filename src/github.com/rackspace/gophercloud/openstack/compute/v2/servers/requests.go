@@ -49,6 +49,9 @@ type ListOpts struct {
 
 	// Integer value for the limit of values to return.
 	Limit int `q:"limit"`
+
+	// Bool to show all tenants
+	AllTenants bool `q:"all_tenants"`
 }
 
 // ToServerListQuery formats a ListOpts into a query string.
@@ -751,9 +754,7 @@ func Metadatum(client *gophercloud.ServiceClient, id, key string) GetMetadatumRe
 // DeleteMetadatum will delete the key-value pair with the given key for the given server ID.
 func DeleteMetadatum(client *gophercloud.ServiceClient, id, key string) DeleteMetadatumResult {
 	var res DeleteMetadatumResult
-	_, res.Err = client.Delete(metadatumURL(client, id, key), &gophercloud.RequestOpts{
-		JSONResponse: &res.Body,
-	})
+	_, res.Err = client.Delete(metadatumURL(client, id, key), nil)
 	return res
 }
 

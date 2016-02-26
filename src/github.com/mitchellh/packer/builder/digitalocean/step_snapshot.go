@@ -30,8 +30,8 @@ func (s *stepSnapshot) Run(state multistep.StateBag) multistep.StepAction {
 
 	// Wait for the droplet to become unlocked first. For snapshots
 	// this can end up taking quite a long time, so we hardcode this to
-	// 10 minutes.
-	if err := waitForDropletUnlocked(client, dropletId, 10*time.Minute); err != nil {
+	// 20 minutes.
+	if err := waitForDropletUnlocked(client, dropletId, 20*time.Minute); err != nil {
 		// If we get an error the first time, actually report it
 		err := fmt.Errorf("Error shutting down droplet: %s", err)
 		state.Put("error", err)
@@ -50,7 +50,7 @@ func (s *stepSnapshot) Run(state multistep.StateBag) multistep.StepAction {
 	}
 
 	log.Printf("Looking up snapshot ID for snapshot: %s", c.SnapshotName)
-	images, _, err := client.Images.ListUser(&godo.ListOptions{PerPage: 200})
+	images, _, err := client.Droplets.Snapshots(dropletId, nil)
 	if err != nil {
 		err := fmt.Errorf("Error looking up snapshot ID: %s", err)
 		state.Put("error", err)
@@ -59,14 +59,9 @@ func (s *stepSnapshot) Run(state multistep.StateBag) multistep.StepAction {
 	}
 
 	var imageId int
-	for _, image := range images {
-		if image.Name == c.SnapshotName {
-			imageId = image.ID
-			break
-		}
-	}
-
-	if imageId == 0 {
+	if len(images) == 1 {
+		imageId = images[0].ID
+	} else {
 		err := errors.New("Couldn't find snapshot to get the image ID. Bug?")
 		state.Put("error", err)
 		ui.Error(err.Error())

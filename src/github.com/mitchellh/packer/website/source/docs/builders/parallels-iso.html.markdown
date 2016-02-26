@@ -11,7 +11,7 @@ page_title: 'Parallels Builder (from an ISO)'
 Type: `parallels-iso`
 
 The Parallels Packer builder is able to create [Parallels Desktop for
-Mac](http://www.parallels.com/products/desktop/) virtual machines and export
+Mac](https://www.parallels.com/products/desktop/) virtual machines and export
 them in the PVM format, starting from an ISO image.
 
 The builder builds a virtual machine by creating a new virtual machine from
@@ -59,7 +59,9 @@ builder.
 -   `iso_checksum` (string) - The checksum for the OS ISO file. Because ISO
     files are so large, this is required and Packer will verify it prior to
     booting a virtual machine with the ISO attached. The type of the checksum is
-    specified with `iso_checksum_type`, documented below.
+    specified with `iso_checksum_type`, documented below. At least one of
+    `iso_checksum` and `iso_checksum_url` must be defined. This has precedence
+    over `iso_checksum_url` type.
 
 -   `iso_checksum_type` (string) - The type of the checksum specified in
     `iso_checksum`. Valid values are "none", "md5", "sha1", "sha256", or
@@ -67,17 +69,23 @@ builder.
     recommended since ISO files are generally large and corruption does happen
     from time to time.
 
+-   `iso_checksum_url` (string) - A URL to a GNU or BSD style checksum file
+    containing a checksum for the OS ISO file. At least one of `iso_checksum`
+    and `iso_checksum_url` must be defined. This will be ignored if
+    `iso_checksum` is non empty.
+
 -   `iso_url` (string) - A URL to the ISO containing the installation image.
     This URL can be either an HTTP URL or a file URL (or path to a file). If
     this is an HTTP URL, Packer will download it and cache it between runs.
-
--   `ssh_username` (string) - The username to use to SSH into the machine once
-    the OS is installed.
 
 -   `parallels_tools_flavor` (string) - The flavor of the Parallels Tools ISO to
     install into the VM. Valid values are "win", "lin", "mac", "os2"
     and "other". This can be omitted only if `parallels_tools_mode`
     is "disable".
+
+-   `ssh_username` (string) - The username to use to SSH into the machine once
+    the OS is installed.
+
 
 ### Optional:
 
@@ -138,6 +146,10 @@ builder.
     to force the HTTP server to be on one port, make this minimum and maximum
     port the same. By default the values are 8000 and 9000, respectively.
 
+-   `iso_target_path` (string) - The path where the iso should be saved after
+    download. By default will go in the packer cache, with a hash of the
+    original filename as its name.
+
 -   `iso_urls` (array of strings) - Multiple URLs for the ISO to download.
     Packer will try these in order. If anything goes wrong attempting to
     download or while downloading a single URL, it will move on to the next. All
@@ -195,6 +207,11 @@ builder.
     `shutdown_command` for the virtual machine to actually shut down. If it
     doesn't shut down in this time, it is an error. By default, the timeout is
     "5m", or five minutes.
+
+-   `skip_compaction` (boolean) - Virtual disk image is compacted at the end of
+    the build process using `prl_disk_tool` utility. In certain rare cases, this
+    might corrupt the resulting disk image. If you find this to be the case,
+    you can disable compaction using this configuration value.
 
 -   `vm_name` (string) - This is the name of the PVM directory for the new
     virtual machine, without the file extension. By default this is

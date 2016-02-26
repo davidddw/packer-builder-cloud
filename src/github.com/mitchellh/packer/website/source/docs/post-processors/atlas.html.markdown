@@ -12,7 +12,7 @@ page_title: 'Atlas Post-Processor'
 Type: `atlas`
 
 The Atlas post-processor uploads artifacts from your packer builds to Atlas for
-hosting. Artifacts hosted in Atlas are are automatically made available for use
+hosting. Artifacts hosted in Atlas are automatically made available for use
 with Vagrant and Terraform, and Atlas provides additional features for managing
 versions and releases. [Learn more about packer in
 Atlas.](https://atlas.hashicorp.com/help/packer/features)
@@ -38,7 +38,7 @@ Here is an example workflow:
     example `hashicorp/foobar`, to create the artifact in Atlas or update the
     version if the artifact already exists
 3.  The new version is ready and available to be used in deployments with a tool
-    like [Terraform](https://terraform.io)
+    like [Terraform](https://www.terraform.io)
 
 ## Configuration
 
@@ -58,9 +58,11 @@ you can also use `token` configuration option.
     You must have access to the organization—hashicorp in this example—in order
     to add an artifact to the organization in Atlas.
 
--   `artifact_type` (string) - For uploading AMIs to Atlas, `artifact_type` will
-    always be `amazon.ami`. This field must be defined because Atlas can host
-    other artifact types, such as Vagrant boxes.
+-   `artifact_type` (string) - For uploading artifacts to Atlas. `artifact_type`
+    can be set to any unique identifier, however, the following are recommended
+    for consistency - `amazon.image`, `digitalocean.image`, `docker.image`,
+    `googlecompute.image`, `openstack.image`, `parallels.image`, `qemu.image`,
+    `virtualbox.image`, `vmware.image`, `custom.image`, and `vagrant.box`.
 
 ### Optional:
 
@@ -86,8 +88,8 @@ you can also use `token` configuration option.
         "access_key": "{{user `aws_access_key`}}",
         "secret_key": "{{user `aws_secret_key`}}",
         "region": "us-east-1",
-        "source_ami": "ami-de0d9eb7",
-        "instance_type": "t1.micro",
+        "source_ami": "ami-72b9e018",
+        "instance_type": "t2.micro",
         "ssh_username": "ubuntu",
         "ami_name": "atlas-example {{timestamp}}"
     }],
@@ -105,7 +107,7 @@ you can also use `token` configuration option.
         "type": "atlas",
         "token": "{{user `atlas_token`}}",
         "artifact": "hashicorp/foobar",
-        "artifact_type": "amazon.ami",
+        "artifact_type": "amazon.image",
         "metadata": {
           "created_at": "{{timestamp}}"
         }
@@ -113,3 +115,5 @@ you can also use `token` configuration option.
     ]
 }
 ```
+
+More information on the correct configuration of the `amazon-ebs` builder in this example can be found in the [amazon-ebs builder documentation](/docs/builders/amazon-ebs.html).

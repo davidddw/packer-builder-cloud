@@ -4,7 +4,6 @@ import (
 	"errors"
 	"fmt"
 	"log"
-	"strings"
 
 	"github.com/mitchellh/multistep"
 	parallelscommon "github.com/mitchellh/packer/builder/parallels/common"
@@ -24,6 +23,8 @@ type Builder struct {
 
 type Config struct {
 	common.PackerConfig                 `mapstructure:",squash"`
+	common.HTTPConfig                   `mapstructure:",squash"`
+	common.ISOConfig                    `mapstructure:",squash"`
 	parallelscommon.FloppyConfig        `mapstructure:",squash"`
 	parallelscommon.OutputConfig        `mapstructure:",squash"`
 	parallelscommon.PrlctlConfig        `mapstructure:",squash"`
@@ -39,19 +40,8 @@ type Config struct {
 	GuestOSType        string   `mapstructure:"guest_os_type"`
 	HardDriveInterface string   `mapstructure:"hard_drive_interface"`
 	HostInterfaces     []string `mapstructure:"host_interfaces"`
-	HTTPDir            string   `mapstructure:"http_directory"`
-	HTTPPortMin        uint     `mapstructure:"http_port_min"`
-	HTTPPortMax        uint     `mapstructure:"http_port_max"`
-	ISOChecksum        string   `mapstructure:"iso_checksum"`
-	ISOChecksumType    string   `mapstructure:"iso_checksum_type"`
-	ISOUrls            []string `mapstructure:"iso_urls"`
+	SkipCompaction     bool     `mapstructure:"skip_compaction"`
 	VMName             string   `mapstructure:"vm_name"`
-
-	RawSingleISOUrl string `mapstructure:"iso_url"`
-
-	// Deprecated parameters
-	GuestOSDistribution    string `mapstructure:"guest_os_distribution"`
-	ParallelsToolsHostPath string `mapstructure:"parallels_tools_host_path"`
 
 	ctx interpolate.Context
 }
@@ -64,6 +54,7 @@ func (b *Builder) Prepare(raws ...interface{}) ([]string, error) {
 			Exclude: []string{
 				"boot_command",
 				"prlctl",
+				"prlctl_post",
 				"parallels_tools_guest_path",
 			},
 		},
@@ -74,6 +65,13 @@ func (b *Builder) Prepare(raws ...interface{}) ([]string, error) {
 
 	// Accumulate any errors and warnings
 	var errs *packer.MultiError
+	warnings := make([]string, 0)
+
+	isoWarnings, isoErrs := b.config.ISOConfig.Prepare(&b.config.ctx)
+	warnings = append(warnings, isoWarnings...)
+	errs = packer.MultiErrorAppend(errs, isoErrs...)
+
+	errs = packer.MultiErrorAppend(errs, b.config.HTTPConfig.Prepare(&b.config.ctx)...)
 	errs = packer.MultiErrorAppend(errs, b.config.FloppyConfig.Prepare(&b.config.ctx)...)
 	errs = packer.MultiErrorAppend(
 		errs, b.config.OutputConfig.Prepare(&b.config.ctx, &b.config.PackerConfig)...)
@@ -84,7 +82,6 @@ func (b *Builder) Prepare(raws ...interface{}) ([]string, error) {
 	errs = packer.MultiErrorAppend(errs, b.config.ShutdownConfig.Prepare(&b.config.ctx)...)
 	errs = packer.MultiErrorAppend(errs, b.config.SSHConfig.Prepare(&b.config.ctx)...)
 	errs = packer.MultiErrorAppend(errs, b.config.ToolsConfig.Prepare(&b.config.ctx)...)
-	warnings := make([]string, 0)
 
 	if b.config.DiskSize == 0 {
 		b.config.DiskSize = 40000
@@ -96,24 +93,6 @@ func (b *Builder) Prepare(raws ...interface{}) ([]string, error) {
 
 	if b.config.GuestOSType == "" {
 		b.config.GuestOSType = "other"
-	}
-
-	if b.config.GuestOSDistribution != "" {
-		// Compatibility with older templates:
-		// Use value of 'guest_os_distribution' if it is defined.
-		b.config.GuestOSType = b.config.GuestOSDistribution
-		warnings = append(warnings,
-			"A 'guest_os_distribution' has been completely replaced with 'guest_os_type'\n"+
-				"It is recommended to remove it and assign the previous value to 'guest_os_type'.\n"+
-				"Run it to see all available values: `prlctl create x -d list` ")
-	}
-
-	if b.config.HTTPPortMin == 0 {
-		b.config.HTTPPortMin = 8000
-	}
-
-	if b.config.HTTPPortMax == 0 {
-		b.config.HTTPPortMax = 9000
 	}
 
 	if len(b.config.HostInterfaces) == 0 {
@@ -130,67 +109,11 @@ func (b *Builder) Prepare(raws ...interface{}) ([]string, error) {
 			errs, errors.New("hard_drive_interface can only be ide, sata, or scsi"))
 	}
 
-	if b.config.HTTPPortMin > b.config.HTTPPortMax {
-		errs = packer.MultiErrorAppend(
-			errs, errors.New("http_port_min must be less than http_port_max"))
-	}
-
-	if b.config.ISOChecksumType == "" {
-		errs = packer.MultiErrorAppend(
-			errs, errors.New("The iso_checksum_type must be specified."))
-	} else {
-		b.config.ISOChecksumType = strings.ToLower(b.config.ISOChecksumType)
-		if b.config.ISOChecksumType != "none" {
-			if b.config.ISOChecksum == "" {
-				errs = packer.MultiErrorAppend(
-					errs, errors.New("Due to large file sizes, an iso_checksum is required"))
-			} else {
-				b.config.ISOChecksum = strings.ToLower(b.config.ISOChecksum)
-			}
-
-			if h := common.HashForType(b.config.ISOChecksumType); h == nil {
-				errs = packer.MultiErrorAppend(
-					errs,
-					fmt.Errorf("Unsupported checksum type: %s", b.config.ISOChecksumType))
-			}
-		}
-	}
-
-	if b.config.RawSingleISOUrl == "" && len(b.config.ISOUrls) == 0 {
-		errs = packer.MultiErrorAppend(
-			errs, errors.New("One of iso_url or iso_urls must be specified."))
-	} else if b.config.RawSingleISOUrl != "" && len(b.config.ISOUrls) > 0 {
-		errs = packer.MultiErrorAppend(
-			errs, errors.New("Only one of iso_url or iso_urls may be specified."))
-	} else if b.config.RawSingleISOUrl != "" {
-		b.config.ISOUrls = []string{b.config.RawSingleISOUrl}
-	}
-
-	for i, url := range b.config.ISOUrls {
-		b.config.ISOUrls[i], err = common.DownloadableURL(url)
-		if err != nil {
-			errs = packer.MultiErrorAppend(
-				errs, fmt.Errorf("Failed to parse iso_url %d: %s", i+1, err))
-		}
-	}
-
 	// Warnings
-	if b.config.ISOChecksumType == "none" {
-		warnings = append(warnings,
-			"A checksum type of 'none' was specified. Since ISO files are so big,\n"+
-				"a checksum is highly recommended.")
-	}
-
 	if b.config.ShutdownCommand == "" {
 		warnings = append(warnings,
 			"A shutdown_command was not specified. Without a shutdown command, Packer\n"+
 				"will forcibly halt the virtual machine, which may result in data loss.")
-	}
-
-	if b.config.ParallelsToolsHostPath != "" {
-		warnings = append(warnings,
-			"A 'parallels_tools_host_path' has been deprecated and not in use anymore\n"+
-				"You can remove it from your Packer template.")
 	}
 
 	if errs != nil && len(errs.Errors) > 0 {
@@ -216,7 +139,9 @@ func (b *Builder) Run(ui packer.Ui, hook packer.Hook, cache packer.Cache) (packe
 			Checksum:     b.config.ISOChecksum,
 			ChecksumType: b.config.ISOChecksumType,
 			Description:  "ISO",
+			Extension:    "iso",
 			ResultKey:    "iso_path",
+			TargetPath:   b.config.TargetPath,
 			Url:          b.config.ISOUrls,
 		},
 		&parallelscommon.StepOutputDir{
@@ -226,7 +151,11 @@ func (b *Builder) Run(ui packer.Ui, hook packer.Hook, cache packer.Cache) (packe
 		&common.StepCreateFloppy{
 			Files: b.config.FloppyFiles,
 		},
-		new(stepHTTPServer),
+		&common.StepHTTPServer{
+			HTTPDir:     b.config.HTTPDir,
+			HTTPPortMin: b.config.HTTPPortMin,
+			HTTPPortMax: b.config.HTTPPortMax,
+		},
 		new(stepCreateVM),
 		new(stepCreateDisk),
 		new(stepSetBootOrder),
@@ -241,7 +170,6 @@ func (b *Builder) Run(ui packer.Ui, hook packer.Hook, cache packer.Cache) (packe
 		},
 		&parallelscommon.StepRun{
 			BootWait: b.config.BootWait,
-			Headless: b.config.Headless, // TODO: migth work on Enterprise Ed.
 		},
 		&parallelscommon.StepTypeBootCommand{
 			BootCommand:    b.config.BootCommand,
@@ -271,6 +199,9 @@ func (b *Builder) Run(ui packer.Ui, hook packer.Hook, cache packer.Cache) (packe
 		&parallelscommon.StepPrlctl{
 			Commands: b.config.PrlctlPost,
 			Ctx:      b.config.ctx,
+		},
+		&parallelscommon.StepCompactDisk{
+			Skip: b.config.SkipCompaction,
 		},
 	}
 

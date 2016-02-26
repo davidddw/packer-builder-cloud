@@ -15,6 +15,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"runtime"
 	"strings"
 	"sync"
 	"unicode"
@@ -55,6 +56,11 @@ func main() {
 		vprintf = func(string, ...interface{}) (int, error) { return 0, nil }
 	}
 
+	// TODO: create temporary cache directory to load files and create and set
+	// a "cache" option if the user did not specify the UNICODE_DIR environment
+	// variable. This will prevent duplicate downloads and also will enable long
+	// tests, which really need to be run after each generated package.
+
 	if gen.UnicodeVersion() != unicode.Version {
 		fmt.Printf("Requested Unicode version %s; core unicode version is %s.\n",
 			gen.UnicodeVersion,
@@ -68,13 +74,21 @@ func main() {
 		}
 	}
 	var (
-		cldr     = generate("cldr")
-		norm     = generate("unicode/norm")
-		language = generate("language", cldr)
-		_        = generate("width")
-		_        = generate("display", cldr, language)
-		_        = generate("cases", norm)
-		_        = generate("collate", cldr, language)
+		cldr       = generate("unicode/cldr")
+		language   = generate("language", cldr)
+		internal   = generate("internal", language)
+		norm       = generate("unicode/norm")
+		rangetable = generate("unicode/rangetable")
+		cases      = generate("cases", norm, language, rangetable)
+		width      = generate("width")
+		bidi       = generate("unicode/bidi", norm, rangetable)
+		_          = generate("secure/precis", norm, rangetable, cases, width, bidi)
+		_          = generate("encoding/htmlindex", language)
+		_          = generate("currency", cldr, language, internal)
+		_          = generate("internal/number", cldr, language, internal)
+		_          = generate("language/display", cldr, language)
+		_          = generate("collate", norm, cldr, language, rangetable)
+		_          = generate("search", norm, cldr, language, rangetable)
 	)
 	all.Wait()
 
@@ -120,7 +134,7 @@ func generate(pkg string, deps ...*dependency) *dependency {
 			args = append(args, "-v")
 		}
 		args = append(args, "./"+pkg)
-		cmd := exec.Command(filepath.Join(os.Getenv("GOROOT"), "bin", "go"), args...)
+		cmd := exec.Command(filepath.Join(runtime.GOROOT(), "bin", "go"), args...)
 		w := &bytes.Buffer{}
 		cmd.Stderr = w
 		cmd.Stdout = w
@@ -130,7 +144,21 @@ func generate(pkg string, deps ...*dependency) *dependency {
 			wg.hasErrors = true
 			return
 		}
+
+		vprintf("=== TEST %s\n", pkg)
+		args[0] = "test"
+		cmd = exec.Command(filepath.Join(runtime.GOROOT(), "bin", "go"), args...)
+		wt := &bytes.Buffer{}
+		cmd.Stderr = wt
+		cmd.Stdout = wt
+		if err := cmd.Run(); err != nil {
+			fmt.Printf("--- FAIL: %s:\n\t%v\n\tError: %v\n", pkg, indent(wt), err)
+			hasErrors = true
+			wg.hasErrors = true
+			return
+		}
 		vprintf("--- SUCCESS: %s\n\t%v\n", pkg, indent(w))
+		fmt.Print(wt.String())
 	}()
 	return &wg
 }

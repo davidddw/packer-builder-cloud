@@ -125,7 +125,9 @@ func (z *Writer) Write(buf []byte) (n int, err error) {
 
 	// with block dependency, require at least 64Kb of data to work with
 	// not having 64Kb only matters initially to setup the first window
+	bl := 0
 	if z.BlockDependency && len(z.window) == 0 {
+		bl = len(z.data)
 		z.data = append(z.data, buf...)
 		if len(z.data) < winSize {
 			z.wg.Wait()
@@ -184,7 +186,18 @@ func (z *Writer) Write(buf []byte) (n int, err error) {
 	for zi, zb := range zblocks {
 		_, err = z.writeBlock(&zb)
 
-		n += len(zb.data)
+		written := len(zb.data)
+		if bl > 0 {
+			if written >= bl {
+				written -= bl
+				bl = 0
+			} else {
+				bl -= written
+				written = 0
+			}
+		}
+
+		n += written
 		// remove the window in zb.data
 		if z.BlockDependency {
 			if zi == 0 {
@@ -203,8 +216,11 @@ func (z *Writer) Write(buf []byte) (n int, err error) {
 			z.window = make([]byte, winSize)
 		}
 		// last buffer may be shorter than the window
-		if len(buf) > winSize {
+		if len(buf) >= winSize {
 			copy(z.window, buf[len(buf)-winSize:])
+		} else {
+			copy(z.window, z.window[len(buf):])
+			copy(z.window[len(buf)+1:], buf)
 		}
 	}
 

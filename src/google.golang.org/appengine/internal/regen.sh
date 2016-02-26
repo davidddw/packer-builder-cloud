@@ -23,17 +23,14 @@ echo 1>&2 $pkgdir
 base=$(echo $pkgdir | sed "s,/$PKG\$,,")
 echo 1>&2 "base: $base"
 cd $base
-for f in $(find $PKG/internal -name '*.proto'); do
-	echo 1>&2 "* $f"
-	protoc --go_out=. $f
+
+# Run protoc once per package.
+for dir in $(find $PKG/internal -name '*.proto' | xargs dirname | sort | uniq); do
+	echo 1>&2 "* $dir"
+	protoc --go_out=. $dir/*.proto
 done
 
 for f in $(find $PKG/internal -name '*.pb.go'); do
-  # Fix up import lines.
-  # This should be fixed upstream.
-  # https://code.google.com/p/goprotobuf/issues/detail?id=32
-  sed -i '/^import.*\.pb"$/s,/[^/]*\.pb"$,",' $f
-
   # Remove proto.RegisterEnum calls.
   # These cause duplicate registration panics when these packages
   # are used on classic App Engine. proto.RegisterEnum only affects

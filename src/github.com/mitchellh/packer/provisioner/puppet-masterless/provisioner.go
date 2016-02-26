@@ -22,6 +22,9 @@ type Config struct {
 	// The command used to execute Puppet.
 	ExecuteCommand string `mapstructure:"execute_command"`
 
+	// Additional arguments to pass when executing Puppet
+	ExtraArguments []string `mapstructure:"extra_arguments"`
+
 	// Additional facts to set when executing Puppet
 	Facter map[string]string
 
@@ -45,6 +48,9 @@ type Config struct {
 	// permissions in this directory.
 	StagingDir string `mapstructure:"staging_directory"`
 
+	// If true, staging directory is removed after executing puppet.
+	CleanStagingDir bool `mapstructure:"clean_staging_directory"`
+
 	// The directory from which the command will be executed.
 	// Packer requires the directory to exist when running puppet.
 	WorkingDir string `mapstructure:"working_directory"`
@@ -62,6 +68,7 @@ type ExecuteTemplate struct {
 	ManifestFile    string
 	ManifestDir     string
 	Sudo            bool
+	ExtraArguments  string
 }
 
 func (p *Provisioner) Prepare(raws ...interface{}) error {
@@ -86,6 +93,7 @@ func (p *Provisioner) Prepare(raws ...interface{}) error {
 			"{{if ne .HieraConfigPath \"\"}}--hiera_config='{{.HieraConfigPath}}' {{end}}" +
 			"{{if ne .ManifestDir \"\"}}--manifestdir='{{.ManifestDir}}' {{end}}" +
 			"--detailed-exitcodes " +
+			"{{if ne .ExtraArguments \"\"}}{{.ExtraArguments}} {{end}}" +
 			"{{.ManifestFile}}"
 	}
 
@@ -218,6 +226,7 @@ func (p *Provisioner) Provision(ui packer.Ui, comm packer.Communicator) error {
 		ModulePath:      strings.Join(modulePaths, ":"),
 		Sudo:            !p.config.PreventSudo,
 		WorkingDir:      p.config.WorkingDir,
+		ExtraArguments:  strings.Join(p.config.ExtraArguments, " "),
 	}
 	command, err := interpolate.Render(p.config.ExecuteCommand, &p.config.ctx)
 	if err != nil {
@@ -235,6 +244,12 @@ func (p *Provisioner) Provision(ui packer.Ui, comm packer.Communicator) error {
 
 	if cmd.ExitStatus != 0 && cmd.ExitStatus != 2 {
 		return fmt.Errorf("Puppet exited with a non-zero exit status: %d", cmd.ExitStatus)
+	}
+
+	if p.config.CleanStagingDir {
+		if err := p.removeDir(ui, comm, p.config.StagingDir); err != nil {
+			return fmt.Errorf("Error removing staging directory: %s", err)
+		}
 	}
 
 	return nil
@@ -312,6 +327,22 @@ func (p *Provisioner) uploadManifests(ui packer.Ui, comm packer.Communicator) (s
 func (p *Provisioner) createDir(ui packer.Ui, comm packer.Communicator, dir string) error {
 	cmd := &packer.RemoteCmd{
 		Command: fmt.Sprintf("mkdir -p '%s'", dir),
+	}
+
+	if err := cmd.StartWithUi(comm, ui); err != nil {
+		return err
+	}
+
+	if cmd.ExitStatus != 0 {
+		return fmt.Errorf("Non-zero exit status.")
+	}
+
+	return nil
+}
+
+func (p *Provisioner) removeDir(ui packer.Ui, comm packer.Communicator, dir string) error {
+	cmd := &packer.RemoteCmd{
+		Command: fmt.Sprintf("rm -fr '%s'", dir),
 	}
 
 	if err := cmd.StartWithUi(comm, ui); err != nil {

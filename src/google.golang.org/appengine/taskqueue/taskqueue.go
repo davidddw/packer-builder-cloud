@@ -14,7 +14,7 @@ taskqueue operation is to add a single POST task, NewPOSTTask makes it easy.
 	})
 	taskqueue.Add(c, t, "") // add t to the default queue
 */
-package taskqueue // import "google.golang.org/appengine/taskqueue"
+package taskqueue
 
 import (
 	"errors"
@@ -152,9 +152,17 @@ var (
 	defaultNamespace = http.CanonicalHeaderKey("X-AppEngine-Default-Namespace")
 )
 
+func getDefaultNamespace(ctx context.Context) string {
+	return internal.IncomingHeaders(ctx).Get(defaultNamespace)
+}
+
 func newAddReq(c context.Context, task *Task, queueName string) (*pb.TaskQueueAddRequest, error) {
 	if queueName == "" {
 		queueName = "default"
+	}
+	path := task.Path
+	if path == "" {
+		path = "/_ah/queue/" + queueName
 	}
 	eta := task.ETA
 	if eta.IsZero() {
@@ -182,7 +190,7 @@ func newAddReq(c context.Context, task *Task, queueName string) (*pb.TaskQueueAd
 		} else {
 			return nil, fmt.Errorf("taskqueue: bad method %q", method)
 		}
-		req.Url = []byte(task.Path)
+		req.Url = []byte(path)
 		for k, vs := range task.Header {
 			for _, v := range vs {
 				req.Header = append(req.Header, &pb.TaskQueueAddRequest_Header{

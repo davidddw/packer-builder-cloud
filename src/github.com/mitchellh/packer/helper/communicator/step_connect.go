@@ -5,6 +5,8 @@ import (
 	"log"
 
 	"github.com/mitchellh/multistep"
+	"github.com/mitchellh/packer/communicator/none"
+	"github.com/mitchellh/packer/packer"
 	gossh "golang.org/x/crypto/ssh"
 )
 
@@ -67,6 +69,15 @@ func (s *StepConnect) Run(state multistep.StateBag) multistep.StepAction {
 	}
 
 	if step == nil {
+		comm, err := none.New("none")
+		if err != nil {
+			err := fmt.Errorf("Failed to set communicator 'none': %s", err)
+			state.Put("error", err)
+			ui := state.Get("ui").(packer.Ui)
+			ui.Error(err.Error())
+			return multistep.ActionHalt
+		}
+		state.Put("communicator", comm)
 		log.Printf("[INFO] communicator disabled, will not connect")
 		return multistep.ActionContinue
 	}

@@ -13,6 +13,7 @@ import (
 	"golang.org/x/oauth2/google"
 	"golang.org/x/oauth2/jwt"
 	"google.golang.org/api/compute/v1"
+	"strings"
 )
 
 // driverGCE is a Driver implementation that actually talks to GCE.
@@ -214,12 +215,49 @@ func (d *driverGCE) RunInstance(c *InstanceConfig) (<-chan error, error) {
 		return nil, err
 	}
 
+	// Subnetwork
+	// Validate Subnetwork config now that we have some info about the network
+	if !network.AutoCreateSubnetworks && len(network.Subnetworks) > 0 {
+		// Network appears to be in "custom" mode, so a subnetwork is required
+		if c.Subnetwork == "" {
+			return nil, fmt.Errorf("a subnetwork must be specified")
+		}
+	}
+	// Get the subnetwork
+	subnetworkSelfLink := ""
+	if c.Subnetwork != "" {
+		d.ui.Message(fmt.Sprintf("Loading subnetwork: %s for region: %s", c.Subnetwork, c.Region))
+		subnetwork, err := d.service.Subnetworks.Get(d.projectId, c.Region, c.Subnetwork).Do()
+		if err != nil {
+			return nil, err
+		}
+		subnetworkSelfLink = subnetwork.SelfLink
+	}
+
+	// If given a regional ip, get it
+	accessconfig := compute.AccessConfig{
+		Name: "AccessConfig created by Packer",
+		Type: "ONE_TO_ONE_NAT",
+	}
+
+	if c.Address != "" {
+		d.ui.Message(fmt.Sprintf("Looking up address: %s", c.Address))
+		region_url := strings.Split(zone.Region, "/")
+		region := region_url[len(region_url)-1]
+		address, err := d.service.Addresses.Get(d.projectId, region, c.Address).Do()
+		if err != nil {
+			return nil, err
+		}
+		accessconfig.NatIP = address.Address
+	}
+
 	// Build up the metadata
 	metadata := make([]*compute.MetadataItems, len(c.Metadata))
 	for k, v := range c.Metadata {
+		vCopy := v
 		metadata = append(metadata, &compute.MetadataItems{
 			Key:   k,
-			Value: v,
+			Value: &vCopy,
 		})
 	}
 
@@ -247,13 +285,14 @@ func (d *driverGCE) RunInstance(c *InstanceConfig) (<-chan error, error) {
 		NetworkInterfaces: []*compute.NetworkInterface{
 			&compute.NetworkInterface{
 				AccessConfigs: []*compute.AccessConfig{
-					&compute.AccessConfig{
-						Name: "AccessConfig created by Packer",
-						Type: "ONE_TO_ONE_NAT",
-					},
+					&accessconfig,
 				},
-				Network: network.SelfLink,
+				Network:    network.SelfLink,
+				Subnetwork: subnetworkSelfLink,
 			},
+		},
+		Scheduling: &compute.Scheduling{
+			Preemptible: c.Preemptible,
 		},
 		ServiceAccounts: []*compute.ServiceAccount{
 			&compute.ServiceAccount{

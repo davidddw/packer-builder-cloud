@@ -207,6 +207,11 @@ builder.
     is exported. By default this is "packer-BUILDNAME", where "BUILDNAME" is the
     name of the build.
 
+-   `vrdp_port_min` and `vrdp_port_max` (integer) - The minimum and maximum port
+    to use for VRDP access to the virtual machine. Packer uses a randomly chosen
+    port in this range that appears available. By default this is 5900 to 6000.
+    The minimum and maximum ports are inclusive.
+
 ## Guest Additions
 
 Packer will automatically download the proper guest additions for the version of
@@ -226,7 +231,7 @@ directory of the SSH user.
 
 In order to perform extra customization of the virtual machine, a template can
 define extra calls to `VBoxManage` to perform.
-[VBoxManage](http://www.virtualbox.org/manual/ch08.html) is the command-line
+[VBoxManage](https://www.virtualbox.org/manual/ch08.html) is the command-line
 interface to VirtualBox where you can completely control VirtualBox. It can be
 used to do things such as set RAM, CPUs, etc.
 

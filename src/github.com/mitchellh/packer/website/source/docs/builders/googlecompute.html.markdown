@@ -77,7 +77,9 @@ straightforwarded, it is documented here.
 
 Below is a fully functioning example. It doesn't do anything useful, since no
 provisioners are defined, but it will effectively repackage an existing GCE
-image. The account file is obtained in the previous section.
+image. The account_file is obtained in the previous section.  If it parses as
+JSON it is assumed to be the file itself, otherwise it is assumed to be
+the path to the file containing the JSON.
 
 ``` {.javascript}
 {
@@ -116,6 +118,9 @@ builder.
     Not required if you run Packer on a GCE instance with a service account.
     Instructions for creating file or using service accounts are above.
 
+-   `address` (string) - The name of a pre-allocated static external IP address.
+    Note, must be the name and not the actual IP address.
+
 -   `disk_size` (integer) - The size of the disk in GB. This defaults to `10`,
     which is 10GB.
 
@@ -134,8 +139,19 @@ builder.
 -   `network` (string) - The Google Compute network to use for the
     launched instance. Defaults to `"default"`.
 
+-   `preemptible` (boolean) - If true, launch a preembtible instance.
+
+-   `region` (string) - The region in which to launch the instance. Defaults to
+    to the region hosting the specified `zone`.
+
 -   `state_timeout` (string) - The time to wait for instance state changes.
     Defaults to `"5m"`.
+
+-   `subnetwork` (string) - The Google Compute subnetwork to use for the launced
+     instance. Only required if the `network` has been created with custom
+     subnetting.
+     Note, the region of the subnetwork must match the `region` or `zone` in
+     which the VM is launched.
 
 -   `tags` (array of strings)
 

@@ -11,7 +11,7 @@ You should only use this if you are (de)compressing big amounts of data, say **m
 
 It is important to note that this library creates and reads *standard gzip files*. You do not have to match the compressor/decompressor to get the described speedups, and the gzip files are fully compatible with other gzip readers/writers.
 
-A golang variant of this is [bgzf](http://godoc.org/code.google.com/p/biogo.hts/bgzf), which has the same feature, as well as seeking in the resulting file. The only drawback is a slightly bigger overhead compared to this and pure gzip. See a comparison below.
+A golang variant of this is [bgzf](https://godoc.org/github.com/biogo/hts/bgzf), which has the same feature, as well as seeking in the resulting file. The only drawback is a slightly bigger overhead compared to this and pure gzip. See a comparison below.
 
 [![GoDoc][1]][2] [![Build Status][3]][4]
 
@@ -33,6 +33,13 @@ To use as a replacement for gzip, exchange
 ```import "compress/gzip"``` 
 with 
 ```import gzip "github.com/klauspost/pgzip"```.
+
+# Changes
+
+* Dec 8, 2015: Decoder now supports the io.WriterTo interface, giving a speedup and less GC pressure.
+* Oct 9, 2015: Reduced allocations by ~35 by using sync.Pool. ~15% overall speedup.
+
+Changes in [github.com/klauspost/compress](https://github.com/klauspost/compress#changelog) are also carried over, so see that for more changes.
 
 ## Compression
 The simplest way to use this is to simply do the same as you would when using [compress/gzip](http://golang.org/pkg/compress/gzip). 
@@ -66,15 +73,26 @@ See [Example on playground](http://play.golang.org/p/uHv1B5NbDh)
 Performance
 ====
 ## Compression
+
+See my blog post in [Benchmarks of Golang Gzip](https://blog.klauspost.com/go-gzipdeflate-benchmarks/).
+
 Compression cost is usually about 0.2% with default settings with a block size of 250k.
 
-Example with GOMAXPROC set to 4 (dual core with 2 hyperthreads)
+Example with GOMAXPROC set to 8 (quad core with 8 hyperthreads)
 
-Compressor  | MB/sec   | speedup | size | size overhead
+Content is [Matt Mahoneys 10GB corpus](http://mattmahoney.net/dc/10gb.html). Compression level 6.
+
+Compressor  | MB/sec   | speedup | size | size overhead (lower=better)
 ------------|----------|---------|------|---------
-[gzip](http://golang.org/pkg/compress/gzip) (golang) | 15.082MB/s | 1.0x | 6.405.193 | 0%
-[pgzip](https://github.com/klauspost/pgzip) (golang) | 26.736MB/s|1.8x | 6.421.585 | 0.2%
-[bgzf](http://godoc.org/code.google.com/p/biogo.hts/bgzf) (golang) | 29.525MB/s | 1.9x | 6.875.913 | 7.3%
+[gzip](http://golang.org/pkg/compress/gzip) (golang) | 7.21MB/s | 1.0x | 4786608902 | 0%
+[gzip](http://github.com/klauspost/compress/gzip) (klauspost) | 10.98MB/s | 1.52x | 4781331645 | -0.11%
+[pgzip](https://github.com/klauspost/pgzip) (klauspost) | 50.76MB/s|7.04x | 4784121440 | -0.052%
+[bgzf](https://godoc.org/github.com/biogo/hts/bgzf) (biogo) | 38.65MB/s | 5.36x | 4924899484 | 2.889%
+[pargzip](https://godoc.org/github.com/golang/build/pargzip) (builder) | 32.00MB/s | 4.44x | 4791226567 | 0.096%
+
+pgzip also contains a [linear time compression](https://github.com/klauspost/compress#linear-time-compression) mode, that will allow compression at ~150MB per core per second, independent of the content.
+
+See the [complete sheet](https://docs.google.com/spreadsheets/d/1nuNE2nPfuINCZJRMt6wFWhKpToF95I47XjSsc-1rbPQ/edit?usp=sharing) for different content types and compression settings.
 
 ## Decompression
 
@@ -91,7 +109,7 @@ But wait, since gzip decompression is inherently singlethreaded (aside from CRC 
 
 This is pretty much an optimal situation for pgzip, but it reflects most common usecases for CPU intensive gzip usage.
 
-I haven't included [bgzf](http://godoc.org/code.google.com/p/biogo.hts/bgzf) in this comparision, since it only can decompress files created by a compatible encoder, and therefore cannot be considered a generic gzip decompressor. But if you are able to compress your files with a bgzf compatible program, you can expect it to scale beyond 100%.
+I haven't included [bgzf](https://godoc.org/github.com/biogo/hts/bgzf) in this comparision, since it only can decompress files created by a compatible encoder, and therefore cannot be considered a generic gzip decompressor. But if you are able to compress your files with a bgzf compatible program, you can expect it to scale beyond 100%.
 
 #License
 This contains large portions of code from the go repository - see GO_LICENSE for more information. The changes are released under MIT License. See LICENSE for more information.

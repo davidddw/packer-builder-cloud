@@ -2,6 +2,9 @@
 
 package width
 
+// UnicodeVersion is the Unicode version from which the tables in this package are derived.
+const UnicodeVersion = "8.0.0"
+
 // lookup returns the trie value for the first UTF-8 encoding in s and
 // the width in bytes of this encoding. The size will be 0 if s does not
 // hold enough bytes to complete the encoding. len(s) must be greater than 0.
@@ -10,7 +13,7 @@ func (t *widthTrie) lookup(s []byte) (v uint16, sz int) {
 	switch {
 	case c0 < 0x80: // is ASCII
 		return widthValues[c0], 1
-	case c0 < 0xC0:
+	case c0 < 0xC2:
 		return 0, 1 // Illegal UTF-8: not a starter, not ASCII.
 	case c0 < 0xE0: // 2-byte UTF-8
 		if len(s) < 2 {
@@ -35,7 +38,7 @@ func (t *widthTrie) lookup(s []byte) (v uint16, sz int) {
 		i = widthIndex[o]
 		c2 := s[2]
 		if c2 < 0x80 || 0xC0 <= c2 {
-			return 0, 1 // Illegal UTF-8: not a continuation byte.
+			return 0, 2 // Illegal UTF-8: not a continuation byte.
 		}
 		return t.lookupValue(uint32(i), c2), 3
 	case c0 < 0xF8: // 4-byte UTF-8
@@ -51,13 +54,13 @@ func (t *widthTrie) lookup(s []byte) (v uint16, sz int) {
 		i = widthIndex[o]
 		c2 := s[2]
 		if c2 < 0x80 || 0xC0 <= c2 {
-			return 0, 1 // Illegal UTF-8: not a continuation byte.
+			return 0, 2 // Illegal UTF-8: not a continuation byte.
 		}
 		o = uint32(i)<<6 + uint32(c2)
 		i = widthIndex[o]
 		c3 := s[3]
 		if c3 < 0x80 || 0xC0 <= c3 {
-			return 0, 1 // Illegal UTF-8: not a continuation byte.
+			return 0, 3 // Illegal UTF-8: not a continuation byte.
 		}
 		return t.lookupValue(uint32(i), c3), 4
 	}
@@ -95,7 +98,7 @@ func (t *widthTrie) lookupString(s string) (v uint16, sz int) {
 	switch {
 	case c0 < 0x80: // is ASCII
 		return widthValues[c0], 1
-	case c0 < 0xC0:
+	case c0 < 0xC2:
 		return 0, 1 // Illegal UTF-8: not a starter, not ASCII.
 	case c0 < 0xE0: // 2-byte UTF-8
 		if len(s) < 2 {
@@ -120,7 +123,7 @@ func (t *widthTrie) lookupString(s string) (v uint16, sz int) {
 		i = widthIndex[o]
 		c2 := s[2]
 		if c2 < 0x80 || 0xC0 <= c2 {
-			return 0, 1 // Illegal UTF-8: not a continuation byte.
+			return 0, 2 // Illegal UTF-8: not a continuation byte.
 		}
 		return t.lookupValue(uint32(i), c2), 3
 	case c0 < 0xF8: // 4-byte UTF-8
@@ -136,13 +139,13 @@ func (t *widthTrie) lookupString(s string) (v uint16, sz int) {
 		i = widthIndex[o]
 		c2 := s[2]
 		if c2 < 0x80 || 0xC0 <= c2 {
-			return 0, 1 // Illegal UTF-8: not a continuation byte.
+			return 0, 2 // Illegal UTF-8: not a continuation byte.
 		}
 		o = uint32(i)<<6 + uint32(c2)
 		i = widthIndex[o]
 		c3 := s[3]
 		if c3 < 0x80 || 0xC0 <= c3 {
-			return 0, 1 // Illegal UTF-8: not a continuation byte.
+			return 0, 3 // Illegal UTF-8: not a continuation byte.
 		}
 		return t.lookupValue(uint32(i), c3), 4
 	}

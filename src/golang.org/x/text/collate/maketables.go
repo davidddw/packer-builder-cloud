@@ -25,12 +25,12 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"golang.org/x/text/cldr"
 	"golang.org/x/text/collate"
 	"golang.org/x/text/collate/build"
 	"golang.org/x/text/collate/colltab"
 	"golang.org/x/text/internal/gen"
 	"golang.org/x/text/language"
+	"golang.org/x/text/unicode/cldr"
 )
 
 var (
@@ -49,7 +49,7 @@ var (
 	include = flagStringSet("include", "", "",
 		"comma-separated list of languages to include. Include trumps exclude.")
 	types = flagStringSetAllowAll("types", "", "",
-		"comma-separated list of types that should be included in addition to the standard type.")
+		"comma-separated list of types that should be included.")
 )
 
 // stringSet implements an ordered set based on a list.  It implements flag.Value
@@ -424,19 +424,18 @@ func parseCollation(b *build.Builder) {
 		}
 		cs := x.Collations.Collation
 		sl := cldr.MakeSlice(&cs)
-		if !types.all {
-			sl.SelectAnyOf("type", append(types.s, x.Collations.Default())...)
+		if len(types.s) == 0 {
+			sl.SelectAnyOf("type", x.Collations.Default())
+		} else if !types.all {
+			sl.SelectAnyOf("type", types.s...)
 		}
 		sl.SelectOnePerGroup("alt", altInclude())
 
 		for _, c := range cs {
 			id, err := language.Parse(loc)
 			if err != nil {
-				if loc == "en-US-posix" {
-					fmt.Fprintf(os.Stderr, "invalid locale: %q", err.Error())
-					continue
-				}
-				id = language.Make("en-US-u-va-posix")
+				fmt.Fprintf(os.Stderr, "invalid locale: %q", err)
+				continue
 			}
 			// Support both old- and new-style defaults.
 			d := c.Type
@@ -445,7 +444,9 @@ func parseCollation(b *build.Builder) {
 			} else {
 				d = x.Collations.DefaultCollation.Data()
 			}
-			if d != c.Type {
+			// We assume tables are being built either for search or collation,
+			// but not both. For search the default is always "search".
+			if d != c.Type && c.Type != "search" {
 				id, err = id.SetTypeForKey("co", c.Type)
 				failOnError(err)
 			}
@@ -524,6 +525,10 @@ func main() {
 		testCollator(collate.NewFromTable(c))
 	} else {
 		w := &bytes.Buffer{}
+
+		gen.WriteUnicodeVersion(w)
+		gen.WriteCLDRVersion(w)
+
 		if tables.contains("collate") {
 			_, err = b.Print(w)
 			failOnError(err)

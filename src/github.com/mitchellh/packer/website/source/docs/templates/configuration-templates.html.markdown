@@ -60,7 +60,7 @@ in Packer templates. These are listed below for reference.
 -   `build_name` - The name of the build being run.
 -   `build_type` - The type of the builder being used currently.
 -   `isotime [FORMAT]` - UTC time, which can be
-    [formatted](http://golang.org/pkg/time/#example_Time_Format). See more
+    [formatted](https://golang.org/pkg/time/#example_Time_Format). See more
     examples below.
 -   `lower` - Lowercases the string.
 -   `pwd` - The working directory while executing Packer.
@@ -188,7 +188,7 @@ isotime = June 7, 7:22:43pm 2014
 {{isotime "Hour15Year200603"}} = Hour19Year201407
 ```
 
-Please note that double quote characters need escaping inside of templates:
+Please note that double quote characters need escaping inside of templates (in this case, on the `ami_name` value):
 
 ``` {.javascript}
 {
@@ -198,14 +198,16 @@ Please note that double quote characters need escaping inside of templates:
       "access_key": "...",
       "secret_key": "...",
       "region": "us-east-1",
-      "source_ami": "ami-de0d9eb7",
-      "instance_type": "t1.micro",
+      "source_ami": "ami-72b9e018",
+      "instance_type": "t2.micro",
       "ssh_username": "ubuntu",
       "ami_name": "packer {{isotime \"2006-01-02\"}}"
     }
   ]
 }
 ```
+
+-&gt; **Note:** See the [Amazon builder](/docs/builders/amazon.html) documentation for more information on how to correctly configure the Amazon builder in this example.
 
 ## Amazon Specific Functions
 

@@ -5,6 +5,7 @@ import (
 	"io"
 	"log"
 	"os"
+	"sync"
 
 	"github.com/masterzen/winrm/winrm"
 	"github.com/mitchellh/packer/packer"
@@ -25,8 +26,10 @@ type Communicator struct {
 // New creates a new communicator implementation over WinRM.
 func New(config *Config) (*Communicator, error) {
 	endpoint := &winrm.Endpoint{
-		Host: config.Host,
-		Port: config.Port,
+		Host:     config.Host,
+		Port:     config.Port,
+		HTTPS:    config.Https,
+		Insecure: config.Insecure,
 
 		/*
 			TODO
@@ -84,20 +87,29 @@ func (c *Communicator) Start(rc *packer.RemoteCmd) error {
 
 func runCommand(shell *winrm.Shell, cmd *winrm.Command, rc *packer.RemoteCmd) {
 	defer shell.Close()
+	var wg sync.WaitGroup
+
+	copyFunc := func(w io.Writer, r io.Reader) {
+		defer wg.Done()
+		io.Copy(w, r)
+	}
 
 	if rc.Stdout != nil && cmd.Stdout != nil {
-		go io.Copy(rc.Stdout, cmd.Stdout)
+		wg.Add(1)
+		go copyFunc(rc.Stdout, cmd.Stdout)
 	} else {
 		log.Printf("[WARN] Failed to read stdout for command '%s'", rc.Command)
 	}
 
 	if rc.Stderr != nil && cmd.Stderr != nil {
-		go io.Copy(rc.Stderr, cmd.Stderr)
+		wg.Add(1)
+		go copyFunc(rc.Stderr, cmd.Stderr)
 	} else {
 		log.Printf("[WARN] Failed to read stderr for command '%s'", rc.Command)
 	}
 
 	cmd.Wait()
+	wg.Wait()
 
 	code := cmd.ExitCode()
 	log.Printf("[INFO] command '%s' exited with code: %d", rc.Command, code)
@@ -128,6 +140,10 @@ func (c *Communicator) Download(src string, dst io.Writer) error {
 	return fmt.Errorf("WinRM doesn't support download.")
 }
 
+func (c *Communicator) DownloadDir(src string, dst string, exclude []string) error {
+	return fmt.Errorf("WinRM doesn't support download dir.")
+}
+
 func (c *Communicator) newCopyClient() (*winrmcp.Winrmcp, error) {
 	addr := fmt.Sprintf("%s:%d", c.endpoint.Host, c.endpoint.Port)
 	return winrmcp.New(addr, &winrmcp.Config{
@@ -135,6 +151,8 @@ func (c *Communicator) newCopyClient() (*winrmcp.Winrmcp, error) {
 			User:     c.config.Username,
 			Password: c.config.Password,
 		},
+		Https:                 c.config.Https,
+		Insecure:              c.config.Insecure,
 		OperationTimeout:      c.config.Timeout,
 		MaxOperationsPerShell: 15, // lowest common denominator
 	})

@@ -6,12 +6,14 @@ package pgzip
 
 import (
 	"bytes"
-	"compress/flate"
 	"errors"
 	"fmt"
 	"hash"
-	"hash/crc32"
 	"io"
+	"sync"
+
+	"github.com/klauspost/compress/flate"
+	"github.com/klauspost/crc32"
 )
 
 const (
@@ -23,10 +25,11 @@ const (
 // These constants are copied from the flate package, so that code that imports
 // "compress/gzip" does not also have to import "compress/flate".
 const (
-	NoCompression      = flate.NoCompression
-	BestSpeed          = flate.BestSpeed
-	BestCompression    = flate.BestCompression
-	DefaultCompression = flate.DefaultCompression
+	NoCompression       = flate.NoCompression
+	BestSpeed           = flate.BestSpeed
+	BestCompression     = flate.BestCompression
+	DefaultCompression  = flate.DefaultCompression
+	ConstantCompression = flate.ConstantCompression
 )
 
 // A Writer is an io.WriteCloser.
@@ -47,6 +50,8 @@ type Writer struct {
 	err           error
 	pushedErr     chan error
 	results       chan result
+	dictFlatePool *sync.Pool
+	dstPool       *sync.Pool
 }
 
 type result struct {
@@ -98,7 +103,7 @@ func NewWriter(w io.Writer) *Writer {
 // integer value between BestSpeed and BestCompression inclusive. The error
 // returned will be nil if the level is valid.
 func NewWriterLevel(w io.Writer, level int) (*Writer, error) {
-	if level < DefaultCompression || level > BestCompression {
+	if level < ConstantCompression || level > BestCompression {
 		return nil, fmt.Errorf("gzip: invalid compression level: %d", level)
 	}
 	z := new(Writer)
@@ -110,7 +115,7 @@ func NewWriterLevel(w io.Writer, level int) (*Writer, error) {
 // This function must be used by goroutines to set an
 // error condition, since z.err access is restricted
 // to the callers goruotine.
-func (z Writer) pushError(err error) {
+func (z *Writer) pushError(err error) {
 	z.pushedErr <- err
 	close(z.pushedErr)
 }
@@ -135,6 +140,14 @@ func (z *Writer) init(w io.Writer, level int) {
 		blockSize: z.blockSize,
 		blocks:    z.blocks,
 	}
+	z.dictFlatePool = &sync.Pool{
+		New: func() interface{} {
+			f, _ := flate.NewWriterDict(w, level, nil)
+			return f
+		},
+	}
+	z.dstPool = &sync.Pool{New: func() interface{} { return make([]byte, 0, z.blockSize) }}
+
 }
 
 // Reset discards the Writer z's state and makes it equivalent to the
@@ -250,7 +263,6 @@ func (z *Writer) checkError() error {
 	select {
 	case err := <-z.pushedErr:
 		z.err = err
-		close(z.pushedErr)
 	default:
 	}
 	return z.err
@@ -341,18 +353,41 @@ func (z *Writer) Write(p []byte) (int, error) {
 					close(r.notifyWritten)
 					return
 				}
+				z.dstPool.Put(buf)
 				close(r.notifyWritten)
 			}
 		}()
 		z.currentBuffer = make([]byte, 0, z.blockSize+(z.blockSize/4))
 	}
-	z.size += len(p)
-	z.digest.Write(p)
-	z.currentBuffer = append(z.currentBuffer, p...)
-	if len(z.currentBuffer) >= z.blockSize {
-		z.compressCurrent(false)
+	// Handle very large writes in a loop
+	if len(p) > z.blockSize*z.blocks {
+		q := p
+		for len(q) > 0 {
+			length := len(q)
+			if length > z.blockSize {
+				length = z.blockSize
+			}
+			z.digest.Write(q[:length])
+			z.currentBuffer = append(z.currentBuffer, q[:length]...)
+			if len(z.currentBuffer) >= z.blockSize {
+				z.compressCurrent(false)
+				if z.err != nil {
+					return len(p) - len(q) - length, z.err
+				}
+			}
+			z.size += length
+			q = q[length:]
+		}
+		return len(p), z.err
+	} else {
+		z.size += len(p)
+		z.digest.Write(p)
+		z.currentBuffer = append(z.currentBuffer, p...)
+		if len(z.currentBuffer) >= z.blockSize {
+			z.compressCurrent(false)
+		}
+		return len(p), z.err
 	}
-	return len(p), z.err
 }
 
 // Step 1: compresses buffer to buffer
@@ -360,23 +395,14 @@ func (z *Writer) Write(p []byte) (int, error) {
 // Step 3: Close result channel to indicate we are done
 func compressBlock(p, prevTail []byte, z Writer, r result) {
 	defer close(r.result)
-	buf := make([]byte, 0, len(p))
-	dest := bytes.NewBuffer(buf)
+	buf := z.dstPool.Get().([]byte)
+	dest := bytes.NewBuffer(buf[:0])
 
-	var compressor *flate.Writer
-	var err error
-	if len(prevTail) > 0 {
-		compressor, err = flate.NewWriterDict(dest, z.level, prevTail)
-	} else {
-		compressor, err = flate.NewWriter(dest, z.level)
-	}
-	if err != nil {
-		z.pushError(err)
-		return
-	}
+	compressor := z.dictFlatePool.Get().(*flate.Writer)
+	compressor.ResetDict(dest, prevTail)
 	compressor.Write(p)
 
-	err = compressor.Flush()
+	err := compressor.Flush()
 	if err != nil {
 		z.pushError(err)
 		return
@@ -388,6 +414,7 @@ func compressBlock(p, prevTail []byte, z Writer, r result) {
 			return
 		}
 	}
+	z.dictFlatePool.Put(compressor)
 	// Read back buffer
 	buf = dest.Bytes()
 	r.result <- buf
@@ -409,9 +436,9 @@ func (z *Writer) Flush() error {
 		return nil
 	}
 	if !z.wroteHeader {
-		z.Write(nil)
-		if z.err != nil {
-			return z.err
+		_, err := z.Write(nil)
+		if err != nil {
+			return err
 		}
 	}
 	// We send current block to compression

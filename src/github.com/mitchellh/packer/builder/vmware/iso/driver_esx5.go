@@ -15,6 +15,7 @@ import (
 	"time"
 
 	"github.com/mitchellh/multistep"
+	commonssh "github.com/mitchellh/packer/common/ssh"
 	"github.com/mitchellh/packer/communicator/ssh"
 	"github.com/mitchellh/packer/packer"
 	gossh "golang.org/x/crypto/ssh"
@@ -27,6 +28,7 @@ type ESX5Driver struct {
 	Port           uint
 	Username       string
 	Password       string
+	PrivateKey     string
 	Datastore      string
 	CacheDatastore string
 	CacheDirectory string
@@ -102,6 +104,18 @@ func (d *ESX5Driver) SuppressMessages(vmxPath string) error {
 
 func (d *ESX5Driver) Unregister(vmxPathLocal string) error {
 	return d.sh("vim-cmd", "vmsvc/unregister", d.vmId)
+}
+
+func (d *ESX5Driver) Destroy() error {
+	return d.sh("vim-cmd", "vmsvc/destroy", d.vmId)
+}
+
+func (d *ESX5Driver) IsDestroyed() (bool, error) {
+	err := d.sh("test", "!", "-e", d.outputDir)
+	if err != nil {
+		return false, err
+	}
+	return true, err
 }
 
 func (d *ESX5Driver) UploadISO(localPath string, checksum string, checksumType string) (string, error) {
@@ -328,7 +342,15 @@ func (d *ESX5Driver) connect() error {
 			ssh.PasswordKeyboardInteractive(d.Password)),
 	}
 
-	// TODO(dougm) KeyPath support
+	if d.PrivateKey != "" {
+		signer, err := commonssh.FileSigner(d.PrivateKey)
+		if err != nil {
+			return err
+		}
+
+		auth = append(auth, gossh.PublicKeys(signer))
+	}
+
 	sshConfig := &ssh.Config{
 		Connection: ssh.ConnectFunc("tcp", address),
 		SSHConfig: &gossh.ClientConfig{

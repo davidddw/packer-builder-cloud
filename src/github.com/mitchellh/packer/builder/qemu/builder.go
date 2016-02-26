@@ -8,7 +8,6 @@ import (
 	"os/exec"
 	"path/filepath"
 	"runtime"
-	"strings"
 	"time"
 
 	"github.com/mitchellh/multistep"
@@ -54,9 +53,10 @@ var netDevice = map[string]bool{
 }
 
 var diskInterface = map[string]bool{
-	"ide":    true,
-	"scsi":   true,
-	"virtio": true,
+	"ide":         true,
+	"scsi":        true,
+	"virtio":      true,
+	"virtio-scsi": true,
 }
 
 var diskCache = map[string]bool{
@@ -79,24 +79,23 @@ type Builder struct {
 
 type Config struct {
 	common.PackerConfig `mapstructure:",squash"`
+	common.HTTPConfig   `mapstructure:",squash"`
+	common.ISOConfig    `mapstructure:",squash"`
 	Comm                communicator.Config `mapstructure:",squash"`
 
+	ISOSkipCache    bool       `mapstructure:"iso_skip_cache"`
 	Accelerator     string     `mapstructure:"accelerator"`
 	BootCommand     []string   `mapstructure:"boot_command"`
 	DiskInterface   string     `mapstructure:"disk_interface"`
 	DiskSize        uint       `mapstructure:"disk_size"`
 	DiskCache       string     `mapstructure:"disk_cache"`
 	DiskDiscard     string     `mapstructure:"disk_discard"`
+	SkipCompaction  bool       `mapstructure:"skip_compaction"`
+	DiskCompression bool       `mapstructure:"disk_compression"`
 	FloppyFiles     []string   `mapstructure:"floppy_files"`
 	Format          string     `mapstructure:"format"`
 	Headless        bool       `mapstructure:"headless"`
 	DiskImage       bool       `mapstructure:"disk_image"`
-	HTTPDir         string     `mapstructure:"http_directory"`
-	HTTPPortMin     uint       `mapstructure:"http_port_min"`
-	HTTPPortMax     uint       `mapstructure:"http_port_max"`
-	ISOChecksum     string     `mapstructure:"iso_checksum"`
-	ISOChecksumType string     `mapstructure:"iso_checksum_type"`
-	ISOUrls         []string   `mapstructure:"iso_urls"`
 	MachineType     string     `mapstructure:"machine_type"`
 	NetDevice       string     `mapstructure:"net_device"`
 	OutputDir       string     `mapstructure:"output_directory"`
@@ -111,14 +110,12 @@ type Config struct {
 
 	// These are deprecated, but we keep them around for BC
 	// TODO(@mitchellh): remove
-	SSHKeyPath     string        `mapstructure:"ssh_key_path"`
 	SSHWaitTimeout time.Duration `mapstructure:"ssh_wait_timeout"`
 
 	// TODO(mitchellh): deprecate
 	RunOnce bool `mapstructure:"run_once"`
 
 	RawBootWait        string `mapstructure:"boot_wait"`
-	RawSingleISOUrl    string `mapstructure:"iso_url"`
 	RawShutdownTimeout string `mapstructure:"shutdown_timeout"`
 
 	bootWait        time.Duration ``
@@ -159,14 +156,6 @@ func (b *Builder) Prepare(raws ...interface{}) ([]string, error) {
 		} else {
 			b.config.Accelerator = "kvm"
 		}
-	}
-
-	if b.config.HTTPPortMin == 0 {
-		b.config.HTTPPortMin = 8000
-	}
-
-	if b.config.HTTPPortMax == 0 {
-		b.config.HTTPPortMax = 9000
 	}
 
 	if b.config.MachineType == "" {
@@ -222,9 +211,6 @@ func (b *Builder) Prepare(raws ...interface{}) ([]string, error) {
 	}
 
 	// TODO: backwards compatibility, write fixer instead
-	if b.config.SSHKeyPath != "" {
-		b.config.Comm.SSHPrivateKey = b.config.SSHKeyPath
-	}
 	if b.config.SSHWaitTimeout != 0 {
 		b.config.Comm.SSHTimeout = b.config.SSHWaitTimeout
 	}
@@ -232,6 +218,15 @@ func (b *Builder) Prepare(raws ...interface{}) ([]string, error) {
 	var errs *packer.MultiError
 	warnings := make([]string, 0)
 
+	if b.config.ISOSkipCache {
+		b.config.ISOChecksumType = "none"
+	}
+
+	isoWarnings, isoErrs := b.config.ISOConfig.Prepare(&b.config.ctx)
+	warnings = append(warnings, isoWarnings...)
+	errs = packer.MultiErrorAppend(errs, isoErrs...)
+
+	errs = packer.MultiErrorAppend(errs, b.config.HTTPConfig.Prepare(&b.config.ctx)...)
 	if es := b.config.Comm.Prepare(&b.config.ctx); len(es) > 0 {
 		errs = packer.MultiErrorAppend(errs, es...)
 	}
@@ -239,6 +234,11 @@ func (b *Builder) Prepare(raws ...interface{}) ([]string, error) {
 	if !(b.config.Format == "qcow2" || b.config.Format == "raw") {
 		errs = packer.MultiErrorAppend(
 			errs, errors.New("invalid format, only 'qcow2' or 'raw' are allowed"))
+	}
+
+	if b.config.Format != "qcow2" {
+		b.config.SkipCompaction = true
+		b.config.DiskCompression = false
 	}
 
 	if _, ok := accels[b.config.Accelerator]; !ok {
@@ -264,50 +264,6 @@ func (b *Builder) Prepare(raws ...interface{}) ([]string, error) {
 	if _, ok := diskDiscard[b.config.DiskDiscard]; !ok {
 		errs = packer.MultiErrorAppend(
 			errs, errors.New("unrecognized disk cache type"))
-	}
-
-	if b.config.HTTPPortMin > b.config.HTTPPortMax {
-		errs = packer.MultiErrorAppend(
-			errs, errors.New("http_port_min must be less than http_port_max"))
-	}
-
-	if b.config.ISOChecksumType == "" {
-		errs = packer.MultiErrorAppend(
-			errs, errors.New("The iso_checksum_type must be specified."))
-	} else {
-		b.config.ISOChecksumType = strings.ToLower(b.config.ISOChecksumType)
-		if b.config.ISOChecksumType != "none" {
-			if b.config.ISOChecksum == "" {
-				errs = packer.MultiErrorAppend(
-					errs, errors.New("Due to large file sizes, an iso_checksum is required"))
-			} else {
-				b.config.ISOChecksum = strings.ToLower(b.config.ISOChecksum)
-			}
-
-			if h := common.HashForType(b.config.ISOChecksumType); h == nil {
-				errs = packer.MultiErrorAppend(
-					errs,
-					fmt.Errorf("Unsupported checksum type: %s", b.config.ISOChecksumType))
-			}
-		}
-	}
-
-	if b.config.RawSingleISOUrl == "" && len(b.config.ISOUrls) == 0 {
-		errs = packer.MultiErrorAppend(
-			errs, errors.New("One of iso_url or iso_urls must be specified."))
-	} else if b.config.RawSingleISOUrl != "" && len(b.config.ISOUrls) > 0 {
-		errs = packer.MultiErrorAppend(
-			errs, errors.New("Only one of iso_url or iso_urls may be specified."))
-	} else if b.config.RawSingleISOUrl != "" {
-		b.config.ISOUrls = []string{b.config.RawSingleISOUrl}
-	}
-
-	for i, url := range b.config.ISOUrls {
-		b.config.ISOUrls[i], err = common.DownloadableURL(url)
-		if err != nil {
-			errs = packer.MultiErrorAppend(
-				errs, fmt.Errorf("Failed to parse iso_url %d: %s", i+1, err))
-		}
 	}
 
 	if !b.config.PackerForce {
@@ -348,12 +304,6 @@ func (b *Builder) Prepare(raws ...interface{}) ([]string, error) {
 		b.config.QemuArgs = make([][]string, 0)
 	}
 
-	if b.config.ISOChecksumType == "none" {
-		warnings = append(warnings,
-			"A checksum type of 'none' was specified. Since ISO files are so big,\n"+
-				"a checksum is highly recommended.")
-	}
-
 	if errs != nil && len(errs.Errors) > 0 {
 		return warnings, errs
 	}
@@ -377,22 +327,38 @@ func (b *Builder) Run(ui packer.Ui, hook packer.Hook, cache packer.Cache) (packe
 		steprun.Message = "Starting VM, booting disk image"
 	}
 
-	steps := []multistep.Step{
-		&common.StepDownload{
+	steps := []multistep.Step{}
+	if !b.config.ISOSkipCache {
+		steps = append(steps, &common.StepDownload{
 			Checksum:     b.config.ISOChecksum,
 			ChecksumType: b.config.ISOChecksumType,
 			Description:  "ISO",
+			Extension:    "iso",
 			ResultKey:    "iso_path",
+			TargetPath:   b.config.TargetPath,
 			Url:          b.config.ISOUrls,
 		},
-		new(stepPrepareOutputDir),
+		)
+	} else {
+		steps = append(steps, &stepSetISO{
+			ResultKey: "iso_path",
+			Url:       b.config.ISOUrls,
+		},
+		)
+	}
+
+	steps = append(steps, new(stepPrepareOutputDir),
 		&common.StepCreateFloppy{
 			Files: b.config.FloppyFiles,
 		},
 		new(stepCreateDisk),
 		new(stepCopyDisk),
 		new(stepResizeDisk),
-		new(stepHTTPServer),
+		&common.StepHTTPServer{
+			HTTPDir:     b.config.HTTPDir,
+			HTTPPortMin: b.config.HTTPPortMin,
+			HTTPPortMax: b.config.HTTPPortMax,
+		},
 		new(stepForwardSSH),
 		new(stepConfigureVNC),
 		steprun,
@@ -406,7 +372,8 @@ func (b *Builder) Run(ui packer.Ui, hook packer.Hook, cache packer.Cache) (packe
 		},
 		new(common.StepProvision),
 		new(stepShutdown),
-	}
+		new(stepConvertDisk),
+	)
 
 	// Setup the state bag
 	state := new(multistep.BasicStateBag)

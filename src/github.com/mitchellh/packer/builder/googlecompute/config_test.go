@@ -93,6 +93,21 @@ func TestConfigPrepare(t *testing.T) {
 			"SO VERY BAD",
 			true,
 		},
+		{
+			"preemptible",
+			nil,
+			false,
+		},
+		{
+			"preemptible",
+			false,
+			false,
+		},
+		{
+			"preemptible",
+			"SO VERY BAD",
+			true,
+		},
 	}
 
 	for _, tc := range cases {
@@ -145,8 +160,18 @@ func TestConfigDefaults(t *testing.T) {
 
 func TestImageName(t *testing.T) {
 	c, _, _ := NewConfig(testConfig(t))
+	if !strings.HasPrefix(c.ImageName, "packer-") {
+		t.Fatalf("ImageName should have 'packer-' prefix, found %s", c.ImageName)
+	}
 	if strings.Contains(c.ImageName, "{{timestamp}}") {
 		t.Errorf("ImageName should be interpolated; found %s", c.ImageName)
+	}
+}
+
+func TestRegion(t *testing.T) {
+	c, _, _ := NewConfig(testConfig(t))
+	if c.Region != "us-east1" {
+		t.Fatalf("Region should be 'us-east1' given Zone of 'us-east1-a', but is %s", c.Region)
 	}
 }
 
@@ -157,7 +182,7 @@ func testConfig(t *testing.T) map[string]interface{} {
 		"account_file": testAccountFile(t),
 		"project_id":   "hashicorp",
 		"source_image": "foo",
-		"zone":         "us-east-1a",
+		"zone":         "us-east1-a",
 	}
 }
 

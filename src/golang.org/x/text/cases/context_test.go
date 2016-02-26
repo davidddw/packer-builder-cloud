@@ -12,6 +12,7 @@ import (
 	"golang.org/x/text/language"
 	"golang.org/x/text/transform"
 	"golang.org/x/text/unicode/norm"
+	"golang.org/x/text/unicode/rangetable"
 )
 
 // The following definitions are taken directly from Chapter 3 of The Unicode
@@ -62,19 +63,29 @@ func contextFromRune(r rune) *context {
 }
 
 func TestCaseProperties(t *testing.T) {
+	assigned := rangetable.Assigned(UnicodeVersion)
+	coreVersion := rangetable.Assigned(unicode.Version)
 	for r := rune(0); r <= lastRuneForTesting; r++ {
+		if !unicode.In(r, assigned) || !unicode.In(r, coreVersion) {
+			continue
+		}
 		c := contextFromRune(r)
 		if got, want := c.info.isCaseIgnorable(), propIgnore(r); got != want {
 			t.Errorf("caseIgnorable(%U): got %v; want %v (%x)", r, got, want, c.info)
 		}
-		if got, want := c.info.isCased(), propCased(r); got != want {
-			t.Errorf("cased(%U): got %v; want %v (%x)", r, got, want, c.info)
-		}
-		if got, want := c.caseType() == cUpper, propUpper(r); got != want {
-			t.Errorf("upper(%U): got %v; want %v (%x)", r, got, want, c.info)
-		}
-		if got, want := c.caseType() == cLower, propLower(r); got != want {
-			t.Errorf("lower(%U): got %v; want %v (%x)", r, got, want, c.info)
+		// New letters may change case types, but existing case pairings should
+		// not change. See Case Pair Stability in
+		// http://unicode.org/policies/stability_policy.html.
+		if rf := unicode.SimpleFold(r); rf != r && unicode.In(rf, assigned) {
+			if got, want := c.info.isCased(), propCased(r); got != want {
+				t.Errorf("cased(%U): got %v; want %v (%x)", r, got, want, c.info)
+			}
+			if got, want := c.caseType() == cUpper, propUpper(r); got != want {
+				t.Errorf("upper(%U): got %v; want %v (%x)", r, got, want, c.info)
+			}
+			if got, want := c.caseType() == cLower, propLower(r); got != want {
+				t.Errorf("lower(%U): got %v; want %v (%x)", r, got, want, c.info)
+			}
 		}
 		if got, want := c.info.isBreak(), hasBreakProp(r); got != want {
 			t.Errorf("isBreak(%U): got %v; want %v (%x)", r, got, want, c.info)
@@ -84,6 +95,8 @@ func TestCaseProperties(t *testing.T) {
 }
 
 func TestMapping(t *testing.T) {
+	assigned := rangetable.Assigned(UnicodeVersion)
+	coreVersion := rangetable.Assigned(unicode.Version)
 	apply := func(r rune, f func(c *context) bool) string {
 		c := contextFromRune(r)
 		f(c)
@@ -103,6 +116,12 @@ func TestMapping(t *testing.T) {
 	}
 
 	for r := rune(0); r <= lastRuneForTesting; r++ {
+		if !unicode.In(r, assigned) || !unicode.In(r, coreVersion) {
+			continue
+		}
+		if rf := unicode.SimpleFold(r); rf == r || !unicode.In(rf, assigned) {
+			continue
+		}
 		if _, ok := special[r]; ok {
 			continue
 		}
@@ -123,8 +142,47 @@ func TestMapping(t *testing.T) {
 	}
 }
 
-func TestCCC(t *testing.T) {
+func runeFoldData(r rune) (x struct{ simple, full, special string }) {
+	x = foldMap[r]
+	if x.simple == "" {
+		x.simple = string(unicode.ToLower(r))
+	}
+	if x.full == "" {
+		x.full = string(unicode.ToLower(r))
+	}
+	if x.special == "" {
+		x.special = x.full
+	}
+	return
+}
+
+func TestFoldData(t *testing.T) {
+	assigned := rangetable.Assigned(UnicodeVersion)
+	coreVersion := rangetable.Assigned(unicode.Version)
+	apply := func(r rune, f func(c *context) bool) (string, info) {
+		c := contextFromRune(r)
+		f(c)
+		return string(c.dst[:c.pDst]), c.info.cccType()
+	}
 	for r := rune(0); r <= lastRuneForTesting; r++ {
+		if !unicode.In(r, assigned) || !unicode.In(r, coreVersion) {
+			continue
+		}
+		x := runeFoldData(r)
+		if got, info := apply(r, foldFull); got != x.full {
+			t.Errorf("full:%q (%U): got %q %U; want %q %U (ccc=%x)", r, r, got, []rune(got), x.full, []rune(x.full), info)
+		}
+		// TODO: special and simple.
+	}
+}
+
+func TestCCC(t *testing.T) {
+	assigned := rangetable.Assigned(UnicodeVersion)
+	normVersion := rangetable.Assigned(norm.Version)
+	for r := rune(0); r <= lastRuneForTesting; r++ {
+		if !unicode.In(r, assigned) || !unicode.In(r, normVersion) {
+			continue
+		}
 		c := contextFromRune(r)
 
 		p := norm.NFC.PropertiesString(string(r))
