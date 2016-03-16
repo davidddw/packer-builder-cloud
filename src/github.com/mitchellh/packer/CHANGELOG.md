@@ -1,4 +1,29 @@
-## 0.9.0 (Unreleased)
+## 0.10.0 (March 14, 2016)
+
+FEATURES:
+
+  * **New `azure-arm` builder**: Build virtual machines in Azure Resource
+    Manager
+
+IMPROVEMENTS:
+
+  * builder/google: Added support for `disk_type` [GH-2830]
+  * builder/openstack: Added support for retrieving the Administrator password
+    when using WinRM if no `winrm_password` is set [GH-3209]
+  * provisioner/ansible: Added the `empty_groups` parameter [GH-3232]
+  * provisioner/ansible: Added the `user` parameter [GH-3276]
+  * provisioner/ansible: Don't use deprecated ssh option with Ansible 2.0
+    [GH-3291]
+  * provisioner/puppet-masterless: Add `ignore_exit_codes` parameter [GH-3349]
+
+BUG FIXES:
+
+  * builders/parallels: Handle `output_directory` containing `.` and `..`
+    [GH-3239]
+  * provisioner/ansible: os.Environ() should always be passed to the ansible
+    command. [GH-3274]
+
+## 0.9.0 (February 19, 2016)
 
 BACKWARDS INCOMPATIBILITIES:
 
@@ -7,8 +32,7 @@ BACKWARDS INCOMPATIBILITIES:
     the packer-* plugin files** or packer will load out-of-date plugins from
     disk.
   * Release binaries are now provided via <https://releases.hashicorp.com>.
-  * Packer 0.9.0 is now built with Go 1.6. Future versions will drop support
-    for building with Go 1.4.
+  * Packer 0.9.0 is now built with Go 1.6.
   * core: Plugins that implement the Communicator interface must now implement
     a DownloadDir method [GH-2618]
   * builder/amazon: Inline `user_data` for EC2 is now base64 encoded

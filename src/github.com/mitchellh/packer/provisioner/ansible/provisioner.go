@@ -16,6 +16,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"regexp"
 	"strconv"
 	"strings"
 	"sync"
@@ -43,7 +44,9 @@ type Config struct {
 	// The main playbook file to execute.
 	PlaybookFile         string   `mapstructure:"playbook_file"`
 	Groups               []string `mapstructure:"groups"`
+	EmptyGroups          []string `mapstructure:"empty_groups"`
 	HostAlias            string   `mapstructure:"host_alias"`
+	User                 string   `mapstructure:"user"`
 	LocalPort            string   `mapstructure:"local_port"`
 	SSHHostKeyFile       string   `mapstructure:"ssh_host_key_file"`
 	SSHAuthorizedKeyFile string   `mapstructure:"ssh_authorized_key_file"`
@@ -52,9 +55,11 @@ type Config struct {
 }
 
 type Provisioner struct {
-	config  Config
-	adapter *adapter
-	done    chan struct{}
+	config            Config
+	adapter           *adapter
+	done              chan struct{}
+	ansibleVersion    string
+	ansibleMajVersion uint
 }
 
 func (p *Provisioner) Prepare(raws ...interface{}) error {
@@ -110,9 +115,47 @@ func (p *Provisioner) Prepare(raws ...interface{}) error {
 		p.config.LocalPort = "0"
 	}
 
+	err = p.getVersion()
+	if err != nil {
+		errs = packer.MultiErrorAppend(errs, err)
+	}
+
+	if p.config.User == "" {
+		p.config.User = os.Getenv("USER")
+	}
+	if p.config.User == "" {
+		errs = packer.MultiErrorAppend(errs, fmt.Errorf("user: could not determine current user from environment."))
+	}
+
 	if errs != nil && len(errs.Errors) > 0 {
 		return errs
 	}
+	return nil
+}
+
+func (p *Provisioner) getVersion() error {
+	out, err := exec.Command(p.config.Command, "--version").Output()
+	if err != nil {
+		return err
+	}
+
+	versionRe := regexp.MustCompile(`\w (\d+\.\d+[.\d+]*)`)
+	matches := versionRe.FindStringSubmatch(string(out))
+	if matches == nil {
+		return fmt.Errorf(
+			"Could not find %s version in output:\n%s", p.config.Command, string(out))
+	}
+
+	version := matches[1]
+	log.Printf("%s version: %s", p.config.Command, version)
+	p.ansibleVersion = version
+
+	majVer, err := strconv.ParseUint(strings.Split(version, ".")[0], 10, 0)
+	if err != nil {
+		return fmt.Errorf("Could not parse major version from \"%s\".", version)
+	}
+	p.ansibleMajVersion = uint(majVer)
+
 	return nil
 }
 
@@ -132,7 +175,7 @@ func (p *Provisioner) Provision(ui packer.Ui, comm packer.Communicator) error {
 
 	keyChecker := ssh.CertChecker{
 		UserKeyFallback: func(conn ssh.ConnMetadata, pubKey ssh.PublicKey) (*ssh.Permissions, error) {
-			if user := conn.User(); user != "packer-ansible" {
+			if user := conn.User(); user != p.config.User {
 				ui.Say(fmt.Sprintf("%s is not a valid user", user))
 				return nil, errors.New("authentication failed")
 			}
@@ -205,12 +248,21 @@ func (p *Provisioner) Provision(ui packer.Ui, comm packer.Communicator) error {
 		}
 		defer os.Remove(tf.Name())
 
-		host := fmt.Sprintf("%s ansible_ssh_host=127.0.0.1 ansible_ssh_user=packer-ansible ansible_ssh_port=%s\n", p.config.HostAlias, p.config.LocalPort)
+		host := fmt.Sprintf("%s ansible_host=127.0.0.1 ansible_user=%s ansible_port=%s\n",
+			p.config.HostAlias, p.config.User, p.config.LocalPort)
+		if p.ansibleMajVersion < 2 {
+			host = fmt.Sprintf("%s ansible_ssh_host=127.0.0.1 ansible_ssh_user=%s ansible_ssh_port=%s\n",
+				p.config.HostAlias, p.config.User, p.config.LocalPort)
+		}
 
 		w := bufio.NewWriter(tf)
 		w.WriteString(host)
 		for _, group := range p.config.Groups {
 			fmt.Fprintf(w, "[%s]\n%s", group, host)
+		}
+
+		for _, group := range p.config.EmptyGroups {
+			fmt.Fprintf(w, "[%s]\n", group)
 		}
 
 		if err := w.Flush(); err != nil {
@@ -257,8 +309,8 @@ func (p *Provisioner) executeAnsible(ui packer.Ui, comm packer.Communicator, pri
 
 	cmd := exec.Command(p.config.Command, args...)
 
+	cmd.Env = os.Environ()
 	if len(envvars) > 0 {
-		cmd.Env = os.Environ()
 		cmd.Env = append(cmd.Env, envvars...)
 	} else if !checkHostKey {
 		cmd.Env = append(cmd.Env, "ANSIBLE_HOST_KEY_CHECKING=False")
